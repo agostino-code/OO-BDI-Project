@@ -1,0 +1,77 @@
+@startuml
+'https://plantuml.com/class-diagram
+!theme vibrant
+class Utente{
+  +email: String
+  +password: String
+  +nome: String
+  +cognome: String
+  +dataNascita: Date
+  +sesso: sesso
+  +codiceFiscale: String
+}
+note "Vincolo di totalità: Un Utente è associato o ad un Operatore o ad uno Studente\nVincolo di disgiungione: Un Utente non può essere associato in modo univoco a un Operatore e uno Studente " as N1
+Utente ... N1
+Operatore .. N1
+Studente .. N1
+class Sede {
+  +città: String
+  +via: String
+  +civico: String
+  +provincia: String
+  +cap: Integer
+  +cod.Sede
+}
+class Gestore {
+  +nome: String
+  +descrizione: String
+  +email: String
+  +password: String
+  +telefono: String
+  +cod.Gestore: String
+}
+Gestore "*" - "1" Sede
+class Operatore{
+
+  +cod.Operatore
+}
+class Studente{
+  +cod.Studente
+}
+enum sesso{
+M
+F
+}
+Utente "1" -- "0..1" Operatore
+Utente "1" -- "0..1" Studente
+Gestore "1" -- "0..*" Corso
+Corso "*" -- "*" Studente
+Corso "1" - "1..*" Operatore
+class Corso{
+  +titolo: String
+  +descrizione: String
+  +iscrizioniMassime: double
+  +tassoPresenzeMinime: float
+  +cod.Corso: String
+}
+class Lezione{
+  +titolo: String
+  +descrizione: String
+  +dataInizio: Date
+  +oraInizio:
+  +cod.Lezione: String
+}
+Corso "1" -- "1..*" Lezione
+(Corso, Studente) .. Iscritti
+Lezione "1" -- "*" Studente
+class Iscritti{
++idonei: boolean
+}
+class Statistiche{
+  presenzeMinime
+  presenzeMassime
+  presenzeMedie
+  percentualeRiempimentoMedia
+}
+Corso "1" --- "1" Statistiche
+@enduml
