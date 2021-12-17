@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62a22cb2-6665-45f9-bf8d-97b02276ff5a" name="Changes" comment="" />
+    <list default="true" id="62a22cb2-6665-45f9-bf8d-97b02276ff5a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jmetro-11.6.151.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/postgresql-42.3.11.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src1.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src2.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/fxml/controller/LoginController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/fxml/controller/ProfileController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/fxml/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/fxml/login.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/fxml/profile.fxml" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +33,9 @@
         <option value="module-info" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -112,6 +128,7 @@
       <workItem from="1639768671375" duration="2291000" />
       <workItem from="1639770992882" duration="2068000" />
       <workItem from="1639775464644" duration="127000" />
+      <workItem from="1639778489253" duration="348000" />
     </task>
     <servers />
   </component>
