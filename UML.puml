@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/class-diagram
 !theme vibrant
-class Utente{
+abstract class Utente{
   +email: String
   +password: String
   +nome: String

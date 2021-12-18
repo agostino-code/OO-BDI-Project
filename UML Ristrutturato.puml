@@ -63,7 +63,7 @@ class Lezione{
 }
 Corso "1" -- "1..*" Lezione
 (Corso, Studente) .. Iscritti
-Lezione "1" -- "*" Studente
+Lezione "*" -- "*" Studente
 class Iscritti{
 +idonei: boolean
 }
