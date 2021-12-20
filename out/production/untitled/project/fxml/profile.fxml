@@ -16,7 +16,7 @@
                <children>
                   <VBox prefHeight="398.4" prefWidth="235.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="300.0" stylesheets="@css/style.css" text="Button">
+                        <Button fx:id="button1" mnemonicParsing="false" prefHeight="30.0" prefWidth="300.0" stylesheets="@css/style.css" text="Button">
                            <VBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>
@@ -37,7 +37,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <TableView layoutY="85.0" prefHeight="485.6" prefWidth="396.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tabella" layoutY="85.0" prefHeight="485.6" prefWidth="396.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn prefWidth="75.0" text="C1" />
                       <TableColumn prefWidth="75.0" text="C2" />

@@ -5,9 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62a22cb2-6665-45f9-bf8d-97b02276ff5a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/project/Autenticazione.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/project/Corso.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/project/Gestore.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/project/Iscritti.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/project/Lezione.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/project/Operatore.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/project/Sede.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/project/Sesso.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/project/Statistiche.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/project/Studente.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/project/Utente.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UML Ristrutturato.puml" beforeDir="false" afterPath="$PROJECT_DIR$/UML Ristrutturato.puml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UML.puml" beforeDir="false" afterPath="$PROJECT_DIR$/UML.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/fxml/controller/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/fxml/controller/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/fxml/profile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/fxml/profile.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,11 +30,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="CSS File" />
         <option value="JavaFXApplication" />
-        <option value="Class" />
         <option value="module-info" />
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -48,13 +63,13 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../Program Files/Java/javafx-sdk-17.0.1/lib" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.16551724" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -69,11 +84,11 @@
       <recent name="C:\Users\agost\IdeaProjects\untitled\.idea" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\agost\OneDrive\Desktop\OO-BDI-Project\src\project\fxml" />
       <recent name="C:\Users\agost\OneDrive\Desktop\untitled\src\project\resource\fxml" />
       <recent name="C:\Users\agost\OneDrive\Desktop\untitled\src\project\fxml\css" />
       <recent name="C:\Users\agost\OneDrive\Desktop\untitled\src\project\fxml" />
       <recent name="C:\Users\agost\OneDrive\Desktop\untitled\src\project\graphics" />
-      <recent name="C:\Users\agost\OneDrive\Desktop\untitled\src\graphics" />
     </key>
   </component>
   <component name="RunManager">
@@ -121,6 +136,8 @@
       <workItem from="1639775464644" duration="127000" />
       <workItem from="1639778489253" duration="348000" />
       <workItem from="1639782045241" duration="2423000" />
+      <workItem from="1639838793362" duration="5389000" />
+      <workItem from="1639999848391" duration="13180000" />
     </task>
     <servers />
   </component>

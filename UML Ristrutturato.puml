@@ -1,9 +1,13 @@
 @startuml
 'https://plantuml.com/class-diagram
 !theme vibrant
-class Utente{
+class Autenticazione {
   +email: String
   +password: String
+}
+Autenticazione "1" -- "1" Utente
+Autenticazione "1" --- "1" Gestore
+abstract class Utente{
   +nome: String
   +cognome: String
   +dataNascita: Date
@@ -25,14 +29,11 @@ class Sede {
 class Gestore {
   +nome: String
   +descrizione: String
-  +email: String
-  +password: String
   +telefono: String
   +cod.Gestore: String
 }
 Gestore "*" - "1" Sede
 class Operatore{
-
   +cod.Operatore
 }
 class Studente{
@@ -46,7 +47,7 @@ Utente "1" -- "0..1" Operatore
 Utente "1" -- "0..1" Studente
 Gestore "1" -- "0..*" Corso
 Corso "*" -- "*" Studente
-Corso "1" - "1..*" Operatore
+Corso "*" - "1..*" Operatore
 class Corso{
   +titolo: String
   +descrizione: String
@@ -54,6 +55,11 @@ class Corso{
   +tassoPresenzeMinime: float
   +cod.Corso: String
 }
+class AreaTematica{
+  +Tipo
+  +cod.AreaTematica
+}
+Corso "*" --- "1..*" AreaTematica
 class Lezione{
   +titolo: String
   +descrizione: String
@@ -73,5 +79,5 @@ class Statistiche{
   presenzeMedie
   percentualeRiempimentoMedia
 }
-Corso "1" --- "1" Statistiche
+Corso "1" - "1" Statistiche
 @enduml
