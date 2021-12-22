@@ -11,6 +11,7 @@ abstract class Utente{
   +nome: String
   +cognome: String
   +dataNascita: Date
+  +comunediNascita: String
   +sesso: sesso
   +codiceFiscale: String
 }
@@ -63,8 +64,8 @@ Corso "*" --- "1..*" AreaTematica
 class Lezione{
   +titolo: String
   +descrizione: String
-  +dataInizio: Date
-  +oraInizio:
+  +dataoraInizio: Timestamp
+  +durata: Time
   +cod.Lezione: String
 }
 Corso "1" -- "1..*" Lezione

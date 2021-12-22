@@ -4,41 +4,109 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62a22cb2-6665-45f9-bf8d-97b02276ff5a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/project/Autenticazione.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/project/Corso.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/project/Gestore.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/project/Iscritti.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/project/Lezione.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/project/Operatore.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/project/Sede.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/project/Sesso.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/project/Statistiche.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/project/Studente.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/project/Utente.java" afterDir="false" />
+    <list default="true" id="fda82428-10f8-42a1-a303-1fe396b62ccd" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Diagram_Progetto.mdj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OO-BDI-Project.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progetto-OO-21-22-v1.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Progetto-OO-21-22-v1.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UML Ristrutturato.puml" beforeDir="false" afterPath="$PROJECT_DIR$/UML Ristrutturato.puml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UML.puml" beforeDir="false" afterPath="$PROJECT_DIR$/UML.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/fxml/controller/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/fxml/controller/ProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/fxml/profile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/fxml/profile.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javafx-swt.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javafx.base.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javafx.controls.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javafx.fxml.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javafx.graphics.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javafx.media.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javafx.swing.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javafx.web.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jmetro-11.6.15.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/postgresql-42.3.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Autenticazione.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Corso.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Gestore.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Iscritti.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Lezione.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Operatore.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Sede.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Sesso.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Statistiche.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Studente.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Utente.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/fxml/controller/LoginController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/fxml/controller/ProfileController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/fxml/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/fxml/login.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/fxml/profile.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/Autenticazione.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/Corso.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/Gestore.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/Iscritti.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/Lezione.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/Operatore.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/Sede.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/Sesso.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/Statistiche.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/Studente.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/Utente.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/fxml/controller/LoginController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/fxml/controller/ProfileController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/fxml/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/fxml/login.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/fxml/profile.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/untitled.iml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="CSS File" />
-        <option value="JavaFXApplication" />
-        <option value="module-info" />
-        <option value="Interface" />
-        <option value="Enum" />
-        <option value="FxmlFile" />
-        <option value="Class" />
-      </list>
-    </option>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/Project">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Project" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Project" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Project" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="application" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Project" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -49,13 +117,12 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
-  <component name="ProjectId" id="22PsnU2AQe9roW3pv0erjvNLFIp" />
+  <component name="ProjectId" id="22byQCIbYaCtQ7RtqqKOAqzNzH6" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DatabaseDriversLRU" value="postgresql" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
@@ -63,81 +130,70 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
-    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.16551724" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.pathVariables" />
+    <property name="project.structure.side.proportion" value="0.61149424" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\agost\OneDrive\Desktop\untitled\src" />
-      <recent name="C:\Users\agost\IdeaProjects\untitled\.idea" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\agost\OneDrive\Desktop\OO-BDI-Project\src\project\fxml" />
-      <recent name="C:\Users\agost\OneDrive\Desktop\untitled\src\project\resource\fxml" />
-      <recent name="C:\Users\agost\OneDrive\Desktop\untitled\src\project\fxml\css" />
-      <recent name="C:\Users\agost\OneDrive\Desktop\untitled\src\project\fxml" />
-      <recent name="C:\Users\agost\OneDrive\Desktop\untitled\src\project\graphics" />
+      <recent name="C:\Users\agost\IdeaProjects\Project\src\main\resources\com\unina\project" />
+      <recent name="C:\Users\agost\IdeaProjects\Project\src\main\resources\com\unina\project\fxml" />
+      <recent name="C:\Users\agost\IdeaProjects\Project\src\main\java\com\unina\project" />
+      <recent name="C:\Users\agost\IdeaProjects\Project\src" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="17" />
-      <option name="MAIN_CLASS_NAME" value="project.Main" />
-      <module name="untitled" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Program Files\Java\javafx-sdk-17.0.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="untitled" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Program Files\Java\javafx-sdk-17.0.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="Project [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--scan" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="run" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Gradle.Project [run]" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="62a22cb2-6665-45f9-bf8d-97b02276ff5a" name="Changes" comment="" />
-      <created>1639750725172</created>
+      <changelist id="fda82428-10f8-42a1-a303-1fe396b62ccd" name="Changes" comment="" />
+      <created>1640120565089</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1639750725172</updated>
-      <workItem from="1639750726353" duration="205000" />
-      <workItem from="1639750956588" duration="495000" />
-      <workItem from="1639751501697" duration="742000" />
-      <workItem from="1639752280419" duration="812000" />
-      <workItem from="1639753117609" duration="743000" />
-      <workItem from="1639754062887" duration="9000000" />
-      <workItem from="1639763405110" duration="3459000" />
-      <workItem from="1639766903196" duration="1754000" />
-      <workItem from="1639768671375" duration="2291000" />
-      <workItem from="1639770992882" duration="2068000" />
-      <workItem from="1639775464644" duration="127000" />
-      <workItem from="1639778489253" duration="348000" />
-      <workItem from="1639782045241" duration="2423000" />
-      <workItem from="1639838793362" duration="5389000" />
-      <workItem from="1639999848391" duration="13180000" />
+      <updated>1640120565089</updated>
+      <workItem from="1640120568907" duration="877000" />
+      <workItem from="1640132526648" duration="104000" />
+      <workItem from="1640132649468" duration="2337000" />
+      <workItem from="1640135035235" duration="2297000" />
+      <workItem from="1640137458828" duration="3513000" />
+      <workItem from="1640141048700" duration="75000" />
+      <workItem from="1640141330885" duration="56000" />
+      <workItem from="1640141442753" duration="22000" />
     </task>
     <servers />
   </component>
@@ -146,12 +202,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.reflect.InvocationTargetException" package="java.lang.reflect" />
-          <option name="timeStamp" value="1" />
-        </breakpoint>
-      </breakpoints>
+      <default-breakpoints>
+        <breakpoint enabled="true" type="java-exception" />
+        <breakpoint enabled="true" type="javascript-exception" />
+      </default-breakpoints>
     </breakpoint-manager>
   </component>
 </project>

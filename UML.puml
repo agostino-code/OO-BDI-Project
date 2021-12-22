@@ -48,8 +48,8 @@ class Corso{
 class Lezione{
   +titolo: String
   +descrizione: String
-  +dataInizio: Date
-  +oraInizio:
+  +dataoraInizio: Timestamp
+  +durata: Time
   +cod.Lezione: String
 }
 Corso "1" -- "1..*" Lezione
