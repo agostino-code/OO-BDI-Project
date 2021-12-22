@@ -5,58 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fda82428-10f8-42a1-a303-1fe396b62ccd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.2/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/workspace-id.txt.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/workspace-id.txt.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Diagram_Progetto.mdj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OO-BDI-Project.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Progetto-OO-21-22-v1.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Progetto-OO-21-22-v1.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UML Ristrutturato.puml" beforeDir="false" afterPath="$PROJECT_DIR$/UML Ristrutturato.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UML.puml" beforeDir="false" afterPath="$PROJECT_DIR$/UML.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-swt.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx.base.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx.controls.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx.fxml.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx.graphics.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx.media.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx.swing.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx.web.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jmetro-11.6.15.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/postgresql-42.3.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Autenticazione.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Corso.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Gestore.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Iscritti.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Lezione.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Operatore.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Sede.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Sesso.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Statistiche.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Studente.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/Utente.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/fxml/controller/LoginController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/fxml/controller/ProfileController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/fxml/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/fxml/login.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/project/fxml/profile.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/Autenticazione.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/Corso.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/Gestore.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/Iscritti.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/Lezione.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/Operatore.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/Sede.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/Sesso.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/Statistiche.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/Studente.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/Utente.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/fxml/controller/LoginController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/fxml/controller/ProfileController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/fxml/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/fxml/login.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/fxml/profile.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/untitled.iml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,6 +148,7 @@
       <workItem from="1640141048700" duration="75000" />
       <workItem from="1640141330885" duration="56000" />
       <workItem from="1640141442753" duration="22000" />
+      <workItem from="1640141505249" duration="281000" />
     </task>
     <servers />
   </component>
