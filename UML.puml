@@ -6,8 +6,8 @@ class Autenticazione {
   +email: String
   +password: String
 }
-Autenticazione "1" -- "1" Utente
-Autenticazione "1" -- "1" Gestore
+Autenticazione "1" -- "1" Utente :AccessoUtente
+Autenticazione "1" -- "1" Gestore :AccessoGestore
 class Utente{
   +nome: String
   +cognome: String
@@ -35,9 +35,9 @@ F
 }
 Utente <|-- Operatore
 Utente <|-- Studente
-Gestore "1" -- "0..*" Corso
+Gestore "1" -- "0..*" Corso:Possiede
 Corso "*" -- "*" Studente
-Corso "*" -- "1..*" Operatore
+Corso "*" -- "1..*" Operatore:Gestiti
 class Corso{
   +titolo: String
   +descrizione: String
@@ -52,9 +52,9 @@ class Lezione{
   +durata: Time
   +cod.Lezione: String
 }
-Corso "1" -- "1..*" Lezione
+Corso "1" -- "1..*" Lezione:Svolto
 (Corso, Studente) .. Iscritti
-Lezione "*" -- "*" Studente
+Lezione "*" -- "*" Studente:Prenotazioni
 class Iscritti{
 +idonei: boolean
 }
@@ -64,11 +64,11 @@ class Statistiche{
   +presenzeMedie
   +percentualeRiempimentoMedia
 }
-Corso "1" -- "1" Statistiche
+Corso "1" -- "1" Statistiche:Associo
 class AreaTematica{
   +Tipo
   +cod.AreaTematica
 }
-Corso "*" -- "1..*" AreaTematica
+Corso "*" -- "1..*" AreaTematica:Appartengono
 
 @enduml
