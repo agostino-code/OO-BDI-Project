@@ -24,9 +24,9 @@ public class Engine {
 	private String vocali_NOME="";
 	
 	public Engine(Utente persona) throws IOException{
-		
-		this.utente =persona;
-		
+
+		this.utente = persona;
+
 		cognome= utente.getCognome().toUpperCase();
 		nome= utente.getNome().toUpperCase();
 		sesso= utente.getSesso().toUpperCase();

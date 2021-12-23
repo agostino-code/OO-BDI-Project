@@ -1,7 +1,6 @@
 package com.unina.project;
 
 import java.time.LocalDate;
-import java.time.Month;
 
 public class Utente {
     public String getNome() {

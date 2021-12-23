@@ -1,5 +1,7 @@
 package com.unina.project;
 
+import com.unina.project.controller.LoginController;
+import com.unina.project.controller.ProfileController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,8 +9,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
-import com.unina.project.controller.LoginController;
-import com.unina.project.controller.ProfileController;
 
 public class Main extends Application {
 

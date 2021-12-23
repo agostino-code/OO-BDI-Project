@@ -4,18 +4,23 @@ import com.unina.project.Autenticazione;
 import com.unina.project.Utente;
 import com.unina.project.codicefiscale.engine.Engine;
 import com.unina.project.codicefiscale.engine.Utils;
-import javafx.collections.FXCollections;
+import com.unina.project.database.AutenticazioneDAO;
+import com.unina.project.database.postgre.PostgreAutenticazioneDAO;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
-public class RegistrazioneController {
+public class RegistrazioneController implements Initializable {
     @FXML
     public Button registratiButton;
     @FXML
@@ -29,7 +34,7 @@ public class RegistrazioneController {
     @FXML
     public javafx.scene.control.TextField comunedinascitaTextField;
     @FXML
-    public ChoiceBox<String> sessoChoiseBox = new ChoiceBox<>(FXCollections.observableArrayList("M", "F"));
+    private ChoiceBox<String> sessoChoiceBox;
     @FXML
     public TextField codicefiscaleTextField;
     @FXML
@@ -38,9 +43,24 @@ public class RegistrazioneController {
     public PasswordField repeatpasswordField;
 
     public List<String> comuni = new ArrayList<>();
+    public Utente utente=new Utente();
+    public Autenticazione autenticazione = new Autenticazione();
+    public AutenticazioneDAO autenticazioneDAO=new PostgreAutenticazioneDAO();
 
-    @FXML
-    private void getComuni() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        getComuni();
+        emailTextField.focusedProperty().addListener(checkEmailListner);
+        sessoChoiceBox.getItems().addAll("M","F");
+        nomeTextField.focusedProperty().addListener(generaCodiceListner);
+        cognomeTextField.focusedProperty().addListener(generaCodiceListner);
+        dataDatePicker.focusedProperty().addListener(generaCodiceListner);
+        comunedinascitaTextField.focusedProperty().addListener(generaCodiceListner);
+        sessoChoiceBox.focusedProperty().addListener(generaCodiceListner);
+
+    }
+
+    public void getComuni() {
         for (Map.Entry<String, String> e : Utils.getCitiesCodes().entrySet()) {
             comuni.add(e.getValue());
         }
@@ -51,19 +71,39 @@ public class RegistrazioneController {
         TextFields.bindAutoCompletion(comunedinascitaTextField,comuni);
     }
 
-    public void newCodiceFiscale(javafx.event.ActionEvent actionEvent) throws IOException {
-        Utente utente = new Utente();
-        Autenticazione autenticazione = new Autenticazione();
-        autenticazione.setEmail(emailTextField.getText());
+    @FXML
+    public void newCodiceFiscale() throws IOException {
         utente.setNome(nomeTextField.getText());
         utente.setCognome(cognomeTextField.getText());
         utente.setDataNascita(dataDatePicker.getValue());
         utente.setComuneDiNascita(comunedinascitaTextField.getText());
-        utente.setSesso(sessoChoiseBox.getValue());
+        utente.setSesso(sessoChoiceBox.getSelectionModel().getSelectedItem());
         Engine engine = new Engine(utente);
         codicefiscaleTextField.setText(engine.getCode());
-
         }
+
+    @FXML
+    private ChangeListener<Boolean> generaCodiceListner = (observable, oldValue, newValue) -> {
+        if (!newValue) {
+            try {
+
+                newCodiceFiscale();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+    @FXML
+    private ChangeListener<Boolean> checkEmailListner = (observable, oldValue, newValue) -> {
+        if (!newValue) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Errore email");
+                    alert.setHeaderText("L'email che hai inserito risulta già registrata!");
+                    alert.setContentText("Cambia il valore di Email");
+                    alert.showAndWait();
+                }
+    };
 }
 
 
