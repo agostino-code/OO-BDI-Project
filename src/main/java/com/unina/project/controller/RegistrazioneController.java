@@ -11,10 +11,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.util.Callback;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +53,7 @@ public class RegistrazioneController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         getComuni();
+        setDataPicker();
         emailTextField.focusedProperty().addListener(checkEmailListner);
         sessoChoiceBox.getItems().addAll("M","F");
         nomeTextField.focusedProperty().addListener(generaCodiceListner);
@@ -86,8 +90,12 @@ public class RegistrazioneController implements Initializable {
     private ChangeListener<Boolean> generaCodiceListner = (observable, oldValue, newValue) -> {
         if (!newValue) {
             try {
-
-                newCodiceFiscale();
+                if(!nomeTextField.getText().isEmpty()&&!cognomeTextField.getText().isEmpty()&&
+                        !comunedinascitaTextField.getText().isEmpty()&&
+                        !sessoChoiceBox.getSelectionModel().isEmpty()&&
+                        !dataDatePicker.getValue().toString().isEmpty()) {
+                    newCodiceFiscale();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -97,13 +105,46 @@ public class RegistrazioneController implements Initializable {
     @FXML
     private ChangeListener<Boolean> checkEmailListner = (observable, oldValue, newValue) -> {
         if (!newValue) {
+            try {
+                if(!autenticazioneDAO.checkEmailExist(emailTextField.getText())) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Errore email");
                     alert.setHeaderText("L'email che hai inserito risulta già registrata!");
                     alert.setContentText("Cambia il valore di Email");
                     alert.showAndWait();
                 }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     };
+    public void setDataPicker(){
+        LocalDate dataLocale = LocalDate.now();
+        LocalDate maxDate =dataLocale.minusYears(16);
+        LocalDate minDate =dataLocale.minusYears(80);
+        restrictDatePicker(dataDatePicker,minDate,maxDate);
+    }
+    public void restrictDatePicker(DatePicker datePicker, LocalDate minDate, LocalDate maxDate) {
+        final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
+            @Override
+            public DateCell call(final DatePicker datePicker) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item.isBefore(minDate)) {
+                            setDisable(true);
+                            setStyle("-fx-background-color: #ffc0cb;");
+                        }else if (item.isAfter(maxDate)) {
+                            setDisable(true);
+                            setStyle("-fx-background-color: #ffc0cb;");
+                        }
+                    }
+                };
+            }
+        };
+        datePicker.setDayCellFactory(dayCellFactory);
+    }
 }
 
 

@@ -1,8 +1,9 @@
 package com.unina.project.database;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public interface AutenticazioneDAO {
     void insertAutenticazione(String email, String password);
-    boolean controllaemailneldatabase(String email);
+    boolean checkEmailExist(String email) throws SQLException;
 }
