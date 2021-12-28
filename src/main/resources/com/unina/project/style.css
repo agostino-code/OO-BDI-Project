@@ -5,3 +5,11 @@
 .label{
     -fx-text-fill: grey;
 }
+.labelError{
+    -fx-text-fill: #ff3c3c;
+}
+
+.green-bar  { -fx-accent: green;  }
+.yellow-bar { -fx-accent: yellow; }
+.orange-bar { -fx-accent: orange; }
+.red-bar    { -fx-accent: red;    }

@@ -29,7 +29,7 @@ public class Engine {
 
 		cognome= utente.getCognome().toUpperCase();
 		nome= utente.getNome().toUpperCase();
-		sesso= utente.getSesso().toUpperCase();
+		sesso= utente.getSesso();
 		giorno= utente.getDataNascitaGiorno();
 		mese= utente.getDataNascitaMese();
 		anno= utente.getDataNascitaAnno();

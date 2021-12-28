@@ -2,6 +2,7 @@ package com.unina.project;
 
 import com.unina.project.controller.LoginController;
 import com.unina.project.controller.ProfileController;
+import com.unina.project.controller.RegistrazioneController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,11 +29,14 @@ public class Main extends Application {
 
             LoginController loginPaneController = loginPaneLoader.getController();
             loginPaneController.setProfileScene(profileScene);
-             loginPaneController.setRegistrazioneScene(registrazioneScene);
+            loginPaneController.setRegistrazioneScene(registrazioneScene);
 
 
             ProfileController profilePaneController = profilePageLoader.getController();
             profilePaneController.setLoginScene(loginScene);
+
+            RegistrazioneController registrazionePaneController = registrazionePageLoader.getController();
+            registrazionePaneController.setLoginScene(loginScene);
 
         JMetro jMetro = new JMetro(Style.LIGHT);
         jMetro.setScene(loginScene);
