@@ -6,7 +6,7 @@ import com.unina.project.database.AutenticazioneDAO;
 import java.sql.*;
 
 public class PostgreAutenticazioneDAO implements AutenticazioneDAO {
-    private PostgreJDBC postgreJDBC=new PostgreJDBC();
+    private final PostgreJDBC postgreJDBC=new PostgreJDBC();
 
     @Override
     public void insertAutenticazione(Autenticazione autenticazione) throws SQLException {
@@ -27,13 +27,7 @@ public class PostgreAutenticazioneDAO implements AutenticazioneDAO {
         PreparedStatement pstmt = conn.prepareStatement(SQL);
         pstmt.setString(1, email);
         ResultSet rs = pstmt.executeQuery();
-            if(rs.next())
-            {
-                return false;
-            }
-            else{
-                return true;
-            }
+        return !rs.next();
     }
 
     @Override
@@ -44,12 +38,6 @@ public class PostgreAutenticazioneDAO implements AutenticazioneDAO {
         pstmt.setString(1, email);
         pstmt.setString(2, password);
         ResultSet rs = pstmt.executeQuery();
-        if(rs.next())
-        {
-            return false;
-        }
-        else{
-            return true;
-        }
+        return !rs.next();
     }
 }

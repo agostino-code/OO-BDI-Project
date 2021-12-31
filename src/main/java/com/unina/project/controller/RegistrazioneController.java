@@ -1,6 +1,7 @@
 package com.unina.project.controller;
 
 import com.unina.project.Autenticazione;
+import com.unina.project.Main;
 import com.unina.project.Utente;
 import com.unina.project.codicefiscale.engine.Engine;
 import com.unina.project.codicefiscale.engine.Utils;
@@ -13,7 +14,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -34,7 +34,7 @@ public class RegistrazioneController implements Initializable {
     @FXML
     private Button registratiButton;
     @FXML
-    private TextField emailTextField;
+    public TextField emailTextField;
     @FXML
     private TextField nomeTextField;
     @FXML
@@ -48,51 +48,40 @@ public class RegistrazioneController implements Initializable {
     @FXML
     private TextField codicefiscaleTextField;
     @FXML
-    private PasswordField passwordField;
+    public PasswordField passwordField;
     @FXML
     private ProgressBar passwordProgressBar;
     @FXML
-    private PasswordField repeatpasswordField;
+    public PasswordField repeatpasswordField;
 
     private boolean registratiButtonDisable=true;
-    private List<String> comuni = new ArrayList<>();
-    private Utente utente=new Utente();
-    private Autenticazione autenticazione = new Autenticazione();
-    private AutenticazioneDAO autenticazioneDAO=new PostgreAutenticazioneDAO();
-    private UtenteDAO utenteDAO=new PostgreUtenteDAO();
+    private final List<String> comuni = new ArrayList<>();
+    private final Utente utente=new Utente();
+    private final Autenticazione autenticazione = new Autenticazione();
+    private final AutenticazioneDAO autenticazioneDAO=new PostgreAutenticazioneDAO();
+    private final UtenteDAO utenteDAO=new PostgreUtenteDAO();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        getComuni();
+        getComuni(comuni);
         setDataPicker();
-        registratiButton.setDisable(true);
+            dataDatePicker.focusedProperty().addListener(generaCodiceListner);
+            nomeTextField.focusedProperty().addListener(generaCodiceListner);
+            cognomeTextField.focusedProperty().addListener(generaCodiceListner);
+            comunedinascitaTextField.focusedProperty().addListener(generaCodiceListner);
+            sessoChoiceBox.getItems().addAll("M","F");
+            sessoChoiceBox.focusedProperty().addListener(generaCodiceListner);
+            registratiButton.setDisable(true);
         emailTextField.focusedProperty().addListener(checkEmailListner);
-        sessoChoiceBox.getItems().addAll("M","F");
-        nomeTextField.focusedProperty().addListener(generaCodiceListner);
-        cognomeTextField.focusedProperty().addListener(generaCodiceListner);
-        dataDatePicker.focusedProperty().addListener(generaCodiceListner);
-        comunedinascitaTextField.focusedProperty().addListener(generaCodiceListner);
-        sessoChoiceBox.focusedProperty().addListener(generaCodiceListner);
         passwordField.focusedProperty().addListener(passwordListner);
         repeatpasswordField.focusedProperty().addListener(repeatpasswordListner);
-
+        TextFields.bindAutoCompletion(comunedinascitaTextField,comuni);
     }
 
-    private Scene loginScene;
-
-    public void setLoginScene(Scene scene) {
-        loginScene = scene;
-    }
-
-    private void getComuni() {
+    public void getComuni(List<String> comuni) {
         for (Map.Entry<String, String> e : Utils.getCitiesCodes().entrySet()) {
             comuni.add(e.getValue());
         }
-    }
-
-    @FXML
-    private void comuniSuggeriti(KeyEvent keyEvent){
-        TextFields.bindAutoCompletion(comunedinascitaTextField,comuni);
     }
 
     private void newCodiceFiscale() throws IOException {
@@ -106,7 +95,7 @@ public class RegistrazioneController implements Initializable {
         utente.setCodiceFiscale(codicefiscaleTextField.getText());
         }
 
-    private ChangeListener<Boolean> generaCodiceListner = (observable, oldValue, newValue) -> {
+    private final ChangeListener<Boolean> generaCodiceListner = (observable, oldValue, newValue) -> {
         if (!newValue) {
             try {
                 if(!nomeTextField.getText().isEmpty()&&!cognomeTextField.getText().isEmpty()&&
@@ -122,7 +111,7 @@ public class RegistrazioneController implements Initializable {
         }
     };
 
-    private ChangeListener<Boolean> checkEmailListner = (observable, oldValue, newValue) -> {
+    public ChangeListener<Boolean> checkEmailListner = (observable, oldValue, newValue) -> {
         if (!newValue) {
             try {
                     if (!autenticazioneDAO.checkEmailExist(emailTextField.getText())) {
@@ -186,7 +175,7 @@ public class RegistrazioneController implements Initializable {
 
     }
 
-    private ChangeListener<Boolean> passwordListner = (observable, oldValue, newValue) -> {
+    public ChangeListener<Boolean> passwordListner = (observable, oldValue, newValue) -> {
         if (!newValue) {
             if(!passwordField.getText().isEmpty())
             if ((calcolaPasswordStrength(passwordField.getText(),nomeTextField.getText())) < 8) {
@@ -194,7 +183,7 @@ public class RegistrazioneController implements Initializable {
                 alert.setTitle("Attenzione!");
                 alert.setHeaderText("La password che hai inserito non è sicura!");
                 alert.setContentText("""
-                        Non deve contenere il nome dell'utente.
+                        Non deve contenere il nome dell'utente/gestore.
                         Deve essere composta da almeno otto caratteri.
                         Deve contenere caratteri di almeno tre delle quattro categorie seguenti:
                            1) Lettere maiuscole dell'alfabeto latino (dalla A alla Z).
@@ -205,13 +194,10 @@ public class RegistrazioneController implements Initializable {
                 passwordField.clear();
                 passwordProgressBar.setProgress(0);
             }
-            else{
-                registratiButton.setDisable(registratiButtonDisable);
-            }
         }
     };
 
-    private ChangeListener<Boolean> repeatpasswordListner = (observable, oldValue, newValue) -> {
+    public ChangeListener<Boolean> repeatpasswordListner = (observable, oldValue, newValue) -> {
         if (!newValue) {
             if(!passwordField.getText().isEmpty()){
                 if(!repeatpasswordField.getText().isEmpty()){
@@ -276,14 +262,16 @@ public class RegistrazioneController implements Initializable {
         alert.setContentText("Benvenuto!");
         alert.showAndWait();
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        primaryStage.setScene(loginScene);
+        primaryStage.setScene(Main.getLoginScene());
 
     }
 
     public void onindietroButtonClick(ActionEvent actionEvent) {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        primaryStage.setScene(loginScene);
+        primaryStage.setTitle("Formazione Facile");
+        primaryStage.setScene(Main.getLoginScene());
     }
+
 }
 
 

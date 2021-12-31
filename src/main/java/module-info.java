@@ -3,7 +3,6 @@ module com.unina.project {
     requires javafx.fxml;
 
     requires org.controlsfx.controls;
-    requires java.desktop;
     requires org.jfxtras.styles.jmetro;
     requires java.sql;
 

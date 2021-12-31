@@ -5,41 +5,205 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fda82428-10f8-42a1-a303-1fe396b62ccd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/database/UtenteDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/database/postgre/PostgreUtenteDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/unina/project/image/warning.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Projectsql.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/Gestore.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/Sede.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/codicefiscale/document/citiesprovinces/CitiesProvinces.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/controller/IndirizzoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/controller/RegistrazioneGestoreController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/unina/project/indirizzo.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/unina/project/registrazioneGestore.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/workspace-id.txt.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/workspace-id.txt.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/Autenticazione.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/Autenticazione.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML Ristrutturato.puml" beforeDir="false" afterPath="$PROJECT_DIR$/UML Ristrutturato.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML.puml" beforeDir="false" afterPath="$PROJECT_DIR$/UML.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/Utente.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/Utente.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/codicefiscale/engine/Engine.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/codicefiscale/engine/Engine.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/codicefiscale/engine/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/codicefiscale/engine/Utils.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/controller/LoginController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/controller/RegistrazioneController$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/controller/RegistrazioneController$1$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/controller/RegistrazioneController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/controller/RegistrazioneController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/controller/RegistrazioneController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/controller/RegistrazioneController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/database/AutenticazioneDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/database/AutenticazioneDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/database/postgre/PostgreAutenticazioneDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/database/postgre/PostgreAutenticazioneDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/database/postgre/PostgreJDBC.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/database/postgre/PostgreJDBC.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/database/postgre/PostgreUtenteDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/database/postgre/PostgreUtenteDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-console-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-console-l1-2-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-datetime-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-debug-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-errorhandling-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-file-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-file-l1-2-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-file-l2-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-handle-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-heap-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-interlocked-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-libraryloader-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-localization-l1-2-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-memory-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-namedpipe-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-processenvironment-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-processthreads-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-processthreads-l1-1-1.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-profile-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-rtlsupport-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-string-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-synch-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-synch-l1-2-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-sysinfo-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-timezone-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-util-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-conio-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-convert-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-environment-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-filesystem-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-heap-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-locale-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-math-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-multibyte-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-private-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-process-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-runtime-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-stdio-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-string-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-time-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-utility-l1-1-0.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/app" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/app.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/awt.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/fontmanager.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/freetype.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/java.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/java.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/javajpeg.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/javaw.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/jawt.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/jimage.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/jli.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/jrunscript.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/jsound.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/keytool.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/lcms.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/mlib_image.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/msvcp140.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/net.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/nio.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/prefs.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/server/jvm.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/splashscreen.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/ucrtbase.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/vcruntime140.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/vcruntime140_1.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/verify.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/bin/zip.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/conf/logging.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/conf/net.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/conf/security/java.policy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/conf/security/java.security" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/conf/security/policy/README.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/conf/security/policy/limited/default_US_export.policy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/conf/security/policy/limited/default_local.policy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/conf/security/policy/limited/exempt_local.policy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/conf/security/policy/unlimited/default_US_export.policy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/conf/security/policy/unlimited/default_local.policy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/conf/sound.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.base/COPYRIGHT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.base/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.base/aes.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.base/asm.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.base/c-libutl.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.base/cldr.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.base/icu.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.base/public_suffix.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.base/unicode.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.base/wepoll.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.base/zlib.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.datatransfer/COPYRIGHT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.datatransfer/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.desktop/COPYRIGHT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.desktop/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.desktop/colorimaging.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.desktop/freetype.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.desktop/giflib.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.desktop/harfbuzz.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.desktop/jpeg.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.desktop/lcms.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.desktop/libpng.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.desktop/mesa3d.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.logging/COPYRIGHT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.logging/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.prefs/COPYRIGHT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.prefs/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.scripting/COPYRIGHT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.scripting/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.xml/COPYRIGHT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.xml/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.xml/bcel.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.xml/dom.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.xml/jcup.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.xml/xalan.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/java.xml/xerces.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/jdk.unsupported/COPYRIGHT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/legal/jdk.unsupported/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/lib/classlist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/lib/fontconfig.bfc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/lib/fontconfig.properties.src" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/lib/jawt.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/lib/jrt-fs.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/lib/jvm.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/lib/jvm.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/lib/modules" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/lib/psfont.properties.ja" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/lib/psfontj2d.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/lib/security/blocked.certs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/lib/security/cacerts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/lib/security/default.policy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/lib/security/public_suffix_list.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/lib/tzdb.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/lib/tzmappings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/image/release" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/jlinkbase/jlinkjars/Project-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/jlinkbase/jlinkjars/Project.merged.module-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/jlinkbase/jlinkjars/Project.merged.module-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/jlinkbase/jlinkjars/controlsfx-11.1.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/jlinkbase/jlinkjars/javafx-base-17.0.1-win.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/jlinkbase/jlinkjars/javafx-controls-17.0.1-win.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/jlinkbase/jlinkjars/javafx-fxml-17.0.1-win.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/jlinkbase/jlinkjars/javafx-graphics-17.0.1-win.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/jlinkbase/jlinkjars/jmetro-11.6.15.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/jlinkbase/tmpmerged/Project.merged.module-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/jlinkbase/tmpmerged/Project.merged.module-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/jlinkbase/tmpmodinfo/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/jlinkbase/tmpmodinfo/module-info.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/libs/Project-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/Project-1.0-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/com/unina/project/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/com/unina/project/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/com/unina/project/profile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/com/unina/project/profile.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/com/unina/project/registrazione.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/com/unina/project/registrazione.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/com/unina/project/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/com/unina/project/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/scripts/Project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/scripts/Project.bat" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/Autenticazione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/Autenticazione.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/Utente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/Utente.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/codicefiscale/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/codicefiscale/engine/Engine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/codicefiscale/engine/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/codicefiscale/engine/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/controller/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/controller/RegistrazioneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/controller/RegistrazioneController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/database/AutenticazioneDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/database/AutenticazioneDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/database/JDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/database/JDBC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/database/postgre/PostgreAutenticazioneDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/database/postgre/PostgreAutenticazioneDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/database/postgre/PostgreJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/database/postgre/PostgreJDBC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/database/postgre/PostgreUtenteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/database/postgre/PostgreUtenteDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/unina/project/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/unina/project/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/unina/project/profile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/unina/project/profile.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/unina/project/registrazione.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/unina/project/registrazione.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/unina/project/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/unina/project/style.css" afterDir="false" />
     </list>
@@ -83,6 +247,42 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Project" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Project" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build setup" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Project" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="distribution" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Project" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="help" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Project" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Project" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="verification" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Project" type="f1a62948:ProjectNode" />
                 <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
               </path>
               <path>
@@ -101,6 +301,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -115,11 +316,15 @@
     <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="22byQCIbYaCtQ7RtqqKOAqzNzH6" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="java.sql.Driver&#10;redshift&#10;postgresql" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
@@ -133,7 +338,7 @@
     <property name="database.data.extractors.current.export.id" value="SQL Inserts" />
     <property name="database.data.extractors.current.id" value="SQL Inserts" />
     <property name="jdk.selected.JAVA_MODULE" value="17.0.1" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/com/unina/project/image" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/unina/project/codicefiscale/document/citiesprovinces" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -141,18 +346,20 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.61149424" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="database.main" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\agost\OneDrive\Desktop\OO-BDI-Project\src\main\java\com\unina\project\codicefiscale\document\citiesprovinces" />
       <recent name="C:\Users\agost\OneDrive\Desktop\OO-BDI-Project\src\main\resources\com\unina\project\image" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\agost\OneDrive\Desktop\OO-BDI-Project\src\main\java\com\unina\project" />
       <recent name="C:\Users\agost\OneDrive\Desktop\OO-BDI-Project\src\main\resources\com\unina\project" />
       <recent name="C:\Users\agost\OneDrive\Desktop\OO-BDI-Project\src\main\resources" />
       <recent name="C:\Users\agost\IdeaProjects\Project\src\main\resources\com\unina\project" />
       <recent name="C:\Users\agost\IdeaProjects\Project\src\main\resources\com\unina\project\fxml" />
-      <recent name="C:\Users\agost\IdeaProjects\Project\src\main\java\com\unina\project" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.unina.project" />
@@ -160,12 +367,12 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="Project [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="OO-BDI-Project [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--scan" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -183,7 +390,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.Project [run]" />
+        <item itemvalue="Gradle.OO-BDI-Project [run]" />
       </list>
     </recent_temporary>
   </component>
@@ -224,11 +431,23 @@
       <workItem from="1640632248235" duration="783000" />
       <workItem from="1640633121543" duration="3939000" />
       <workItem from="1640642796369" duration="3602000" />
+      <workItem from="1640696361611" duration="434000" />
+      <workItem from="1640696817881" duration="3000" />
+      <workItem from="1640697323004" duration="79000" />
+      <workItem from="1640708406550" duration="19399000" />
+      <workItem from="1640763612079" duration="506000" />
+      <workItem from="1640764140437" duration="24961000" />
+      <workItem from="1640877030684" duration="7502000" />
+      <workItem from="1640888114636" duration="7139000" />
+      <workItem from="1640906862952" duration="3276000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

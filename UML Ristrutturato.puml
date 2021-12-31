@@ -7,7 +7,7 @@ class Autenticazione {
 }
 Autenticazione "1" -- "1" Utente:AccessoUtente
 Autenticazione "1" --- "1" Gestore:AccessoGestore
-abstract class Utente{
+class Utente{
   +nome: String
   +cognome: String
   +dataNascita: Date
@@ -15,7 +15,7 @@ abstract class Utente{
   +sesso: sesso
   +codiceFiscale: String
 }
-note "Vincolo di totalità: Un Utente è associato o ad un Operatore o ad uno Studente\nVincolo di disgiungione: Un Utente non può essere associato in modo univoco a un Operatore e uno Studente " as N1
+note "{ Partial , Overlapping }" as N1
 Utente ... N1
 Operatore .. N1
 Studente .. N1
