@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+            prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.unina.project.controller.RegistrazioneGestoreController">
+   <Label layoutX="55.0" layoutY="55.0" stylesheets="@style.css" text="email" AnchorPane.leftAnchor="45.0"
+          AnchorPane.topAnchor="45.0"/>
+   <TextField fx:id="emailTextField" layoutX="165.0" layoutY="50.0" prefWidth="200.0" AnchorPane.leftAnchor="155.0"
+              AnchorPane.topAnchor="40.0"/>
+   <Label layoutX="55.0" layoutY="95.0" stylesheets="@style.css" text="Nome" AnchorPane.leftAnchor="45.0"
+          AnchorPane.topAnchor="85.0"/>
+   <TextField fx:id="nomeTextField" layoutX="165.0" layoutY="90.0" prefWidth="200.0" AnchorPane.leftAnchor="155.0"
+              AnchorPane.topAnchor="80.0"/>
+   <Label layoutX="45.0" layoutY="350.0" stylesheets="@style.css" text="Password" AnchorPane.leftAnchor="45.0"
+          AnchorPane.topAnchor="350.0"/>
+   <PasswordField fx:id="passwordField" layoutX="155.0" layoutY="345.0" onKeyPressed="#passwordCheck" prefWidth="200.0"
+                  AnchorPane.leftAnchor="155.0" AnchorPane.topAnchor="345.0"/>
+   <Label layoutX="45.0" layoutY="395.0" stylesheets="@style.css" text="Ripeti password" AnchorPane.leftAnchor="45.0"
+          AnchorPane.topAnchor="395.0"/>
+   <PasswordField fx:id="repeatpasswordField" layoutX="155.0" layoutY="390.0" prefWidth="200.0"
+                  AnchorPane.leftAnchor="155.0" AnchorPane.topAnchor="390.0"/>
+   <Button fx:id="registratigestoreButton" layoutX="204.0" layoutY="425.0" mnemonicParsing="false"
+           onAction="#oninviasottoscrizioneButtonClick" prefHeight="26.0" prefWidth="150.0" stylesheets="@style.css"
+           text="Invia sottoscrizione" AnchorPane.leftAnchor="204.0" AnchorPane.topAnchor="425.0"/>
+   <ProgressBar fx:id="passwordProgressBar" layoutX="155.0" layoutY="375.0" prefHeight="8.0" prefWidth="200.0"
+                progress="0.0" stylesheets="@style.css" AnchorPane.leftAnchor="155.0" AnchorPane.topAnchor="375.0"/>
+   <Button fx:id="indietroButton" layoutX="45.0" layoutY="470.0" mnemonicParsing="false"
+           onAction="#onindietroButtonClick" prefWidth="100.0" stylesheets="@style.css" text="Indietro"
+           AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="470.0"/>
+   <Label layoutX="55.0" layoutY="130.0" stylesheets="@style.css" text="Descrizione" AnchorPane.leftAnchor="45.0"
+          AnchorPane.topAnchor="125.0"/>
+   <TextArea fx:id="descrizionegestoreTextArea" layoutX="165.0" layoutY="127.0" prefHeight="130.0" prefWidth="200.0"
+             AnchorPane.leftAnchor="155.0" AnchorPane.topAnchor="120.0"/>
+   <Label layoutX="45.0" layoutY="310.0" stylesheets="@style.css" text="Telefono" AnchorPane.leftAnchor="45.0"
+          AnchorPane.topAnchor="310.0"/>
+   <TextField fx:id="telefonoTextField" layoutX="155.0" layoutY="305.0" prefWidth="200.0" AnchorPane.leftAnchor="155.0"
+              AnchorPane.topAnchor="305.0"/>
+   <Label layoutX="56.0" layoutY="269.0" stylesheets="@style.css" text="Indirizzo" AnchorPane.leftAnchor="45.0"
+          AnchorPane.topAnchor="270.0"/>
+   <TextField fx:id="indirizzoTextField" editable="false" layoutX="166.0" layoutY="265.0"
+              onMouseClicked="#getinserisciScene" prefWidth="200.0" AnchorPane.leftAnchor="155.0"
+              AnchorPane.topAnchor="265.0"/>
+</AnchorPane>

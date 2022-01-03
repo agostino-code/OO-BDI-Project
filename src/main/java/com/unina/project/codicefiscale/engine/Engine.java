@@ -7,33 +7,30 @@ import java.io.IOException;
 
 public class Engine {
 
-	private Utente utente;
-	private String code="";
+	private String code;
 	
-	private String cognome="";
-	private String nome="";
-	private String sesso="";
-	private int giorno;
-	private int mese;
-	private int anno;
-	private String citta="";
+	private final String cognome;
+	private final String nome;
+	private final String sesso;
+	private final int giorno;
+	private final int mese;
+	private final int anno;
+	private final String citta;
 	
 	private String consonanti_COGNOME="";
 	private String vocali_COGNOME="";
 	private String consonanti_NOME="";
 	private String vocali_NOME="";
 	
-	public Engine(Utente persona) throws IOException{
+	public Engine(Utente persona) {
 
-		this.utente = persona;
-
-		cognome= utente.getCognome().toUpperCase();
-		nome= utente.getNome().toUpperCase();
-		sesso= utente.getSesso().toUpperCase();
-		giorno= utente.getDataNascitaGiorno();
-		mese= utente.getDataNascitaMese();
-		anno= utente.getDataNascitaAnno();
-		citta= utente.getComuneDiNascita();
+		cognome= persona.getCognome().toUpperCase();
+		nome= persona.getNome().toUpperCase();
+		sesso= persona.getSesso();
+		giorno= persona.getDataNascitaGiorno();
+		mese= persona.getDataNascitaMese();
+		anno= persona.getDataNascitaAnno();
+		citta= persona.getComuneDiNascita();
 	
 		popolazioneStringheConsonantiVocali();
 		
@@ -47,122 +44,122 @@ public class Engine {
 	
 	private String controlCode(String s) {
 		String c="";
-		String char_posPari="";
-		String char_posDispari="";
+		StringBuilder char_posPari= new StringBuilder();
+		StringBuilder char_posDispari= new StringBuilder();
 		int counter=0;
 		for(int i=0;i<s.length();i++){
 			if(i%2==0)
-				char_posDispari+=s.charAt(i); //perchè per l'algoritmo la stringa comincia da 1 e non da 0 
+				char_posDispari.append(s.charAt(i)); //perchè per l'algoritmo la stringa comincia da 1 e non da 0
 			else
-				char_posPari+=s.charAt(i);
+				char_posPari.append(s.charAt(i));
 		}
 		for(int i=0;i<char_posDispari.length();i++){
-			switch(char_posDispari.charAt(i)){
-			case '0': counter+=1;break;
-			case '1': counter+=0;break;
-			case '2': counter+=5;break;
-			case '3': counter+=7;break;
-			case '4': counter+=9;break;
-			case '5': counter+=13;break;
-			case '6': counter+=15;break;
-			case '7': counter+=17;break;
-			case '8': counter+=19;break;
-			case '9': counter+=21;break;
-			case 'A': counter+=1;break;
-			case 'B': counter+=0;break;
-			case 'C': counter+=5;break;
-			case 'D': counter+=7;break;
-			case 'E': counter+=9;break;
-			case 'F': counter+=13;break;
-			case 'G': counter+=15;break;
-			case 'H': counter+=17;break;
-			case 'I': counter+=19;break;
-			case 'J': counter+=21;break;
-			case 'K': counter+=2;break;
-			case 'L': counter+=4;break;
-			case 'M': counter+=18;break;
-			case 'N': counter+=20;break;
-			case 'O': counter+=11;break;
-			case 'P': counter+=3;break;
-			case 'Q': counter+=6;break;
-			case 'R': counter+=8;break;
-			case 'S': counter+=12;break;
-			case 'T': counter+=14;break;
-			case 'U': counter+=16;break;
-			case 'V': counter+=10;break;
-			case 'W': counter+=22;break;
-			case 'X': counter+=25;break;
-			case 'Y': counter+=24;break;
-			case 'Z': counter+=23;break;
+			switch (char_posDispari.charAt(i)) {
+				case '0' -> counter += 1;
+				case '1' -> counter += 0;
+				case '2' -> counter += 5;
+				case '3' -> counter += 7;
+				case '4' -> counter += 9;
+				case '5' -> counter += 13;
+				case '6' -> counter += 15;
+				case '7' -> counter += 17;
+				case '8' -> counter += 19;
+				case '9' -> counter += 21;
+				case 'A' -> counter += 1;
+				case 'B' -> counter += 0;
+				case 'C' -> counter += 5;
+				case 'D' -> counter += 7;
+				case 'E' -> counter += 9;
+				case 'F' -> counter += 13;
+				case 'G' -> counter += 15;
+				case 'H' -> counter += 17;
+				case 'I' -> counter += 19;
+				case 'J' -> counter += 21;
+				case 'K' -> counter += 2;
+				case 'L' -> counter += 4;
+				case 'M' -> counter += 18;
+				case 'N' -> counter += 20;
+				case 'O' -> counter += 11;
+				case 'P' -> counter += 3;
+				case 'Q' -> counter += 6;
+				case 'R' -> counter += 8;
+				case 'S' -> counter += 12;
+				case 'T' -> counter += 14;
+				case 'U' -> counter += 16;
+				case 'V' -> counter += 10;
+				case 'W' -> counter += 22;
+				case 'X' -> counter += 25;
+				case 'Y' -> counter += 24;
+				case 'Z' -> counter += 23;
 			}
 		}
 		for(int i=0;i<char_posPari.length();i++){
-			switch(char_posPari.charAt(i)){
-			case '0': counter+=0;break;
-			case '1': counter+=1;break;
-			case '2': counter+=2;break;
-			case '3': counter+=3;break;
-			case '4': counter+=4;break;
-			case '5': counter+=5;break;
-			case '6': counter+=6;break;
-			case '7': counter+=7;break;
-			case '8': counter+=8;break;
-			case '9': counter+=9;break;
-			case 'A': counter+=0;break;
-			case 'B': counter+=1;break;
-			case 'C': counter+=2;break;
-			case 'D': counter+=3;break;
-			case 'E': counter+=4;break;
-			case 'F': counter+=5;break;
-			case 'G': counter+=6;break;
-			case 'H': counter+=7;break;
-			case 'I': counter+=8;break;
-			case 'J': counter+=9;break;
-			case 'K': counter+=10;break;
-			case 'L': counter+=11;break;
-			case 'M': counter+=12;break;
-			case 'N': counter+=13;break;
-			case 'O': counter+=14;break;
-			case 'P': counter+=15;break;
-			case 'Q': counter+=16;break;
-			case 'R': counter+=17;break;
-			case 'S': counter+=18;break;
-			case 'T': counter+=19;break;
-			case 'U': counter+=20;break;
-			case 'V': counter+=21;break;
-			case 'W': counter+=22;break;
-			case 'X': counter+=23;break;
-			case 'Y': counter+=24;break;
-			case 'Z': counter+=25;break;
+			switch (char_posPari.charAt(i)) {
+				case '0' -> counter += 0;
+				case '1' -> counter += 1;
+				case '2' -> counter += 2;
+				case '3' -> counter += 3;
+				case '4' -> counter += 4;
+				case '5' -> counter += 5;
+				case '6' -> counter += 6;
+				case '7' -> counter += 7;
+				case '8' -> counter += 8;
+				case '9' -> counter += 9;
+				case 'A' -> counter += 0;
+				case 'B' -> counter += 1;
+				case 'C' -> counter += 2;
+				case 'D' -> counter += 3;
+				case 'E' -> counter += 4;
+				case 'F' -> counter += 5;
+				case 'G' -> counter += 6;
+				case 'H' -> counter += 7;
+				case 'I' -> counter += 8;
+				case 'J' -> counter += 9;
+				case 'K' -> counter += 10;
+				case 'L' -> counter += 11;
+				case 'M' -> counter += 12;
+				case 'N' -> counter += 13;
+				case 'O' -> counter += 14;
+				case 'P' -> counter += 15;
+				case 'Q' -> counter += 16;
+				case 'R' -> counter += 17;
+				case 'S' -> counter += 18;
+				case 'T' -> counter += 19;
+				case 'U' -> counter += 20;
+				case 'V' -> counter += 21;
+				case 'W' -> counter += 22;
+				case 'X' -> counter += 23;
+				case 'Y' -> counter += 24;
+				case 'Z' -> counter += 25;
 			}
 		}
-		switch(counter%26){
-		case 0: c="A";break;
-		case 1: c="B";break;
-		case 2: c="C";break;
-		case 3: c="D";break;
-		case 4: c="E";break;
-		case 5: c="F";break;
-		case 6: c="G";break;
-		case 7: c="H";break;
-		case 8: c="I";break;
-		case 9: c="J";break;
-		case 10: c="K";break;
-		case 11: c="L";break;
-		case 12: c="M";break;
-		case 13: c="N";break;
-		case 14: c="O";break;
-		case 15: c="P";break;
-		case 16: c="Q";break;
-		case 17: c="R";break;
-		case 18: c="S";break;
-		case 19: c="T";break;
-		case 20: c="U";break;
-		case 21: c="V";break;
-		case 22: c="W";break;
-		case 23: c="X";break;
-		case 24: c="Y";break;
-		case 25: c="Z";break;
+		switch (counter % 26) {
+			case 0 -> c = "A";
+			case 1 -> c = "B";
+			case 2 -> c = "C";
+			case 3 -> c = "D";
+			case 4 -> c = "E";
+			case 5 -> c = "F";
+			case 6 -> c = "G";
+			case 7 -> c = "H";
+			case 8 -> c = "I";
+			case 9 -> c = "J";
+			case 10 -> c = "K";
+			case 11 -> c = "L";
+			case 12 -> c = "M";
+			case 13 -> c = "N";
+			case 14 -> c = "O";
+			case 15 -> c = "P";
+			case 16 -> c = "Q";
+			case 17 -> c = "R";
+			case 18 -> c = "S";
+			case 19 -> c = "T";
+			case 20 -> c = "U";
+			case 21 -> c = "V";
+			case 22 -> c = "W";
+			case 23 -> c = "X";
+			case 24 -> c = "Y";
+			case 25 -> c = "Z";
 		}
 		return c;
 	}
@@ -175,21 +172,21 @@ public class Engine {
 		String s="";
 		String annoS=anno+"";
 		s=s+annoS.charAt(2)+annoS.charAt(3);
-		switch(mese){
-		case 1: s+="A";break;
-		case 2: s+="B";break;
-		case 3: s+="C";break;
-		case 4: s+="D";break;
-		case 5: s+="E";break;
-		case 6: s+="H";break;
-		case 7: s+="L";break;
-		case 8: s+="M";break;
-		case 9: s+="P";break;
-		case 10: s+="R";break;
-		case 11: s+="S";break;
-		case 12: s+="T";break;
+		switch (mese) {
+			case 1 -> s += "A";
+			case 2 -> s += "B";
+			case 3 -> s += "C";
+			case 4 -> s += "D";
+			case 5 -> s += "E";
+			case 6 -> s += "H";
+			case 7 -> s += "L";
+			case 8 -> s += "M";
+			case 9 -> s += "P";
+			case 10 -> s += "R";
+			case 11 -> s += "S";
+			case 12 -> s += "T";
 		}
-		if(sesso=="M"){
+		if(sesso.equals("M")){
 			if(giorno<10)
 				s+="0"+giorno;
 			else
@@ -202,50 +199,50 @@ public class Engine {
 	}
 	
 	private String codiceNome() {
-		String s="";
+		StringBuilder s= new StringBuilder();
 		if(consonanti_NOME.length()>3){
-			s=s+consonanti_NOME.charAt(0)+consonanti_NOME.charAt(2)+consonanti_NOME.charAt(3);
-			return s;
+			s.append(consonanti_NOME.charAt(0)).append(consonanti_NOME.charAt(2)).append(consonanti_NOME.charAt(3));
+			return s.toString();
 		}
 		if(consonanti_NOME.length()==3){
 			for(int i=0;i<3;i++)
-				s=s+consonanti_NOME.charAt(i);
-			return s;
+				s.append(consonanti_NOME.charAt(i));
+			return s.toString();
 		}
 		if(consonanti_NOME.length()==2){
-			s=s+consonanti_NOME.charAt(0)+consonanti_NOME.charAt(1)+vocali_NOME.charAt(0);
-			return s;
+			s.append(consonanti_NOME.charAt(0)).append(consonanti_NOME.charAt(1)).append(vocali_NOME.charAt(0));
+			return s.toString();
 		}
 		if(consonanti_NOME.length()==1){
-			s=s+consonanti_NOME.charAt(0)+vocali_NOME.charAt(0)+vocali_NOME.charAt(1);
-			return s;
+			s.append(consonanti_NOME.charAt(0)).append(vocali_NOME.charAt(0)).append(vocali_NOME.charAt(1));
+			return s.toString();
 		}
 		else{
 			for(int i=0;i<3;i++)
-				s=s+vocali_NOME.charAt(i);
-			return s;
+				s.append(vocali_NOME.charAt(i));
+			return s.toString();
 		}
 	}
 	
 	private String codiceCognome() {
-		String s="";
+		StringBuilder s= new StringBuilder();
 		if(consonanti_COGNOME.length()>=3){
 			for(int i=0;i<3;i++)
-				s=s+consonanti_COGNOME.charAt(i);
-			return s;
+				s.append(consonanti_COGNOME.charAt(i));
+			return s.toString();
 		}
 		if(consonanti_COGNOME.length()==2){
-			s=s+consonanti_COGNOME.charAt(0)+consonanti_COGNOME.charAt(1)+vocali_COGNOME.charAt(0);
-			return s;
+			s.append(consonanti_COGNOME.charAt(0)).append(consonanti_COGNOME.charAt(1)).append(vocali_COGNOME.charAt(0));
+			return s.toString();
 		}
 		if(consonanti_COGNOME.length()==1){
-			s=s+consonanti_COGNOME.charAt(0)+vocali_COGNOME.charAt(0)+vocali_COGNOME.charAt(1);
-			return s;
+			s.append(consonanti_COGNOME.charAt(0)).append(vocali_COGNOME.charAt(0)).append(vocali_COGNOME.charAt(1));
+			return s.toString();
 		}
 		else{
 			for(int i=0;i<3;i++)
-				s=s+vocali_COGNOME.charAt(i);
-			return s;
+				s.append(vocali_COGNOME.charAt(i));
+			return s.toString();
 		}
 	}
 
@@ -267,9 +264,7 @@ public class Engine {
 	}
 
 	private boolean isVocal(char c){
-		if(c=='A' || c=='E' || c=='I' || c=='O' || c=='U')
-			return true;
-		return false;
+		return c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U';
 	}
 	
 }
