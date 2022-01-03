@@ -24,21 +24,27 @@ import java.util.ResourceBundle;
 public class LoginController implements Initializable {
 
     @FXML
-    Button loginButton;
+    public Button loginButton;
     @FXML
-    TextField emailTextField;
+    public TextField emailTextField;
     @FXML
-    TextField passwordTextField;
+    public TextField passwordTextField;
     @FXML
-    ProgressBar loginProgressBar;
+    public ProgressBar loginProgressBar;
+    @FXML
+    public TextField gestoriemailTextField;
+    @FXML
+    public PasswordField gestoriPasswordField;
 
     private final AutenticazioneDAO autenticazioneDAO=new PostgreAutenticazioneDAO();
     private final JMetro jMetro = new JMetro(Style.LIGHT);
 
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         emailTextField.focusedProperty().addListener(checkEmailListner);
+        gestoriemailTextField.focusedProperty().addListener(checkEmailGestoriListner);
     }
 
     public void openRegistrazioneScene(ActionEvent actionEvent) throws IOException {
@@ -68,16 +74,35 @@ public class LoginController implements Initializable {
 
     private final ChangeListener<Boolean> checkEmailListner = (observable, oldValue, newValue) -> {
         if (!newValue) {
-            try {
-                if(autenticazioneDAO.checkEmailExist(emailTextField.getText())) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Errore email");
-                    alert.setHeaderText("L'email che hai inserito non risulta registrata!");
-                    alert.setContentText("Registrati!");
-                    alert.showAndWait();
+                if (!emailTextField.getText().isBlank()) {
+                    try {
+                    if (autenticazioneDAO.checkEmailExist(emailTextField.getText())) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Errore email");
+                        alert.setHeaderText("L'email che hai inserito non risulta registrata!");
+                        alert.setContentText("Registrati!");
+                        alert.showAndWait();
+                    }
+                } catch(SQLException e){
+                    e.printStackTrace();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
+                }
+        }
+    };
+    private final ChangeListener<Boolean> checkEmailGestoriListner = (observable, oldValue, newValue) -> {
+        if (!newValue) {
+            if (!gestoriemailTextField.getText().isBlank()) {
+                try {
+                    if (autenticazioneDAO.checkEmailGestoriExist(gestoriemailTextField.getText())) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Errore email");
+                        alert.setHeaderText("L'email che hai inserito non risulta registrata!");
+                        alert.setContentText("Registrati!");
+                        alert.showAndWait();
+                    }
+                } catch(SQLException e){
+                    e.printStackTrace();
+                }
             }
         }
     };
@@ -94,7 +119,7 @@ public class LoginController implements Initializable {
 
     public void openProfileGestoriScene(ActionEvent actionEvent) {
         try {
-            if(autenticazioneDAO.loginGestore(emailTextField.getText(), passwordTextField.getText())){
+            if(autenticazioneDAO.loginGestore(gestoriemailTextField.getText(), gestoriPasswordField.getText())){
                 checkLoginFail();
             }
             else{
@@ -109,7 +134,7 @@ public class LoginController implements Initializable {
 
     private void loadProfile(ActionEvent actionEvent, FXMLLoader profilePageLoader) throws IOException {
         Parent profilePane = profilePageLoader.load();
-        Scene profileScene = new Scene(profilePane, 600, 400);
+        Scene profileScene = new Scene(profilePane);
         jMetro.setScene(profileScene);
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(profileScene);
