@@ -22,6 +22,17 @@ public class PostgreAutenticazioneDAO implements AutenticazioneDAO {
 
     @Override
     public boolean checkEmailExist(String email) throws SQLException {
+        String SQL = ("SELECT email FROM \"Autenticazione\" WHERE email = ?;");
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement pstmt = conn.prepareStatement(SQL);
+        pstmt.setString(1, email);
+        ResultSet rs = pstmt.executeQuery();
+        return !rs.next();
+    }
+
+
+    @Override
+    public boolean checkEmailUtenteExist(String email) throws SQLException {
         String SQL = ("SELECT email FROM loginutente WHERE email = ?;");
         Connection conn = postgreJDBC.Connessione();
         PreparedStatement pstmt = conn.prepareStatement(SQL);

@@ -278,7 +278,7 @@ public class RegistrazioneController implements Initializable {
             }
         }
 
-    public static void accountCreatedSuccessful(ActionEvent actionEvent) {
+    public void accountCreatedSuccessful(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Attenzione!");
         alert.setHeaderText("Account Creato Correttamente");

@@ -22,7 +22,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loginPaneLoader = new FXMLLoader(getClass().getResource("login.fxml"));
         Parent loginPane = loginPaneLoader.load();
-        loginScene = new Scene(loginPane, 300, 400);
+        loginScene = new Scene(loginPane, 400, 400);
 
         JMetro jMetro = new JMetro(Style.LIGHT);
         jMetro.setScene(loginScene);

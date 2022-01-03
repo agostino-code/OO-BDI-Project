@@ -13,20 +13,17 @@ public class PostgreSedeDAO implements SedeDAO {
     private final PostgreJDBC postgreJDBC=new PostgreJDBC();
 
     @Override
-    public String insertSede(Sede sede) throws SQLException {
-        String SQL = ("INSERT INTO \"Sede\" (città, via, civico,provincia) VALUES (?,?,?,?) returning \"codSede\";");
+    public void insertSede(Sede sede,String codGestore) throws SQLException {
+        String SQL = ("INSERT INTO \"Sede\" (città, via, civico, provincia, \"codGestore\") VALUES (?,?,?,?,?);");
         Connection conn = postgreJDBC.Connessione();
         PreparedStatement pstmt = conn.prepareStatement(SQL);
         pstmt.setString(1, sede.citta);
         pstmt.setString(2, sede.via);
         pstmt.setString(3, sede.civico);
         pstmt.setString(4, sede.provincia);
+        pstmt.setString(5, codGestore);
         pstmt.execute();
-        ResultSet rs =pstmt.getResultSet();
-        rs.next();
-        String codSede= rs.getString(1);
         pstmt.close();
         conn.close();
-        return codSede;
     }
 }

@@ -25,7 +25,6 @@ class Sede {
   +civico: String
   +provincia: String
   +cap: Integer
-  +cod.Sede
 }
 class Gestore {
   +nome: String

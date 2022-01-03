@@ -11,18 +11,21 @@ import java.sql.SQLException;
 public class PostgreGestoreDAO implements GestoreDAO {
     private final PostgreJDBC postgreJDBC=new PostgreJDBC();
 
-    public void insertGestore(Gestore gestore,String codSede) throws SQLException {
-        String SQL = ("INSERT INTO \"Gestore\" (nome, descrizione, telefono, email, \"codSede\") VALUES (?,?,?,?,?);");
+    public String insertGestore(Gestore gestore) throws SQLException {
+        String SQL = ("INSERT INTO \"Gestore\" (nome, descrizione, telefono, email) VALUES (?,?,?,?) returning \"codGestore\";");
         Connection conn = postgreJDBC.Connessione();
         PreparedStatement pstmt = conn.prepareStatement(SQL);
         pstmt.setString(1, gestore.nome);
         pstmt.setString(2, gestore.descrizione);
         pstmt.setString(3, gestore.telefono);
         pstmt.setString(4, gestore.email);
-        pstmt.setString(5, codSede);
-        pstmt.executeUpdate();
+        pstmt.execute();
+        ResultSet rs =pstmt.getResultSet();
+        rs.next();
+        String codGestore= rs.getString(1);
         pstmt.close();
         conn.close();
+        return codGestore;
     }
     public boolean checkNomeExist(String nome) throws SQLException {
         String SQL = ("SELECT nome FROM \"Gestore\" WHERE nome = ?;");

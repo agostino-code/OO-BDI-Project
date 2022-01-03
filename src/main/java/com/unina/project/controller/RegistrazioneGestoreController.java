@@ -3,6 +3,7 @@ package com.unina.project.controller;
 import com.unina.project.Gestore;
 import com.unina.project.Main;
 import com.unina.project.Sede;
+import com.unina.project.codicefiscale.engine.Utils;
 import com.unina.project.database.AutenticazioneDAO;
 import com.unina.project.database.GestoreDAO;
 import com.unina.project.database.SedeDAO;
@@ -71,8 +72,11 @@ public class RegistrazioneGestoreController extends RegistrazioneController{
         indirizzoStage.showAndWait();
         registratigestoreButton.getParent().setDisable(false);
         IndirizzoController indirizzocontroller = indirizzoPageLoader.getController();
-            this.sede=indirizzocontroller.getSede();
-            indirizzoTextField.setText(this.sede.getIndirizzo());
+            sede=indirizzocontroller.getSede();
+            if(sede.via!=null){
+                indirizzoTextField.setText(sede.getIndirizzo());
+            }
+
         }
 
     private final ChangeListener<Boolean> nomeListner = (observable, oldValue, newValue) -> {
@@ -122,7 +126,9 @@ public class RegistrazioneGestoreController extends RegistrazioneController{
                     descrizionegestoreTextArea.clear();
                     alert.showAndWait();
                 } else {
-                    gestore.setDescrizione(descrizionegestoreTextArea.getText());
+                    if(!descrizionegestoreTextArea.getText().isBlank()){
+                        gestore.setDescrizione(descrizionegestoreTextArea.getText());
+                    }
                 }
         }
     };
@@ -153,12 +159,12 @@ public class RegistrazioneGestoreController extends RegistrazioneController{
                     gestore.setEmail(autenticazione.email);
                     try {
                         autenticazioneDAO.insertAutenticazione(autenticazione);
-                        String codSede=sedeDAO.insertSede(sede);
-                        gestoreDAO.insertGestore(gestore,codSede);
+                        String codGestore=gestoreDAO.insertGestore(gestore);
+                        sedeDAO.insertSede(sede,codGestore);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
-                    RegistrazioneController.accountCreatedSuccessful(actionEvent);
+                    accountCreatedSuccessful(actionEvent);
                 }
                 else{
                     Alert alert = new Alert(Alert.AlertType.WARNING);

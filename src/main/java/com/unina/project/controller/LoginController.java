@@ -76,7 +76,7 @@ public class LoginController implements Initializable {
         if (!newValue) {
                 if (!emailTextField.getText().isBlank()) {
                     try {
-                    if (autenticazioneDAO.checkEmailExist(emailTextField.getText())) {
+                    if (autenticazioneDAO.checkEmailUtenteExist(emailTextField.getText())) {
                         Alert alert = new Alert(Alert.AlertType.WARNING);
                         alert.setTitle("Errore email");
                         alert.setHeaderText("L'email che hai inserito non risulta registrata!");

@@ -75,7 +75,6 @@ public class IndirizzoController extends RegistrazioneGestoreController {
             sede.setCivico(civicoTextField.getText());
             sede.setCitta(cittaTextField.getText());
             sede.setProvincia(provinciaTextField.getText());
-
             Stage stage = (Stage) inserisciButton.getScene().getWindow();
             stage.close();
         }
