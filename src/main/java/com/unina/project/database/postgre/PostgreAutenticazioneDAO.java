@@ -31,8 +31,19 @@ public class PostgreAutenticazioneDAO implements AutenticazioneDAO {
     }
 
     @Override
-    public boolean checkLogin(String email, String password) throws SQLException {
-        String SQL = ("SELECT email FROM \"Autenticazione\" WHERE email = ? AND password = ?;");
+    public boolean loginUtente(String email, String password) throws SQLException {
+        String SQL = ("SELECT email FROM loginutente WHERE email = ? AND password = ?;");
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement pstmt = conn.prepareStatement(SQL);
+        pstmt.setString(1, email);
+        pstmt.setString(2, password);
+        ResultSet rs = pstmt.executeQuery();
+        return !rs.next();
+    }
+
+    @Override
+    public boolean loginGestore(String email, String password) throws SQLException {
+        String SQL = ("SELECT email FROM logingestore WHERE email = ? AND password = ?;");
         Connection conn = postgreJDBC.Connessione();
         PreparedStatement pstmt = conn.prepareStatement(SQL);
         pstmt.setString(1, email);

@@ -44,11 +44,11 @@ public class Utente {
     }
 
     public void setComuneDiNascita(String comuneDiNascita) {
-        this.comuneDiNascita = comuneDiNascita.toUpperCase();
+        this.comuneDiNascita = comuneDiNascita.toLowerCase();
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.toLowerCase();
     }
 
     public String email;

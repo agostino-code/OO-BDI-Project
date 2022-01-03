@@ -9,66 +9,37 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.unina.project.controller.LoginController">
-    <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0"
-             AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unina.project.controller.LoginController">
+    <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Tab text="Login">
             <AnchorPane>
-                <PasswordField fx:id="passwordTextField" prefHeight="26.0" prefWidth="180.0"
-                               AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="100.0"/>
-                <TextField fx:id="emailTextField" prefHeight="26.0" prefWidth="180.0" AnchorPane.leftAnchor="100.0"
-                           AnchorPane.topAnchor="50.0"/>
-                <ProgressBar fx:id="loginProgressBar" prefHeight="20.0" prefWidth="180.0" progress="0.0"
-                             AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="150.0"/>
-                <Label stylesheets="@style.css" text="Email" AnchorPane.leftAnchor="25.0"
-                       AnchorPane.topAnchor="55.0"/>
-                <Label stylesheets="@style.css" text="Password" AnchorPane.leftAnchor="25.0"
-                       AnchorPane.topAnchor="105.0"/>
-                <Button fx:id="loginButton" layoutX="226.0" layoutY="181.0" mnemonicParsing="false"
-                        onAction="#openProfileScene" stylesheets="@style.css" text="Login"
-                        AnchorPane.leftAnchor="226.0" AnchorPane.topAnchor="180.0"/>
-                <Label layoutX="25.0" layoutY="227.0" stylesheets="@style.css" text="Non hai ancora un account?"
-                       AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="250.0"/>
-                <Button fx:id="registratiButton" layoutX="29.0" layoutY="282.0" mnemonicParsing="false"
-                        onAction="#openRegistrazioneScene" styleClass="text" stylesheets="@style.css"
-                        text="Registrati" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="280.0"/>
+                <PasswordField fx:id="passwordTextField" onAction="#openProfileScene" prefHeight="26.0" prefWidth="180.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="100.0" />
+                <TextField fx:id="emailTextField" prefHeight="26.0" prefWidth="180.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0" />
+                <ProgressBar fx:id="loginProgressBar" prefHeight="20.0" prefWidth="180.0" progress="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="150.0" />
+                <Label stylesheets="@style.css" text="Email" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="55.0" />
+                <Label stylesheets="@style.css" text="Password" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="105.0" />
+                <Button fx:id="loginButton" layoutX="226.0" layoutY="181.0" mnemonicParsing="false" onAction="#openProfileScene" stylesheets="@style.css" text="Login" AnchorPane.leftAnchor="226.0" AnchorPane.topAnchor="180.0" />
+                <Label layoutX="25.0" layoutY="227.0" stylesheets="@style.css" text="Non hai ancora un account?" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="250.0" />
+                <Button fx:id="registratiButton" layoutX="29.0" layoutY="282.0" mnemonicParsing="false" onAction="#openRegistrazioneScene" styleClass="text" stylesheets="@style.css" text="Registrati" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="280.0" />
             </AnchorPane>
         </Tab>
         <Tab text="Gestori">
             <AnchorPane>
-                <PasswordField fx:id="gestoriPasswordField" prefHeight="26.0" prefWidth="180.0"
-                               AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="100.0"/>
-                <TextField fx:id="gestoriemailTextField" prefHeight="26.0" prefWidth="180.0"
-                           AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0"/>
-                <ProgressBar fx:id="gestoriloginProgressBar" prefHeight="20.0" prefWidth="180.0" progress="0.0"
-                             AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="150.0"/>
-                <Label stylesheets="@style.css" text="Email" AnchorPane.leftAnchor="25.0"
-                       AnchorPane.topAnchor="55.0"/>
-                <Label stylesheets="@style.css" text="Password" AnchorPane.leftAnchor="25.0"
-                       AnchorPane.topAnchor="105.0"/>
-                <Button fx:id="gestoriloginButton" layoutX="226.0" layoutY="181.0" mnemonicParsing="false"
-                        onAction="#openProfileGestoriScene" stylesheets="@style.css" text="Login"
-                        AnchorPane.leftAnchor="226.0" AnchorPane.topAnchor="180.0"/>
-                <Label layoutX="25.0" layoutY="227.0" stylesheets="@style.css"
-                       text="Vuoi utilizzare il nostro programma" AnchorPane.leftAnchor="25.0"
-                       AnchorPane.topAnchor="250.0"/>
-                <Button fx:id="gestoriregistratiButton" layoutX="25.0" layoutY="290.0" mnemonicParsing="false"
-                        onAction="#openRegistrazioneGestoriScene" prefHeight="26.0" prefWidth="137.0"
-                        styleClass="text" stylesheets="@style.css" text="Nuova sottoscrizione"
-                        AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="290.0"/>
-                <Label layoutX="25.0" layoutY="232.0" stylesheets="@style.css"
-                       text="Sei un gestore di corsi di formazione?" AnchorPane.leftAnchor="25.0"
-                       AnchorPane.topAnchor="230.0"/>
-                <Label layoutX="25.0" layoutY="265.0" stylesheets="@style.css" text="per la tua azienda?"
-                       AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="265.0"/>
-                <Label layoutX="25.0" layoutY="20.0" prefHeight="18.0" prefWidth="255.0" stylesheets="@style.css"
-                       text="Pagina riservata ai gestori dei corsi!" AnchorPane.leftAnchor="25.0"
-                       AnchorPane.topAnchor="20.0"/>
+                <PasswordField fx:id="gestoriPasswordField" prefHeight="26.0" prefWidth="180.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="100.0" />
+                <TextField fx:id="gestoriemailTextField" prefHeight="26.0" prefWidth="180.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0" />
+                <ProgressBar fx:id="gestoriloginProgressBar" prefHeight="20.0" prefWidth="180.0" progress="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="150.0" />
+                <Label stylesheets="@style.css" text="Email" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="55.0" />
+                <Label stylesheets="@style.css" text="Password" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="105.0" />
+                <Button fx:id="gestoriloginButton" layoutX="226.0" layoutY="181.0" mnemonicParsing="false" onAction="#openProfileGestoriScene" stylesheets="@style.css" text="Login" AnchorPane.leftAnchor="226.0" AnchorPane.topAnchor="180.0" />
+                <Label layoutX="25.0" layoutY="227.0" stylesheets="@style.css" text="Vuoi utilizzare il nostro programma" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="250.0" />
+                <Button fx:id="gestoriregistratiButton" layoutX="25.0" layoutY="290.0" mnemonicParsing="false" onAction="#openRegistrazioneGestoriScene" prefHeight="26.0" prefWidth="137.0" styleClass="text" stylesheets="@style.css" text="Nuova sottoscrizione" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="290.0" />
+                <Label layoutX="25.0" layoutY="232.0" stylesheets="@style.css" text="Sei un gestore di corsi di formazione?" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="230.0" />
+                <Label layoutX="25.0" layoutY="265.0" stylesheets="@style.css" text="per la tua azienda?" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="265.0" />
+                <Label layoutX="25.0" layoutY="20.0" prefHeight="18.0" prefWidth="255.0" stylesheets="@style.css" text="Pagina riservata ai gestori di corsi!" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="20.0" />
             </AnchorPane>
         </Tab>
         <Tab text="Chi siamo?">
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
         </Tab>
     </TabPane>
 </AnchorPane>

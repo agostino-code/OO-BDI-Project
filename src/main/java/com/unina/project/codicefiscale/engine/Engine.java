@@ -30,7 +30,7 @@ public class Engine {
 		giorno= persona.getDataNascitaGiorno();
 		mese= persona.getDataNascitaMese();
 		anno= persona.getDataNascitaAnno();
-		citta= persona.getComuneDiNascita();
+		citta= persona.getComuneDiNascita().toUpperCase();
 	
 		popolazioneStringheConsonantiVocali();
 		

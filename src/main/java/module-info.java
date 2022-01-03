@@ -5,6 +5,7 @@ module com.unina.project {
     requires org.controlsfx.controls;
     requires org.jfxtras.styles.jmetro;
     requires java.sql;
+    requires java.mail;
 
     opens com.unina.project to javafx.fxml;
     exports com.unina.project;

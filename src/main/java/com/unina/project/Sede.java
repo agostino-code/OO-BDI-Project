@@ -1,5 +1,7 @@
 package com.unina.project;
 
+import com.unina.project.codicefiscale.engine.Utils;
+
 public class Sede {
     public void setVia(String via) {
         this.via = via.toUpperCase();;
@@ -24,7 +26,7 @@ public class Sede {
 
     public String getIndirizzo(){
 
-        return via+civico+citta+provincia;
+        return "VIA "+via+", "+civico+", "+citta+", "+provincia+", "+ Utils.getCitiesCodes().getKey(provincia);
     }
 
 }

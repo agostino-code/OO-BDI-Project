@@ -9,13 +9,13 @@ import com.unina.project.database.AutenticazioneDAO;
 import com.unina.project.database.UtenteDAO;
 import com.unina.project.database.postgre.PostgreAutenticazioneDAO;
 import com.unina.project.database.postgre.PostgreUtenteDAO;
+import com.unina.project.verificationcode.SendVerificationEmail;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.controlsfx.control.textfield.TextFields;
@@ -25,14 +25,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class RegistrazioneController implements Initializable {
-    @FXML
-    private Button registratiButton;
     @FXML
     public TextField emailTextField;
     @FXML
@@ -54,10 +49,9 @@ public class RegistrazioneController implements Initializable {
     @FXML
     public PasswordField repeatpasswordField;
 
-    private boolean registratiButtonDisable=true;
     private final List<String> comuni = new ArrayList<>();
     private final Utente utente=new Utente();
-    private final Autenticazione autenticazione = new Autenticazione();
+    public final Autenticazione autenticazione = new Autenticazione();
     private final AutenticazioneDAO autenticazioneDAO=new PostgreAutenticazioneDAO();
     private final UtenteDAO utenteDAO=new PostgreUtenteDAO();
 
@@ -71,7 +65,6 @@ public class RegistrazioneController implements Initializable {
             comunedinascitaTextField.focusedProperty().addListener(generaCodiceListner);
             sessoChoiceBox.getItems().addAll("M","F");
             sessoChoiceBox.focusedProperty().addListener(generaCodiceListner);
-            registratiButton.setDisable(true);
         emailTextField.focusedProperty().addListener(checkEmailListner);
         passwordField.focusedProperty().addListener(passwordListner);
         repeatpasswordField.focusedProperty().addListener(repeatpasswordListner);
@@ -98,11 +91,10 @@ public class RegistrazioneController implements Initializable {
     private final ChangeListener<Boolean> generaCodiceListner = (observable, oldValue, newValue) -> {
         if (!newValue) {
             try {
-                if(!nomeTextField.getText().isEmpty()&&!cognomeTextField.getText().isEmpty()&&
-                        !comunedinascitaTextField.getText().isEmpty()&&
+                if(!nomeTextField.getText().isBlank()&&!cognomeTextField.getText().isBlank()&&
+                        !comunedinascitaTextField.getText().isBlank()&&
                         !sessoChoiceBox.getSelectionModel().isEmpty()&&
-                        !dataDatePicker.getValue().toString().isEmpty()) {
-                    registratiButtonDisable=false;
+                        !dataDatePicker.getValue().toString().isBlank()) {
                     newCodiceFiscale();
                 }
             } catch (IOException e) {
@@ -123,7 +115,6 @@ public class RegistrazioneController implements Initializable {
                         alert.showAndWait();
                     } else {
                         autenticazione.setEmail(emailTextField.getText());
-                        utente.setEmail(emailTextField.getText());
                     }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -170,14 +161,14 @@ public class RegistrazioneController implements Initializable {
         datePicker.setDayCellFactory(dayCellFactory);
     }
 
-    public void passwordCheck(KeyEvent keyEvent) {
+    public void passwordCheck() {
         passwordProgressBar.setProgress(calcolaPasswordStrength(passwordField.getText(),nomeTextField.getText())/10);
 
     }
 
     public ChangeListener<Boolean> passwordListner = (observable, oldValue, newValue) -> {
         if (!newValue) {
-            if(!passwordField.getText().isEmpty())
+            if(!passwordField.getText().isBlank())
             if ((calcolaPasswordStrength(passwordField.getText(),nomeTextField.getText())) < 8) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Attenzione!");
@@ -211,7 +202,6 @@ public class RegistrazioneController implements Initializable {
                     }
                     else
                     {
-                        registratiButton.setDisable(registratiButtonDisable);
                         autenticazione.setPassword(repeatpasswordField.getText());
                     }
                 }
@@ -249,13 +239,46 @@ public class RegistrazioneController implements Initializable {
         return passwordScore;
     }
     public void onregistratiButtonClick(ActionEvent actionEvent) {
-        try {
-            autenticazioneDAO.insertAutenticazione(autenticazione);
-            utenteDAO.insertUtente(utente);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            if(!emailTextField.getText().isBlank()&&!nomeTextField.getText().isBlank()&&
+                    !cognomeTextField.getText().isBlank()&& !sessoChoiceBox.getSelectionModel().isEmpty()&&
+                    !dataDatePicker.getValue().toString().isBlank()&&!codicefiscaleTextField.getText().isEmpty()&&
+                    !passwordField.getText().isBlank()&&!repeatpasswordField.getText().isBlank()) {
+                SendVerificationEmail sendVerificationEmail=new SendVerificationEmail();
+                String codicediverifica=sendVerificationEmail.SendEmail(autenticazione.email);
+                TextInputDialog dialog = new TextInputDialog();
+                dialog.setTitle("Invio codice di Verifica");
+                dialog.setHeaderText("Abbiamo inviato un codice di verifica all'email che ci hai fornito");
+                dialog.setContentText("Inserisci qui il codice :");
+                Optional<String> result = dialog.showAndWait();
+                if (result.isPresent()){
+                    if(result.get().equals(codicediverifica)){
+                        utente.setEmail(autenticazione.email);
+                        try {
+                            autenticazioneDAO.insertAutenticazione(autenticazione);
+                            utenteDAO.insertUtente(utente);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        accountCreatedSuccessful(actionEvent);
+                    }
+                    else{
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Attenzione!");
+                        alert.setHeaderText("Il codice inserito non è corretto!");
+                        alert.setContentText("Riprova!");
+                        alert.showAndWait();
+                    }
+                }
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Errore");
+                alert.setHeaderText("Inserisci prima tutti i dati!");
+                alert.showAndWait();
+            }
         }
+
+    public static void accountCreatedSuccessful(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Attenzione!");
         alert.setHeaderText("Account Creato Correttamente");
@@ -263,7 +286,6 @@ public class RegistrazioneController implements Initializable {
         alert.showAndWait();
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.setScene(Main.getLoginScene());
-
     }
 
     public void onindietroButtonClick(ActionEvent actionEvent) {

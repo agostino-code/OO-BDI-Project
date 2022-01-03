@@ -53,24 +53,13 @@ public class LoginController implements Initializable {
 
     public void openProfileScene(ActionEvent actionEvent) {
         try {
-            if(autenticazioneDAO.checkLogin(emailTextField.getText(), passwordTextField.getText())){
-                loginProgressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Errore");
-                alert.setHeaderText("Nessuna corrispondenza tra email e password!");
-                alert.setContentText("Riprova!");
-                alert.showAndWait();
-                loginProgressBar.setProgress(0);
+            if(autenticazioneDAO.loginUtente(emailTextField.getText(), passwordTextField.getText())){
+                checkLoginFail();
             }
             else{
                 loginProgressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
                 FXMLLoader profilePageLoader = new FXMLLoader(Main.class.getResource("profile.fxml"));
-                Parent profilePane = profilePageLoader.load();
-                Scene profileScene = new Scene(profilePane, 600, 400);
-                jMetro.setScene(profileScene);
-                Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-                primaryStage.setScene(profileScene);
-                primaryStage.setResizable(true);
+                loadProfile(actionEvent, profilePageLoader);
             }
         } catch (SQLException | IOException e) {
             e.printStackTrace();
@@ -93,9 +82,6 @@ public class LoginController implements Initializable {
         }
     };
 
-    public void openProfileGestoriScene(ActionEvent actionEvent) {
-    }
-
     public void openRegistrazioneGestoriScene(ActionEvent actionEvent) throws IOException {
         FXMLLoader registrazionegestorePageLoader = new FXMLLoader(Main.class.getResource("registrazioneGestore.fxml"));
         Parent registrazionegestorePane = registrazionegestorePageLoader.load();
@@ -104,6 +90,41 @@ public class LoginController implements Initializable {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.setTitle("Registrazione Gestore");
         primaryStage.setScene(registrazionegestoreScene);
+    }
+
+    public void openProfileGestoriScene(ActionEvent actionEvent) {
+        try {
+            if(autenticazioneDAO.loginGestore(emailTextField.getText(), passwordTextField.getText())){
+                checkLoginFail();
+            }
+            else{
+                loginProgressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
+                FXMLLoader profilePageLoader = new FXMLLoader(Main.class.getResource("profileGestore.fxml"));
+                loadProfile(actionEvent, profilePageLoader);
+            }
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadProfile(ActionEvent actionEvent, FXMLLoader profilePageLoader) throws IOException {
+        Parent profilePane = profilePageLoader.load();
+        Scene profileScene = new Scene(profilePane, 600, 400);
+        jMetro.setScene(profileScene);
+        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setScene(profileScene);
+        primaryStage.setResizable(true);
+    }
+
+
+    private void checkLoginFail() {
+        loginProgressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Errore");
+        alert.setHeaderText("Nessuna corrispondenza tra email e password!");
+        alert.setContentText("Riprova!");
+        alert.showAndWait();
+        loginProgressBar.setProgress(0);
     }
 }
 
