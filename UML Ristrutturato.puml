@@ -47,7 +47,7 @@ Utente "1" -- "0..1" Operatore:EssereOperatore
 Utente "1" -- "0..1" Studente:EssereStudente
 Gestore "1" -- "0..*" Corso:Possiede
 Corso "*" -- "*" Studente
-Corso "*" - "1..*" Operatore:Gestiti
+Corso "*" - "1..*" Operatore:Coordinato
 class Corso{
   +titolo: String
   +descrizione: String

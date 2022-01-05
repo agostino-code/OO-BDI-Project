@@ -1,12 +1,10 @@
 package com.unina.project.database.postgre;
 
-import com.unina.project.Autenticazione;
 import com.unina.project.Sede;
 import com.unina.project.database.SedeDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class PostgreSedeDAO implements SedeDAO {

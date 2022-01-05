@@ -5,27 +5,15 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.unina.project.controller.IndirizzoController">
-   <Label layoutX="65.0" layoutY="39.0" stylesheets="@style.css" text="Via" AnchorPane.leftAnchor="45.0"
-          AnchorPane.topAnchor="45.0"/>
-   <TextField fx:id="viaTextField" layoutX="175.0" layoutY="50.0" prefWidth="200.0" AnchorPane.leftAnchor="155.0"
-              AnchorPane.topAnchor="40.0"/>
-   <Label layoutX="65.0" layoutY="105.0" stylesheets="@style.css" text="Civico" AnchorPane.leftAnchor="45.0"
-          AnchorPane.topAnchor="85.0"/>
-   <TextField fx:id="civicoTextField" layoutX="175.0" layoutY="100.0" prefWidth="200.0" AnchorPane.leftAnchor="155.0"
-              AnchorPane.topAnchor="80.0"/>
-   <Label layoutX="56.0" layoutY="155.0" stylesheets="@style.css" text="Città" AnchorPane.leftAnchor="45.0"
-          AnchorPane.topAnchor="125.0"/>
-   <TextField fx:id="cittaTextField" layoutX="166.0" layoutY="150.0" prefWidth="200.0" AnchorPane.leftAnchor="155.0"
-              AnchorPane.topAnchor="120.0"/>
-   <Label layoutX="56.0" layoutY="260.0" stylesheets="@style.css" text="Provincia" AnchorPane.leftAnchor="45.0"
-          AnchorPane.topAnchor="165.0"/>
-   <Button fx:id="inserisciButton" layoutX="255.0" layoutY="200.0" mnemonicParsing="false"
-           onAction="#oninserisciButtonClick" prefHeight="26.0" prefWidth="100.0" stylesheets="@style.css"
-           text="Inserisci" AnchorPane.leftAnchor="255.0" AnchorPane.topAnchor="200.0"/>
-   <TextField fx:id="siglaTextField" editable="false" layoutX="320.0" layoutY="160.0" prefHeight="26.0" prefWidth="35.0"
-              AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="160.0"/>
-   <TextField fx:id="provinciaTextField" layoutX="155.0" layoutY="160.0" prefHeight="26.0" prefWidth="160.0"
-              AnchorPane.leftAnchor="155.0" AnchorPane.topAnchor="160.0"/>
+<AnchorPane prefHeight="250.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unina.project.controller.IndirizzoController">
+   <Label layoutX="65.0" layoutY="39.0" stylesheets="@style.css" text="Via" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="45.0" />
+   <TextField fx:id="viaTextField" layoutX="175.0" layoutY="50.0" prefWidth="230.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="40.0" />
+   <Label layoutX="65.0" layoutY="105.0" stylesheets="@style.css" text="Civico" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="85.0" />
+   <TextField fx:id="civicoTextField" layoutX="175.0" layoutY="100.0" prefWidth="230.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="80.0" />
+   <Label layoutX="56.0" layoutY="155.0" stylesheets="@style.css" text="Città" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="125.0" />
+   <TextField fx:id="cittaTextField" layoutX="166.0" layoutY="150.0" prefWidth="230.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="120.0" />
+   <Label layoutX="56.0" layoutY="260.0" stylesheets="@style.css" text="Provincia" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="165.0" />
+   <Button fx:id="inserisciButton" layoutX="230.0" layoutY="200.0" mnemonicParsing="false" onAction="#oninserisciButtonClick" prefHeight="26.0" prefWidth="100.0" stylesheets="@style.css" text="Inserisci" AnchorPane.leftAnchor="255.0" AnchorPane.topAnchor="200.0" />
+   <TextField fx:id="siglaTextField" editable="false" layoutX="284.0" layoutY="160.0" prefHeight="26.0" prefWidth="45.0" AnchorPane.leftAnchor="310.0" AnchorPane.topAnchor="160.0" />
+   <TextField fx:id="provinciaTextField" layoutX="155.0" layoutY="160.0" prefHeight="26.0" prefWidth="180.0" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="160.0" />
 </AnchorPane>

@@ -27,6 +27,7 @@ public class PostgreGestoreDAO implements GestoreDAO {
         conn.close();
         return codGestore;
     }
+
     public boolean checkNomeExist(String nome) throws SQLException {
         String SQL = ("SELECT nome FROM \"Gestore\" WHERE nome = ?;");
         Connection conn = postgreJDBC.Connessione();
@@ -34,5 +35,19 @@ public class PostgreGestoreDAO implements GestoreDAO {
         pstmt.setString(1, nome);
         ResultSet rs = pstmt.executeQuery();
         return !rs.next();
+    }
+
+    public String returncodGestore(String email) throws SQLException {
+        String SQL = ("SELECT \"codGestore\" FROM \"Gestore\" WHERE email = ?;");
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement pstmt = conn.prepareStatement(SQL);
+        pstmt.setString(1, email);
+        pstmt.execute();
+        ResultSet rs =pstmt.getResultSet();
+        rs.next();
+        String codGestore= rs.getString(1);
+        pstmt.close();
+        conn.close();
+        return codGestore;
     }
 }

@@ -65,7 +65,10 @@ public class LoginController implements Initializable {
             else{
                 loginProgressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
                 FXMLLoader profilePageLoader = new FXMLLoader(Main.class.getResource("profile.fxml"));
-                loadProfile(actionEvent, profilePageLoader);
+                loadProfile(actionEvent, profilePageLoader,"Profilo Utente");
+                loginProgressBar.setProgress(0);
+                emailTextField.clear();
+                passwordTextField.clear();
             }
         } catch (SQLException | IOException e) {
             e.printStackTrace();
@@ -125,18 +128,24 @@ public class LoginController implements Initializable {
             else{
                 loginProgressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
                 FXMLLoader profilePageLoader = new FXMLLoader(Main.class.getResource("profileGestore.fxml"));
-                loadProfile(actionEvent, profilePageLoader);
+                loadProfile(actionEvent, profilePageLoader,"Profilo Gestore");
+                ProfileGestoreController profileGestoreController=profilePageLoader.getController();
+                profileGestoreController.setAutenticazione(gestoriemailTextField.getText(), gestoriPasswordField.getText());
+                loginProgressBar.setProgress(0);
+                gestoriemailTextField.clear();
+                gestoriPasswordField.clear();
             }
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void loadProfile(ActionEvent actionEvent, FXMLLoader profilePageLoader) throws IOException {
+    private void loadProfile(ActionEvent actionEvent, FXMLLoader profilePageLoader,String titolo) throws IOException {
         Parent profilePane = profilePageLoader.load();
         Scene profileScene = new Scene(profilePane);
         jMetro.setScene(profileScene);
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setTitle(titolo);
         primaryStage.setScene(profileScene);
         primaryStage.setResizable(true);
     }

@@ -8,6 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fda82428-10f8-42a1-a303-1fe396b62ccd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/Corso.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/controller/CorsoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/database/CorsoDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/database/postgre/PostgreCorsoDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/unina/project/corso.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/fileHashes/fileHashes.bin" afterDir="false" />
@@ -15,38 +20,36 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projectsql.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Projectsql.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SchemaLogico.docx" beforeDir="false" afterPath="$PROJECT_DIR$/SchemaLogico.docx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UML Ristrutturato.puml" beforeDir="false" afterPath="$PROJECT_DIR$/UML Ristrutturato.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/controller/IndirizzoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/controller/IndirizzoController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/controller/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/controller/RegistrazioneController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/controller/RegistrazioneController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/controller/ProfileGestoreController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/controller/ProfileGestoreController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/controller/RegistrazioneGestoreController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/controller/RegistrazioneGestoreController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/database/AutenticazioneDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/database/AutenticazioneDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/database/GestoreDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/database/GestoreDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/database/SedeDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/database/SedeDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/database/postgre/PostgreAutenticazioneDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/database/postgre/PostgreAutenticazioneDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/database/postgre/PostgreGestoreDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/database/postgre/PostgreGestoreDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/database/postgre/PostgreSedeDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/unina/project/database/postgre/PostgreSedeDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/libs/Project-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/Project-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/com/unina/project/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/com/unina/project/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/com/unina/project/indirizzo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/com/unina/project/indirizzo.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/com/unina/project/profile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/com/unina/project/profile.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/com/unina/project/profileGestore.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/com/unina/project/profileGestore.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/com/unina/project/registrazione.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/com/unina/project/registrazione.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/com/unina/project/registrazioneGestore.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/com/unina/project/registrazioneGestore.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/Sede.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/Sede.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/controller/IndirizzoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/controller/IndirizzoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/controller/RegistrazioneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/controller/RegistrazioneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/controller/ProfileGestoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/controller/ProfileGestoreController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/controller/RegistrazioneGestoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/controller/RegistrazioneGestoreController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/database/AutenticazioneDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/database/AutenticazioneDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/database/GestoreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/database/GestoreDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/database/SedeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/database/SedeDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/database/postgre/PostgreAutenticazioneDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/database/postgre/PostgreAutenticazioneDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/database/postgre/PostgreGestoreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/database/postgre/PostgreGestoreDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/unina/project/database/postgre/PostgreSedeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/unina/project/database/postgre/PostgreSedeDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/unina/project/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/unina/project/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/unina/project/indirizzo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/unina/project/indirizzo.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/unina/project/profile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/unina/project/profile.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/unina/project/profileGestore.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/unina/project/profileGestore.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/unina/project/registrazione.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/unina/project/registrazione.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/unina/project/registrazioneGestore.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/unina/project/registrazioneGestore.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,8 +157,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="FxmlFile" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -332,6 +335,12 @@
       <workItem from="1641177135306" duration="573000" />
       <workItem from="1641214444786" duration="3532000" />
       <workItem from="1641222908432" duration="13773000" />
+      <workItem from="1641237982537" duration="471000" />
+      <workItem from="1641284548065" duration="10670000" />
+      <workItem from="1641307203439" duration="1894000" />
+      <workItem from="1641373277857" duration="2016000" />
+      <workItem from="1641375323959" duration="6478000" />
+      <workItem from="1641402153933" duration="42000" />
     </task>
     <servers />
   </component>

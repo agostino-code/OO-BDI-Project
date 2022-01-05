@@ -72,4 +72,16 @@ public class PostgreAutenticazioneDAO implements AutenticazioneDAO {
         ResultSet rs = pstmt.executeQuery();
         return !rs.next();
     }
+
+    @Override
+    public void deleteAutenticazione(Autenticazione autenticazione) throws SQLException {
+        String SQL = ("Delete FROM \"Autenticazione\" WHERE email = ? AND password = ?;");
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement pstmt = conn.prepareStatement(SQL);
+        pstmt.setString(1, autenticazione.email);
+        pstmt.setString(2, autenticazione.password);
+        pstmt.executeQuery();
+        pstmt.close();
+        conn.close();
+    }
 }
