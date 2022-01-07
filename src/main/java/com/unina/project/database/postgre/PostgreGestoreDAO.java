@@ -1,5 +1,6 @@
 package com.unina.project.database.postgre;
 
+import com.unina.project.Corso;
 import com.unina.project.Gestore;
 import com.unina.project.database.GestoreDAO;
 
@@ -7,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PostgreGestoreDAO implements GestoreDAO {
     private final PostgreJDBC postgreJDBC=new PostgreJDBC();
@@ -49,5 +52,46 @@ public class PostgreGestoreDAO implements GestoreDAO {
         pstmt.close();
         conn.close();
         return codGestore;
+    }
+
+    public List<Corso> getCorsi(String codGestore) throws SQLException {
+        String SQL = ("SELECT titolo, descrizione, \"iscrizioniMassime\", \"tassoPresenzeMinime\", \"numeroLezioni\" FROM \"Corso\" WHERE \"codGestore\" = ?;");
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement pstmt = conn.prepareStatement(SQL);
+        pstmt.setString(1, codGestore);
+        pstmt.execute();
+        ResultSet rs =pstmt.getResultSet();
+        List<Corso> corsi= new ArrayList<>();
+        while(rs.next()) {
+            Corso corso= new Corso();
+            corso.setTitolo(rs.getString("titolo"));
+            corso.setDescrizione(rs.getString("descrizione"));
+            corso.setIscrizioniMassime(rs.getInt("iscrizioniMassime"));
+            corso.setTassoPresenzeMinime(rs.getInt("tassoPresenzeMinime"));
+            corso.setNumeroLezioni(rs.getInt("numeroLezioni"));
+            corsi.add(corso);
+        }
+        pstmt.close();
+        conn.close();
+        return corsi;
+    }
+
+    public Gestore getGestore(String codGestore) throws SQLException {
+        String SQL = ("SELECT nome, descrizione, telefono, email FROM \"Gestore\" WHERE \"codGestore\" = ?;");
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement pstmt = conn.prepareStatement(SQL);
+        pstmt.setString(1, codGestore);
+        pstmt.execute();
+        ResultSet rs =pstmt.getResultSet();
+        Gestore gestore= new Gestore();
+        while(rs.next()) {
+            gestore.setNome(rs.getString("nome"));
+            gestore.setDescrizione(rs.getString("descrizione"));
+            gestore.setTelefono(rs.getString("telefono"));
+            gestore.setEmail(rs.getString("email"));
+        }
+        pstmt.close();
+        conn.close();
+        return gestore;
     }
 }

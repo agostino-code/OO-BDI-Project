@@ -8,8 +8,9 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -30,19 +31,26 @@
                            <Font size="24.0" />
                        </font>
                    </Label>
-                   <TreeTableView fx:id="corsiTableView" editable="true">
-                       <columns>
-                           <TreeTableColumn prefWidth="75.0" text="Titolo" />
-                           <TreeTableColumn prefWidth="166.86585235595703" text="Descrizione" />
-                           <TreeTableColumn prefWidth="144.77012634277344" text="Iscrizioni Massime" />
-                           <TreeTableColumn prefWidth="196.82986450195312" text="Tasso Presenze Minime" />
-                       </columns>
-                   </TreeTableView>
-                   <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="214.0" stylesheets="@style.css" text="Nuovo Corso">
-                       <VBox.margin>
-                           <Insets top="10.0" />
-                       </VBox.margin>
-                   </Button>
+               <AnchorPane>
+                  <children>
+                         <TableView fx:id="corsiTableView" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                             <columns>
+                                 <TableColumn fx:id="titoloTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" text="Titolo" />
+                                 <TableColumn fx:id="descrizioneTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" text="Descrizione" />
+                                 <TableColumn fx:id="iscrizionimassimeTableColumn" maxWidth="1.7976931348623157E308" minWidth="32.0" prefWidth="120.0" text="Iscrizioni Massime" />
+                           <TableColumn fx:id="numerolezioniTableColumn" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="120.0" text="Numero Lezioni" />
+                                 <TableColumn fx:id="tassopresenzeminimeTableColumn" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="150.0" text="Tasso Presenze Minime" />
+                             </columns>
+                        <columnResizePolicy>
+                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                        </columnResizePolicy>
+                         </TableView>
+                  </children>
+               </AnchorPane>
+                   <Button fx:id="nuovoCorsoButton" mnemonicParsing="false" onAction="#onNuovoCorsoButton" prefHeight="26.0" prefWidth="214.0" stylesheets="@style.css" text="Nuovo Corso">
+                  <VBox.margin>
+                     <Insets top="10.0" />
+                  </VBox.margin></Button>
                </VBox>
            </ScrollPane>
            <SplitPane dividerPositions="0.5189556509298998" orientation="VERTICAL">
@@ -53,14 +61,14 @@
                                <Font size="24.0" />
                            </font>
                        </Label>
-                       <TreeTableView fx:id="operatoriTableView">
+                       <TableView fx:id="operatoriTableView">
                            <columns>
-                               <TreeTableColumn prefWidth="75.0" text="Email" />
-                               <TreeTableColumn prefWidth="75.0" text="Nome" />
-                               <TreeTableColumn prefWidth="75.0" text="Cognome" />
-                               <TreeTableColumn prefWidth="75.0" text="Codice Fiscale" />
+                               <TableColumn prefWidth="75.0" text="Email" />
+                               <TableColumn prefWidth="75.0" text="Nome" />
+                               <TableColumn prefWidth="75.0" text="Cognome" />
+                               <TableColumn prefWidth="75.0" text="Codice Fiscale" />
                            </columns>
-                       </TreeTableView>
+                       </TableView>
                    </VBox>
                </ScrollPane>
                <ScrollPane>
@@ -70,38 +78,30 @@
                                <Font size="24.0" />
                            </font>
                        </Label>
-                       <TreeTableView fx:id="iscrittiTableView">
+                       <TableView fx:id="iscrittiTableView">
                            <columns>
-                               <TreeTableColumn prefWidth="75.0" text="Email" />
-                               <TreeTableColumn prefWidth="75.0" text="Nome" />
-                               <TreeTableColumn prefWidth="75.0" text="Cognome" />
-                               <TreeTableColumn prefWidth="75.0" text="Idoneo" />
+                               <TableColumn prefWidth="75.0" text="Email" />
+                               <TableColumn prefWidth="75.0" text="Nome" />
+                               <TableColumn prefWidth="75.0" text="Cognome" />
+                               <TableColumn prefWidth="75.0" text="Idoneo" />
                            </columns>
-                       </TreeTableView>
+                       </TableView>
                    </VBox>
                </ScrollPane>
            </SplitPane>
        </SplitPane>
    </center>
    <top>
-      <MenuBar fx:id="gestoreMenuBar" BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-                  <MenuItem mnemonicParsing="false" onAction="#oncloseButtonMenuClick" text="Chiudi" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#oneliminaGestoreButtonMenuClick" text="Elimina Gestore" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Documentazione" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
+       <MenuBar fx:id="gestoreMenuBar" BorderPane.alignment="CENTER">
+           <Menu mnemonicParsing="false" text="File">
+               <MenuItem mnemonicParsing="false" onAction="#oncloseButtonMenuClick" text="Chiudi" />
+           </Menu>
+           <Menu mnemonicParsing="false" text="Edit">
+               <MenuItem mnemonicParsing="false" onAction="#oneliminaGestoreButtonMenuClick" text="Elimina Gestore" />
+           </Menu>
+           <Menu mnemonicParsing="false" text="Help">
+               <MenuItem mnemonicParsing="false" text="Documentazione" />
+           </Menu>
+       </MenuBar>
    </top>
 </BorderPane>

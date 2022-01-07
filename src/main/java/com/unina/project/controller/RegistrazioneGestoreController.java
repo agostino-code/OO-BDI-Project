@@ -85,7 +85,7 @@ public class RegistrazioneGestoreController extends RegistrazioneController{
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Errore nome");
                     alert.setHeaderText("Esiste già un gestore con questo nome!");
-                    alert.setContentText("Cambia il valore di Email");
+                    alert.setContentText("Cambia il valore di nome");
                     nomeTextField.clear();
                     alert.showAndWait();
                 } else {
@@ -122,7 +122,6 @@ public class RegistrazioneGestoreController extends RegistrazioneController{
                     alert.setTitle("Errore descrizione");
                     alert.setHeaderText("La descrizione non può superare 200 caratteri!");
                     alert.setContentText("Quando il testo diventa rosso hai superato i 200 caratteri!");
-                    descrizionegestoreTextArea.clear();
                     alert.showAndWait();
                 } else {
                     if(!descrizionegestoreTextArea.getText().isBlank()){

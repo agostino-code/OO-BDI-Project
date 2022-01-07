@@ -130,7 +130,7 @@ public class LoginController implements Initializable {
                 FXMLLoader profilePageLoader = new FXMLLoader(Main.class.getResource("profileGestore.fxml"));
                 loadProfile(actionEvent, profilePageLoader,"Profilo Gestore");
                 ProfileGestoreController profileGestoreController=profilePageLoader.getController();
-                profileGestoreController.setAutenticazione(gestoriemailTextField.getText(), gestoriPasswordField.getText());
+                profileGestoreController.setProfileGestore(gestoriemailTextField.getText(), gestoriPasswordField.getText());
                 loginProgressBar.setProgress(0);
                 gestoriemailTextField.clear();
                 gestoriPasswordField.clear();
