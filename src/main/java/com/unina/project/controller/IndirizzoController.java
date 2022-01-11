@@ -2,12 +2,15 @@ package com.unina.project.controller;
 
 import com.unina.project.Sede;
 import com.unina.project.codicefiscale.engine.Utils;
+import com.unina.project.graphics.LimitedTextField;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -25,9 +28,9 @@ public class IndirizzoController extends RegistrazioneGestoreController {
     @FXML
     private TextField civicoTextField;
     @FXML
-    private javafx.scene.control.TextField cittaTextField;
+    private TextField cittaTextField;
     @FXML
-    private javafx.scene.control.TextField provinciaTextField;
+    private TextField provinciaTextField;
     @FXML
     private TextField siglaTextField;
 
@@ -35,6 +38,17 @@ public class IndirizzoController extends RegistrazioneGestoreController {
     private final List<String> province =new ArrayList<>();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        LimitedTextField limitvia=new LimitedTextField(viaTextField);
+        limitvia.setMaxLength(30);
+        limitvia.setCharsOnlyFieldwSpace();
+        LimitedTextField limitcivico=new LimitedTextField(civicoTextField);
+        limitcivico.setZipcodeField();
+        LimitedTextField limitcitta=new LimitedTextField(cittaTextField);
+        limitcitta.setMaxLength(35);
+        limitcitta.setCharsOnlyFieldwSpace();
+        LimitedTextField limitprovincia=new LimitedTextField(provinciaTextField);
+        limitprovincia.setMaxLength(22);
+        limitprovincia.setCharsOnlyFieldwSpace();
         getComuni(comuni);
         getProvince(province);
         provinciaTextField.focusedProperty().addListener(provinciaListner);

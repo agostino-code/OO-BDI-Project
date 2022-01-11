@@ -11,4 +11,6 @@ module com.unina.project {
     exports com.unina.project;
     opens com.unina.project.controller to javafx.fxml;
     exports com.unina.project.controller;
+    opens com.unina.project.graphics to javafx.fxml;
+    exports com.unina.project.graphics;
 }

@@ -1,15 +1,8 @@
 package com.unina.project.controller;
 
-import com.unina.project.Autenticazione;
-import com.unina.project.Corso;
-import com.unina.project.Gestore;
-import com.unina.project.Main;
-import com.unina.project.database.AutenticazioneDAO;
-import com.unina.project.database.CorsoDAO;
-import com.unina.project.database.GestoreDAO;
-import com.unina.project.database.postgre.PostgreAutenticazioneDAO;
-import com.unina.project.database.postgre.PostgreCorsoDAO;
-import com.unina.project.database.postgre.PostgreGestoreDAO;
+import com.unina.project.*;
+import com.unina.project.database.*;
+import com.unina.project.database.postgre.*;
 import com.unina.project.verificationcode.SendVerificationEmail;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -38,20 +31,10 @@ public class ProfileGestoreController implements Initializable {
 
     @FXML
     public TableView<Corso> corsiTableView;
-
-    @FXML
     public TableColumn<Corso,String> titoloTableColumn;
-
-    @FXML
     public TableColumn<Corso,String> descrizioneTableColumn;
-
-    @FXML
     public TableColumn<Corso,Integer> iscrizionimassimeTableColumn;
-
-    @FXML
     public TableColumn<Corso,Integer> numerolezioniTableColumn;
-
-    @FXML
     public TableColumn<Corso,String> tassopresenzeminimeTableColumn;
 
     @FXML
@@ -61,47 +44,169 @@ public class ProfileGestoreController implements Initializable {
     private TableView<?> iscrittiTableView;
 
     @FXML
-    private TableView<?> operatoriTableView;
+    private TableView<Operatore> operatoriTableView;
+    public TableColumn<Operatore,String> emailoperatoreTableColumn;
+    public TableColumn<Operatore,String> nomeoperatoreTableColumn;
+    public TableColumn<Operatore,String> cognomeoperatoreTableColumn;
+    public TableColumn<Operatore,String> codoperatoreTableColumn;
 
     private ObservableList<Corso> listCorsi = FXCollections.observableArrayList();
+    private ObservableList<Operatore> listOperatori = FXCollections.observableArrayList();
+    private Corso rowData;
+    private Autenticazione autenticazione = new Autenticazione();
+    private AutenticazioneDAO autenticazioneDAO = new PostgreAutenticazioneDAO();
+    public Gestore gestore= new Gestore();
+    private GestoreDAO gestoreDAO= new PostgreGestoreDAO();
+    public AreaTematicaDAO areaTematicaDAO=new PostgreAreaTematicaDAO();
+    public Corso corso=new Corso();
+    public CorsoDAO corsoDAO=new PostgreCorsoDAO();
+    private OperatoreDAO operatoreDAO=new PostgreOperatoreDAO();
+    private Operatore operatore=new Operatore();
+    private Utente utente=new Utente();
+    private UtenteDAO utenteDAO=new PostgreUtenteDAO();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        titoloTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().titolo));
-        descrizioneTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().descrizione));
-        iscrizionimassimeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().iscrizioniMassime));
-        numerolezioniTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().numeroLezioni));
-        tassopresenzeminimeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTassoPresenzeMinime()));
+        setCorsiTableView();
+        setOperatoriTableView();
         ContextMenu contextMenu = new ContextMenu();
-        MenuItem menuItem1 = new MenuItem("Choice 1");
-        MenuItem menuItem2 = new MenuItem("Choice 2");
-        MenuItem menuItem3 = new MenuItem("Choice 3");
-
-        menuItem3.setOnAction((event) -> {
-            System.out.println("Choice 3 clicked!");
-        });
-        contextMenu.getItems().addAll(menuItem1,menuItem2,menuItem3);
+        MenuItem menuItem1 = new MenuItem("Aggiungi Operatore");
+        MenuItem menuItem2 = new MenuItem("Visualizza Statistiche");
+        MenuItem menuItem3 = new MenuItem("Modifica Corso");
+        MenuItem menuItem4 = new MenuItem("Elimina Corso");
+        contextMenu.getItems().addAll(menuItem1,menuItem2,menuItem3,menuItem4);
         corsiTableView.setRowFactory( tv -> {
             TableRow<Corso> row = new TableRow<>();
             row.setContextMenu(contextMenu);
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
-                    Corso rowData = row.getItem();
-
-
-
-
-                    System.out.println(rowData);
+                    rowData = row.getItem();
+                    try {
+                        updateOperatoriTableView(rowData.codCorso);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
             return row ;
         });
+        menuItem1.setOnAction((event) -> {
+            aggiungiOperatore(rowData);
+        });
+        menuItem4.setOnAction((event) -> {
+            try {
+                modificaCorso(rowData);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        menuItem4.setOnAction((event) -> {
+            eliminaCorso(rowData);
+        });
+    }
 
+    public void setCorsiTableView(){
+        titoloTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().titolo));
+        descrizioneTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().descrizione));
+        iscrizionimassimeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().iscrizioniMassime));
+        numerolezioniTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().numeroLezioni));
+        tassopresenzeminimeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTassoPresenzeMinime()));
+    }
+
+    public void setOperatoriTableView(){
+        emailoperatoreTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().email));
+        nomeoperatoreTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().nome));
+        cognomeoperatoreTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().cognome));
+        codoperatoreTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().codOperatore));
+    }
+    public void eliminaCorso(Corso corso){
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Conferma");
+        dialog.setHeaderText("Per eliminare il corso");
+        dialog.setContentText("Inserisci 'si' :");
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            if (result.get().equals("si")) {
+                try {
+                    corsoDAO.deleteCorso(corso);
+                    updateCorsiTableView();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Attenzione!");
+                alert.setHeaderText("Devi inserire 'si' per eliminare il corso!");
+                alert.setContentText("Riprova!");
+                alert.showAndWait();
+            }
+        }
+    }
+
+    public void aggiungiOperatore(Corso corso){
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Inserisci Operatore");
+        dialog.setHeaderText("Aggiungi l'email dell'operatore che vuoi che coordina il corso");
+        dialog.setContentText("Email :");
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            try {
+                if (autenticazioneDAO.checkEmailUtenteExist(result.get())) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Errore email");
+                    alert.setHeaderText("L'email che hai inserito non risulta registrata!");
+                    alert.showAndWait();
+                }
+                else{
+                    utente=utenteDAO.getUtente(result.get());
+                    operatore.setCodOperatore(operatoreDAO.setOperatore(utente.codiceFiscale));
+                    operatoreDAO.associaOperatore(operatore.codOperatore, corso.codCorso);
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Attenzione!");
+                    alert.setHeaderText(utente.nome+" "+utente.cognome+" ora è operatore del corso "+corso.titolo);
+                    alert.showAndWait();
+                    updateOperatoriTableView(corso.codCorso);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void modificaCorso(Corso corso) throws IOException {
+        Stage corsoStage=new Stage();
+        FXMLLoader corsoPageLoader = new FXMLLoader(Main.class.getResource("corso.fxml"));
+        CorsoModificaController corsoModificaController=new CorsoModificaController();
+        corsoPageLoader.setController(corsoModificaController);
+        Parent corsoPane = corsoPageLoader.load();
+        Scene corsoScene = new Scene(corsoPane, 400, 600);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(corsoScene);
+        corsoModificaController.setcodGestore(gestore.codGestore);
+        corsoStage.setResizable(false);
+        corsoStage.setTitle("Muodifica Corso");
+        corsoStage.setScene(corsoScene);
+        nuovoCorsoButton.getParent().setDisable(true);
+        corsoStage.showAndWait();
+        try {
+            updateCorsiTableView();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        nuovoCorsoButton.getParent().setDisable(false);
     }
     public void updateCorsiTableView() throws SQLException {
-        gestore.setCorsi(gestoreDAO.getCorsi(codGestore));
+        corsiTableView.getItems().clear();
+        gestore.setCorsi(corsoDAO.getCorsi(gestore.codGestore));
         listCorsi.addAll(gestore.corsi);
         corsiTableView.setItems(listCorsi);
+    }
+
+    public void updateOperatoriTableView(String codCorso) throws SQLException {
+        operatoriTableView.getItems().clear();
+        corso.setOperatori(operatoreDAO.getOperatori(codCorso));
+        listOperatori.addAll(corso.operatori);
+        operatoriTableView.setItems(listOperatori);
 
     }
 
@@ -109,21 +214,12 @@ public class ProfileGestoreController implements Initializable {
         autenticazione.setEmail(email);
         autenticazione.setPassword(password);
         try {
-            codGestore=gestoreDAO.returncodGestore(email);
-            gestore=gestoreDAO.getGestore(codGestore);
+            gestore=gestoreDAO.getGestore(email);
             updateCorsiTableView();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
-    private Autenticazione autenticazione = new Autenticazione();
-    private AutenticazioneDAO autenticazioneDAO = new PostgreAutenticazioneDAO();
-    private GestoreDAO gestoreDAO= new PostgreGestoreDAO();
-    public CorsoDAO corsoDAO=new PostgreCorsoDAO();
-    private Gestore gestore= new Gestore();
-    public Corso corso=new Corso();
-    public String codGestore;
 
     @FXML
     public void oncloseButtonMenuClick() {
@@ -175,11 +271,11 @@ public class ProfileGestoreController implements Initializable {
             Stage corsoStage=new Stage();
             FXMLLoader corsoPageLoader = new FXMLLoader(Main.class.getResource("corso.fxml"));
             Parent corsoPane = corsoPageLoader.load();
-            Scene corsoScene = new Scene(corsoPane, 400, 500);
+            Scene corsoScene = new Scene(corsoPane, 400, 600);
             JMetro jMetro = new JMetro(Style.LIGHT);
             jMetro.setScene(corsoScene);
             CorsoController corsoController=corsoPageLoader.getController();
-            corsoController.setcodGestore(codGestore);
+            corsoController.setcodGestore(gestore.codGestore);
             corsoStage.setResizable(false);
             corsoStage.setTitle("Inserisci Nuovo Corso");
             corsoStage.setScene(corsoScene);
@@ -191,7 +287,5 @@ public class ProfileGestoreController implements Initializable {
             e.printStackTrace();
         }
         nuovoCorsoButton.getParent().setDisable(false);
-
-
         }
 }

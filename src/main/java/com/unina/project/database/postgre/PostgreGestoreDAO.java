@@ -40,47 +40,11 @@ public class PostgreGestoreDAO implements GestoreDAO {
         return !rs.next();
     }
 
-    public String returncodGestore(String email) throws SQLException {
-        String SQL = ("SELECT \"codGestore\" FROM \"Gestore\" WHERE email = ?;");
+    public Gestore getGestore(String email) throws SQLException {
+        String SQL = ("SELECT nome, descrizione, telefono, email, \"codGestore\" FROM \"Gestore\" WHERE email = ?;");
         Connection conn = postgreJDBC.Connessione();
         PreparedStatement pstmt = conn.prepareStatement(SQL);
         pstmt.setString(1, email);
-        pstmt.execute();
-        ResultSet rs =pstmt.getResultSet();
-        rs.next();
-        String codGestore= rs.getString(1);
-        pstmt.close();
-        conn.close();
-        return codGestore;
-    }
-
-    public List<Corso> getCorsi(String codGestore) throws SQLException {
-        String SQL = ("SELECT titolo, descrizione, \"iscrizioniMassime\", \"tassoPresenzeMinime\", \"numeroLezioni\" FROM \"Corso\" WHERE \"codGestore\" = ?;");
-        Connection conn = postgreJDBC.Connessione();
-        PreparedStatement pstmt = conn.prepareStatement(SQL);
-        pstmt.setString(1, codGestore);
-        pstmt.execute();
-        ResultSet rs =pstmt.getResultSet();
-        List<Corso> corsi= new ArrayList<>();
-        while(rs.next()) {
-            Corso corso= new Corso();
-            corso.setTitolo(rs.getString("titolo"));
-            corso.setDescrizione(rs.getString("descrizione"));
-            corso.setIscrizioniMassime(rs.getInt("iscrizioniMassime"));
-            corso.setTassoPresenzeMinime(rs.getInt("tassoPresenzeMinime"));
-            corso.setNumeroLezioni(rs.getInt("numeroLezioni"));
-            corsi.add(corso);
-        }
-        pstmt.close();
-        conn.close();
-        return corsi;
-    }
-
-    public Gestore getGestore(String codGestore) throws SQLException {
-        String SQL = ("SELECT nome, descrizione, telefono, email FROM \"Gestore\" WHERE \"codGestore\" = ?;");
-        Connection conn = postgreJDBC.Connessione();
-        PreparedStatement pstmt = conn.prepareStatement(SQL);
-        pstmt.setString(1, codGestore);
         pstmt.execute();
         ResultSet rs =pstmt.getResultSet();
         Gestore gestore= new Gestore();
@@ -89,6 +53,7 @@ public class PostgreGestoreDAO implements GestoreDAO {
             gestore.setDescrizione(rs.getString("descrizione"));
             gestore.setTelefono(rs.getString("telefono"));
             gestore.setEmail(rs.getString("email"));
+            gestore.setCodGestore(rs.getString("codGestore"));
         }
         pstmt.close();
         conn.close();

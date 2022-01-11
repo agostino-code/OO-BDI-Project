@@ -1,50 +1,67 @@
 package com.unina.project.controller;
 
-import com.unina.project.Corso;
-import com.unina.project.database.CorsoDAO;
-import com.unina.project.database.postgre.PostgreCorsoDAO;
+import com.unina.project.graphics.LimitedTextField;
+import com.unina.project.graphics.TagBar;
 import javafx.beans.value.ChangeListener;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class CorsoController extends ProfileGestoreController {
 
-    @FXML
-    private TextArea descrizionecorsoTextArea;
 
     @FXML
-    private TextField iscrizioniMassimeTextField;
+    public TextArea descrizionecorsoTextArea;
 
     @FXML
-    private TextField lezioniTextField;
+    public TextField iscrizioniMassimeTextField;
 
     @FXML
-    private TextField lezioniMinimeTextField;
+    public TextField lezioniTextField;
 
     @FXML
-    private Button nuovoCorsoButton;
+    public TextField lezioniMinimeTextField;
 
     @FXML
-    private TextField tassoMinimoTextField;
+    public Button nuovoCorsoButton;
 
     @FXML
-    private TextField titoloTextField;
+    public TextField tassoMinimoTextField;
+
+    @FXML
+    public TextField titoloTextField;
+    @FXML
+    public ChoiceBox<String> tipocorsoChoiseBox;
+    @FXML
+    public HBox tagshbox;
+
+    public TagBar tagBar = new TagBar();
+    public List<String> areeTematiche=new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        LimitedTextField limittitolo =new LimitedTextField(titoloTextField);
+        limittitolo.setMaxLength(50);
+        LimitedTextField limitiscrizioni =new LimitedTextField(iscrizioniMassimeTextField);
+        limitiscrizioni.setMaxLength(3);
+        limitiscrizioni.setIntegerField();
+        LimitedTextField limitlezioni =new LimitedTextField(lezioniTextField);
+        limitlezioni.setMaxLength(3);
+        limitlezioni.setIntegerField();
+        LimitedTextField limitlezioniminime =new LimitedTextField(lezioniMinimeTextField);
+        limitlezioniminime.setMaxLength(3);
+        limitlezioniminime.setIntegerField();
+        tagBar.setMinWidth(230);
+        tagshbox.getChildren().add(tagBar);
+        tipocorsoChoiseBox.getItems().addAll("Privato","Pubblico");
         descrizionecorsoTextArea.focusedProperty().addListener(descrizioneLister);
-        lezioniTextField.focusedProperty().addListener(onlynumberListner);
-        iscrizioniMassimeTextField.focusedProperty().addListener(onlynumberiscrittiListner);
         lezioniMinimeTextField.focusedProperty().addListener(lezioniMinimeListner);
         titoloTextField.focusedProperty().addListener(titoloListner);
         tassoMinimoTextField.setDisable(true);
@@ -56,7 +73,7 @@ public class CorsoController extends ProfileGestoreController {
                 if (!corsoDAO.checkTitoloExist(titoloTextField.getText())) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Errore titolo");
-                    alert.setHeaderText("Esiste già un corso con questo itolo!");
+                    alert.setHeaderText("Esiste già un corso con questo titolo!");
                     alert.setContentText("Cambia il valore di titolo");
                     titoloTextField.clear();
                     alert.showAndWait();
@@ -87,60 +104,24 @@ public class CorsoController extends ProfileGestoreController {
 
     private final ChangeListener<Boolean> lezioniMinimeListner = (observable, oldValue, newValue) -> {
         if (!newValue) {
-            if (!lezioniMinimeTextField.getText().isBlank()) {
+            if (!lezioniMinimeTextField.getText().isBlank()&&!lezioniTextField.getText().isBlank()) {
                 Integer lezioniminime = Integer.parseInt(lezioniMinimeTextField.getText());
-                if (corso.numeroLezioni < lezioniminime || lezioniTextField.getText().isBlank()
-                        ||!lezioniMinimeTextField.getText().matches("[0-9]+")) {
+                if (Integer.parseInt(lezioniTextField.getText()) < lezioniminime || lezioniTextField.getText().isBlank()) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Errore lezioni minime");
-                    alert.setHeaderText("Le lezioni minime da seguire non possono essere maggiori del numero di lezioni!\n" +
-                            "Il numero di lezioni minime è un parametro numerico!");
+                    alert.setHeaderText("Le lezioni minime da seguire non possono essere maggiori del numero di lezioni!");
                     alert.setContentText("Inserisci un numero di lezioni minime minore o uguale di lezioni!");
                     lezioniMinimeTextField.clear();
                     alert.showAndWait();
                 }
                 else {
+                    corso.setNumeroLezioni(Integer.parseInt(lezioniTextField.getText()));
                     corso.setTassoPresenzeMinime(lezioniminime*100/corso.numeroLezioni);
                     tassoMinimoTextField.setText(corso.tassoPresenzeMinime +"%");
                 }
             }
         }
     };
-
-    private final ChangeListener<Boolean> onlynumberListner = (observable, oldValue, newValue) -> {
-        if (!newValue) {
-            if (!lezioniTextField.getText().isBlank())
-                if (!lezioniTextField.getText().matches("[0-9]+")) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Errore lezioni");
-                    alert.setHeaderText("Il numero di lezioni è un parametro numerico!");
-                    alert.setContentText("Cambia il valore di lezioni");
-                    lezioniTextField.clear();
-                    alert.showAndWait();
-                } else {
-                    Integer lezioni = Integer.parseInt(lezioniTextField.getText());
-                    corso.setNumeroLezioni(lezioni);
-                }
-        }
-    };
-
-    private final ChangeListener<Boolean> onlynumberiscrittiListner = (observable, oldValue, newValue) -> {
-        if (!newValue) {
-            if (!iscrizioniMassimeTextField.getText().isBlank())
-                if (!iscrizioniMassimeTextField.getText().matches("[0-9]+")) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Errore iscrizioni massime");
-                    alert.setHeaderText("Il numero di iscrizioni massime è un parametro numerico!");
-                    alert.setContentText("Cambia il valore di iscrizioni massime");
-                    iscrizioniMassimeTextField.clear();
-                    alert.showAndWait();
-                } else {
-                    Integer iscrizioniMassime = Integer.parseInt(iscrizioniMassimeTextField.getText());
-                    corso.setIscrizioniMassime(iscrizioniMassime);
-                }
-        }
-    };
-
 
     public void checkDescrizioneLenght() {
         if (descrizionecorsoTextArea.getLength()>200){
@@ -152,14 +133,14 @@ public class CorsoController extends ProfileGestoreController {
     }
 
     public void setcodGestore(String codGestore){
-        this.codGestore=codGestore;
+        gestore.codGestore=codGestore;
     }
 
     @FXML
-    public void onnuovoCorsoButtonClick(ActionEvent event) {
+    public void onnuovoCorsoButtonClick() {
         if (titoloTextField.getText().isBlank() || iscrizioniMassimeTextField.getText().isBlank()
                 || lezioniTextField.getText().isBlank() || lezioniTextField.getText().isBlank()
-                ||tassoMinimoTextField.getText().isBlank()){
+                ||tassoMinimoTextField.getText().isBlank()||tipocorsoChoiseBox.getSelectionModel().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Attenzione!");
             alert.setHeaderText("Inserisci prima tutti i dati!");
@@ -167,8 +148,13 @@ public class CorsoController extends ProfileGestoreController {
             alert.showAndWait();
         }
         else{
+            areeTematiche=tagBar.getTags();
+            corso.setIscrizioniMassime(Integer.parseInt(iscrizioniMassimeTextField.getText()));
+            corso.setPrivato(tipocorsoChoiseBox.getSelectionModel().getSelectedItem().equals("Privato"));
             try {
-                corsoDAO.insertCorso(corso,codGestore);
+                areaTematicaDAO.insertAreaTematica(areeTematiche);
+                corso.setCodCorso(corsoDAO.insertCorso(corso,gestore.codGestore));
+                areaTematicaDAO.associaAreaTematica(areeTematiche, corso.codCorso);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

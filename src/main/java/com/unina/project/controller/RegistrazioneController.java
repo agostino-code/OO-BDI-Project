@@ -9,6 +9,7 @@ import com.unina.project.database.AutenticazioneDAO;
 import com.unina.project.database.UtenteDAO;
 import com.unina.project.database.postgre.PostgreAutenticazioneDAO;
 import com.unina.project.database.postgre.PostgreUtenteDAO;
+import com.unina.project.graphics.LimitedTextField;
 import com.unina.project.verificationcode.SendVerificationEmail;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
@@ -37,7 +38,7 @@ public class RegistrazioneController implements Initializable {
     @FXML
     private DatePicker dataDatePicker;
     @FXML
-    private javafx.scene.control.TextField comunedinascitaTextField;
+    private TextField comunedinascitaTextField;
     @FXML
     private ChoiceBox<String> sessoChoiceBox;
     @FXML
@@ -57,6 +58,25 @@ public class RegistrazioneController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        LimitedTextField limitemail=new LimitedTextField(emailTextField);
+        limitemail.setMaxLength(60);
+        limitemail.setEmailField();
+        LimitedTextField limitnome=new LimitedTextField(nomeTextField);
+        limitnome.setMaxLength(30);
+        limitnome.setCharsOnlyFieldwSpace();
+        LimitedTextField limitcognome=new LimitedTextField(cognomeTextField);
+        limitcognome.setMaxLength(30);
+        limitcognome.setCharsOnlyFieldwSpace();
+        LimitedTextField limitpassword=new LimitedTextField(passwordField);
+        limitpassword.setMaxLength(30);
+        limitpassword.setStandardField();
+        LimitedTextField limitrepeatpassword=new LimitedTextField(repeatpasswordField);
+        limitrepeatpassword.setMaxLength(30);
+        limitrepeatpassword.setStandardField();
+        LimitedTextField limitdate=new LimitedTextField(dataDatePicker.getEditor());
+        limitdate.setDateField();
+        LimitedTextField limitcomuni=new LimitedTextField(comunedinascitaTextField);
+        limitcomuni.setMaxLength(35);
         getComuni(comuni);
         setDataPicker();
             dataDatePicker.focusedProperty().addListener(generaCodiceListner);

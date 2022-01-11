@@ -9,6 +9,7 @@ import com.unina.project.database.SedeDAO;
 import com.unina.project.database.postgre.PostgreAutenticazioneDAO;
 import com.unina.project.database.postgre.PostgreGestoreDAO;
 import com.unina.project.database.postgre.PostgreSedeDAO;
+import com.unina.project.graphics.LimitedTextField;
 import com.unina.project.verificationcode.SendVerificationEmail;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
@@ -48,10 +49,23 @@ public class RegistrazioneGestoreController extends RegistrazioneController{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        LimitedTextField limitemail=new LimitedTextField(emailTextField);
+        limitemail.setMaxLength(60);
+        limitemail.setEmailField();
+        LimitedTextField limitnome=new LimitedTextField(nomeTextField);
+        limitnome.setMaxLength(30);
+        limitnome.setCharsOnlyFieldwSpace();
+        LimitedTextField limitelefono=new LimitedTextField(telefonoTextField);
+        limitelefono.setPhoneNumberField();
+        LimitedTextField limitpassword=new LimitedTextField(passwordField);
+        limitpassword.setMaxLength(30);
+        limitpassword.setStandardField();
+        LimitedTextField limitrepeatpassword=new LimitedTextField(repeatpasswordField);
+        limitrepeatpassword.setMaxLength(30);
+        limitrepeatpassword.setStandardField();
         emailTextField.focusedProperty().addListener(checkEmailListner);
         passwordField.focusedProperty().addListener(passwordListner);
         repeatpasswordField.focusedProperty().addListener(repeatpasswordListner);
-        telefonoTextField.focusedProperty().addListener(telefonoListner);
         descrizionegestoreTextArea.focusedProperty().addListener(descrizioneLister);
         nomeTextField.focusedProperty().addListener(nomeListner);
 
@@ -94,24 +108,6 @@ public class RegistrazioneGestoreController extends RegistrazioneController{
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
-    };
-
-    private final ChangeListener<Boolean> telefonoListner = (observable, oldValue, newValue) -> {
-        if (!newValue) {
-            if(!telefonoTextField.getText().isEmpty())
-                if (telefonoTextField.getText().isBlank()||!telefonoTextField.getText().matches("[0-9]+")||
-                        telefonoTextField.getText().length()<6) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Errore telefono");
-                    alert.setHeaderText("Il numero di telefono inserito non è valido!");
-                    alert.setContentText("Cambia il valore di Telefono");
-                    telefonoTextField.clear();
-                    alert.showAndWait();
-                    telefonoTextField.clear();
-                } else {
-                    gestore.setTelefono(telefonoTextField.getText());
-                }
         }
     };
 

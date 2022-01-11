@@ -1,5 +1,7 @@
 package com.unina.project;
 
+import java.util.List;
+
 public class Corso{
     public void setTitolo(String titolo) {
         this.titolo = titolo;
@@ -31,5 +33,22 @@ public class Corso{
     }
 
     public Integer tassoPresenzeMinime;
+
+    public void setCodCorso(String codCorso) {
+        this.codCorso = codCorso;
+    }
+
     public String codCorso;
+
+    public void setPrivato(Boolean privato) {
+        Privato = privato;
+    }
+
+    public Boolean Privato;
+    public void setOperatori(List<Operatore> operatori) {
+        this.operatori = operatori;
+    }
+
+    public List<Operatore> operatori;
+    public List<AreaTematica> areetematiche;
 }

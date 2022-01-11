@@ -70,5 +70,4 @@ public class Utente {
     public int getDataNascitaAnno() {
         return dataNascita.getYear();
     }
-
 }

@@ -21,71 +21,97 @@
            <BorderPane.margin>
                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
            </BorderPane.margin>
-           <ScrollPane>
+           <ScrollPane fitToHeight="true" fitToWidth="true">
                <VBox>
                    <opaqueInsets>
                        <Insets />
                    </opaqueInsets>
-                   <Label stylesheets="@style.css" text="I miei Corsi">
-                       <font>
-                           <Font size="24.0" />
-                       </font>
-                   </Label>
-               <AnchorPane>
+               <Label styleClass="label24px" stylesheets="@style.css" text="I miei Corsi">
+                  <font>
+                     <Font size="24.0" />
+                  </font>
+               </Label>
+               <AnchorPane VBox.vgrow="ALWAYS">
                   <children>
                          <TableView fx:id="corsiTableView" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                              <columns>
-                                 <TableColumn fx:id="titoloTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" text="Titolo" />
-                                 <TableColumn fx:id="descrizioneTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" text="Descrizione" />
-                                 <TableColumn fx:id="iscrizionimassimeTableColumn" maxWidth="1.7976931348623157E308" minWidth="32.0" prefWidth="120.0" text="Iscrizioni Massime" />
-                           <TableColumn fx:id="numerolezioniTableColumn" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="120.0" text="Numero Lezioni" />
-                                 <TableColumn fx:id="tassopresenzeminimeTableColumn" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="150.0" text="Tasso Presenze Minime" />
+                                 <TableColumn fx:id="titoloTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Titolo" />
+                                 <TableColumn fx:id="descrizioneTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Descrizione" />
+                                 <TableColumn fx:id="iscrizionimassimeTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Iscrizioni Massime" />
+                           <TableColumn fx:id="numerolezioniTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Numero Lezioni" />
+                                 <TableColumn fx:id="tassopresenzeminimeTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Tasso Presenze Minime" />
                              </columns>
                         <columnResizePolicy>
                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                         </columnResizePolicy>
                          </TableView>
                   </children>
+                  <VBox.margin>
+                     <Insets />
+                  </VBox.margin>
+                  <padding>
+                     <Insets right="10.0" />
+                  </padding>
                </AnchorPane>
                    <Button fx:id="nuovoCorsoButton" mnemonicParsing="false" onAction="#onNuovoCorsoButton" prefHeight="26.0" prefWidth="214.0" stylesheets="@style.css" text="Nuovo Corso">
                   <VBox.margin>
-                     <Insets top="10.0" />
+                     <Insets bottom="40.0" right="20.0" top="20.0" />
                   </VBox.margin></Button>
                </VBox>
            </ScrollPane>
            <SplitPane dividerPositions="0.5189556509298998" orientation="VERTICAL">
-               <ScrollPane>
+               <ScrollPane fitToHeight="true" fitToWidth="true">
                    <VBox>
-                       <Label stylesheets="@style.css" text="Operatori">
+                       <Label styleClass="label24px" stylesheets="@style.css" text="Operatori">
                            <font>
                                <Font size="24.0" />
                            </font>
                        </Label>
-                       <TableView fx:id="operatoriTableView">
-                           <columns>
-                               <TableColumn prefWidth="75.0" text="Email" />
-                               <TableColumn prefWidth="75.0" text="Nome" />
-                               <TableColumn prefWidth="75.0" text="Cognome" />
-                               <TableColumn prefWidth="75.0" text="Codice Fiscale" />
-                           </columns>
-                       </TableView>
+                  <AnchorPane VBox.vgrow="ALWAYS">
+                     <children>
+                             <TableView fx:id="operatoriTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <columns>
+                                     <TableColumn fx:id="emailoperatoreTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Email" />
+                                     <TableColumn fx:id="nomeoperatoreTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Nome" />
+                                     <TableColumn fx:id="cognomeoperatoreTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Cognome" />
+                                     <TableColumn fx:id="codoperatoreTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Cod.Operatore" />
+                                 </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                             </TableView>
+                     </children>
+                  </AnchorPane>
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" />
+                  </padding>
                    </VBox>
                </ScrollPane>
-               <ScrollPane>
+               <ScrollPane fitToHeight="true" fitToWidth="true">
                    <VBox>
-                       <Label stylesheets="@style.css" text="Iscritti">
+                       <Label styleClass="label24px" stylesheets="@style.css" text="Iscritti">
                            <font>
                                <Font size="24.0" />
                            </font>
                        </Label>
-                       <TableView fx:id="iscrittiTableView">
-                           <columns>
-                               <TableColumn prefWidth="75.0" text="Email" />
-                               <TableColumn prefWidth="75.0" text="Nome" />
-                               <TableColumn prefWidth="75.0" text="Cognome" />
-                               <TableColumn prefWidth="75.0" text="Idoneo" />
-                           </columns>
-                       </TableView>
+                  <AnchorPane VBox.vgrow="ALWAYS">
+                     <children>
+                             <TableView fx:id="iscrittiTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <columns>
+                                     <TableColumn maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Email" />
+                                     <TableColumn maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Nome" />
+                                     <TableColumn maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Cognome" />
+                                     <TableColumn maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Idoneo" />
+                                 </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                             </TableView>
+                     </children>
+                  </AnchorPane>
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" />
+                  </padding>
                    </VBox>
                </ScrollPane>
            </SplitPane>

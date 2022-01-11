@@ -3,6 +3,7 @@ package com.unina.project.controller;
 import com.unina.project.Main;
 import com.unina.project.database.AutenticazioneDAO;
 import com.unina.project.database.postgre.PostgreAutenticazioneDAO;
+import com.unina.project.graphics.LimitedTextField;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,6 +44,18 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        LimitedTextField limitemail=new LimitedTextField(emailTextField);
+        limitemail.setMaxLength(60);
+        limitemail.setEmailField();
+        LimitedTextField limitemailgestori=new LimitedTextField(gestoriemailTextField);
+        limitemailgestori.setMaxLength(60);
+        limitemailgestori.setEmailField();
+        LimitedTextField limitpassword=new LimitedTextField(passwordTextField);
+        limitpassword.setMaxLength(30);
+        limitpassword.setStandardField();
+        LimitedTextField limitpasswordgestori=new LimitedTextField(gestoriPasswordField);
+        limitpasswordgestori.setMaxLength(30);
+        limitpasswordgestori.setStandardField();
         emailTextField.focusedProperty().addListener(checkEmailListner);
         gestoriemailTextField.focusedProperty().addListener(checkEmailGestoriListner);
     }

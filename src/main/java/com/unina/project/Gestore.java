@@ -25,6 +25,12 @@ public class Gestore {
     public String telefono;
     public String email;
 
+    public void setCodGestore(String codGestore) {
+        this.codGestore = codGestore;
+    }
+
+    public String codGestore;
+
     public void setCorsi(List<Corso> corsi) {
         this.corsi = corsi;
     }
