@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 import java.sql.SQLException;
 
-public class CorsoModificaController extends  CorsoController{
+public class CorsoModificaController extends CorsoController{
     @Override
     public void onnuovoCorsoButtonClick() {
         if (titoloTextField.getText().isBlank() || iscrizioniMassimeTextField.getText().isBlank()
@@ -21,11 +21,16 @@ public class CorsoModificaController extends  CorsoController{
         }
         else{
             areeTematiche=tagBar.getTags();
+            corso.setTitolo(titoloTextField.getText());
             corso.setIscrizioniMassime(Integer.parseInt(iscrizioniMassimeTextField.getText()));
+            corso.setNumeroLezioni(Integer.parseInt(lezioniTextField.getText()));
+            corso.setTassoPresenzeMinime(Integer.parseInt(lezioniMinimeTextField.getText())*100/corso.numeroLezioni);
+            corso.setDescrizione(descrizionecorsoTextArea.getText());
             corso.setPrivato(tipocorsoChoiseBox.getSelectionModel().getSelectedItem().equals("Privato"));
             try {
                 areaTematicaDAO.insertAreaTematica(areeTematiche);
-                corso.setCodCorso(corsoDAO.insertCorso(corso,gestore.codGestore));
+                corsoDAO.updateCorso(corso);
+                areaTematicaDAO.deleteAreaTematica(corso);
                 areaTematicaDAO.associaAreaTematica(areeTematiche, corso.codCorso);
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -37,8 +42,9 @@ public class CorsoModificaController extends  CorsoController{
 
     public void setCorso(Corso corso) {
         titoloTextField.setText(corso.titolo);
-        descrizionecorsoTextArea.setText(corso.titolo);
-        if(corso.Privato ==false){
+        descrizionecorsoTextArea.setText(corso.descrizione);
+        this.corso.setCodCorso(corso.codCorso);
+        if(!corso.Privato){
             tipocorsoChoiseBox.getSelectionModel().selectLast();
         }
         else{
@@ -46,11 +52,11 @@ public class CorsoModificaController extends  CorsoController{
         }
         iscrizioniMassimeTextField.setText(String.valueOf(corso.iscrizioniMassime));
         lezioniTextField.setText(String.valueOf(corso.numeroLezioni));
-        lezioniMinimeTextField.setText(String.valueOf((corso.numeroLezioni/100)*corso.tassoPresenzeMinime));
+        lezioniMinimeTextField.setText(String.valueOf((corso.numeroLezioni*corso.tassoPresenzeMinime)/100));
         tassoMinimoTextField.setText(corso.getTassoPresenzeMinime());
         for(AreaTematica i: corso.areetematiche){
             tagBar.getTags().add(i.tag);
         }
-
+        nuovoCorsoButton.setText("Modifica Corso");
     }
 }

@@ -1,6 +1,7 @@
 package com.unina.project.database.postgre;
 
 import com.unina.project.AreaTematica;
+import com.unina.project.Corso;
 import com.unina.project.database.AreaTematicaDAO;
 
 import java.sql.Connection;
@@ -56,6 +57,17 @@ public class PostgreAreaTematicaDAO implements AreaTematicaDAO {
         pstmt.close();
         conn.close();
         return areaTematicaList;
+    }
+
+    @Override
+    public void deleteAreaTematica(Corso corso) throws SQLException {
+        String SQL = ("DELETE FROM \"Appartiene\" WHERE \"codCorso\"= ?;");
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement pstmt = conn.prepareStatement(SQL);
+        pstmt.setString(1,corso.codCorso );
+        pstmt.executeUpdate();
+        pstmt.close();
+        conn.close();
     }
 }
 

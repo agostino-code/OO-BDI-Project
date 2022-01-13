@@ -44,7 +44,7 @@ public class Utente {
     }
 
     public void setComuneDiNascita(String comuneDiNascita) {
-        this.comuneDiNascita = comuneDiNascita.toLowerCase();
+        this.comuneDiNascita = comuneDiNascita.toUpperCase();
     }
 
     public void setEmail(String email) {
@@ -54,6 +54,11 @@ public class Utente {
     public String email;
     public String nome;
     public String cognome;
+
+    public LocalDate getDataNascita() {
+        return dataNascita;
+    }
+
     public LocalDate dataNascita;
     public String sesso;
     public String comuneDiNascita;

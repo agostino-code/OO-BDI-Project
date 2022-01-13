@@ -31,14 +31,17 @@ public class ProfileGestoreController implements Initializable {
 
     @FXML
     public TableView<Corso> corsiTableView;
+    public TableColumn<Corso,String> codCorsoTableColumn;
     public TableColumn<Corso,String> titoloTableColumn;
     public TableColumn<Corso,String> descrizioneTableColumn;
     public TableColumn<Corso,Integer> iscrizionimassimeTableColumn;
     public TableColumn<Corso,Integer> numerolezioniTableColumn;
     public TableColumn<Corso,String> tassopresenzeminimeTableColumn;
+    public TableColumn<Corso,String> privatoTableColumn;
 
     @FXML
     private MenuBar gestoreMenuBar;
+    public Menu nomeGestoreMenu;
 
     @FXML
     private TableView<?> iscrittiTableView;
@@ -64,6 +67,7 @@ public class ProfileGestoreController implements Initializable {
     private Operatore operatore=new Operatore();
     private Utente utente=new Utente();
     private UtenteDAO utenteDAO=new PostgreUtenteDAO();
+    private Stage loginStage;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -93,7 +97,7 @@ public class ProfileGestoreController implements Initializable {
         menuItem1.setOnAction((event) -> {
             aggiungiOperatore(rowData);
         });
-        menuItem4.setOnAction((event) -> {
+        menuItem3.setOnAction((event) -> {
             try {
                 modificaCorso(rowData);
             } catch (IOException e) {
@@ -106,11 +110,13 @@ public class ProfileGestoreController implements Initializable {
     }
 
     public void setCorsiTableView(){
+        codCorsoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().codCorso));
         titoloTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().titolo));
         descrizioneTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().descrizione));
         iscrizionimassimeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().iscrizioniMassime));
         numerolezioniTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().numeroLezioni));
         tassopresenzeminimeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTassoPresenzeMinime()));
+        privatoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPrivato()));
     }
 
     public void setOperatoriTableView(){
@@ -159,7 +165,9 @@ public class ProfileGestoreController implements Initializable {
                 }
                 else{
                     utente=utenteDAO.getUtente(result.get());
-                    operatore.setCodOperatore(operatoreDAO.setOperatore(utente.codiceFiscale));
+                    if(operatoreDAO.checkOperatoreExist(utente.codiceFiscale)){
+                        operatore.setCodOperatore(operatoreDAO.setOperatore(utente.codiceFiscale));
+                    }
                     operatoreDAO.associaOperatore(operatore.codOperatore, corso.codCorso);
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Attenzione!");
@@ -176,15 +184,20 @@ public class ProfileGestoreController implements Initializable {
     public void modificaCorso(Corso corso) throws IOException {
         Stage corsoStage=new Stage();
         FXMLLoader corsoPageLoader = new FXMLLoader(Main.class.getResource("corso.fxml"));
-        CorsoModificaController corsoModificaController=new CorsoModificaController();
-        corsoPageLoader.setController(corsoModificaController);
+        corsoPageLoader.setControllerFactory((Class<?> controllerType) ->{
+            if(controllerType == CorsoController.class){
+                return new CorsoModificaController();
+            }
+            return new CorsoModificaController();
+        });
         Parent corsoPane = corsoPageLoader.load();
         Scene corsoScene = new Scene(corsoPane, 400, 600);
         JMetro jMetro = new JMetro(Style.LIGHT);
         jMetro.setScene(corsoScene);
-        corsoModificaController.setcodGestore(gestore.codGestore);
+        CorsoModificaController corsoModificaController=corsoPageLoader.getController();
+        corsoModificaController.setCorso(corso);
         corsoStage.setResizable(false);
-        corsoStage.setTitle("Muodifica Corso");
+        corsoStage.setTitle("Modifica Corso");
         corsoStage.setScene(corsoScene);
         nuovoCorsoButton.getParent().setDisable(true);
         corsoStage.showAndWait();
@@ -210,11 +223,14 @@ public class ProfileGestoreController implements Initializable {
 
     }
 
-    public void setProfileGestore(String email, String password) {
+    public void setProfileGestore(Stage primaryStage,String email, String password) {
+        loginStage=primaryStage;
         autenticazione.setEmail(email);
         autenticazione.setPassword(password);
         try {
             gestore=gestoreDAO.getGestore(email);
+            nomeGestoreMenu.setText(gestore.nome);
+            nomeGestoreMenu.setStyle("-fx-font-weight: bold");
             updateCorsiTableView();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -223,9 +239,9 @@ public class ProfileGestoreController implements Initializable {
 
     @FXML
     public void oncloseButtonMenuClick() {
-        Stage primaryStage = (Stage) (gestoreMenuBar.getScene().getWindow());
-        primaryStage.setTitle("Formazione Facile");
-        primaryStage.setScene(Main.getLoginScene());
+        Stage secondaryStage = (Stage) (gestoreMenuBar.getScene().getWindow());
+        secondaryStage.close();
+        loginStage.show();
     }
 
     @FXML
@@ -243,7 +259,7 @@ public class ProfileGestoreController implements Initializable {
 
     private void eliminaGestore() {
         SendVerificationEmail sendVerificationEmail = new SendVerificationEmail();
-        String codicediverifica = sendVerificationEmail.SendEmail(autenticazione.email);
+        String codicediverifica = sendVerificationEmail.SendEmail(autenticazione.getEmail());
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Invio codice di Verifica");
         dialog.setHeaderText("Per eliminare il tuo account inserisci il codice inviato alla tua Mail");

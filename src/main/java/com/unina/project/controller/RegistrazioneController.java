@@ -264,7 +264,7 @@ public class RegistrazioneController implements Initializable {
                     !dataDatePicker.getValue().toString().isBlank()&&!codicefiscaleTextField.getText().isEmpty()&&
                     !passwordField.getText().isBlank()&&!repeatpasswordField.getText().isBlank()) {
                 SendVerificationEmail sendVerificationEmail=new SendVerificationEmail();
-                String codicediverifica=sendVerificationEmail.SendEmail(autenticazione.email);
+                String codicediverifica=sendVerificationEmail.SendEmail(autenticazione.getEmail());
                 TextInputDialog dialog = new TextInputDialog();
                 dialog.setTitle("Invio codice di Verifica");
                 dialog.setHeaderText("Abbiamo inviato un codice di verifica all'email che ci hai fornito");
@@ -272,7 +272,7 @@ public class RegistrazioneController implements Initializable {
                 Optional<String> result = dialog.showAndWait();
                 if (result.isPresent()){
                     if(result.get().equals(codicediverifica)){
-                        utente.setEmail(autenticazione.email);
+                        utente.setEmail(autenticazione.getEmail());
                         try {
                             autenticazioneDAO.insertAutenticazione(autenticazione);
                             utenteDAO.insertUtente(utente);

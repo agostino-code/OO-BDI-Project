@@ -63,28 +63,8 @@ public class CorsoController extends ProfileGestoreController {
         tipocorsoChoiseBox.getItems().addAll("Privato","Pubblico");
         descrizionecorsoTextArea.focusedProperty().addListener(descrizioneLister);
         lezioniMinimeTextField.focusedProperty().addListener(lezioniMinimeListner);
-        titoloTextField.focusedProperty().addListener(titoloListner);
         tassoMinimoTextField.setDisable(true);
     }
-
-    private final ChangeListener<Boolean> titoloListner = (observable, oldValue, newValue) -> {
-        if (!newValue) {
-            try {
-                if (!corsoDAO.checkTitoloExist(titoloTextField.getText())) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Errore titolo");
-                    alert.setHeaderText("Esiste già un corso con questo titolo!");
-                    alert.setContentText("Cambia il valore di titolo");
-                    titoloTextField.clear();
-                    alert.showAndWait();
-                } else {
-                    corso.setTitolo(titoloTextField.getText());
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    };
 
     private final ChangeListener<Boolean> descrizioneLister = (observable, oldValue, newValue) -> {
         if (!newValue) {
@@ -94,10 +74,6 @@ public class CorsoController extends ProfileGestoreController {
                 alert.setHeaderText("La descrizione non può superare 200 caratteri!");
                 alert.setContentText("Quando il testo diventa rosso hai superato i 200 caratteri!");
                 alert.showAndWait();
-            } else {
-                if(!descrizionecorsoTextArea.getText().isBlank()){
-                    corso.setDescrizione(descrizionecorsoTextArea.getText());
-                }
             }
         }
     };
@@ -105,8 +81,7 @@ public class CorsoController extends ProfileGestoreController {
     private final ChangeListener<Boolean> lezioniMinimeListner = (observable, oldValue, newValue) -> {
         if (!newValue) {
             if (!lezioniMinimeTextField.getText().isBlank()&&!lezioniTextField.getText().isBlank()) {
-                Integer lezioniminime = Integer.parseInt(lezioniMinimeTextField.getText());
-                if (Integer.parseInt(lezioniTextField.getText()) < lezioniminime || lezioniTextField.getText().isBlank()) {
+                if (Integer.parseInt(lezioniTextField.getText()) < Integer.parseInt(lezioniMinimeTextField.getText()) || lezioniTextField.getText().isBlank()) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Errore lezioni minime");
                     alert.setHeaderText("Le lezioni minime da seguire non possono essere maggiori del numero di lezioni!");
@@ -114,9 +89,8 @@ public class CorsoController extends ProfileGestoreController {
                     lezioniMinimeTextField.clear();
                     alert.showAndWait();
                 }
-                else {
-                    corso.setNumeroLezioni(Integer.parseInt(lezioniTextField.getText()));
-                    corso.setTassoPresenzeMinime(lezioniminime*100/corso.numeroLezioni);
+                else{
+                    corso.setTassoPresenzeMinime(Integer.parseInt(lezioniMinimeTextField.getText())*100/Integer.parseInt(lezioniTextField.getText()));
                     tassoMinimoTextField.setText(corso.tassoPresenzeMinime +"%");
                 }
             }
@@ -149,7 +123,11 @@ public class CorsoController extends ProfileGestoreController {
         }
         else{
             areeTematiche=tagBar.getTags();
+            corso.setTitolo(titoloTextField.getText());
             corso.setIscrizioniMassime(Integer.parseInt(iscrizioniMassimeTextField.getText()));
+            corso.setNumeroLezioni(Integer.parseInt(lezioniTextField.getText()));
+            corso.setTassoPresenzeMinime(Integer.parseInt(lezioniMinimeTextField.getText())*100/corso.numeroLezioni);
+            corso.setDescrizione(descrizionecorsoTextArea.getText());
             corso.setPrivato(tipocorsoChoiseBox.getSelectionModel().getSelectedItem().equals("Privato"));
             try {
                 areaTematicaDAO.insertAreaTematica(areeTematiche);

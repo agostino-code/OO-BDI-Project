@@ -44,11 +44,23 @@ public class Corso{
         Privato = privato;
     }
 
+    public String getPrivato() {
+        if(Privato){
+            return "Privato";
+        }
+        return "Pubblico";
+    }
+
     public Boolean Privato;
     public void setOperatori(List<Operatore> operatori) {
         this.operatori = operatori;
     }
 
     public List<Operatore> operatori;
+
+    public void setAreetematiche(List<AreaTematica> areetematiche) {
+        this.areetematiche = areetematiche;
+    }
+
     public List<AreaTematica> areetematiche;
 }

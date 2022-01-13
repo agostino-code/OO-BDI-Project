@@ -6,6 +6,10 @@ module com.unina.project {
     requires org.jfxtras.styles.jmetro;
     requires java.sql;
     requires java.mail;
+    requires org.kordamp.ikonli.core;
+    requires org.kordamp.ikonli.javafx;
+    // add icon pack modules
+    requires org.kordamp.ikonli.win10;
 
     opens com.unina.project to javafx.fxml;
     exports com.unina.project;
@@ -13,4 +17,6 @@ module com.unina.project {
     exports com.unina.project.controller;
     opens com.unina.project.graphics to javafx.fxml;
     exports com.unina.project.graphics;
+    exports com.unina.project.controller.profile;
+    opens com.unina.project.controller.profile to javafx.fxml;
 }

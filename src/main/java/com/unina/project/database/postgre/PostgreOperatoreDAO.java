@@ -1,6 +1,5 @@
 package com.unina.project.database.postgre;
 
-import com.unina.project.Corso;
 import com.unina.project.Operatore;
 import com.unina.project.database.OperatoreDAO;
 
@@ -65,5 +64,15 @@ public class PostgreOperatoreDAO implements OperatoreDAO {
         pstmt.close();
         conn.close();
         return operatori;
+    }
+
+    @Override
+    public boolean checkOperatoreExist(String codiceFiscale) throws SQLException {
+        String SQL = ("SELECT \"codOperatore\" FROM \"Operatore\" WHERE \"codiceFiscale\" = ?;");
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement pstmt = conn.prepareStatement(SQL);
+        pstmt.setString(1, codiceFiscale);
+        ResultSet rs = pstmt.executeQuery();
+        return !rs.next();
     }
 }

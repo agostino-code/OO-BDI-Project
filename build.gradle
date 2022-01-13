@@ -44,6 +44,8 @@ dependencies {
     implementation 'org.openjfx:javafx-media:17.0.0.1'
     implementation 'org.postgresql:postgresql:42.3.1'
     implementation 'com.sun.mail:javax.mail:1.6.2'
+    implementation 'org.kordamp.ikonli:ikonli-javafx:12.2.0'
+    implementation 'org.kordamp.ikonli:ikonli-win10-pack:12.2.0'
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
@@ -66,11 +68,4 @@ jlinkZip {
 }
 run {
     jvmArgs = ['--add-exports=javafx.base/com.sun.javafx.event=org.controlsfx.controls']
-}
-
-gradleEnterprise {
-    buildScan {
-        termsOfServiceUrl = 'https://gradle.com/terms-of-service'
-        termsOfServiceAgree = 'yes'
-    }
 }

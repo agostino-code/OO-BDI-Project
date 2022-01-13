@@ -1,11 +1,14 @@
 package com.unina.project.controller;
 
 import com.unina.project.Main;
+import com.unina.project.controller.profile.ProfileController;
 import com.unina.project.database.AutenticazioneDAO;
 import com.unina.project.database.postgre.PostgreAutenticazioneDAO;
 import com.unina.project.graphics.LimitedTextField;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,12 +17,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -78,7 +83,11 @@ public class LoginController implements Initializable {
             else{
                 loginProgressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
                 FXMLLoader profilePageLoader = new FXMLLoader(Main.class.getResource("profile.fxml"));
-                loadProfile(actionEvent, profilePageLoader,"Profilo Utente");
+                Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+                primaryStage.close();
+                loadProfile(actionEvent,profilePageLoader,"Profilo Utente");
+                ProfileController profileController = profilePageLoader.getController();
+                profileController.setProfile(primaryStage,emailTextField.getText(), passwordTextField.getText());
                 loginProgressBar.setProgress(0);
                 emailTextField.clear();
                 passwordTextField.clear();
@@ -141,9 +150,11 @@ public class LoginController implements Initializable {
             else{
                 loginProgressBar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
                 FXMLLoader profilePageLoader = new FXMLLoader(Main.class.getResource("profileGestore.fxml"));
-                loadProfile(actionEvent, profilePageLoader,"Profilo Gestore");
+                Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+                primaryStage.close();
+                loadProfile(actionEvent,profilePageLoader,"Profilo Gestore");
                 ProfileGestoreController profileGestoreController=profilePageLoader.getController();
-                profileGestoreController.setProfileGestore(gestoriemailTextField.getText(), gestoriPasswordField.getText());
+                profileGestoreController.setProfileGestore(primaryStage,gestoriemailTextField.getText(), gestoriPasswordField.getText());
                 loginProgressBar.setProgress(0);
                 gestoriemailTextField.clear();
                 gestoriPasswordField.clear();
@@ -153,14 +164,33 @@ public class LoginController implements Initializable {
         }
     }
 
-    private void loadProfile(ActionEvent actionEvent, FXMLLoader profilePageLoader,String titolo) throws IOException {
+    private void loadProfile(ActionEvent actionEvent,FXMLLoader profilePageLoader,String titolo) throws IOException {
         Parent profilePane = profilePageLoader.load();
-        Scene profileScene = new Scene(profilePane);
+        Scene profileScene = new Scene(profilePane,900,600);
         jMetro.setScene(profileScene);
-        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        primaryStage.setTitle(titolo);
-        primaryStage.setScene(profileScene);
-        primaryStage.setResizable(true);
+        Stage secondaryStage=new Stage();
+        secondaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+
+                // consume event
+                event.consume();
+
+                // show close dialog
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText("Vuoi effettuare il logout?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK){
+                    secondaryStage.close();
+                    Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+                    primaryStage.show();
+                }
+            }
+        });
+        secondaryStage.setTitle(titolo);
+        secondaryStage.setScene(profileScene);
+        secondaryStage.centerOnScreen();
+        secondaryStage.show();
     }
 
 

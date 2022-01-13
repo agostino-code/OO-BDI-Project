@@ -142,7 +142,7 @@ public class RegistrazioneGestoreController extends RegistrazioneController{
                 !passwordField.getText().isBlank()&&
                 !repeatpasswordField.getText().isBlank()) {
             SendVerificationEmail sendVerificationEmail=new SendVerificationEmail();
-            String codicediverifica=sendVerificationEmail.SendEmail(autenticazione.email);
+            String codicediverifica=sendVerificationEmail.SendEmail(autenticazione.getEmail());
             TextInputDialog dialog = new TextInputDialog();
             dialog.setTitle("Invio codice di Verifica");
             dialog.setHeaderText("Abbiamo inviato un codice di verifica all'email che ci hai fornito");
@@ -150,7 +150,7 @@ public class RegistrazioneGestoreController extends RegistrazioneController{
             Optional<String> result = dialog.showAndWait();
             if (result.isPresent()){
                 if(result.get().equals(codicediverifica)){
-                    gestore.setEmail(autenticazione.email);
+                    gestore.setEmail(autenticazione.getEmail());
                     try {
                         autenticazioneDAO.insertAutenticazione(autenticazione);
                         String codGestore=gestoreDAO.insertGestore(gestore);

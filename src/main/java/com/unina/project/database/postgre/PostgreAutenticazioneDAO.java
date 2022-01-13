@@ -13,7 +13,7 @@ public class PostgreAutenticazioneDAO implements AutenticazioneDAO {
         String SQL = ("INSERT INTO \"Autenticazione\" (email, password) VALUES (?,?);");
         Connection conn = postgreJDBC.Connessione();
         PreparedStatement pstmt = conn.prepareStatement(SQL);
-        pstmt.setString(1, autenticazione.email);
+        pstmt.setString(1, autenticazione.getEmail());
         pstmt.setString(2, autenticazione.password);
         pstmt.executeUpdate();
         pstmt.close();
@@ -78,7 +78,7 @@ public class PostgreAutenticazioneDAO implements AutenticazioneDAO {
         String SQL = ("Delete FROM \"Autenticazione\" WHERE email = ? AND password = ?;");
         Connection conn = postgreJDBC.Connessione();
         PreparedStatement pstmt = conn.prepareStatement(SQL);
-        pstmt.setString(1, autenticazione.email);
+        pstmt.setString(1, autenticazione.getEmail());
         pstmt.setString(2, autenticazione.password);
         pstmt.executeQuery();
         pstmt.close();

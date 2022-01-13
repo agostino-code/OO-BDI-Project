@@ -11,4 +11,6 @@ public interface OperatoreDAO {
     void associaOperatore(String codOperatore, String codCorso) throws SQLException;
 
     List<Operatore> getOperatori(String codGestore) throws SQLException;
+
+    boolean checkOperatoreExist(String codiceFiscale) throws SQLException;
 }

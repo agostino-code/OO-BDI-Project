@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <SplitPane dividerPositions="0.5" layoutX="10.0" layoutY="10.0" orientation="VERTICAL" prefHeight="920.0" prefWidth="272.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <ScrollPane fitToWidth="true">
+               <content>
+                  <VBox>
+                     <children>
+                        <Label alignment="CENTER" style="&#10;" styleClass="label24px" stylesheets="@../style.css" text="I miei corsi" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <textFill>
+                              <Color red="0.624" green="0.624" blue="0.624" />
+                           </textFill>
+                        </Label>
+                        <AnchorPane VBox.vgrow="ALWAYS">
+                           <children>
+                              <TableView fx:id="tabella" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.8000000000000114" AnchorPane.topAnchor="0.0">
+                                 <columns>
+                                    <TableColumn prefWidth="75.0" text="C1" />
+                                    <TableColumn prefWidth="75.0" text="C2" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <ScrollPane fitToWidth="true">
+               <content>
+                  <VBox>
+                     <children>
+                        <Label alignment="CENTER" style="&#10;" styleClass="label24px" stylesheets="@../style.css" text="Lezioni pianificate" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <textFill>
+                              <Color red="0.624" green="0.624" blue="0.624" />
+                           </textFill>
+                        </Label>
+                        <AnchorPane VBox.vgrow="ALWAYS">
+                           <children>
+                              <TreeTableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <columns>
+                                    <TreeTableColumn prefWidth="75.0" text="C1" />
+                                    <TreeTableColumn prefWidth="75.0" text="C2" />
+                                 </columns>
+                              </TreeTableView>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
