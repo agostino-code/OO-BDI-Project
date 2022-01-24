@@ -44,6 +44,23 @@ public class CorsoRicerca {
     public String citta;
     public String provincia;
 
+    public void setIscrizioniMassime(Integer iscrizioniMassime) {
+        this.iscrizioniMassime = iscrizioniMassime;
+    }
+
+    public Integer iscrizioniMassime;
+
+    public void setNumeroLezioni(Integer numeroLezioni) {
+        this.numeroLezioni = numeroLezioni;
+    }
+
+    public void setTassoPresenzeMinime(Integer tassoPresenzeMinime) {
+        this.tassoPresenzeMinime = tassoPresenzeMinime;
+    }
+
+    public Integer numeroLezioni;
+    public Integer tassoPresenzeMinime;
+
     public String getPrivato() {
         if (Privato == null) {
             return null;

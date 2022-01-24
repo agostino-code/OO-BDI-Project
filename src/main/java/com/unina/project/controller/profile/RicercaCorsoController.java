@@ -11,7 +11,6 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -70,11 +69,11 @@ public class RicercaCorsoController implements Initializable {
         if(!tipocorsoChoiseBox.getSelectionModel().isEmpty())
         {
             if(tipocorsoChoiseBox.getSelectionModel().getSelectedItem().equals("Privato")){
-                String sqltipo = " Privato = true AND ";
+                String sqltipo = " \"Privato\" = true AND ";
                 SQL=SQL.concat(sqltipo);
             }
             else{
-                String sqltipo = " Privato = false AND ";
+                String sqltipo = " \"Privato\" = false AND ";
                 SQL=SQL.concat(sqltipo);
             }
 
@@ -99,7 +98,6 @@ public class RicercaCorsoController implements Initializable {
             String sqlprovinciagestore = " provincia ='"+provinciaTextField.getText().toUpperCase()+"' AND ";
             SQL=SQL.concat(sqlprovinciagestore);
         }
-        SQL=SQL.concat(" TRUE ");
         System.out.println(SQL);
         Stage stage = (Stage) cercaCorsoButton.getScene().getWindow();
         stage.close();

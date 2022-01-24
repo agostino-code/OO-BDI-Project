@@ -19,4 +19,10 @@ public interface CorsoDAO {
     void updateCorso(Corso corso) throws SQLException;
 
     List<AreaTematica> getAreeTematiche(String codCorso) throws SQLException;
+
+    Integer numeroIscrittiCorso(String CodCorso) throws SQLException;
+
+    List<Corso> getCorsiOperatore(String codOperatore) throws SQLException;
+
+    List<Corso> getCorsiStudente(String codStudente) throws SQLException;
 }

@@ -29,7 +29,10 @@ public class Corso{
     public Integer numeroLezioni;
 
     public String getTassoPresenzeMinime() {
-        return String.valueOf(tassoPresenzeMinime)+"%";
+        if(tassoPresenzeMinime!=null){
+            return tassoPresenzeMinime +"%";
+        }
+        return "";
     }
 
     public Integer tassoPresenzeMinime;
@@ -45,10 +48,15 @@ public class Corso{
     }
 
     public String getPrivato() {
-        if(Privato){
+        if (Privato == null) {
+            return null;
+        }
+        if(Privato==true){
             return "Privato";
         }
-        return "Pubblico";
+        else{
+            return "Pubblico";
+        }
     }
 
     public Boolean Privato;
@@ -63,4 +71,11 @@ public class Corso{
     }
 
     public List<AreaTematica> areetematiche;
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public String tag="...";
+
 }

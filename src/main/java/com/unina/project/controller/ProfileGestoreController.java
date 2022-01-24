@@ -5,15 +5,20 @@ import com.unina.project.database.*;
 import com.unina.project.database.postgre.*;
 import com.unina.project.verificationcode.SendVerificationEmail;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
@@ -21,6 +26,8 @@ import jfxtras.styles.jmetro.Style;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -30,15 +37,15 @@ public class ProfileGestoreController implements Initializable {
     public Button nuovoCorsoButton;
 
     @FXML
-    public TableView<Corso> corsiTableView;
-    public TableColumn<Corso,String> codCorsoTableColumn;
-    public TableColumn<Corso,String> titoloTableColumn;
-    public TableColumn<Corso,String> descrizioneTableColumn;
-    public TableColumn<Corso,Integer> iscrizionimassimeTableColumn;
-    public TableColumn<Corso,Integer> numerolezioniTableColumn;
-    public TableColumn<Corso,String> tassopresenzeminimeTableColumn;
-    public TableColumn<Corso,String> privatoTableColumn;
-
+    public TreeTableView<Corso> corsiTableView;
+    public TreeTableColumn<Corso,String> codCorsoTableColumn;
+    public TreeTableColumn<Corso,String> titoloTableColumn;
+    public TreeTableColumn<Corso,String> descrizioneTableColumn;
+    public TreeTableColumn<Corso,Integer> iscrizionimassimeTableColumn;
+    public TreeTableColumn<Corso,Integer> numerolezioniTableColumn;
+    public TreeTableColumn<Corso,String> tassopresenzeminimeTableColumn;
+    public TreeTableColumn<Corso,String> privatoTableColumn;
+    public TreeTableColumn<Corso,String> areeTableColumn;
     @FXML
     private MenuBar gestoreMenuBar;
     public Menu nomeGestoreMenu;
@@ -52,8 +59,8 @@ public class ProfileGestoreController implements Initializable {
     public TableColumn<Operatore,String> nomeoperatoreTableColumn;
     public TableColumn<Operatore,String> cognomeoperatoreTableColumn;
     public TableColumn<Operatore,String> codoperatoreTableColumn;
+    public TableColumn<Operatore,String> richiestaTableColumn;
 
-    private ObservableList<Corso> listCorsi = FXCollections.observableArrayList();
     private ObservableList<Operatore> listOperatori = FXCollections.observableArrayList();
     private Corso rowData;
     private Autenticazione autenticazione = new Autenticazione();
@@ -80,7 +87,7 @@ public class ProfileGestoreController implements Initializable {
         MenuItem menuItem4 = new MenuItem("Elimina Corso");
         contextMenu.getItems().addAll(menuItem1,menuItem2,menuItem3,menuItem4);
         corsiTableView.setRowFactory( tv -> {
-            TableRow<Corso> row = new TableRow<>();
+            TreeTableRow<Corso> row = new TreeTableRow<>();
             row.setContextMenu(contextMenu);
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
@@ -110,13 +117,19 @@ public class ProfileGestoreController implements Initializable {
     }
 
     public void setCorsiTableView(){
-        codCorsoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().codCorso));
-        titoloTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().titolo));
-        descrizioneTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().descrizione));
-        iscrizionimassimeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().iscrizioniMassime));
-        numerolezioniTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().numeroLezioni));
-        tassopresenzeminimeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTassoPresenzeMinime()));
-        privatoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPrivato()));
+        try {
+            updateCorsiTableView();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        codCorsoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().codCorso));
+        titoloTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().titolo));
+        descrizioneTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().descrizione));
+        iscrizionimassimeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().iscrizioniMassime));
+        numerolezioniTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().numeroLezioni));
+        tassopresenzeminimeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getTassoPresenzeMinime()));
+        privatoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getPrivato()));
+        areeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().tag));
     }
 
     public void setOperatoriTableView(){
@@ -124,6 +137,7 @@ public class ProfileGestoreController implements Initializable {
         nomeoperatoreTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().nome));
         cognomeoperatoreTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().cognome));
         codoperatoreTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().codOperatore));
+        richiestaTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getRichiesta()));
     }
     public void eliminaCorso(Corso corso){
         TextInputDialog dialog = new TextInputDialog();
@@ -168,6 +182,9 @@ public class ProfileGestoreController implements Initializable {
                     if(operatoreDAO.checkOperatoreExist(utente.codiceFiscale)){
                         operatore.setCodOperatore(operatoreDAO.setOperatore(utente.codiceFiscale));
                     }
+                    else{
+                        operatore.setCodOperatore(operatoreDAO.getCodOperatore(utente.codiceFiscale));
+                    }
                     operatoreDAO.associaOperatore(operatore.codOperatore, corso.codCorso);
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Attenzione!");
@@ -209,10 +226,21 @@ public class ProfileGestoreController implements Initializable {
         nuovoCorsoButton.getParent().setDisable(false);
     }
     public void updateCorsiTableView() throws SQLException {
-        corsiTableView.getItems().clear();
+        TreeItem<Corso> fakeroot=new TreeItem<>();
+        corsiTableView.setRoot(fakeroot);
+        fakeroot.getChildren().clear();
         gestore.setCorsi(corsoDAO.getCorsi(gestore.codGestore));
-        listCorsi.addAll(gestore.corsi);
-        corsiTableView.setItems(listCorsi);
+        for(Corso i: gestore.corsi){
+                TreeItem<Corso> treeItem=new TreeItem<>(i);
+                for(AreaTematica areaTematica:i.areetematiche){
+                    Corso corso=new Corso();
+                    corso.setTag(areaTematica.tag);
+                    TreeItem<Corso> tagItem=new TreeItem<>(corso);
+                    treeItem.getChildren().add(tagItem);
+            }
+            fakeroot.getChildren().add(treeItem);
+        }
+        corsiTableView.setShowRoot(false);
     }
 
     public void updateOperatoriTableView(String codCorso) throws SQLException {
@@ -220,7 +248,17 @@ public class ProfileGestoreController implements Initializable {
         corso.setOperatori(operatoreDAO.getOperatori(codCorso));
         listOperatori.addAll(corso.operatori);
         operatoriTableView.setItems(listOperatori);
-
+        operatoriTableView.setRowFactory(row -> new TableRow<Operatore>() {
+            @Override
+            public void updateItem(Operatore item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null) {
+                    setStyle("");
+                } else if (item.getRichiesta().equalsIgnoreCase("In attesa")) {
+                    this.setStyle("-fx-background-color: #ffc1cc");
+                }
+            }
+        });
     }
 
     public void setProfileGestore(Stage primaryStage,String email, String password) {

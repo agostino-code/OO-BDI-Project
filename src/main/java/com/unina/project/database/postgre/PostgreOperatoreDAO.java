@@ -42,7 +42,7 @@ public class PostgreOperatoreDAO implements OperatoreDAO {
 
     @Override
     public List<Operatore> getOperatori(String codCorso) throws SQLException {
-        String SQL = ("SELECT email, nome, cognome, sesso, \"dataNascita\", \"comunediNascita\", \"codOperatore\", \"codiceFiscale\" FROM \"operatoricorsi\" WHERE \"codCorso\" = ?;");
+        String SQL = ("SELECT email, nome, cognome, sesso, \"dataNascita\", \"comunediNascita\", \"codOperatore\", \"codiceFiscale\",\"Richiesta\" FROM \"operatoricorsi\" WHERE \"codCorso\" = ?;");
         Connection conn = postgreJDBC.Connessione();
         PreparedStatement pstmt = conn.prepareStatement(SQL);
         pstmt.setString(1, codCorso);
@@ -59,6 +59,7 @@ public class PostgreOperatoreDAO implements OperatoreDAO {
             operatore.setComuneDiNascita(rs.getString("comunediNascita"));
             operatore.setCodOperatore(rs.getString("codOperatore"));
             operatore.setCodiceFiscale(rs.getString("codiceFiscale"));
+            operatore.setRichiesta(rs.getBoolean("Richiesta"));
             operatori.add(operatore);
         }
         pstmt.close();
@@ -74,5 +75,52 @@ public class PostgreOperatoreDAO implements OperatoreDAO {
         pstmt.setString(1, codiceFiscale);
         ResultSet rs = pstmt.executeQuery();
         return !rs.next();
+    }
+
+    @Override
+    public String getCodOperatore(String codiceFiscale) throws SQLException {
+        String SQL = ("SELECT \"codOperatore\" FROM \"Operatore\" WHERE \"codiceFiscale\" = ?;");
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement pstmt = conn.prepareStatement(SQL);
+        pstmt.setString(1, codiceFiscale);
+        ResultSet rs = pstmt.executeQuery();
+        String codOperatore="";
+        if (rs.next()){
+            codOperatore= rs.getString(1);
+        }
+        pstmt.close();
+        conn.close();
+        return codOperatore;
+    }
+
+    @Override
+    public boolean checkOperatoreAccettato(String codOperatore, String codCorso) throws SQLException {
+        String SQL = ("SELECT \"codOperatore\" FROM \"Coordina\" WHERE  \"codCorso\" = ? AND \"codOperatore\" = ? AND \"Richiesta\" = false;");
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement pstmt = conn.prepareStatement(SQL);
+        pstmt.setString(1, codCorso);
+        pstmt.setString(2, codOperatore);
+        ResultSet rs = pstmt.executeQuery();
+        return !rs.next();
+    }
+    @Override
+    public void annullaGestioneCorso(String codOperatore,String codCorso) throws SQLException {
+      Connection conn = postgreJDBC.Connessione();
+      PreparedStatement stmt = conn.prepareStatement("DELETE FROM \"Coordina\" where \"codCorso\"=? and \"codOperatore\"=? " );
+      stmt.setString(1,codCorso);
+      stmt.setString(2,codOperatore);
+      stmt.executeUpdate();
+      stmt.close();
+      conn.close();
+    }
+    @Override
+    public void accettaGestioneCorso(String codOperatore,String codCorso) throws SQLException {
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement stmt = conn.prepareStatement("update \"Coordina\" set \"Richiesta\"='true' where \"codCorso\"=? and \"codOperatore\"=? " );
+        stmt.setString(1,codCorso);
+        stmt.setString(2,codOperatore);
+        stmt.executeUpdate();
+        stmt.close();
+        conn.close();
     }
 }

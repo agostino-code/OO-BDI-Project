@@ -10,6 +10,8 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
@@ -33,20 +35,18 @@
                </Label>
                <AnchorPane VBox.vgrow="ALWAYS">
                   <children>
-                         <TableView fx:id="corsiTableView" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                         <TreeTableView fx:id="corsiTableView" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                              <columns>
-                           <TableColumn fx:id="codCorsoTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="cod.Corso" />
-                                 <TableColumn fx:id="titoloTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Titolo" />
-                                 <TableColumn fx:id="descrizioneTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Descrizione" />
-                                 <TableColumn fx:id="iscrizionimassimeTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Iscrizioni Massime" />
-                           <TableColumn fx:id="numerolezioniTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Numero Lezioni" />
-                                 <TableColumn fx:id="tassopresenzeminimeTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Tasso Presenze Minime" />
-                           <TableColumn fx:id="privatoTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Tipo" />
+                           <TreeTableColumn fx:id="codCorsoTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="cod.Corso" />
+                                 <TreeTableColumn fx:id="titoloTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Titolo" />
+                                 <TreeTableColumn fx:id="descrizioneTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Descrizione" />
+                                 <TreeTableColumn fx:id="iscrizionimassimeTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Iscrizioni Massime" />
+                           <TreeTableColumn fx:id="numerolezioniTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Numero Lezioni" />
+                                 <TreeTableColumn fx:id="tassopresenzeminimeTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Tasso Presenze Minime" />
+                           <TreeTableColumn fx:id="privatoTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Tipo" />
+                           <TreeTableColumn fx:id="areeTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Aree Tematiche" />
                              </columns>
-                        <columnResizePolicy>
-                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                        </columnResizePolicy>
-                         </TableView>
+                         </TreeTableView>
                   </children>
                   <VBox.margin>
                      <Insets />
@@ -77,10 +77,8 @@
                                      <TableColumn fx:id="nomeoperatoreTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Nome" />
                                      <TableColumn fx:id="cognomeoperatoreTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Cognome" />
                                      <TableColumn fx:id="codoperatoreTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="cod.Operatore" />
+                              <TableColumn fx:id="richiestaTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Richiesta" />
                                  </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
                              </TableView>
                      </children>
                   </AnchorPane>
@@ -105,9 +103,6 @@
                                      <TableColumn maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Cognome" />
                                      <TableColumn maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Idoneo" />
                                  </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
                              </TableView>
                      </children>
                   </AnchorPane>

@@ -1,10 +1,13 @@
 package com.unina.project.controller.profile;
 
-import com.unina.project.AreaTematica;
-import com.unina.project.Main;
+import com.unina.project.*;
 import com.unina.project.database.CorsoDAO;
+import com.unina.project.database.OperatoreDAO;
+import com.unina.project.database.StudenteDAO;
 import com.unina.project.database.postgre.PostgreCorsoDAO;
-import javafx.beans.property.ReadOnlyStringWrapper;
+import com.unina.project.database.postgre.PostgreOperatoreDAO;
+import com.unina.project.database.postgre.PostgreStudenteDAO;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,10 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
@@ -25,6 +25,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class IscrizioneCorsoController implements Initializable {
@@ -43,12 +44,88 @@ public class IscrizioneCorsoController implements Initializable {
     public TreeTableColumn<CorsoRicerca,String> tipoTableColumn;
     @FXML
     private Button cercaButton;
-
+    private Utente utente = new Utente();
+    private CorsoRicerca rowData;
+    private CorsoDAO corsoDAO=new PostgreCorsoDAO();
+    private Studente studente=new Studente();
+    private StudenteDAO studenteDAO=new PostgreStudenteDAO();
+    private Operatore operatore=new Operatore();
+    private OperatoreDAO operatoreDAO=new PostgreOperatoreDAO();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setCorsoRicercaTableView();
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem menuItem1 = new MenuItem("Iscriviti");
+        MenuItem menuItem2 = new MenuItem("Visualizza Dettagli");
+        contextMenu.getItems().addAll(menuItem1,menuItem2);
+        ricercacorsiTableView.setRowFactory( tv -> {
+            TreeTableRow<CorsoRicerca> row = new TreeTableRow<>();
+            row.setContextMenu(contextMenu);
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
+                    rowData = row.getItem();
+                }
+            });
+            return row ;
+        });
+        menuItem1.setOnAction((event) -> {
+            try {
+                iscrizioneCorso(rowData);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+        menuItem2.setOnAction((event) -> {
+            try {
+                dettagliCorso(rowData);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
     }
-    private CorsoDAO corsoDAO=new PostgreCorsoDAO();
+
+    private void iscrizioneCorso(CorsoRicerca corsoRicerca) throws SQLException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Conferma");
+        alert.setHeaderText("Vuoi iscriverti al corso "+corsoRicerca.titolo+"?");
+        if(corsoRicerca.Privato){
+            alert.setContentText("Il corso è Privato sarà inoltrata una richiesta all'Operatore.");
+        }
+        else{
+            alert.setContentText("Il corso è Pubblico l'iscrizione è immediata.");
+        }
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            if(studenteDAO.checkStudenteExist(utente.codiceFiscale)){
+                studente.setCodStudente(studenteDAO.setStudente(utente.codiceFiscale));
+            }
+            else{
+                studente.setCodStudente(studenteDAO.getCodStudente(utente.codiceFiscale));
+            }
+            studenteDAO.iscriviStudente(studente.codStudente, corsoRicerca.codCorso);
+            setCorsoRicercaTableView();
+            if(corsoRicerca.Privato){
+            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+            alert2.setTitle("Attenzione!");
+            alert2.setHeaderText(utente.nome+" "+utente.cognome+" ha inoltrato correttamente la richiesta per il corso "+corsoRicerca.titolo);
+            alert2.showAndWait();
+            }
+            else{
+            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+            alert2.setTitle("Attenzione!");
+            alert2.setHeaderText(utente.nome+" "+utente.cognome+" ora è iscritto del corso "+corsoRicerca.titolo);
+            alert2.showAndWait();
+            }
+
+        }
+    }
+    private void dettagliCorso(CorsoRicerca corsoRicerca) throws SQLException {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Dettagli");
+        alert.setHeaderText("Il numero di lezioni è "+corsoRicerca.numeroLezioni+",\n" +
+                "con un tasso di presenze minime del "+corsoRicerca.tassoPresenzeMinime+"%.\n" +
+                "Il numero di iscritti sono "+corsoDAO.numeroIscrittiCorso(corsoRicerca.codCorso)+"/"+corsoRicerca.iscrizioniMassime+".");
+        alert.show();
+    }
 
     private void setCorsoRicercaTableView() {
         try {
@@ -56,58 +133,38 @@ public class IscrizioneCorsoController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        codiceGestoreTableColumn.setCellValueFactory(
-                (TreeTableColumn.CellDataFeatures<CorsoRicerca, String> param) ->
-                        new ReadOnlyStringWrapper(param.getValue().getValue().codGestore)
-        );
-        titoloTableColumn.setCellValueFactory(
-                (TreeTableColumn.CellDataFeatures<CorsoRicerca, String> param) ->
-                        new ReadOnlyStringWrapper(param.getValue().getValue().titolo)
-        );
-        descrizioneTableColumn.setCellValueFactory(
-                (TreeTableColumn.CellDataFeatures<CorsoRicerca, String> param) ->
-                        new ReadOnlyStringWrapper(param.getValue().getValue().descrizione)
-        );
-        codiceCorsoTableColumn.setCellValueFactory(
-                (TreeTableColumn.CellDataFeatures<CorsoRicerca, String> param) ->
-                        new ReadOnlyStringWrapper(param.getValue().getValue().codCorso)
-        );
-        nomeGestoreTableColumn.setCellValueFactory(
-                (TreeTableColumn.CellDataFeatures<CorsoRicerca, String> param) ->
-                        new ReadOnlyStringWrapper(param.getValue().getValue().nome)
-        );
-        cittaGestoreTableColumn.setCellValueFactory(
-                (TreeTableColumn.CellDataFeatures<CorsoRicerca, String> param) ->
-                        new ReadOnlyStringWrapper(param.getValue().getValue().citta)
-        );
-        provinciaGestoreTableColumn.setCellValueFactory(
-                (TreeTableColumn.CellDataFeatures<CorsoRicerca, String> param) ->
-                        new ReadOnlyStringWrapper(param.getValue().getValue().provincia)
-        );
-        areeTableColumn.setCellValueFactory(
-                (TreeTableColumn.CellDataFeatures<CorsoRicerca, String> param) ->
-                        new ReadOnlyStringWrapper(param.getValue().getValue().tag)
-        );
-        tipoTableColumn.setCellValueFactory(
-                (TreeTableColumn.CellDataFeatures<CorsoRicerca, String> param) ->
-                        new ReadOnlyStringWrapper(param.getValue().getValue().getPrivato())
-        );
-
+        codiceGestoreTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().codGestore));
+        titoloTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().titolo));
+        descrizioneTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().descrizione));
+        codiceCorsoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().codCorso));
+        nomeGestoreTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().nome));
+        cittaGestoreTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().citta));
+        provinciaGestoreTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().provincia));
+        areeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().tag));
+        tipoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getPrivato()));
     }
 
     public void setDefaultRicercaTableView() throws SQLException {
         TreeItem<CorsoRicerca> fakeroot=new TreeItem<>();
         ricercacorsiTableView.setRoot(fakeroot);
         fakeroot.getChildren().clear();
-        for(CorsoRicerca i: corsoDAO.ricercaCorsi("SELECT * FROM \"parametriricerca\";")){
-            TreeItem<CorsoRicerca> treeItem=new TreeItem<>(i);
-            for(AreaTematica areaTematica:i.areetematiche){
-                CorsoRicerca corsoRicerca=new CorsoRicerca();
-                corsoRicerca.setTag(areaTematica.tag);
-                TreeItem<CorsoRicerca> tagItem=new TreeItem<>(corsoRicerca);
-                treeItem.getChildren().add(tagItem);
+        String codOperatore=operatoreDAO.getCodOperatore(utente.codiceFiscale);
+        String codStudente=studenteDAO.getCodStudente(utente.codiceFiscale);
+        String SQL= "SELECT * FROM \"parametriricerca\" WHERE \"codCorso\" NOT IN" +
+                "(SELECT \"codCorso\" FROM \"Coordina\" WHERE \"codOperatore\"='"+codOperatore+"') \n" +
+                " AND \"codCorso\" NOT IN(SELECT \"codCorso\" FROM \"Iscritti\" WHERE \"codStudente\"='"+codStudente+"');";
+        List<CorsoRicerca> corsoRicercaList=corsoDAO.ricercaCorsi(SQL);
+        for(CorsoRicerca i: corsoRicercaList) {
+            if (i.iscrizioniMassime >= corsoDAO.numeroIscrittiCorso(i.codCorso)) {
+                TreeItem<CorsoRicerca> treeItem = new TreeItem<>(i);
+                for (AreaTematica areaTematica : i.areetematiche) {
+                    CorsoRicerca corsoRicerca = new CorsoRicerca();
+                    corsoRicerca.setTag(areaTematica.tag);
+                    TreeItem<CorsoRicerca> tagItem = new TreeItem<>(corsoRicerca);
+                    treeItem.getChildren().add(tagItem);
+                }
+                fakeroot.getChildren().add(treeItem);
             }
-            fakeroot.getChildren().add(treeItem);
         }
         ricercacorsiTableView.setShowRoot(false);
     }
@@ -116,18 +173,20 @@ public class IscrizioneCorsoController implements Initializable {
         TreeItem<CorsoRicerca> fakeroot=new TreeItem<>();
         ricercacorsiTableView.setRoot(fakeroot);
         fakeroot.getChildren().clear();
-        for(CorsoRicerca i: corsoDAO.ricercaCorsi(SQL)){
-            TreeItem<CorsoRicerca> treeItem=new TreeItem<>(i);
-            List<String> tagscorso=new ArrayList<>();
-            for(AreaTematica areaTematica:i.areetematiche){
-                    CorsoRicerca corsoRicerca=new CorsoRicerca();
+        for(CorsoRicerca i: corsoDAO.ricercaCorsi(SQL)) {
+            if (i.iscrizioniMassime >= corsoDAO.numeroIscrittiCorso(i.codCorso)) {
+                TreeItem<CorsoRicerca> treeItem = new TreeItem<>(i);
+                List<String> tagscorso = new ArrayList<>();
+                for (AreaTematica areaTematica : i.areetematiche) {
+                    CorsoRicerca corsoRicerca = new CorsoRicerca();
                     corsoRicerca.setTag(areaTematica.tag);
                     tagscorso.add(areaTematica.tag);
-                    TreeItem<CorsoRicerca> tagItem=new TreeItem<>(corsoRicerca);
+                    TreeItem<CorsoRicerca> tagItem = new TreeItem<>(corsoRicerca);
                     treeItem.getChildren().add(tagItem);
-            }
-            if(tagscorso.containsAll(tags)||tags.isEmpty()){
-                fakeroot.getChildren().add(treeItem);
+                }
+                if (tagscorso.containsAll(tags) || tags.isEmpty()) {
+                    fakeroot.getChildren().add(treeItem);
+                }
             }
         }
         ricercacorsiTableView.setShowRoot(false);
@@ -150,11 +209,23 @@ public class IscrizioneCorsoController implements Initializable {
         RicercaCorsoController ricercaCorsoController=cercaPageLoader.getController();
         List<String> tags=ricercaCorsoController.getTagsRicerca();
         String SQL=ricercaCorsoController.getParametriRicercaSQL();
-        try {
-            setRicercaTableView(SQL,tags);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if(!SQL.equals("Select * from \"parametriricerca\" WHERE ")) {
+            try {
+                String codOperatore=operatoreDAO.getCodOperatore(utente.codiceFiscale);
+                String codStudente=studenteDAO.getCodStudente(utente.codiceFiscale);
+                SQL=SQL.concat("\"codCorso\" NOT IN" +
+                        "(SELECT \"codCorso\" FROM \"Coordina\" WHERE \"codOperatore\"='"+codOperatore+"') \n" +
+                        " AND \"codCorso\" NOT IN(SELECT \"codCorso\" FROM \"Iscritti\" WHERE \"codStudente\"='"+codStudente+"');");
+                setRicercaTableView(SQL, tags);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         primaryStage.getScene().getRoot().setDisable(false);
+    }
+
+    public void setDatiUtente(Utente utente){
+        this.utente=utente;
+        setCorsoRicercaTableView();
     }
 }

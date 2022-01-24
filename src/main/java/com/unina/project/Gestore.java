@@ -1,6 +1,5 @@
 package com.unina.project;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class Gestore {
@@ -36,13 +35,5 @@ public class Gestore {
     }
 
     public List<Corso> corsi;
-
-    public void stampaCorsi(){
-        Iterator<Corso> iterator = corsi.iterator();
-
-        while(iterator.hasNext()){
-            System.out.println(iterator.next().titolo);
-        }
-    }
 
 }

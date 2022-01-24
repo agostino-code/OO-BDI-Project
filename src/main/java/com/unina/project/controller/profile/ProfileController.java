@@ -19,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -30,6 +31,7 @@ import java.util.ResourceBundle;
 
 public class ProfileController implements Initializable {
 
+    public AnchorPane operatoreAnchorPane;
     @FXML
     private Button gestioneCorsiButton;
 
@@ -89,7 +91,10 @@ public class ProfileController implements Initializable {
     void onIscrizioneCorsiButtonClick(ActionEvent event) {
         Parent root = null;
         try {
-            root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("profile/iscrizioneCorsi.fxml")));
+            FXMLLoader iscrizioneCorsiPageLoader = new FXMLLoader(Objects.requireNonNull(Main.class.getResource("profile/iscrizioneCorsi.fxml")));
+            root = iscrizioneCorsiPageLoader.load();
+            IscrizioneCorsoController iscrizioneCorsoController=iscrizioneCorsiPageLoader.getController();
+            iscrizioneCorsoController.setDatiUtente(utente);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -108,7 +113,17 @@ public class ProfileController implements Initializable {
 
     @FXML
     void oniscrizioniLezioniButtonClick(ActionEvent event) {
-
+        Parent root = null;
+        try {
+            FXMLLoader iscrizioneLezioniPageLoader = new FXMLLoader(Objects.requireNonNull(Main.class.getResource("profile/iscrizioneLezioni.fxml")));
+            root = iscrizioneLezioniPageLoader.load();
+            IscrizioneLezioniController iscrizioneLezioniController=iscrizioneLezioniPageLoader.getController();
+            iscrizioneLezioniController.setDatiUtente(utente);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stackPanelProfilo.getChildren().clear();
+        stackPanelProfilo.getChildren().addAll(root);
     }
 
     public void setHomepage() {
@@ -129,6 +144,7 @@ public class ProfileController implements Initializable {
         try {
             utente=utenteDAO.getUtente(email);
             if(!operatoreDAO.checkOperatoreExist(utente.codiceFiscale)){
+                operatoreAnchorPane.setVisible(true);
                 gestioneCorsiButton.setVisible(true);
                 gestorelezioneButton.setVisible(true);
                 richiesteButton.setVisible(true);
@@ -139,5 +155,46 @@ public class ProfileController implements Initializable {
         }
     }
 
+    public void onGestioneCorsiButtonClick(ActionEvent actionEvent) {
+        Parent root = null;
+        try {
+            FXMLLoader gestioneCorsiPageLoader = new FXMLLoader(Objects.requireNonNull(Main.class.getResource("profile/gestioneCorsi.fxml")));
+            root = gestioneCorsiPageLoader.load();
+            GestioneCorsiController gestioneCorsiController=gestioneCorsiPageLoader.getController();
+            gestioneCorsiController.setDatiUtente(utente);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stackPanelProfilo.getChildren().clear();
+        stackPanelProfilo.getChildren().addAll(root);
+    }
+
+    public void onGestioneLezioniButtonClick(ActionEvent actionEvent) {
+        Parent root = null;
+        try {
+            FXMLLoader gestioneLezioniPageLoader = new FXMLLoader(Objects.requireNonNull(Main.class.getResource("profile/gestioneLezioni.fxml")));
+            root = gestioneLezioniPageLoader.load();
+            GestioneLezioniController gestioneLezioniController=gestioneLezioniPageLoader.getController();
+            gestioneLezioniController.setDatiUtente(utente);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stackPanelProfilo.getChildren().clear();
+        stackPanelProfilo.getChildren().addAll(root);
+    }
+
+    public void onRichiesteButtonClick(ActionEvent actionEvent) {
+        Parent root = null;
+        try {
+            FXMLLoader richiestePageLoader = new FXMLLoader(Objects.requireNonNull(Main.class.getResource("profile/richieste.fxml")));
+            root = richiestePageLoader.load();
+            RichiesteController richiesteController=richiestePageLoader.getController();
+            richiesteController.setDatiUtente(utente);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stackPanelProfilo.getChildren().clear();
+        stackPanelProfilo.getChildren().addAll(root);
+    }
 }
 

@@ -32,18 +32,14 @@ public class PostgreCorsoDAO implements CorsoDAO {
         conn.close();
         return codCorso;
     }
-    public boolean checkTitoloExist(String titolo) throws SQLException {
-        String SQL = ("SELECT titolo FROM \"Corso\" WHERE titolo = ?;");
-        Connection conn = postgreJDBC.Connessione();
-        PreparedStatement pstmt = conn.prepareStatement(SQL);
-        pstmt.setString(1, titolo);
-        ResultSet rs = pstmt.executeQuery();
-        return !rs.next();
-    }
 
     @Override
     public List<Corso> getCorsi(String codGestore) throws SQLException {
         String SQL = ("SELECT titolo, descrizione, \"iscrizioniMassime\", \"tassoPresenzeMinime\", \"numeroLezioni\",\"codCorso\",\"Privato\" FROM \"Corso\" WHERE \"codGestore\" = ?;");
+        return getCorsoList(codGestore, SQL);
+    }
+
+    public List<Corso> getCorsoList(String codGestore, String SQL) throws SQLException {
         Connection conn = postgreJDBC.Connessione();
         PreparedStatement pstmt = conn.prepareStatement(SQL);
         pstmt.setString(1, codGestore);
@@ -95,6 +91,9 @@ public class PostgreCorsoDAO implements CorsoDAO {
             corso.setCodCorso(rs.getString("codCorso"));
             corso.setProvincia(rs.getString("provincia"));
             corso.setPrivato(rs.getBoolean("Privato"));
+            corso.setNumeroLezioni(rs.getInt("numeroLezioni"));
+            corso.setTassoPresenzeMinime(rs.getInt("tassoPresenzeMinime"));
+            corso.setIscrizioniMassime(rs.getInt("iscrizioniMassime"));
             corso.setAreetematiche(getAreeTematiche(corso.codCorso));
             corsi.add(corso);
         }
@@ -136,5 +135,29 @@ public class PostgreCorsoDAO implements CorsoDAO {
         pstmt.close();
         conn.close();
         return areeTematiche;
+    }
+
+    @Override
+    public Integer numeroIscrittiCorso(String CodCorso) throws SQLException{
+        Integer NumeroIscritti;
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement stmt = conn.prepareStatement("Select count(*) from \"Iscritti\" where \"codCorso\"=? and \"Richiesta\"=true");
+        stmt.setString(1,CodCorso);
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+        NumeroIscritti =rs.getInt(1);
+        return NumeroIscritti;
+    }
+
+    @Override
+    public List<Corso> getCorsiOperatore(String codOperatore) throws SQLException {
+        String SQL = ("SELECT titolo, descrizione, \"iscrizioniMassime\", \"tassoPresenzeMinime\", \"numeroLezioni\",\"codCorso\",\"Privato\" FROM \"Corso\" NATURAL JOIN \"Coordina\" WHERE \"codOperatore\" = ? AND \"Richiesta\"=true;");
+        return getCorsoList(codOperatore, SQL);
+    }
+
+    @Override
+    public List<Corso> getCorsiStudente(String codStudente) throws SQLException {
+        String SQL = ("SELECT titolo, descrizione, \"iscrizioniMassime\", \"tassoPresenzeMinime\", \"numeroLezioni\",\"codCorso\",\"Privato\" FROM \"Corso\" NATURAL JOIN \"Iscritti\" WHERE \"codStudente\" = ?;");
+        return getCorsoList(codStudente, SQL);
     }
 }
