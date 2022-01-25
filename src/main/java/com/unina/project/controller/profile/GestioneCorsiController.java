@@ -10,7 +10,6 @@ import com.unina.project.database.postgre.PostgreStudenteDAO;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -45,14 +44,13 @@ public class GestioneCorsiController implements Initializable {
     public TreeTableColumn<Corso,String> areeTableColumn;
     public TreeTableColumn<Corso,String> privatoTableColumn;
 
-    private Utente utente=new Utente();
     private Corso rowDataCorso=new Corso();
     private Studente rowDataStudente=new Studente();
-    private StudenteDAO studenteDAO=new PostgreStudenteDAO();
-    private Operatore operatore=new Operatore();
-    private OperatoreDAO operatoreDAO=new PostgreOperatoreDAO();
-    private CorsoDAO corsoDAO= new PostgreCorsoDAO();
-    private ObservableList<Studente> listStudenti = FXCollections.observableArrayList();
+    private final StudenteDAO studenteDAO=new PostgreStudenteDAO();
+    private final Operatore operatore=new Operatore();
+    private final OperatoreDAO operatoreDAO=new PostgreOperatoreDAO();
+    private final CorsoDAO corsoDAO= new PostgreCorsoDAO();
+    private final ObservableList<Studente> listStudenti = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -71,7 +69,7 @@ public class GestioneCorsiController implements Initializable {
                 if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
                     rowDataCorso = row.getItem();
                     try {
-                        if(!operatoreDAO.checkOperatoreAccettato(operatore.codOperatore,rowDataCorso.codCorso)){
+                        if(!operatoreDAO.checkOperatoreDaAccettare(operatore.codOperatore,rowDataCorso.codCorso)){
                             row.setContextMenu(contextMenuAccetta);
                         }
                         else{
@@ -191,7 +189,7 @@ public class GestioneCorsiController implements Initializable {
                 new Callback<>() {
                     @Override
                     public TreeTableCell<Corso, String> call(final TreeTableColumn<Corso, String> param) {
-                        final TreeTableCell<Corso, String> cell = new TreeTableCell<>() {
+                        return new TreeTableCell<>() {
 
                             @Override
                             public void updateItem(String item, boolean empty) {
@@ -203,7 +201,7 @@ public class GestioneCorsiController implements Initializable {
                                     setText(item);
                                     TreeTableRow<Corso> row = getTableRow();
                                     try {
-                                        if (!operatoreDAO.checkOperatoreAccettato(operatore.codOperatore, item)) {
+                                        if (!operatoreDAO.checkOperatoreDaAccettare(operatore.codOperatore, item)) {
                                             row.setStyle("-fx-background-color: #ffc1cc");
                                         }
                                     } catch (SQLException e) {
@@ -212,7 +210,6 @@ public class GestioneCorsiController implements Initializable {
                                 }
                             }
                         };
-                        return cell;
                     }
                 };
         codCorsoTableColumn.setCellFactory(cellFactory);
@@ -225,7 +222,6 @@ public class GestioneCorsiController implements Initializable {
     }
 
     public void setDatiUtente(Utente utente){
-        this.utente=utente;
         try {
             operatore.codOperatore=operatoreDAO.getCodOperatore(utente.codiceFiscale);
             updateCorsiTableView();

@@ -151,6 +151,12 @@ public class PostgreCorsoDAO implements CorsoDAO {
 
     @Override
     public List<Corso> getCorsiOperatore(String codOperatore) throws SQLException {
+        String SQL = ("SELECT titolo, descrizione, \"iscrizioniMassime\", \"tassoPresenzeMinime\", \"numeroLezioni\",\"codCorso\",\"Privato\" FROM \"Corso\" NATURAL JOIN \"Coordina\" WHERE \"codOperatore\" = ?;");
+        return getCorsoList(codOperatore, SQL);
+    }
+
+    @Override
+    public List<Corso> getCorsiOperatoreAccettati(String codOperatore) throws SQLException {
         String SQL = ("SELECT titolo, descrizione, \"iscrizioniMassime\", \"tassoPresenzeMinime\", \"numeroLezioni\",\"codCorso\",\"Privato\" FROM \"Corso\" NATURAL JOIN \"Coordina\" WHERE \"codOperatore\" = ? AND \"Richiesta\"=true;");
         return getCorsoList(codOperatore, SQL);
     }
@@ -159,5 +165,31 @@ public class PostgreCorsoDAO implements CorsoDAO {
     public List<Corso> getCorsiStudente(String codStudente) throws SQLException {
         String SQL = ("SELECT titolo, descrizione, \"iscrizioniMassime\", \"tassoPresenzeMinime\", \"numeroLezioni\",\"codCorso\",\"Privato\" FROM \"Corso\" NATURAL JOIN \"Iscritti\" WHERE \"codStudente\" = ?;");
         return getCorsoList(codStudente, SQL);
+    }
+
+    @Override
+    public void disiscrivitiCorso(String codStudente, String codCorso) throws SQLException {
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM \"Iscritti\" where \"codCorso\"=? and \"codStudente\"=?");
+        stmt.setString(1,codCorso);
+        stmt.setString(2,codStudente);
+        stmt.executeUpdate();
+        stmt.close();
+        conn.close();
+    }
+
+    @Override
+    public Integer getNumeroLezioni(String codCorso) throws SQLException {
+        String SQL = ("SELECT \"numeroLezioni\" FROM \"Corso\" WHERE \"codCorso\" = ?;");
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement pstmt = conn.prepareStatement(SQL);
+        pstmt.setString(1, codCorso);
+        pstmt.execute();
+        ResultSet rs =pstmt.getResultSet();
+        rs.next();
+        Integer numeroLezioni=rs.getInt("numeroLezioni");
+        pstmt.close();
+        conn.close();
+        return numeroLezioni;
     }
 }

@@ -131,7 +131,7 @@ public class RichiesteController implements Initializable {
         TreeItem<Corso> fakeroot=new TreeItem<>();
         corsiTableView.setRoot(fakeroot);
         fakeroot.getChildren().clear();
-        operatore.setCorsi(corsoDAO.getCorsiOperatore(operatore.codOperatore));
+        operatore.setCorsi(corsoDAO.getCorsiOperatoreAccettati(operatore.codOperatore));
         for(Corso i: operatore.corsi){
             if(i.Privato){
                 TreeItem<Corso> treeItem=new TreeItem<>(i);

@@ -94,7 +94,7 @@ public class PostgreOperatoreDAO implements OperatoreDAO {
     }
 
     @Override
-    public boolean checkOperatoreAccettato(String codOperatore, String codCorso) throws SQLException {
+    public boolean checkOperatoreDaAccettare(String codOperatore, String codCorso) throws SQLException {
         String SQL = ("SELECT \"codOperatore\" FROM \"Coordina\" WHERE  \"codCorso\" = ? AND \"codOperatore\" = ? AND \"Richiesta\" = false;");
         Connection conn = postgreJDBC.Connessione();
         PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -103,6 +103,7 @@ public class PostgreOperatoreDAO implements OperatoreDAO {
         ResultSet rs = pstmt.executeQuery();
         return !rs.next();
     }
+
     @Override
     public void annullaGestioneCorso(String codOperatore,String codCorso) throws SQLException {
       Connection conn = postgreJDBC.Connessione();
@@ -113,6 +114,7 @@ public class PostgreOperatoreDAO implements OperatoreDAO {
       stmt.close();
       conn.close();
     }
+
     @Override
     public void accettaGestioneCorso(String codOperatore,String codCorso) throws SQLException {
         Connection conn = postgreJDBC.Connessione();
@@ -122,5 +124,16 @@ public class PostgreOperatoreDAO implements OperatoreDAO {
         stmt.executeUpdate();
         stmt.close();
         conn.close();
+    }
+
+    @Override
+    public boolean checkOperatoreCorso(String codOperatore, String codCorso) throws SQLException {
+        String SQL = ("SELECT \"codOperatore\" FROM \"Coordina\" WHERE  \"codCorso\" = ? AND \"codOperatore\" = ?;");
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement pstmt = conn.prepareStatement(SQL);
+        pstmt.setString(1, codCorso);
+        pstmt.setString(2, codOperatore);
+        ResultSet rs = pstmt.executeQuery();
+        return !rs.next();
     }
 }

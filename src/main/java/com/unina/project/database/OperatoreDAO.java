@@ -16,8 +16,9 @@ public interface OperatoreDAO {
 
     String getCodOperatore(String codiceFiscale) throws SQLException;
 
-    boolean checkOperatoreAccettato(String codOperatore, String codCorso) throws SQLException;
+    boolean checkOperatoreDaAccettare(String codOperatore, String codCorso) throws SQLException;
     void annullaGestioneCorso(String codOperatore,String codCorso)throws SQLException;
     void accettaGestioneCorso(String codOperatore,String codCorso) throws SQLException;
 
+    boolean checkOperatoreCorso(String codOperatore, String codCorso) throws SQLException;
 }

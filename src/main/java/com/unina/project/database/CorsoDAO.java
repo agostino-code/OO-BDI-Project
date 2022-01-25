@@ -24,5 +24,11 @@ public interface CorsoDAO {
 
     List<Corso> getCorsiOperatore(String codOperatore) throws SQLException;
 
+    List<Corso> getCorsiOperatoreAccettati(String codOperatore) throws SQLException;
+
     List<Corso> getCorsiStudente(String codStudente) throws SQLException;
+
+    void disiscrivitiCorso(String codStudente, String codCorso) throws SQLException;
+
+    Integer getNumeroLezioni(String codCorso) throws SQLException;
 }

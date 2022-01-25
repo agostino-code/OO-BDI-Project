@@ -13,17 +13,17 @@
    <children>
       <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label alignment="CENTER" style="&#10;" styleClass="label24px" stylesheets="@../style.css" text="Prenotazione Lezioni" textAlignment="CENTER" wrapText="false">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <textFill>
-                  <Color red="0.624" green="0.624" blue="0.624" />
-               </textFill>
-            </Label>
             <AnchorPane VBox.vgrow="ALWAYS">
                <children>
-                  <TreeTableView fx:id="lezioniTableView" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Label alignment="CENTER" style="&#10;" styleClass="label24px" stylesheets="@../style.css" text="Prenotazione Lezioni" textAlignment="CENTER" wrapText="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <textFill>
+                        <Color red="0.624" green="0.624" blue="0.624" />
+                     </textFill>
+                  </Label>
+                  <TreeTableView fx:id="lezioniTableView" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
                      <columns>
                         <TreeTableColumn fx:id="codCorsoTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="cod.Corso" />
                         <TreeTableColumn fx:id="titoloTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Titolo" />

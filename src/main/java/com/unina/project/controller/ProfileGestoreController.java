@@ -5,29 +5,24 @@ import com.unina.project.database.*;
 import com.unina.project.database.postgre.*;
 import com.unina.project.verificationcode.SendVerificationEmail;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -51,7 +46,14 @@ public class ProfileGestoreController implements Initializable {
     public Menu nomeGestoreMenu;
 
     @FXML
-    private TableView<?> iscrittiTableView;
+    public TableView<Studente> studentiTableView;
+    public TableColumn<Studente,String> nomeTableColumn;
+    public TableColumn<Studente,String> cognomeTableColumn;
+    public TableColumn<Studente,String> emailTableColumn;
+    public TableColumn<Studente,String> codStudenteTableColumn;
+    public TableColumn<Studente,String> sessoTableColumn;
+    public TableColumn<Studente, LocalDate> datadiNascitaTableColumn;
+    public TableColumn<Studente,String> idoneoTableColumn;
 
     @FXML
     private TableView<Operatore> operatoriTableView;
@@ -61,8 +63,11 @@ public class ProfileGestoreController implements Initializable {
     public TableColumn<Operatore,String> codoperatoreTableColumn;
     public TableColumn<Operatore,String> richiestaTableColumn;
 
+    private ObservableList<Studente> listStudenti = FXCollections.observableArrayList();
     private ObservableList<Operatore> listOperatori = FXCollections.observableArrayList();
     private Corso rowData;
+    private Operatore rowDataOperatore;
+    private StudenteDAO studenteDAO=new PostgreStudenteDAO();
     private Autenticazione autenticazione = new Autenticazione();
     private AutenticazioneDAO autenticazioneDAO = new PostgreAutenticazioneDAO();
     public Gestore gestore= new Gestore();
@@ -80,12 +85,16 @@ public class ProfileGestoreController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         setCorsiTableView();
         setOperatoriTableView();
+        setStudentiTableView();
         ContextMenu contextMenu = new ContextMenu();
         MenuItem menuItem1 = new MenuItem("Aggiungi Operatore");
         MenuItem menuItem2 = new MenuItem("Visualizza Statistiche");
         MenuItem menuItem3 = new MenuItem("Modifica Corso");
         MenuItem menuItem4 = new MenuItem("Elimina Corso");
         contextMenu.getItems().addAll(menuItem1,menuItem2,menuItem3,menuItem4);
+        ContextMenu contextMenuElimina = new ContextMenu();
+        MenuItem menuItem5 = new MenuItem("Rimuovi Operatore");
+        contextMenuElimina.getItems().addAll(menuItem5);
         corsiTableView.setRowFactory( tv -> {
             TreeTableRow<Corso> row = new TreeTableRow<>();
             row.setContextMenu(contextMenu);
@@ -94,6 +103,7 @@ public class ProfileGestoreController implements Initializable {
                     rowData = row.getItem();
                     try {
                         updateOperatoriTableView(rowData.codCorso);
+                        updateStudentiTableView(rowData.codCorso);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -113,6 +123,19 @@ public class ProfileGestoreController implements Initializable {
         });
         menuItem4.setOnAction((event) -> {
             eliminaCorso(rowData);
+        });
+        operatoriTableView.setRowFactory( tv -> {
+            TableRow<Operatore> row = new TableRow<>();
+            row.setContextMenu(contextMenuElimina);
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
+                    rowDataOperatore = row.getItem();
+                }
+            });
+            return row ;
+        });
+        menuItem5.setOnAction((event) -> {
+            eliminaOperatore(rowDataOperatore.codOperatore,rowData.codCorso);
         });
     }
 
@@ -139,6 +162,76 @@ public class ProfileGestoreController implements Initializable {
         codoperatoreTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().codOperatore));
         richiestaTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getRichiesta()));
     }
+
+    public void setStudentiTableView(){
+        nomeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().nome));
+        cognomeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().cognome));
+        emailTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().email));
+        codStudenteTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().codStudente));
+        datadiNascitaTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().dataNascita));
+        sessoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().sesso));
+        idoneoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getIdoneo()));
+    }
+
+    public void updateStudentiTableView(String codCorso) throws SQLException {
+        studentiTableView.getItems().clear();
+        listStudenti.addAll(studenteDAO.getStudentiAccettati(codCorso));
+        studentiTableView.setItems(listStudenti);
+    }
+
+    private void eliminaOperatore(String codOperatore,String codCorso) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Conferma");
+        dialog.setHeaderText("Per rimuovere l'operatore");
+        dialog.setContentText("Inserisci 'si' :");
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            if (result.get().equals("si")) {
+                try {
+                    operatoreDAO.annullaGestioneCorso(codOperatore,codCorso);
+                    updateOperatoriTableView(codCorso);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Attenzione!");
+                alert.setHeaderText("Devi inserire 'si' per rimuovere l'operatore!");
+                alert.setContentText("Riprova!");
+                alert.showAndWait();
+            }
+        }
+    }
+
+    private void styleRowColor() {
+        Callback<TableColumn<Operatore, String>, TableCell<Operatore, String>> cellFactory
+                =
+                new Callback<>() {
+                    @Override
+                    public TableCell<Operatore, String> call(final TableColumn<Operatore, String> param) {
+                        final TableCell<Operatore, String> cell = new TableCell<>() {
+
+                            @Override
+                            public void updateItem(String item, boolean empty) {
+                                super.updateItem(item, empty);
+                                if (empty) {
+                                    setGraphic(null);
+                                    setText(null);
+                                } else {
+                                    setText(item);
+                                    TableRow<Operatore> row = getTableRow();
+                                        if (item.equals("In attesa")) {
+                                            row.setStyle("-fx-background-color: #ffc1cc");
+                                        }
+                                }
+                            }
+                        };
+                        return cell;
+                    }
+                };
+        richiestaTableColumn.setCellFactory(cellFactory);
+    }
+
     public void eliminaCorso(Corso corso){
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Conferma");
@@ -171,6 +264,7 @@ public class ProfileGestoreController implements Initializable {
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
             try {
+                utente=utenteDAO.getUtente(result.get());
                 if (autenticazioneDAO.checkEmailUtenteExist(result.get())) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Errore email");
@@ -178,19 +272,37 @@ public class ProfileGestoreController implements Initializable {
                     alert.showAndWait();
                 }
                 else{
-                    utente=utenteDAO.getUtente(result.get());
-                    if(operatoreDAO.checkOperatoreExist(utente.codiceFiscale)){
-                        operatore.setCodOperatore(operatoreDAO.setOperatore(utente.codiceFiscale));
+                    if(!studenteDAO.checkStudenteIscritto(corso.codCorso, studenteDAO.getCodStudente(utente.codiceFiscale))){
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Attenzione!");
+                        alert.setHeaderText(utente.nome+" "+utente.cognome+" è già iscritto al corso "+corso.titolo+" come Studente");
+                        alert.setContentText("Un Utente può essere Operatore o Studente di un Corso non entrambi!");
+                        alert.showAndWait();
                     }
                     else{
-                        operatore.setCodOperatore(operatoreDAO.getCodOperatore(utente.codiceFiscale));
+                        if(!operatoreDAO.checkOperatoreCorso(operatoreDAO.getCodOperatore(utente.codiceFiscale), corso.codCorso)){
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("Attenzione!");
+                            alert.setHeaderText(utente.nome+" "+utente.cognome+" è già operatore o ha una richiesta in sospeso per il corso "+corso.titolo);
+                            alert.setContentText("Lo stato della richiesta è visibile dal colore della riga. Se la riga è bianca lo stato è accettata!");
+                            alert.showAndWait();
+                        }
+                        else{
+                            if(operatoreDAO.checkOperatoreExist(utente.codiceFiscale)){
+                                operatore.setCodOperatore(operatoreDAO.setOperatore(utente.codiceFiscale));
+                            }
+                            else{
+                                operatore.setCodOperatore(operatoreDAO.getCodOperatore(utente.codiceFiscale));
+                            }
+                            operatoreDAO.associaOperatore(operatore.codOperatore, corso.codCorso);
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Attenzione!");
+                            alert.setHeaderText("E' stata inviata una richiesta ad "+utente.nome+" "+utente.cognome+" per diventare operatore del corso "+corso.titolo);
+                            alert.setContentText("Lo stato della richiesta è visibile dal colore della riga. Se la riga è bianca lo stato è accettata!");
+                            alert.showAndWait();
+                            updateOperatoriTableView(corso.codCorso);
+                        }
                     }
-                    operatoreDAO.associaOperatore(operatore.codOperatore, corso.codCorso);
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Attenzione!");
-                    alert.setHeaderText(utente.nome+" "+utente.cognome+" ora è operatore del corso "+corso.titolo);
-                    alert.showAndWait();
-                    updateOperatoriTableView(corso.codCorso);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -248,17 +360,7 @@ public class ProfileGestoreController implements Initializable {
         corso.setOperatori(operatoreDAO.getOperatori(codCorso));
         listOperatori.addAll(corso.operatori);
         operatoriTableView.setItems(listOperatori);
-        operatoriTableView.setRowFactory(row -> new TableRow<Operatore>() {
-            @Override
-            public void updateItem(Operatore item, boolean empty) {
-                super.updateItem(item, empty);
-                if (item == null) {
-                    setStyle("");
-                } else if (item.getRichiesta().equalsIgnoreCase("In attesa")) {
-                    this.setStyle("-fx-background-color: #ffc1cc");
-                }
-            }
-        });
+        styleRowColor();
     }
 
     public void setProfileGestore(Stage primaryStage,String email, String password) {

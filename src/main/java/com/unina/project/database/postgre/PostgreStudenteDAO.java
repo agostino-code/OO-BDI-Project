@@ -124,11 +124,11 @@ public class PostgreStudenteDAO implements StudenteDAO {
     }
 
     @Override
-    public boolean checkStudenteIscritto(String codLezione,String codStudente) throws SQLException {
-        String SQL = ("SELECT \"codStudente\" FROM \"Prenotazioni\" WHERE \"codLezione\" = ? and \"codStudente\"=?;");
+    public boolean checkStudenteIscritto(String codCorso,String codStudente) throws SQLException {
+        String SQL = ("SELECT \"codStudente\" FROM \"Iscritti\" WHERE \"codCorso\" = ? AND \"codStudente\"=?;");
         Connection conn = postgreJDBC.Connessione();
         PreparedStatement pstmt = conn.prepareStatement(SQL);
-        pstmt.setString(1, codLezione);
+        pstmt.setString(1, codCorso);
         pstmt.setString(2,codStudente);
         ResultSet rs = pstmt.executeQuery();
         return !rs.next();

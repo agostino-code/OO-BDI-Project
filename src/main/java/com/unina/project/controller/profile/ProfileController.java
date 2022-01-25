@@ -129,7 +129,10 @@ public class ProfileController implements Initializable {
     public void setHomepage() {
         Parent root = null;
         try {
-            root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("profile/homepage.fxml")));
+            FXMLLoader homepagePageLoader = new FXMLLoader(Objects.requireNonNull(Main.class.getResource("profile/homepage.fxml")));
+            root = homepagePageLoader.load();
+            HomepageController homepageController=homepagePageLoader.getController();
+            homepageController.setDatiUtente(utente);
         } catch (IOException e) {
             e.printStackTrace();
         }

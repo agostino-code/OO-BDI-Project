@@ -1,7 +1,9 @@
 package com.unina.project.controller.profile;
 
 import com.unina.project.Lezione;
+import com.unina.project.database.CorsoDAO;
 import com.unina.project.database.LezioneDAO;
+import com.unina.project.database.postgre.PostgreCorsoDAO;
 import com.unina.project.database.postgre.PostgreLezioneDAO;
 import com.unina.project.graphics.LimitedTextField;
 import javafx.beans.value.ChangeListener;
@@ -46,6 +48,7 @@ public class LezioneController implements Initializable {
 
     private Lezione lezione=new Lezione();
     private LezioneDAO lezioneDAO=new PostgreLezioneDAO();
+    private CorsoDAO corsoDAO=new PostgreCorsoDAO();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -160,7 +163,16 @@ public class LezioneController implements Initializable {
             lezione.setDataoraInizio(localDateTime);
             lezione.setDurata(LocalTime.parse(durataTextField.getText()));
             try {
-                lezioneDAO.insertLezione(lezione);
+                if(lezioneDAO.countNumeroLezioni(lezione.codCorso) < corsoDAO.getNumeroLezioni(lezione.codCorso)){
+                    lezioneDAO.insertLezione(lezione);
+                }
+                else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Errore");
+                    alert.setHeaderText("Hai raggiunto il numero massimo di Lezioni!");
+                    alert.setContentText("Contatta il tuo Gestore.");
+                    alert.showAndWait();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }

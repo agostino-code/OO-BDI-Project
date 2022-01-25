@@ -1,23 +1,18 @@
 package com.unina.project.controller.profile;
 
 import com.unina.project.*;
-import com.unina.project.controller.IndirizzoController;
 import com.unina.project.database.CorsoDAO;
 import com.unina.project.database.LezioneDAO;
 import com.unina.project.database.OperatoreDAO;
-import com.unina.project.database.StudenteDAO;
 import com.unina.project.database.postgre.PostgreCorsoDAO;
 import com.unina.project.database.postgre.PostgreLezioneDAO;
 import com.unina.project.database.postgre.PostgreOperatoreDAO;
-import com.unina.project.database.postgre.PostgreStudenteDAO;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -55,15 +50,13 @@ public class GestioneLezioniController implements Initializable {
     public TreeTableColumn<Lezione,LocalTime> durataTableColumn;
     public TreeTableColumn<Lezione,String> codLezioneTableColumn;
 
-    private Utente utente=new Utente();
     private Lezione rowDataLezione=new Lezione();
     private Studente rowDataStudente=new Studente();
-    private LezioneDAO lezioneDAO=new PostgreLezioneDAO();
-    private StudenteDAO studenteDAO=new PostgreStudenteDAO();
-    private Operatore operatore=new Operatore();
-    private OperatoreDAO operatoreDAO=new PostgreOperatoreDAO();
-    private CorsoDAO corsoDAO= new PostgreCorsoDAO();
-    private ObservableList<Studente> listStudenti = FXCollections.observableArrayList();
+    private final LezioneDAO lezioneDAO=new PostgreLezioneDAO();
+    private final Operatore operatore=new Operatore();
+    private final OperatoreDAO operatoreDAO=new PostgreOperatoreDAO();
+    private final CorsoDAO corsoDAO= new PostgreCorsoDAO();
+    private final ObservableList<Studente> listStudenti = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -75,6 +68,9 @@ public class GestioneLezioniController implements Initializable {
         ContextMenu contextMenuNuovaLezione = new ContextMenu();
         MenuItem menuItem2 = new MenuItem("Nuova Lezione");
         contextMenuNuovaLezione.getItems().addAll(menuItem2);
+        ContextMenu contextMenuNonPresente = new ContextMenu();
+        MenuItem menuItem3 = new MenuItem("Non Presente");
+        contextMenuNonPresente.getItems().addAll(menuItem3);
         lezioniTableView.setRowFactory( tv -> {
             TreeTableRow<Lezione> row = new TreeTableRow<>();
             row.setOnMouseClicked(event -> {
@@ -84,7 +80,11 @@ public class GestioneLezioniController implements Initializable {
                         if(rowDataLezione.codCorso!=null){
                             row.setContextMenu(contextMenuNuovaLezione);
                         }
-                        updateStudentiTableView(rowDataLezione.codLezione);
+                        else{
+                            updateStudentiTableView(rowDataLezione.codLezione);
+                        }
+
+
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -94,22 +94,42 @@ public class GestioneLezioniController implements Initializable {
         });
         studentiTableView.setRowFactory( tv -> {
             TableRow<Studente> row = new TableRow<>();
-            row.setContextMenu(contextMenuPresente);
+
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
                     rowDataStudente = row.getItem();
+                    if(rowDataStudente.getPresente().equals("Si")){
+                        row.setContextMenu(contextMenuNonPresente);
+                    }
+                    else{
+                        row.setContextMenu(contextMenuPresente);
+                    }
+
                 }
             });
             return row ;
         });
         menuItem1.setOnAction((event) -> {
-                //accettaRichiesta(operatore.codOperatore,rowDataCorso);
-
+            try {
+                lezioneDAO.confermapresenza(rowDataStudente.codStudente,rowDataLezione.codLezione);
+                updateStudentiTableView(rowDataLezione.codLezione);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+        menuItem3.setOnAction((event) -> {
+            try {
+                lezioneDAO.nonpresente(rowDataStudente.codStudente,rowDataLezione.codLezione);
+                updateStudentiTableView(rowDataLezione.codLezione);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         });
         menuItem2.setOnAction((event) -> {
             try {
                 nuovalezione(rowDataLezione.codCorso);
-            } catch (IOException e) {
+                updateLezioniTableView();
+            } catch (IOException | SQLException e) {
                 e.printStackTrace();
             }
 
@@ -153,16 +173,16 @@ public class GestioneLezioniController implements Initializable {
         lezioneStage.showAndWait();
         primaryStage.getScene().getRoot().setDisable(false);
         try {
-            updateCorsiTableView();
+            updateLezioniTableView();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    public void updateCorsiTableView() throws SQLException {
+    public void updateLezioniTableView() throws SQLException {
         TreeItem<Lezione> fakeroot=new TreeItem<>();
         lezioniTableView.setRoot(fakeroot);
         fakeroot.getChildren().clear();
-        operatore.setCorsi(corsoDAO.getCorsiOperatore(operatore.codOperatore));
+        operatore.setCorsi(corsoDAO.getCorsiOperatoreAccettati(operatore.codOperatore));
         for(Corso i: operatore.corsi){
             Lezione onlycodcorso=new Lezione();
             onlycodcorso.setCodCorso(i.codCorso);
@@ -182,7 +202,7 @@ public class GestioneLezioniController implements Initializable {
                 new Callback<>() {
                     @Override
                     public TableCell<Studente, String> call(final TableColumn<Studente, String> param) {
-                        final TableCell<Studente, String> cell = new TableCell<>() {
+                        return new TableCell<>() {
 
                             @Override
                             public void updateItem(String item, boolean empty) {
@@ -202,7 +222,6 @@ public class GestioneLezioniController implements Initializable {
                                 }
                             }
                         };
-                        return cell;
                     }
                 };
         presenteTableColumn.setCellFactory(cellFactory);
@@ -217,10 +236,9 @@ public class GestioneLezioniController implements Initializable {
     }
 
     public void setDatiUtente(Utente utente){
-        this.utente=utente;
         try {
             operatore.codOperatore=operatoreDAO.getCodOperatore(utente.codiceFiscale);
-            updateCorsiTableView();
+            updateLezioniTableView();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -96,14 +96,17 @@
                        </Label>
                   <AnchorPane VBox.vgrow="ALWAYS">
                      <children>
-                             <TableView fx:id="iscrittiTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <columns>
-                                     <TableColumn maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Email" />
-                                     <TableColumn maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Nome" />
-                                     <TableColumn maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Cognome" />
-                                     <TableColumn maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Idoneo" />
-                                 </columns>
-                             </TableView>
+                        <TableView fx:id="studentiTableView" fixedCellSize="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="475.2" prefWidth="255.2" snapToPixel="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <columns>
+                              <TableColumn fx:id="emailTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Email" />
+                              <TableColumn fx:id="nomeTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Nome" />
+                              <TableColumn fx:id="cognomeTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Cognome" />
+                              <TableColumn fx:id="datadiNascitaTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Data di Nascita" />
+                              <TableColumn fx:id="sessoTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Sesso" />
+                              <TableColumn fx:id="idoneoTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Idoneo" />
+                              <TableColumn fx:id="codStudenteTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="cod.Studente" />
+                           </columns>
+                        </TableView>
                      </children>
                   </AnchorPane>
                   <padding>

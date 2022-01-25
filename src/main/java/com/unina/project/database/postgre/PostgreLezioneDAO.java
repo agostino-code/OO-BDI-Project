@@ -35,8 +35,24 @@ public class PostgreLezioneDAO implements LezioneDAO {
     }
 
     @Override
+    public String getCorsoLezione(String codLezione) throws SQLException {
+        String SQL = ("SELECT * FROM \"Lezione\" WHERE \"codLezione\" = ?;");
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement pstmt = conn.prepareStatement(SQL);
+        pstmt.setString(1, codLezione);
+        pstmt.execute();
+        ResultSet rs =pstmt.getResultSet();
+        rs.next();
+        String codCorso=rs.getString("codCorso");
+        pstmt.close();
+        conn.close();
+        return codCorso;
+    }
+
+    @Override
     public List<Studente> getStudentiPrenotati(String codLezione) throws SQLException {
-        String SQL = ("SELECT email, nome, cognome,sesso,\"dataNascita\",\"codStudente\",\"Idoneo\",\"Presente\" FROM \"studenticorsi\" NATURAL JOIN \"Prenotazioni\" WHERE \"codLezione\" = ?");
+        String codCorso=getCorsoLezione(codLezione);
+        String SQL = ("SELECT email, nome, cognome,sesso,\"dataNascita\",\"codStudente\",\"Idoneo\",\"Presente\" FROM \"studenticorsi\" NATURAL JOIN \"Prenotazioni\" WHERE \"codLezione\" = ? AND \"codCorso\" ='"+codCorso+"'");
         Connection conn = postgreJDBC.Connessione();
         PreparedStatement pstmt = conn.prepareStatement(SQL);
         pstmt.setString(1, codLezione);
@@ -106,5 +122,74 @@ public class PostgreLezioneDAO implements LezioneDAO {
         stmt.executeUpdate();
         stmt.close();
         conn.close();
+    }
+
+    @Override
+    public void confermapresenza(String codStudente,String codLezione) throws SQLException {
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement stmt = conn.prepareStatement("update \"Prenotazioni\" set \"Presente\"='true' where \"codStudente\"=? and \"codLezione\"=? " );
+        stmt.setString(1,codStudente);
+        stmt.setString(2,codLezione);
+        stmt.executeUpdate();
+        stmt.close();
+        conn.close();
+    }
+
+    @Override
+    public void nonpresente(String codStudente,String codLezione) throws SQLException {
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement stmt = conn.prepareStatement("update \"Prenotazioni\" set \"Presente\"='false' where \"codStudente\"=? and \"codLezione\"=? " );
+        stmt.setString(1,codStudente);
+        stmt.setString(2,codLezione);
+        stmt.executeUpdate();
+        stmt.close();
+        conn.close();
+    }
+
+    @Override
+    public List<Lezione> getLezioniPrenotate(String codStudente) throws SQLException {
+        String SQL = ("SELECT * FROM \"Lezione\" NATURAL JOIN \"Prenotazioni\" WHERE \"codStudente\" = ?;");
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement pstmt = conn.prepareStatement(SQL);
+        pstmt.setString(1, codStudente);
+        pstmt.execute();
+        ResultSet rs =pstmt.getResultSet();
+        List<Lezione> lezioni= new ArrayList<>();
+        while(rs.next()) {
+            Lezione lezione= new Lezione();
+            lezione.setCodCorso(rs.getString("codCorso"));
+            lezione.setTitolo(rs.getString("titolo"));
+            lezione.setDescrizione(rs.getString("descrizione"));
+            lezione.setDataoraInizio(rs.getTimestamp("dataoraInizio").toLocalDateTime());
+            lezione.setDurata(rs.getTime("durata").toLocalTime());
+            lezione.setCodLezione(rs.getString("codLezione"));
+            lezioni.add(lezione);
+        }
+        pstmt.close();
+        conn.close();
+        return lezioni;
+    }
+
+    @Override
+    public boolean checkStudenteIscrittoLezione(String codLezione, String codStudente) throws SQLException {
+        String SQL = ("SELECT \"codStudente\" FROM \"Prenotazioni\" WHERE \"codLezione\" = ? AND \"codStudente\"=?;");
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement pstmt = conn.prepareStatement(SQL);
+        pstmt.setString(1, codLezione);
+        pstmt.setString(2,codStudente);
+        ResultSet rs = pstmt.executeQuery();
+        return !rs.next();
+    }
+
+    @Override
+    public Integer countNumeroLezioni(String CodCorso) throws SQLException{
+        int numerolezioni;
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement stmt = conn.prepareStatement("Select count(*) from \"Lezione\" where \"codCorso\"=?");
+        stmt.setString(1,CodCorso);
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+        numerolezioni =rs.getInt(1);
+        return numerolezioni;
     }
 }

@@ -11,8 +11,6 @@ import com.unina.project.database.postgre.PostgreCorsoDAO;
 import com.unina.project.database.postgre.PostgreLezioneDAO;
 import com.unina.project.database.postgre.PostgreStudenteDAO;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -37,13 +35,11 @@ public class IscrizioneLezioniController implements Initializable {
     public TreeTableColumn<Lezione,LocalTime> durataTableColumn;
     public TreeTableColumn<Lezione,String> codLezioneTableColumn;
 
-    private Utente utente=new Utente();
     private Lezione rowDataLezione=new Lezione();
-    private Studente studente=new Studente();
-    private LezioneDAO lezioneDAO=new PostgreLezioneDAO();
-    private StudenteDAO studenteDAO=new PostgreStudenteDAO();
-    private CorsoDAO corsoDAO= new PostgreCorsoDAO();
-    private ObservableList<Studente> listStudenti = FXCollections.observableArrayList();
+    private final Studente studente=new Studente();
+    private final LezioneDAO lezioneDAO=new PostgreLezioneDAO();
+    private final StudenteDAO studenteDAO=new PostgreStudenteDAO();
+    private final CorsoDAO corsoDAO= new PostgreCorsoDAO();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -61,7 +57,7 @@ public class IscrizioneLezioniController implements Initializable {
                     rowDataLezione = row.getItem();
                     try {
                         if(rowDataLezione.codLezione!=null){
-                            if (studenteDAO.checkStudenteIscritto(rowDataLezione.codLezione, studente.codStudente)) {
+                            if (lezioneDAO.checkStudenteIscrittoLezione(rowDataLezione.codLezione, studente.codStudente)) {
                                 row.setContextMenu(contextMenu);
                             }
                             else{
@@ -132,7 +128,7 @@ public class IscrizioneLezioniController implements Initializable {
                 new Callback<>() {
                     @Override
                     public TreeTableCell<Lezione, String> call(final TreeTableColumn<Lezione, String> param) {
-                        final TreeTableCell<Lezione, String> cell = new TreeTableCell<>() {
+                        return new TreeTableCell<>() {
 
                             @Override
                             public void updateItem(String item, boolean empty) {
@@ -145,7 +141,7 @@ public class IscrizioneLezioniController implements Initializable {
                                     TreeTableRow<Lezione> row = getTableRow();
                                     try {
                                         if(item!=null)
-                                        if (studenteDAO.checkStudenteIscritto(item,studente.codStudente)) {
+                                        if (lezioneDAO.checkStudenteIscrittoLezione(item,studente.codStudente)) {
                                             row.setStyle("-fx-background-color: #ffc1cc");
                                         }
                                         else{
@@ -157,7 +153,6 @@ public class IscrizioneLezioniController implements Initializable {
                                 }
                             }
                         };
-                        return cell;
                     }
                 };
         codLezioneTableColumn.setCellFactory(cellFactory);
@@ -165,7 +160,6 @@ public class IscrizioneLezioniController implements Initializable {
     }
 
     public void setDatiUtente(Utente utente){
-        this.utente=utente;
         try {
             studente.codStudente=studenteDAO.getCodStudente(utente.codiceFiscale);
             updateLezioniTableView();
