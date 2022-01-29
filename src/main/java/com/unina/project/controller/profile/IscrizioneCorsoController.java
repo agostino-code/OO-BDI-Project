@@ -46,11 +46,11 @@ public class IscrizioneCorsoController implements Initializable {
     private Button cercaButton;
     private Utente utente = new Utente();
     private CorsoRicerca rowData;
-    private CorsoDAO corsoDAO=new PostgreCorsoDAO();
-    private Studente studente=new Studente();
-    private StudenteDAO studenteDAO=new PostgreStudenteDAO();
-    private Operatore operatore=new Operatore();
-    private OperatoreDAO operatoreDAO=new PostgreOperatoreDAO();
+    private final CorsoDAO corsoDAO=new PostgreCorsoDAO();
+    private final Studente studente=new Studente();
+    private final StudenteDAO studenteDAO=new PostgreStudenteDAO();
+    private final Operatore operatore=new Operatore();
+    private final OperatoreDAO operatoreDAO=new PostgreOperatoreDAO();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ContextMenu contextMenu = new ContextMenu();
@@ -94,6 +94,7 @@ public class IscrizioneCorsoController implements Initializable {
             alert.setContentText("Il corso è Pubblico l'iscrizione è immediata.");
         }
         Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent())
         if (result.get() == ButtonType.OK){
             if(studenteDAO.checkStudenteExist(utente.codiceFiscale)){
                 studente.setCodStudente(studenteDAO.setStudente(utente.codiceFiscale));

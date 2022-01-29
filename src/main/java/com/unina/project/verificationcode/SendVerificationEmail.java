@@ -11,16 +11,16 @@ public class SendVerificationEmail {
         String password = "ProjectJavaAlessandroAgostino";
         String host = "smtp.gmail.com";
         String oggetto = "Formazione Facile - Codice di Verifica";
-        String testo = "Hai richiesto un codice di Verifica?" +
-                "\n\n" +
-                "Se non hai richiesto nessun codice di Verifica ignora questa mail." +
-                "\n" +
-                "Se hai richiesto il Codice di Verifica" +
-                "\n\n" +
-                "Il tuo codice di verifica è :";
+        String testo = """
+                Hai richiesto un codice di Verifica?
+
+                Se non hai richiesto nessun codice di Verifica ignora questa mail.
+                Se hai richiesto il Codice di Verifica
+
+                Il tuo codice di verifica è :""";
         Random r = new Random();
-        Integer codiceverifica = r.nextInt(999999);
-        testo = testo.concat(codiceverifica.toString());
+        int codiceverifica = r.nextInt(999999);
+        testo = testo.concat(Integer.toString(codiceverifica));
         Properties p = System.getProperties();
         p.put("mail.smtp.auth", "true");
         p.put("mail.smtp.starttls.enable", "true");
@@ -44,7 +44,7 @@ public class SendVerificationEmail {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return codiceverifica.toString();
+        return Integer.toString(codiceverifica);
     }
 
 }

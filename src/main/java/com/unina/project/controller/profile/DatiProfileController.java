@@ -33,18 +33,13 @@ public class DatiProfileController{
     @FXML
     private TextField passwordTextField;
 
-    private Autenticazione autenticazione=new Autenticazione();
-    private Utente utente=new Utente();
-
     public void setDatiAutenticazione(Autenticazione autenticazione){
-        this.autenticazione=autenticazione;
         emailTextField.setText(autenticazione.getEmail());
         passwordField.setText(autenticazione.getPassword());
         passwordTextField.setText(autenticazione.getPassword());
     }
 
     public void setDatiUtente(Utente utente){
-        this.utente=utente;
         NomeTextField.setText(utente.getNome());
         CognomeTextField.setText(utente.getCognome());
         CodiceFiscaleTextField.setText(utente.getCodiceFiscale());

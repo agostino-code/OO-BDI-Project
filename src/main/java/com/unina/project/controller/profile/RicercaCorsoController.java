@@ -43,7 +43,7 @@ public class RicercaCorsoController implements Initializable {
         @FXML
         private TextField titoloTextField;
 
-        public TagBar tagBar = new TagBar();
+        public final TagBar tagBar = new TagBar();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tagBar.setMinWidth(230);

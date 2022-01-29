@@ -7,10 +7,8 @@ import com.unina.project.database.postgre.PostgreAreaTematicaDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -21,13 +19,11 @@ import org.controlsfx.control.textfield.TextFields;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class TagBar extends VBox {
-    private AreaTematicaDAO areaTematicaDAO=new PostgreAreaTematicaDAO();
     private final ObservableList<String> tags;
     private final TextField inputTextField;
     public ObservableList<String> getTags() {
@@ -36,7 +32,7 @@ public class TagBar extends VBox {
 
     public TagBar() {
         getStyleClass().setAll("tag-bar");
-        getStylesheets().add(Objects.requireNonNull(Main.class.getResource("style.css").toExternalForm()));
+        getStylesheets().add(Objects.requireNonNull(Objects.requireNonNull(Main.class.getResource("style.css")).toExternalForm()));
         tags = FXCollections.observableArrayList();
         inputTextField = new TextField();
         inputTextField.setOnAction(evt -> {
@@ -51,6 +47,7 @@ public class TagBar extends VBox {
         limitag.setStandardField();
         List<AreaTematica>loadtags= new ArrayList<>();
         try {
+            AreaTematicaDAO areaTematicaDAO = new PostgreAreaTematicaDAO();
             loadtags = areaTematicaDAO.getAreeTematiche();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -60,7 +57,7 @@ public class TagBar extends VBox {
         }
         inputTextField.prefHeightProperty().bind(this.heightProperty());
         HBox.setHgrow(inputTextField, Priority.ALWAYS);
-        inputTextField.getStylesheets().add(Main.class.getResource("style.css").toExternalForm());
+        inputTextField.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("style.css")).toExternalForm());
         tags.addListener((ListChangeListener.Change<? extends String> change) -> {
             while (change.next()) {
                 if (change.wasPermutated()) {
@@ -78,7 +75,7 @@ public class TagBar extends VBox {
                         getChildren().subList(change.getFrom(), change.getFrom() + change.getRemovedSize()).clear();
                     }
                     if (change.wasAdded()) {
-                        getChildren().addAll(change.getFrom(), change.getAddedSubList().stream().map(Tag::new).collect(Collectors.toList()));
+                        getChildren().addAll(change.getFrom(), change.getAddedSubList().stream().map(Tag::new).toList());
                     }
                 }
             }

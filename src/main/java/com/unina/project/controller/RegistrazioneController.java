@@ -123,7 +123,7 @@ public class RegistrazioneController implements Initializable {
         }
     };
 
-    public ChangeListener<Boolean> checkEmailListner = (observable, oldValue, newValue) -> {
+    public final ChangeListener<Boolean> checkEmailListner = (observable, oldValue, newValue) -> {
         if (!newValue) {
             try {
                     if (!autenticazioneDAO.checkEmailExist(emailTextField.getText())) {
@@ -186,7 +186,7 @@ public class RegistrazioneController implements Initializable {
 
     }
 
-    public ChangeListener<Boolean> passwordListner = (observable, oldValue, newValue) -> {
+    public final ChangeListener<Boolean> passwordListner = (observable, oldValue, newValue) -> {
         if (!newValue) {
             if(!passwordField.getText().isBlank())
             if ((calcolaPasswordStrength(passwordField.getText(),nomeTextField.getText())) < 8) {
@@ -208,7 +208,7 @@ public class RegistrazioneController implements Initializable {
         }
     };
 
-    public ChangeListener<Boolean> repeatpasswordListner = (observable, oldValue, newValue) -> {
+    public final ChangeListener<Boolean> repeatpasswordListner = (observable, oldValue, newValue) -> {
         if (!newValue) {
             if(!passwordField.getText().isEmpty()){
                 if(!repeatpasswordField.getText().isEmpty()){

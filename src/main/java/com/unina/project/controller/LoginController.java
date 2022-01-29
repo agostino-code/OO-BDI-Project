@@ -5,7 +5,6 @@ import com.unina.project.controller.profile.ProfileController;
 import com.unina.project.database.AutenticazioneDAO;
 import com.unina.project.database.postgre.PostgreAutenticazioneDAO;
 import com.unina.project.graphics.LimitedTextField;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -169,22 +168,19 @@ public class LoginController implements Initializable {
         Scene profileScene = new Scene(profilePane,900,600);
         jMetro.setScene(profileScene);
         Stage secondaryStage=new Stage();
-        secondaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
+        secondaryStage.setOnCloseRequest(event -> {
 
-                // consume event
-                event.consume();
+            // consume event
+            event.consume();
 
-                // show close dialog
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setHeaderText("Vuoi effettuare il logout?");
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == ButtonType.OK){
-                    secondaryStage.close();
-                    Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-                    primaryStage.show();
-                }
+            // show close dialog
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText("Vuoi effettuare il logout?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                secondaryStage.close();
+                Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                primaryStage.show();
             }
         });
         secondaryStage.setTitle(titolo);

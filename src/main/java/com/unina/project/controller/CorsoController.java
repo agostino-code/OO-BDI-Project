@@ -42,7 +42,7 @@ public class CorsoController extends ProfileGestoreController {
     @FXML
     public HBox tagshbox;
 
-    public TagBar tagBar = new TagBar();
+    public final TagBar tagBar = new TagBar();
     public List<String> areeTematiche=new ArrayList<>();
 
     @Override

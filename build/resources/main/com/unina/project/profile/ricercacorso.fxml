@@ -22,10 +22,10 @@
    <Label layoutX="25.0" layoutY="230.0" stylesheets="@../style.css" text="Città" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="230.0" />
    <TextField fx:id="nomeTextField" layoutX="145.0" layoutY="145.0" prefHeight="26.0" prefWidth="230.0" AnchorPane.leftAnchor="145.0" AnchorPane.topAnchor="145.0" />
    <Label layoutX="26.0" layoutY="311.0" stylesheets="@../style.css" text="Aree tematiche" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="311.0" />
-   <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="145.0" layoutY="300.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="150.0" prefWidth="242.0" AnchorPane.leftAnchor="144.0" AnchorPane.topAnchor="305.0">
-      <content>
-         <HBox fx:id="tagshbox" style="-fx-background-color: transparent;" />
-      </content>
+   <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="145.0" layoutY="300.0" maxHeight="-Infinity"
+               maxWidth="-Infinity" prefHeight="150.0" prefWidth="242.0" AnchorPane.leftAnchor="144.0"
+               AnchorPane.topAnchor="305.0">
+      <HBox fx:id="tagshbox" style="-fx-background-color: transparent;"/>
    </ScrollPane>
    <ChoiceBox fx:id="tipocorsoChoiseBox" layoutX="145.0" layoutY="110.0" prefHeight="26.0" prefWidth="230.0" AnchorPane.leftAnchor="145.0" AnchorPane.topAnchor="105.0" />
    <Label layoutX="24.0" layoutY="109.0" stylesheets="@../style.css" text="Tipo corso" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="110.0" />

@@ -17,7 +17,7 @@ public class Studente extends Utente{
         if (Idoneo == null) {
             return null;
         }
-        if(Idoneo==true){
+        if(Idoneo){
             return "Si";
         }
         else{
@@ -27,7 +27,7 @@ public class Studente extends Utente{
 
     public Boolean Idoneo;
     public String getPresente() {
-        if(Presente==true){
+        if(Presente){
             return "Si";
         }
         else{

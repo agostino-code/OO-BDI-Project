@@ -1,6 +1,5 @@
 package com.unina.project.database.postgre;
 
-import com.unina.project.Corso;
 import com.unina.project.Gestore;
 import com.unina.project.database.GestoreDAO;
 
@@ -8,8 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PostgreGestoreDAO implements GestoreDAO {
     private final PostgreJDBC postgreJDBC=new PostgreJDBC();

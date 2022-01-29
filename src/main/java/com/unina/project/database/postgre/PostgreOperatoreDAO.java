@@ -101,7 +101,7 @@ public class PostgreOperatoreDAO implements OperatoreDAO {
         pstmt.setString(1, codCorso);
         pstmt.setString(2, codOperatore);
         ResultSet rs = pstmt.executeQuery();
-        return !rs.next();
+        return rs.next();
     }
 
     @Override

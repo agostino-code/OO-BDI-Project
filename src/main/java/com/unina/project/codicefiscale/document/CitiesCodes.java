@@ -11,17 +11,17 @@ import com.unina.project.codicefiscale.engine.Utils;
 @SuppressWarnings("serial")
 public class CitiesCodes extends TreeMap<String, String> {
 
-    CitiesCodes_A ccA = new CitiesCodes_A();
-    CitiesCodes_B ccB = new CitiesCodes_B();
-    CitiesCodes_C ccC = new CitiesCodes_C();
-    CitiesCodes_D ccD = new CitiesCodes_D();
-    CitiesCodes_E ccE = new CitiesCodes_E();
-    CitiesCodes_F ccF = new CitiesCodes_F();
-    CitiesCodes_G ccG = new CitiesCodes_G();
-    CitiesCodes_H ccH = new CitiesCodes_H();
-    CitiesCodes_I ccI = new CitiesCodes_I();
-    CitiesCodes_L ccL = new CitiesCodes_L();
-    CitiesCodes_M ccM = new CitiesCodes_M();
+    final CitiesCodes_A ccA = new CitiesCodes_A();
+    final CitiesCodes_B ccB = new CitiesCodes_B();
+    final CitiesCodes_C ccC = new CitiesCodes_C();
+    final CitiesCodes_D ccD = new CitiesCodes_D();
+    final CitiesCodes_E ccE = new CitiesCodes_E();
+    final CitiesCodes_F ccF = new CitiesCodes_F();
+    final CitiesCodes_G ccG = new CitiesCodes_G();
+    final CitiesCodes_H ccH = new CitiesCodes_H();
+    final CitiesCodes_I ccI = new CitiesCodes_I();
+    final CitiesCodes_L ccL = new CitiesCodes_L();
+    final CitiesCodes_M ccM = new CitiesCodes_M();
 
     public CitiesCodes(){
         this.putAll(ccA);

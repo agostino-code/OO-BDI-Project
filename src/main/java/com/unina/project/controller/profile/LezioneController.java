@@ -46,9 +46,9 @@ public class LezioneController implements Initializable {
     @FXML
     private TextField titoloTextField;
 
-    private Lezione lezione=new Lezione();
-    private LezioneDAO lezioneDAO=new PostgreLezioneDAO();
-    private CorsoDAO corsoDAO=new PostgreCorsoDAO();
+    private final Lezione lezione=new Lezione();
+    private final LezioneDAO lezioneDAO=new PostgreLezioneDAO();
+    private final CorsoDAO corsoDAO=new PostgreCorsoDAO();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -116,7 +116,7 @@ public class LezioneController implements Initializable {
         datePicker.setDayCellFactory(dayCellFactory);
     }
 
-    public ChangeListener<Boolean> oraListner = (observable, oldValue, newValue) -> {
+    public final ChangeListener<Boolean> oraListner = (observable, oldValue, newValue) -> {
         if (!newValue) {
             if(!oraTextField.getText().isBlank())
             try {
@@ -133,7 +133,7 @@ public class LezioneController implements Initializable {
         }
     };
 
-    public ChangeListener<Boolean> durataListner = (observable, oldValue, newValue) -> {
+    public final ChangeListener<Boolean> durataListner = (observable, oldValue, newValue) -> {
         if (!newValue) {
             if(!durataTextField.getText().isBlank())
             try {

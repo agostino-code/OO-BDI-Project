@@ -2,8 +2,6 @@ package com.unina.project.codicefiscale.engine;
 
 import com.unina.project.Utente;
 
-import java.io.IOException;
-
 
 public class Engine {
 
@@ -215,13 +213,12 @@ public class Engine {
 		}
 		if(consonanti_NOME.length()==1){
 			s.append(consonanti_NOME.charAt(0)).append(vocali_NOME.charAt(0)).append(vocali_NOME.charAt(1));
-			return s.toString();
 		}
 		else{
 			for(int i=0;i<3;i++)
 				s.append(vocali_NOME.charAt(i));
-			return s.toString();
 		}
+		return s.toString();
 	}
 	
 	private String codiceCognome() {
@@ -237,15 +234,15 @@ public class Engine {
 		}
 		if(consonanti_COGNOME.length()==1){
 			s.append(consonanti_COGNOME.charAt(0)).append(vocali_COGNOME.charAt(0)).append(vocali_COGNOME.charAt(1));
-			return s.toString();
 		}
 		else{
 			for(int i=0;i<3;i++)
 				s.append(vocali_COGNOME.charAt(i));
-			return s.toString();
 		}
+		return s.toString();
 	}
 
+	@SuppressWarnings("StringConcatenationInLoop")
 	private void popolazioneStringheConsonantiVocali() {
 //		COGNOME
 		for(int i=0;i<cognome.length();i++)

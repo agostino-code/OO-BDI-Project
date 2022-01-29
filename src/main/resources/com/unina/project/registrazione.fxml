@@ -30,9 +30,9 @@
       </rotationAxis></PasswordField>
    <TextField fx:id="codicefiscaleTextField" editable="false" layoutX="155.0" layoutY="288.0" prefWidth="230.0" AnchorPane.leftAnchor="145.0" AnchorPane.topAnchor="280.0" />
    <Label layoutX="45.0" layoutY="284.0" stylesheets="@style.css" text="Codice Fiscale" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="285.0" />
-   <Button fx:id="registratiButton" layoutX="275.0" layoutY="400.0" mnemonicParsing="false" onAction="#onregistratiButtonClick" prefWidth="100.0" stylesheets="@style.css" text="Registrati" AnchorPane.leftAnchor="275.0" AnchorPane.topAnchor="400.0" />
+   <Button layoutX="275.0" layoutY="400.0" mnemonicParsing="false" onAction="#onregistratiButtonClick" prefWidth="100.0" stylesheets="@style.css" text="Registrati" AnchorPane.leftAnchor="275.0" AnchorPane.topAnchor="400.0" />
    <TextField fx:id="comunedinascitaTextField" layoutX="155.0" layoutY="201.0" prefWidth="230.0" AnchorPane.leftAnchor="145.0" AnchorPane.topAnchor="200.0" />
    <ChoiceBox fx:id="sessoChoiceBox" layoutX="155.0" layoutY="241.0" prefHeight="26.0" prefWidth="230.0" AnchorPane.leftAnchor="145.0" AnchorPane.topAnchor="240.0" />
    <ProgressBar fx:id="passwordProgressBar" layoutX="155.0" layoutY="350.0" prefHeight="8.0" prefWidth="230.0" progress="0.0" stylesheets="@style.css" AnchorPane.leftAnchor="145.0" AnchorPane.topAnchor="350.0" />
-   <Button fx:id="indietroButton" layoutX="25.0" layoutY="450.0" mnemonicParsing="false" onAction="#onindietroButtonClick" prefWidth="100.0" stylesheets="@style.css" text="Indietro" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="450.0" />
+   <Button layoutX="25.0" layoutY="450.0" mnemonicParsing="false" onAction="#onindietroButtonClick" prefWidth="100.0" stylesheets="@style.css" text="Indietro" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="450.0" />
 </AnchorPane>

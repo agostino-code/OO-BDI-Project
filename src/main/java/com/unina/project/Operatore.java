@@ -23,7 +23,7 @@ public class Operatore extends Utente{
         if (Richiesta == null) {
             return null;
         }
-        if(Richiesta==true){
+        if(Richiesta){
             return "Accettata";
         }
         else{

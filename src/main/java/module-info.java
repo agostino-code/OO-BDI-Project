@@ -8,7 +8,6 @@ module com.unina.project {
     requires java.mail;
     requires org.kordamp.ikonli.core;
     requires org.kordamp.ikonli.javafx;
-    // add icon pack modules
     requires org.kordamp.ikonli.win10;
 
     opens com.unina.project to javafx.fxml;

@@ -7,26 +7,39 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unina.project.controller.profile.IscrizioneCorsoController">
-   <children>
-      <Label alignment="CENTER" styleClass="label24px" stylesheets="@../style.css" text="Iscrizione corsi" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
-      <TreeTableView fx:id="ricercacorsiTableView" fixedCellSize="0.0" layoutY="25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" snapToPixel="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
-        <columns>
-            <TreeTableColumn fx:id="codiceCorsoTableColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Codice Corso" />
-          <TreeTableColumn fx:id="titoloTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Titolo" />
-          <TreeTableColumn fx:id="descrizioneTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Descrizione" />
-            <TreeTableColumn fx:id="tipoTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Tipo" />
-            <TreeTableColumn fx:id="codiceGestoreTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Codice Gestore" />
-            <TreeTableColumn fx:id="nomeGestoreTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Nome Gestore" />
-            <TreeTableColumn fx:id="cittaGestoreTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Città Gestore" />
-            <TreeTableColumn fx:id="provinciaGestoreTableColumn" maxWidth="1.7976931348623157E308" prefWidth="100.0" text="Provincia Gestore" />
-            <TreeTableColumn fx:id="areeTableColumn" maxWidth="1.7976931348623157E308" prefWidth="100.0" text="Aree Tematiche" />
-        </columns>
-      </TreeTableView>
-      <Button fx:id="cercaButton" alignment="CENTER" layoutY="30.0" mnemonicParsing="false" onAction="#onCercaCorsoButtonClick" stylesheets="@../style.css" text="Cerca" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="30.0">
-         <graphic>
-            <FontIcon iconColor="WHITE" iconLiteral="win10-search" iconSize="14" />
-         </graphic>
-      </Button>
-   </children>
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.unina.project.controller.profile.IscrizioneCorsoController">
+    <Label alignment="CENTER" styleClass="label24px" stylesheets="@../style.css" text="Iscrizione corsi"
+           AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0"/>
+    <TreeTableView fx:id="ricercacorsiTableView" fixedCellSize="0.0" layoutY="25.0" maxHeight="1.7976931348623157E308"
+                   maxWidth="1.7976931348623157E308" snapToPixel="false" AnchorPane.bottomAnchor="0.0"
+                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
+      <columns>
+          <TreeTableColumn fx:id="codiceCorsoTableColumn" editable="false" maxWidth="1.7976931348623157E308"
+                           minWidth="-1.0" prefWidth="100.0" text="Codice Corso"/>
+          <TreeTableColumn fx:id="titoloTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0"
+                           prefWidth="100.0" text="Titolo"/>
+          <TreeTableColumn fx:id="descrizioneTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0"
+                           prefWidth="100.0" text="Descrizione"/>
+          <TreeTableColumn fx:id="tipoTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0"
+                           text="Tipo"/>
+          <TreeTableColumn fx:id="codiceGestoreTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0"
+                           prefWidth="100.0" text="Codice Gestore"/>
+          <TreeTableColumn fx:id="nomeGestoreTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0"
+                           prefWidth="100.0" text="Nome Gestore"/>
+          <TreeTableColumn fx:id="cittaGestoreTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0"
+                           prefWidth="100.0" text="Città Gestore"/>
+          <TreeTableColumn fx:id="provinciaGestoreTableColumn" maxWidth="1.7976931348623157E308" prefWidth="100.0"
+                           text="Provincia Gestore"/>
+          <TreeTableColumn fx:id="areeTableColumn" maxWidth="1.7976931348623157E308" prefWidth="100.0"
+                           text="Aree Tematiche"/>
+      </columns>
+    </TreeTableView>
+    <Button fx:id="cercaButton" alignment="CENTER" layoutY="30.0" mnemonicParsing="false"
+            onAction="#onCercaCorsoButtonClick" stylesheets="@../style.css" text="Cerca" AnchorPane.rightAnchor="50.0"
+            AnchorPane.topAnchor="30.0">
+        <graphic>
+          <FontIcon iconColor="WHITE" iconLiteral="win10-search" iconSize="14"/>
+        </graphic>
+    </Button>
 </AnchorPane>

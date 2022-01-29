@@ -1,13 +1,9 @@
 package com.unina.project.database.postgre;
 
-import com.unina.project.Corso;
 import com.unina.project.Utente;
 import com.unina.project.database.UtenteDAO;
 
 import java.sql.*;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PostgreUtenteDAO implements UtenteDAO {
     private final PostgreJDBC postgreJDBC=new PostgreJDBC();

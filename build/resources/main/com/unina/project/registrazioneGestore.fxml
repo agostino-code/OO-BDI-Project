@@ -19,7 +19,7 @@
    <PasswordField fx:id="repeatpasswordField" layoutX="155.0" layoutY="390.0" prefWidth="230.0" AnchorPane.leftAnchor="145.0" AnchorPane.topAnchor="390.0" />
    <Button fx:id="registratigestoreButton" layoutX="224.0" layoutY="425.0" mnemonicParsing="false" onAction="#oninviasottoscrizioneButtonClick" prefHeight="26.0" prefWidth="150.0" stylesheets="@style.css" text="Invia sottoscrizione" AnchorPane.leftAnchor="224.0" AnchorPane.topAnchor="425.0" />
    <ProgressBar fx:id="passwordProgressBar" layoutX="155.0" layoutY="375.0" prefHeight="8.0" prefWidth="230.0" progress="0.0" stylesheets="@style.css" AnchorPane.leftAnchor="145.0" AnchorPane.topAnchor="375.0" />
-   <Button fx:id="indietroButton" layoutX="25.0" layoutY="470.0" mnemonicParsing="false" onAction="#onindietroButtonClick" prefWidth="100.0" stylesheets="@style.css" text="Indietro" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="470.0" />
+   <Button layoutX="25.0" layoutY="470.0" mnemonicParsing="false" onAction="#onindietroButtonClick" prefWidth="100.0" stylesheets="@style.css" text="Indietro" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="470.0" />
    <Label layoutX="55.0" layoutY="130.0" stylesheets="@style.css" text="Descrizione" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="125.0" />
    <TextArea fx:id="descrizionegestoreTextArea" layoutX="165.0" layoutY="127.0" onKeyPressed="#checkDescrizioneLenght" prefHeight="130.0" prefWidth="230.0" AnchorPane.leftAnchor="145.0" AnchorPane.topAnchor="120.0" />
    <Label layoutX="45.0" layoutY="310.0" stylesheets="@style.css" text="Telefono" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="310.0" />

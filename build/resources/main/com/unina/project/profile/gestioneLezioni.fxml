@@ -13,76 +13,85 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unina.project.controller.profile.GestioneLezioniController">
-   <children>
-      <SplitPane dividerPositions="0.5" layoutX="10.0" layoutY="10.0" orientation="VERTICAL" prefHeight="920.0" prefWidth="272.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <items>
-            <ScrollPane fitToWidth="true">
-               <content>
-                  <VBox>
-                     <children>
-                        <Label alignment="CENTER" style="&#10;" styleClass="label24px" stylesheets="@../style.css" text="Controllo Lezioni" textAlignment="CENTER" wrapText="false">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                           <textFill>
-                              <Color red="0.624" green="0.624" blue="0.624" />
-                           </textFill>
-                        </Label>
-                        <AnchorPane VBox.vgrow="ALWAYS" />
-                        <TreeTableView fx:id="lezioniTableView" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                           <columns>
-                              <TreeTableColumn fx:id="codCorsoTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="cod.Corso" />
-                              <TreeTableColumn fx:id="titoloTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Titolo" />
-                              <TreeTableColumn fx:id="descrizioneTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Descrizione" />
-                              <TreeTableColumn fx:id="dataTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Data Inizio" />
-                              <TreeTableColumn fx:id="oraTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Ora Inizio" />
-                              <TreeTableColumn fx:id="durataTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Durata" />
-                              <TreeTableColumn fx:id="codLezioneTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="cod.Lezione" />
-                           </columns>
-                        </TreeTableView>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </VBox>
-               </content>
-            </ScrollPane>
-            <ScrollPane fitToWidth="true">
-               <content>
-                  <VBox>
-                     <children>
-                        <Label alignment="CENTER" style="&#10;" styleClass="label24px" stylesheets="@../style.css" text="Studenti Prenotati" textAlignment="CENTER" wrapText="false">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                           <textFill>
-                              <Color red="0.624" green="0.624" blue="0.624" />
-                           </textFill>
-                        </Label>
-                        <AnchorPane VBox.vgrow="ALWAYS">
-                           <children>
-                              <TableView fx:id="studentiTableView" fixedCellSize="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="475.2" prefWidth="236.0" snapToPixel="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <columns>
-                                    <TableColumn fx:id="emailTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Email" />
-                                    <TableColumn fx:id="nomeTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Nome" />
-                                    <TableColumn fx:id="cognomeTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Cognome" />
-                                    <TableColumn fx:id="datadiNascitaTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Data di Nascita" />
-                                    <TableColumn fx:id="sessoTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Sesso" />
-                                    <TableColumn fx:id="presenteTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Presente" />
-                                    <TableColumn fx:id="codStudenteTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="cod.Studente" />
-                                </columns>
-                              </TableView>
-                           </children>
-                        </AnchorPane>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </VBox>
-               </content>
-            </ScrollPane>
-         </items>
-      </SplitPane>
-   </children>
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.unina.project.controller.profile.GestioneLezioniController">
+   <SplitPane dividerPositions="0.5" layoutX="10.0" layoutY="10.0" orientation="VERTICAL" prefHeight="920.0"
+              prefWidth="272.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ScrollPane fitToWidth="true">
+         <VBox>
+            <padding>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </padding>
+            <Label alignment="CENTER" style="&#10;" styleClass="label24px" stylesheets="@../style.css"
+                   text="Controllo Lezioni" textAlignment="CENTER" wrapText="false">
+               <font>
+                  <Font size="18.0"/>
+               </font>
+               <textFill>
+                  <Color red="0.624" green="0.624" blue="0.624"/>
+               </textFill>
+            </Label>
+            <AnchorPane VBox.vgrow="ALWAYS"/>
+            <TreeTableView fx:id="lezioniTableView" editable="true" maxHeight="1.7976931348623157E308"
+                           maxWidth="1.7976931348623157E308">
+               <columns>
+                  <TreeTableColumn fx:id="codCorsoTableColumn" maxWidth="1.7976931348623157E308"
+                                   minWidth="100.0" prefWidth="-1.0" text="cod.Corso"/>
+                  <TreeTableColumn fx:id="titoloTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0"
+                                   prefWidth="-1.0" text="Titolo"/>
+                  <TreeTableColumn fx:id="descrizioneTableColumn" maxWidth="1.7976931348623157E308"
+                                   minWidth="100.0" prefWidth="-1.0" text="Descrizione"/>
+                  <TreeTableColumn fx:id="dataTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0"
+                                   prefWidth="-1.0" text="Data Inizio"/>
+                  <TreeTableColumn fx:id="oraTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0"
+                                   prefWidth="-1.0" text="Ora Inizio"/>
+                  <TreeTableColumn fx:id="durataTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0"
+                                   prefWidth="-1.0" text="Durata"/>
+                  <TreeTableColumn fx:id="codLezioneTableColumn" maxWidth="1.7976931348623157E308"
+                                   minWidth="100.0" prefWidth="-1.0" text="cod.Lezione"/>
+               </columns>
+            </TreeTableView>
+         </VBox>
+      </ScrollPane>
+      <ScrollPane fitToWidth="true">
+         <VBox>
+            <padding>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </padding>
+            <Label alignment="CENTER" style="&#10;" styleClass="label24px" stylesheets="@../style.css"
+                   text="Studenti Prenotati" textAlignment="CENTER" wrapText="false">
+               <font>
+                  <Font size="18.0"/>
+               </font>
+               <textFill>
+                  <Color red="0.624" green="0.624" blue="0.624"/>
+               </textFill>
+            </Label>
+            <AnchorPane VBox.vgrow="ALWAYS">
+               <TableView fx:id="studentiTableView" fixedCellSize="0.0" maxHeight="1.7976931348623157E308"
+                          maxWidth="1.7976931348623157E308" prefHeight="475.2" prefWidth="236.0"
+                          snapToPixel="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                          AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <columns>
+                     <TableColumn fx:id="emailTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0"
+                                  prefWidth="100.0" text="Email"/>
+                     <TableColumn fx:id="nomeTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0"
+                                  prefWidth="100.0" text="Nome"/>
+                     <TableColumn fx:id="cognomeTableColumn" maxWidth="1.7976931348623157E308"
+                                  minWidth="-1.0" prefWidth="100.0" text="Cognome"/>
+                     <TableColumn fx:id="datadiNascitaTableColumn" maxWidth="1.7976931348623157E308"
+                                  minWidth="-1.0" prefWidth="100.0" text="Data di Nascita"/>
+                     <TableColumn fx:id="sessoTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0"
+                                  prefWidth="100.0" text="Sesso"/>
+                     <TableColumn fx:id="presenteTableColumn" maxWidth="1.7976931348623157E308"
+                                  minWidth="-1.0" prefWidth="100.0" text="Presente"/>
+                     <TableColumn fx:id="codStudenteTableColumn" maxWidth="1.7976931348623157E308"
+                                  minWidth="-1.0" prefWidth="100.0" text="cod.Studente"/>
+                  </columns>
+               </TableView>
+            </AnchorPane>
+         </VBox>
+      </ScrollPane>
+   </SplitPane>
 </AnchorPane>

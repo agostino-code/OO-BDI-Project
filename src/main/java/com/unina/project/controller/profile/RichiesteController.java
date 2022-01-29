@@ -17,8 +17,6 @@ import javafx.scene.control.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class RichiesteController implements Initializable {
@@ -42,14 +40,13 @@ public class RichiesteController implements Initializable {
     public TreeTableColumn<Corso,String> tassopresenzeminimeTableColumn;
     public TreeTableColumn<Corso,String> areeTableColumn;
 
-    private Utente utente=new Utente();
     private Corso rowDataCorso=new Corso();
     private Studente rowDataStudente=new Studente();
-    private StudenteDAO studenteDAO=new PostgreStudenteDAO();
-    private Operatore operatore=new Operatore();
-    private OperatoreDAO operatoreDAO=new PostgreOperatoreDAO();
-    private CorsoDAO corsoDAO= new PostgreCorsoDAO();
-    private ObservableList<Studente> listStudentiDaAccettare = FXCollections.observableArrayList();
+    private final StudenteDAO studenteDAO=new PostgreStudenteDAO();
+    private final Operatore operatore=new Operatore();
+    private final OperatoreDAO operatoreDAO=new PostgreOperatoreDAO();
+    private final CorsoDAO corsoDAO= new PostgreCorsoDAO();
+    private final ObservableList<Studente> listStudentiDaAccettare = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -154,7 +151,6 @@ public class RichiesteController implements Initializable {
     }
 
     public void setDatiUtente(Utente utente){
-        this.utente=utente;
         try {
             operatore.codOperatore=operatoreDAO.getCodOperatore(utente.codiceFiscale);
             updateCorsiTableView();

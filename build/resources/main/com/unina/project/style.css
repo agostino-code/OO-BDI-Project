@@ -51,3 +51,27 @@
     -fx-min-height: 25px;
     -fx-min-width: 25px;
 }
+
+.default-color0.chart-pie { -fx-pie-color: #00ACF8; }
+.default-color1.chart-pie { -fx-pie-color: rgba(0, 202, 246, 0.45); }
+
+.chart-pie-label-line {
+    -fx-stroke: black;
+}
+
+.chart-pie-label {
+    -fx-fill: black;
+    -fx-font-size: 12px;
+}
+.chart-title {
+    -fx-font-size: 20px;
+}
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+.chart-vertical-grid-lines {
+    -fx-stroke: rgba(128, 128, 128, 0.5);
+}
+.chart-horizontal-grid-lines {
+    -fx-stroke: rgba(128, 128, 128, 0.5);
+}

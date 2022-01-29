@@ -20,7 +20,7 @@
                 <Label stylesheets="@style.css" text="Password" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="105.0" />
                 <Button fx:id="loginButton" layoutX="270.0" layoutY="186.0" mnemonicParsing="false" onAction="#openProfileScene" prefHeight="26.0" prefWidth="100.0" stylesheets="@style.css" text="Login" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="186.0" />
                 <Label layoutX="25.0" layoutY="227.0" stylesheets="@style.css" text="Non hai ancora un account?" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="250.0" />
-                <Button fx:id="registratiButton" layoutX="29.0" layoutY="282.0" mnemonicParsing="false" onAction="#openRegistrazioneScene" prefHeight="26.0" prefWidth="100.0" styleClass="text" stylesheets="@style.css" text="Registrati" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="280.0" />
+                <Button layoutX="29.0" layoutY="282.0" mnemonicParsing="false" onAction="#openRegistrazioneScene" prefHeight="26.0" prefWidth="100.0" stylesheets="@style.css" text="Registrati" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="280.0" />
             </AnchorPane>
         </Tab>
         <Tab text="Gestori">
@@ -30,9 +30,9 @@
                 <ProgressBar fx:id="loginProgressBar" prefHeight="20.0" prefWidth="270.0" progress="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="150.0" />
                 <Label stylesheets="@style.css" text="Email" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="55.0" />
                 <Label stylesheets="@style.css" text="Password" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="105.0" />
-                <Button fx:id="gestoriloginButton" layoutX="270.0" layoutY="186.0" mnemonicParsing="false" onAction="#openProfileGestoriScene" prefHeight="26.0" prefWidth="100.0" stylesheets="@style.css" text="Login" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="186.0" />
+                <Button layoutX="270.0" layoutY="186.0" mnemonicParsing="false" onAction="#openProfileGestoriScene" prefHeight="26.0" prefWidth="100.0" stylesheets="@style.css" text="Login" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="186.0" />
                 <Label layoutX="25.0" layoutY="227.0" stylesheets="@style.css" text="Vuoi utilizzare il nostro programma" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="250.0" />
-                <Button fx:id="gestoriregistratiButton" layoutX="25.0" layoutY="290.0" mnemonicParsing="false" onAction="#openRegistrazioneGestoriScene" prefHeight="26.0" prefWidth="140.0" styleClass="text" stylesheets="@style.css" text="Nuova sottoscrizione" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="290.0" />
+                <Button layoutX="25.0" layoutY="290.0" mnemonicParsing="false" onAction="#openRegistrazioneGestoriScene" prefHeight="26.0" prefWidth="140.0" stylesheets="@style.css" text="Nuova sottoscrizione" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="290.0" />
                 <Label layoutX="25.0" layoutY="232.0" stylesheets="@style.css" text="Sei un gestore di corsi di formazione?" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="230.0" />
                 <Label layoutX="25.0" layoutY="265.0" stylesheets="@style.css" text="per la tua azienda?" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="265.0" />
                 <Label layoutX="25.0" layoutY="20.0" prefHeight="18.0" prefWidth="255.0" stylesheets="@style.css" text="Pagina riservata ai gestori di corsi!" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="20.0" />

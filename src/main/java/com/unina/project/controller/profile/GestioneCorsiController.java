@@ -69,7 +69,7 @@ public class GestioneCorsiController implements Initializable {
                 if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
                     rowDataCorso = row.getItem();
                     try {
-                        if(!operatoreDAO.checkOperatoreDaAccettare(operatore.codOperatore,rowDataCorso.codCorso)){
+                        if(operatoreDAO.checkOperatoreDaAccettare(operatore.codOperatore, rowDataCorso.codCorso)){
                             row.setContextMenu(contextMenuAccetta);
                         }
                         else{
@@ -128,6 +128,7 @@ public class GestioneCorsiController implements Initializable {
         alert.setTitle("Conferma");
         alert.setHeaderText("Vuoi davvero rimuovere lo studente "+rowDataStudente.nome+" "+rowDataStudente.cognome+" dal Corso "+ rowDataCorso.titolo+"?");
         Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent())
         if (result.get() == ButtonType.OK){
             studenteDAO.richiestaRifiutata(rowDataStudente.codStudente, rowDataCorso.codCorso);
         }
@@ -201,7 +202,7 @@ public class GestioneCorsiController implements Initializable {
                                     setText(item);
                                     TreeTableRow<Corso> row = getTableRow();
                                     try {
-                                        if (!operatoreDAO.checkOperatoreDaAccettare(operatore.codOperatore, item)) {
+                                        if (operatoreDAO.checkOperatoreDaAccettare(operatore.codOperatore, item)) {
                                             row.setStyle("-fx-background-color: #ffc1cc");
                                         }
                                     } catch (SQLException e) {

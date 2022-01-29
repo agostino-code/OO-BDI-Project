@@ -139,7 +139,7 @@ public class PostgreCorsoDAO implements CorsoDAO {
 
     @Override
     public Integer numeroIscrittiCorso(String CodCorso) throws SQLException{
-        Integer NumeroIscritti;
+        int NumeroIscritti;
         Connection conn = postgreJDBC.Connessione();
         PreparedStatement stmt = conn.prepareStatement("Select count(*) from \"Iscritti\" where \"codCorso\"=? and \"Richiesta\"=true");
         stmt.setString(1,CodCorso);

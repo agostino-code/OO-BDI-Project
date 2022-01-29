@@ -65,7 +65,7 @@ public class CorsoRicerca {
         if (Privato == null) {
             return null;
         }
-        if(Privato==true){
+        if(Privato){
             return "Privato";
         }
         else{

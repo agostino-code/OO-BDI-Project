@@ -17,8 +17,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -45,12 +43,12 @@ public class ProfileController implements Initializable {
     private StackPane stackPanelProfilo;
 
     private Stage loginStage;
-    public Autenticazione autenticazione = new Autenticazione();
-    private AutenticazioneDAO autenticazioneDAO = new PostgreAutenticazioneDAO();
+    public final Autenticazione autenticazione = new Autenticazione();
+    private final AutenticazioneDAO autenticazioneDAO = new PostgreAutenticazioneDAO();
     public Utente utente=new Utente();
-    private UtenteDAO utenteDAO=new PostgreUtenteDAO();
-    private Operatore operatore=new Operatore();
-    private OperatoreDAO operatoreDAO=new PostgreOperatoreDAO();
+    private final UtenteDAO utenteDAO=new PostgreUtenteDAO();
+    private final Operatore operatore=new Operatore();
+    private final OperatoreDAO operatoreDAO=new PostgreOperatoreDAO();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -1,6 +1,7 @@
 package com.unina.project.controller;
 
 import com.unina.project.*;
+import com.unina.project.controller.profile.StatisticheController;
 import com.unina.project.database.*;
 import com.unina.project.database.postgre.*;
 import com.unina.project.verificationcode.SendVerificationEmail;
@@ -63,22 +64,21 @@ public class ProfileGestoreController implements Initializable {
     public TableColumn<Operatore,String> codoperatoreTableColumn;
     public TableColumn<Operatore,String> richiestaTableColumn;
 
-    private ObservableList<Studente> listStudenti = FXCollections.observableArrayList();
-    private ObservableList<Operatore> listOperatori = FXCollections.observableArrayList();
+    private final ObservableList<Studente> listStudenti = FXCollections.observableArrayList();
+    private final ObservableList<Operatore> listOperatori = FXCollections.observableArrayList();
     private Corso rowData;
     private Operatore rowDataOperatore;
-    private StudenteDAO studenteDAO=new PostgreStudenteDAO();
-    private Autenticazione autenticazione = new Autenticazione();
-    private AutenticazioneDAO autenticazioneDAO = new PostgreAutenticazioneDAO();
+    private final StudenteDAO studenteDAO=new PostgreStudenteDAO();
+    private final Autenticazione autenticazione = new Autenticazione();
+    private final AutenticazioneDAO autenticazioneDAO = new PostgreAutenticazioneDAO();
     public Gestore gestore= new Gestore();
-    private GestoreDAO gestoreDAO= new PostgreGestoreDAO();
-    public AreaTematicaDAO areaTematicaDAO=new PostgreAreaTematicaDAO();
-    public Corso corso=new Corso();
-    public CorsoDAO corsoDAO=new PostgreCorsoDAO();
-    private OperatoreDAO operatoreDAO=new PostgreOperatoreDAO();
-    private Operatore operatore=new Operatore();
-    private Utente utente=new Utente();
-    private UtenteDAO utenteDAO=new PostgreUtenteDAO();
+    private final GestoreDAO gestoreDAO= new PostgreGestoreDAO();
+    public final AreaTematicaDAO areaTematicaDAO=new PostgreAreaTematicaDAO();
+    public final Corso corso=new Corso();
+    public final CorsoDAO corsoDAO=new PostgreCorsoDAO();
+    private final OperatoreDAO operatoreDAO=new PostgreOperatoreDAO();
+    private final Operatore operatore=new Operatore();
+    private final UtenteDAO utenteDAO=new PostgreUtenteDAO();
     private Stage loginStage;
 
     @Override
@@ -111,8 +111,13 @@ public class ProfileGestoreController implements Initializable {
             });
             return row ;
         });
-        menuItem1.setOnAction((event) -> {
-            aggiungiOperatore(rowData);
+        menuItem1.setOnAction((event) -> aggiungiOperatore(rowData));
+        menuItem2.setOnAction((event) -> {
+            try {
+                visualizzaStatistiche(rowData);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
         menuItem3.setOnAction((event) -> {
             try {
@@ -121,9 +126,7 @@ public class ProfileGestoreController implements Initializable {
                 e.printStackTrace();
             }
         });
-        menuItem4.setOnAction((event) -> {
-            eliminaCorso(rowData);
-        });
+        menuItem4.setOnAction((event) -> eliminaCorso(rowData));
         operatoriTableView.setRowFactory( tv -> {
             TableRow<Operatore> row = new TableRow<>();
             row.setContextMenu(contextMenuElimina);
@@ -134,9 +137,7 @@ public class ProfileGestoreController implements Initializable {
             });
             return row ;
         });
-        menuItem5.setOnAction((event) -> {
-            eliminaOperatore(rowDataOperatore.codOperatore,rowData.codCorso);
-        });
+        menuItem5.setOnAction((event) -> eliminaOperatore(rowDataOperatore.codOperatore,rowData.codCorso));
     }
 
     public void setCorsiTableView(){
@@ -203,13 +204,31 @@ public class ProfileGestoreController implements Initializable {
         }
     }
 
+
+    private void visualizzaStatistiche(Corso corso) throws IOException {
+        Stage statisticheStage=new Stage();
+        FXMLLoader statistichePageLoader = new FXMLLoader(Main.class.getResource("profile/statistiche.fxml"));
+        Parent statistichePane = statistichePageLoader.load();
+        Scene statisticheScene = new Scene(statistichePane);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(statisticheScene);
+        statisticheStage.setTitle("Inserisci Lezione");
+        statisticheStage.setScene(statisticheScene);
+        StatisticheController statistichecontroller = statistichePageLoader.getController();
+        statistichecontroller.setStatistiche(corso);
+        Stage primaryStage = (Stage) corsiTableView.getParent().getScene().getWindow();
+        primaryStage.getScene().getRoot().setDisable(true);
+        statisticheStage.showAndWait();
+        primaryStage.getScene().getRoot().setDisable(false);
+    }
+
     private void styleRowColor() {
         Callback<TableColumn<Operatore, String>, TableCell<Operatore, String>> cellFactory
                 =
                 new Callback<>() {
                     @Override
                     public TableCell<Operatore, String> call(final TableColumn<Operatore, String> param) {
-                        final TableCell<Operatore, String> cell = new TableCell<>() {
+                        return new TableCell<>() {
 
                             @Override
                             public void updateItem(String item, boolean empty) {
@@ -226,7 +245,6 @@ public class ProfileGestoreController implements Initializable {
                                 }
                             }
                         };
-                        return cell;
                     }
                 };
         richiestaTableColumn.setCellFactory(cellFactory);
@@ -264,7 +282,7 @@ public class ProfileGestoreController implements Initializable {
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
             try {
-                utente=utenteDAO.getUtente(result.get());
+                Utente utente = utenteDAO.getUtente(result.get());
                 if (autenticazioneDAO.checkEmailUtenteExist(result.get())) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Errore email");
@@ -275,7 +293,7 @@ public class ProfileGestoreController implements Initializable {
                     if(!studenteDAO.checkStudenteIscritto(corso.codCorso, studenteDAO.getCodStudente(utente.codiceFiscale))){
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Attenzione!");
-                        alert.setHeaderText(utente.nome+" "+utente.cognome+" è già iscritto al corso "+corso.titolo+" come Studente");
+                        alert.setHeaderText(utente.nome+" "+ utente.cognome+" è già iscritto al corso "+corso.titolo+" come Studente");
                         alert.setContentText("Un Utente può essere Operatore o Studente di un Corso non entrambi!");
                         alert.showAndWait();
                     }
@@ -283,7 +301,7 @@ public class ProfileGestoreController implements Initializable {
                         if(!operatoreDAO.checkOperatoreCorso(operatoreDAO.getCodOperatore(utente.codiceFiscale), corso.codCorso)){
                             Alert alert = new Alert(Alert.AlertType.ERROR);
                             alert.setTitle("Attenzione!");
-                            alert.setHeaderText(utente.nome+" "+utente.cognome+" è già operatore o ha una richiesta in sospeso per il corso "+corso.titolo);
+                            alert.setHeaderText(utente.nome+" "+ utente.cognome+" è già operatore o ha una richiesta in sospeso per il corso "+corso.titolo);
                             alert.setContentText("Lo stato della richiesta è visibile dal colore della riga. Se la riga è bianca lo stato è accettata!");
                             alert.showAndWait();
                         }
@@ -297,7 +315,7 @@ public class ProfileGestoreController implements Initializable {
                             operatoreDAO.associaOperatore(operatore.codOperatore, corso.codCorso);
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("Attenzione!");
-                            alert.setHeaderText("E' stata inviata una richiesta ad "+utente.nome+" "+utente.cognome+" per diventare operatore del corso "+corso.titolo);
+                            alert.setHeaderText("E' stata inviata una richiesta ad "+ utente.nome+" "+ utente.cognome+" per diventare operatore del corso "+corso.titolo);
                             alert.setContentText("Lo stato della richiesta è visibile dal colore della riga. Se la riga è bianca lo stato è accettata!");
                             alert.showAndWait();
                             updateOperatoriTableView(corso.codCorso);

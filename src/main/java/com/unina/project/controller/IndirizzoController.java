@@ -5,12 +5,10 @@ import com.unina.project.codicefiscale.engine.Utils;
 import com.unina.project.graphics.LimitedTextField;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -67,7 +65,7 @@ public class IndirizzoController extends RegistrazioneGestoreController {
         return Utils.getCitiesProvinces().getKey(provincia);
     }
 
-    public ChangeListener<Boolean> provinciaListner = (observable, oldValue, newValue) -> {
+    public final ChangeListener<Boolean> provinciaListner = (observable, oldValue, newValue) -> {
         if (!newValue) {
             siglaTextField.setText(getProvinceSigle(provinciaTextField.getText().toUpperCase()));
         }
