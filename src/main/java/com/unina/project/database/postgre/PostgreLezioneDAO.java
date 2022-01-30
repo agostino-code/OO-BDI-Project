@@ -81,11 +81,11 @@ public class PostgreLezioneDAO implements LezioneDAO {
         String SQL = ("INSERT INTO \"Lezione\" (titolo,descrizione, \"dataoraInizio\", durata, \"codCorso\") VALUES (?,?,?,?,?);");
         Connection conn = postgreJDBC.Connessione();
         PreparedStatement pstmt = conn.prepareStatement(SQL);
-        pstmt.setString(1, lezione.titolo);
-        pstmt.setString(2, lezione.descrizione);
-        pstmt.setTimestamp(3, Timestamp.valueOf(lezione.dataoraInizio));
-        pstmt.setTime(4, Time.valueOf(lezione.durata));
-        pstmt.setString(5,lezione.codCorso);
+        pstmt.setString(1, lezione.getTitolo());
+        pstmt.setString(2, lezione.getDescrizione());
+        pstmt.setTimestamp(3, Timestamp.valueOf(lezione.getDataoraInizio()));
+        pstmt.setTime(4, Time.valueOf(lezione.getDurata()));
+        pstmt.setString(5,lezione.getCodCorso());
         pstmt.execute();
         pstmt.close();
         conn.close();

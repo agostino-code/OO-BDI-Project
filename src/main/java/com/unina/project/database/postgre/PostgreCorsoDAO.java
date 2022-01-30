@@ -17,11 +17,11 @@ public class PostgreCorsoDAO implements CorsoDAO {
         String SQL = ("INSERT INTO \"Corso\" (titolo, descrizione, \"iscrizioniMassime\", \"tassoPresenzeMinime\",\"numeroLezioni\",\"codGestore\",\"Privato\") VALUES (?,?,?,?,?,?,?) returning \"codCorso\";");
         Connection conn = postgreJDBC.Connessione();
         PreparedStatement pstmt = conn.prepareStatement(SQL);
-        pstmt.setString(1, corso.titolo);
-        pstmt.setString(2, corso.descrizione);
-        pstmt.setInt(3, corso.iscrizioniMassime);
+        pstmt.setString(1, corso.getTitolo());
+        pstmt.setString(2, corso.getDescrizione());
+        pstmt.setInt(3, corso.getIscrizioniMassime());
         pstmt.setInt(4, corso.tassoPresenzeMinime);
-        pstmt.setInt(5, corso.numeroLezioni);
+        pstmt.setInt(5, corso.getNumeroLezioni());
         pstmt.setString(6,codGestore);
         pstmt.setBoolean(7,corso.Privato);
         pstmt.execute();
@@ -55,7 +55,7 @@ public class PostgreCorsoDAO implements CorsoDAO {
             corso.setNumeroLezioni(rs.getInt("numeroLezioni"));
             corso.setCodCorso(rs.getString("codCorso"));
             corso.setPrivato(rs.getBoolean("Privato"));
-            corso.setAreetematiche(getAreeTematiche(corso.codCorso));
+            corso.setAreetematiche(getAreeTematiche(corso.getCodCorso()));
             corsi.add(corso);
         }
         pstmt.close();
@@ -68,7 +68,7 @@ public class PostgreCorsoDAO implements CorsoDAO {
         String SQL = ("Delete FROM \"Corso\" WHERE titolo = ?;");
         Connection conn = postgreJDBC.Connessione();
         PreparedStatement pstmt = conn.prepareStatement(SQL);
-        pstmt.setString(1, corso.titolo);
+        pstmt.setString(1, corso.getTitolo());
         pstmt.executeUpdate();
         pstmt.close();
         conn.close();
@@ -104,13 +104,13 @@ public class PostgreCorsoDAO implements CorsoDAO {
 
     @Override
     public void updateCorso(Corso corso) throws SQLException {
-        String SQL = ("UPDATE \"Corso\" SET titolo = '"+corso.titolo+
-                "', descrizione = '"+corso.descrizione+
-                "', \"iscrizioniMassime\" = "+corso.iscrizioniMassime+
+        String SQL = ("UPDATE \"Corso\" SET titolo = '"+corso.getTitolo()+
+                "', descrizione = '"+corso.getDescrizione()+
+                "', \"iscrizioniMassime\" = "+corso.getIscrizioniMassime()+
                 ", \"tassoPresenzeMinime\" = "+corso.tassoPresenzeMinime+
-                ",\"numeroLezioni\" = "+corso.numeroLezioni+
+                ",\"numeroLezioni\" = "+corso.getNumeroLezioni()+
                 ",\"Privato\" = "+corso.Privato+
-                " WHERE \"codCorso\" = '"+corso.codCorso+"';");
+                " WHERE \"codCorso\" = '"+corso.getCodCorso()+"';");
         Connection conn = postgreJDBC.Connessione();
         Statement stmt = conn.createStatement();
         stmt.executeUpdate(SQL);

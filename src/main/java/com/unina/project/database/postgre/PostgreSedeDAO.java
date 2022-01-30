@@ -15,10 +15,10 @@ public class PostgreSedeDAO implements SedeDAO {
         String SQL = ("INSERT INTO \"Sede\" (città, via, civico, provincia, \"codGestore\") VALUES (?,?,?,?,?);");
         Connection conn = postgreJDBC.Connessione();
         PreparedStatement pstmt = conn.prepareStatement(SQL);
-        pstmt.setString(1, sede.citta);
-        pstmt.setString(2, sede.via);
-        pstmt.setString(3, sede.civico);
-        pstmt.setString(4, sede.provincia);
+        pstmt.setString(1, sede.getCivico());
+        pstmt.setString(2, sede.getVia());
+        pstmt.setString(3, sede.getCivico());
+        pstmt.setString(4, sede.getProvincia());
         pstmt.setString(5, codGestore);
         pstmt.execute();
         pstmt.close();

@@ -11,10 +11,17 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import javafx.util.Callback;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -69,12 +76,12 @@ public class GestioneCorsiController implements Initializable {
                 if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
                     rowDataCorso = row.getItem();
                     try {
-                        if(operatoreDAO.checkOperatoreDaAccettare(operatore.codOperatore, rowDataCorso.codCorso)){
+                        if(operatoreDAO.checkOperatoreDaAccettare(operatore.getCodOperatore(), rowDataCorso.getCodCorso())){
                             row.setContextMenu(contextMenuAccetta);
                         }
                         else{
                             row.setContextMenu(contextMenu);
-                            updateStudentiTableView(rowDataCorso.codCorso);
+                            updateStudentiTableView(rowDataCorso.getCodCorso());
                         }
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -98,20 +105,24 @@ public class GestioneCorsiController implements Initializable {
         });
         menuItem1.setOnAction((event) -> {
             try {
-                accettaRichiesta(operatore.codOperatore,rowDataCorso);
+                accettaRichiesta(operatore.getCodOperatore(),rowDataCorso);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         });
         menuItem2.setOnAction((event) -> {
             try {
-                eliminaRichiesta(operatore.codOperatore,rowDataCorso);
+                eliminaRichiesta(operatore.getCodOperatore(),rowDataCorso);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         });
         menuItem3.setOnAction((event) -> {
-
+            try {
+                visualizzaStatistiche(rowDataCorso);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
         menuItem4.setOnAction((event) -> {
@@ -126,40 +137,57 @@ public class GestioneCorsiController implements Initializable {
     public void eliminaStudente() throws SQLException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Conferma");
-        alert.setHeaderText("Vuoi davvero rimuovere lo studente "+rowDataStudente.nome+" "+rowDataStudente.cognome+" dal Corso "+ rowDataCorso.titolo+"?");
+        alert.setHeaderText("Vuoi davvero rimuovere lo studente "+rowDataStudente.getNome()+" "+rowDataStudente.getCognome()+" dal Corso "+ rowDataCorso.getTitolo()+"?");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent())
         if (result.get() == ButtonType.OK){
-            studenteDAO.richiestaRifiutata(rowDataStudente.codStudente, rowDataCorso.codCorso);
+            studenteDAO.richiestaRifiutata(rowDataStudente.getCodStudente(), rowDataCorso.getCodCorso());
         }
 
     }
     public void accettaRichiesta(String codOperatore,Corso corso) throws SQLException {
-        operatoreDAO.accettaGestioneCorso(codOperatore, corso.codCorso);
+        operatoreDAO.accettaGestioneCorso(codOperatore, corso.getCodCorso());
         updateCorsiTableView();
-        updateStudentiTableView(corso.codCorso);
+        updateStudentiTableView(corso.getCodCorso());
     }
     public void eliminaRichiesta(String codOperatore,Corso corso) throws SQLException {
-        operatoreDAO.annullaGestioneCorso(codOperatore, corso.codCorso);
+        operatoreDAO.annullaGestioneCorso(codOperatore, corso.getCodCorso());
         updateCorsiTableView();
     }
 
+    private void visualizzaStatistiche(Corso corso) throws IOException {
+        Stage statisticheStage=new Stage();
+        FXMLLoader statistichePageLoader = new FXMLLoader(Main.class.getResource("profile/statistiche.fxml"));
+        Parent statistichePane = statistichePageLoader.load();
+        Scene statisticheScene = new Scene(statistichePane);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(statisticheScene);
+        statisticheStage.setTitle("Statistiche Corso: "+corso.getCodCorso());
+        statisticheStage.setScene(statisticheScene);
+        StatisticheController statistichecontroller = statistichePageLoader.getController();
+        statistichecontroller.setStatistiche(corso);
+        Stage primaryStage = (Stage) corsiTableView.getParent().getScene().getWindow();
+        primaryStage.getScene().getRoot().setDisable(true);
+        statisticheStage.showAndWait();
+        primaryStage.getScene().getRoot().setDisable(false);
+    }
+
     public void setCorsiTableView(){
-        codCorsoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().codCorso));
-        titoloTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().titolo));
-        descrizioneTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().descrizione));
-        iscrizionimassimeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().iscrizioniMassime));
-        numerolezioniTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().numeroLezioni));
+        codCorsoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getCodCorso()));
+        titoloTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getTitolo()));
+        descrizioneTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getDescrizione()));
+        iscrizionimassimeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getIscrizioniMassime()));
+        numerolezioniTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getNumeroLezioni()));
         tassopresenzeminimeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getTassoPresenzeMinime()));
         privatoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getPrivato()));
         areeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().tag));
     }
 
     public void setStudentiTableView(){
-        nomeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().nome));
-        cognomeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().cognome));
-        emailTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().email));
-        codStudenteTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().codStudente));
+        nomeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNome()));
+        cognomeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCognome()));
+        emailTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEmail()));
+        codStudenteTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCodStudente()));
         datadiNascitaTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().dataNascita));
         sessoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().sesso));
         idoneoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getIdoneo()));
@@ -169,12 +197,12 @@ public class GestioneCorsiController implements Initializable {
         TreeItem<Corso> fakeroot=new TreeItem<>();
         corsiTableView.setRoot(fakeroot);
         fakeroot.getChildren().clear();
-        operatore.setCorsi(corsoDAO.getCorsiOperatore(operatore.codOperatore));
-        for(Corso i: operatore.corsi){
+        operatore.setCorsi(corsoDAO.getCorsiOperatore(operatore.getCodOperatore()));
+        for(Corso i: operatore.getCorsi()){
                 TreeItem<Corso> treeItem=new TreeItem<>(i);
-                for(AreaTematica areaTematica:i.areetematiche) {
+                for(AreaTematica areaTematica:i.getAreetematiche()) {
                     Corso corso = new Corso();
-                    corso.setTag(areaTematica.tag);
+                    corso.setTag(areaTematica.getTag());
                     TreeItem<Corso> tagItem = new TreeItem<>(corso);
                     treeItem.getChildren().add(tagItem);
                 }
@@ -202,7 +230,7 @@ public class GestioneCorsiController implements Initializable {
                                     setText(item);
                                     TreeTableRow<Corso> row = getTableRow();
                                     try {
-                                        if (operatoreDAO.checkOperatoreDaAccettare(operatore.codOperatore, item)) {
+                                        if (operatoreDAO.checkOperatoreDaAccettare(operatore.getCodOperatore(), item)) {
                                             row.setStyle("-fx-background-color: #ffc1cc");
                                         }
                                     } catch (SQLException e) {
@@ -224,7 +252,7 @@ public class GestioneCorsiController implements Initializable {
 
     public void setDatiUtente(Utente utente){
         try {
-            operatore.codOperatore=operatoreDAO.getCodOperatore(utente.codiceFiscale);
+            operatore.setCodOperatore(operatoreDAO.getCodOperatore(utente.getCodiceFiscale()));
             updateCorsiTableView();
         } catch (SQLException e) {
             e.printStackTrace();

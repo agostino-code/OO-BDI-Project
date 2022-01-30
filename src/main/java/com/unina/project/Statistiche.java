@@ -34,8 +34,8 @@ public class Statistiche {
         this.presenzeMedie = presenzeMedie;
     }
 
-    public Integer percentualeRiempimento;
-    public Integer presenzeMinime;
-    public Integer presenzeMassime;
-    public Float presenzeMedie;
+    private Integer percentualeRiempimento;
+    private Integer presenzeMinime;
+    private Integer presenzeMassime;
+    private Float presenzeMedie;
 }

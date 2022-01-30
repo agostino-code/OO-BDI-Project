@@ -144,7 +144,7 @@ public class ProfileController implements Initializable {
         autenticazione.setPassword(password);
         try {
             utente=utenteDAO.getUtente(email);
-            if(!operatoreDAO.checkOperatoreExist(utente.codiceFiscale)){
+            if(!operatoreDAO.checkOperatoreExist(utente.getCodiceFiscale())){
                 operatoreAnchorPane.setVisible(true);
                 gestioneCorsiButton.setVisible(true);
                 gestorelezioneButton.setVisible(true);

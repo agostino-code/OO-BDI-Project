@@ -24,14 +24,14 @@ public class CorsoModificaController extends CorsoController{
             corso.setTitolo(titoloTextField.getText());
             corso.setIscrizioniMassime(Integer.parseInt(iscrizioniMassimeTextField.getText()));
             corso.setNumeroLezioni(Integer.parseInt(lezioniTextField.getText()));
-            corso.setTassoPresenzeMinime(Integer.parseInt(lezioniMinimeTextField.getText())*100/corso.numeroLezioni);
+            corso.setTassoPresenzeMinime(Integer.parseInt(lezioniMinimeTextField.getText())*100/corso.getNumeroLezioni());
             corso.setDescrizione(descrizionecorsoTextArea.getText());
             corso.setPrivato(tipocorsoChoiseBox.getSelectionModel().getSelectedItem().equals("Privato"));
             try {
                 areaTematicaDAO.insertAreaTematica(areeTematiche);
                 corsoDAO.updateCorso(corso);
                 areaTematicaDAO.deleteAreaTematica(corso);
-                areaTematicaDAO.associaAreaTematica(areeTematiche, corso.codCorso);
+                areaTematicaDAO.associaAreaTematica(areeTematiche, corso.getCodCorso());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -41,21 +41,21 @@ public class CorsoModificaController extends CorsoController{
     }
 
     public void setCorso(Corso corso) {
-        titoloTextField.setText(corso.titolo);
-        descrizionecorsoTextArea.setText(corso.descrizione);
-        this.corso.setCodCorso(corso.codCorso);
+        titoloTextField.setText(corso.getTitolo());
+        descrizionecorsoTextArea.setText(corso.getDescrizione());
+        this.corso.setCodCorso(corso.getCodCorso());
         if(!corso.Privato){
             tipocorsoChoiseBox.getSelectionModel().selectLast();
         }
         else{
             tipocorsoChoiseBox.getSelectionModel().selectFirst();
         }
-        iscrizioniMassimeTextField.setText(String.valueOf(corso.iscrizioniMassime));
-        lezioniTextField.setText(String.valueOf(corso.numeroLezioni));
-        lezioniMinimeTextField.setText(String.valueOf((corso.numeroLezioni*corso.tassoPresenzeMinime)/100));
+        iscrizioniMassimeTextField.setText(String.valueOf(corso.getIscrizioniMassime()));
+        lezioniTextField.setText(String.valueOf(corso.getNumeroLezioni()));
+        lezioniMinimeTextField.setText(String.valueOf((corso.getNumeroLezioni()*corso.tassoPresenzeMinime)/100));
         tassoMinimoTextField.setText(corso.getTassoPresenzeMinime());
-        for(AreaTematica i: corso.areetematiche){
-            tagBar.getTags().add(i.tag);
+        for(AreaTematica i: corso.getAreetematiche()){
+            tagBar.getTags().add(i.getTag());
         }
         nuovoCorsoButton.setText("Modifica Corso");
     }

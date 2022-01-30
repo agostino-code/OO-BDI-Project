@@ -23,10 +23,42 @@ public class Corso{
         this.numeroLezioni = numeroLezioni;
     }
 
-    public String titolo;
-    public String descrizione;
-    public Integer iscrizioniMassime;
-    public Integer numeroLezioni;
+    public String getTitolo() {
+        return titolo;
+    }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public Integer getIscrizioniMassime() {
+        return iscrizioniMassime;
+    }
+
+    public Integer getNumeroLezioni() {
+        return numeroLezioni;
+    }
+
+    public String getCodCorso() {
+        return codCorso;
+    }
+
+    public List<Operatore> getOperatori() {
+        return operatori;
+    }
+
+    public List<AreaTematica> getAreetematiche() {
+        return areetematiche;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    private String titolo;
+    private String descrizione;
+    private Integer iscrizioniMassime;
+    private Integer numeroLezioni;
 
     public String getTassoPresenzeMinime() {
         if(tassoPresenzeMinime!=null){
@@ -41,7 +73,7 @@ public class Corso{
         this.codCorso = codCorso;
     }
 
-    public String codCorso;
+    private String codCorso;
 
     public void setPrivato(Boolean privato) {
         Privato = privato;
@@ -64,13 +96,13 @@ public class Corso{
         this.operatori = operatori;
     }
 
-    public List<Operatore> operatori;
+    private List<Operatore> operatori;
 
     public void setAreetematiche(List<AreaTematica> areetematiche) {
         this.areetematiche = areetematiche;
     }
 
-    public List<AreaTematica> areetematiche;
+    private List<AreaTematica> areetematiche;
 
     public void setTag(String tag) {
         this.tag = tag;

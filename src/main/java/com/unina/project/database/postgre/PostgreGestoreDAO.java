@@ -15,10 +15,10 @@ public class PostgreGestoreDAO implements GestoreDAO {
         String SQL = ("INSERT INTO \"Gestore\" (nome, descrizione, telefono, email) VALUES (?,?,?,?) returning \"codGestore\";");
         Connection conn = postgreJDBC.Connessione();
         PreparedStatement pstmt = conn.prepareStatement(SQL);
-        pstmt.setString(1, gestore.nome);
-        pstmt.setString(2, gestore.descrizione);
-        pstmt.setString(3, gestore.telefono);
-        pstmt.setString(4, gestore.email);
+        pstmt.setString(1, gestore.getNome());
+        pstmt.setString(2, gestore.getDescrizione());
+        pstmt.setString(3, gestore.getTelefono());
+        pstmt.setString(4, gestore.getEmail());
         pstmt.execute();
         ResultSet rs =pstmt.getResultSet();
         rs.next();

@@ -17,7 +17,7 @@ public class Autenticazione {
         return password;
     }
 
-    public String email;
-    public String password;
+    private String email;
+    private String password;
 
 }

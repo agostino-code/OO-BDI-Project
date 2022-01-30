@@ -126,13 +126,13 @@ public class CorsoController extends ProfileGestoreController {
             corso.setTitolo(titoloTextField.getText());
             corso.setIscrizioniMassime(Integer.parseInt(iscrizioniMassimeTextField.getText()));
             corso.setNumeroLezioni(Integer.parseInt(lezioniTextField.getText()));
-            corso.setTassoPresenzeMinime(Integer.parseInt(lezioniMinimeTextField.getText())*100/corso.numeroLezioni);
+            corso.setTassoPresenzeMinime(Integer.parseInt(lezioniMinimeTextField.getText())*100/corso.getNumeroLezioni());
             corso.setDescrizione(descrizionecorsoTextArea.getText());
             corso.setPrivato(tipocorsoChoiseBox.getSelectionModel().getSelectedItem().equals("Privato"));
             try {
                 areaTematicaDAO.insertAreaTematica(areeTematiche);
                 corso.setCodCorso(corsoDAO.insertCorso(corso,gestore.codGestore));
-                areaTematicaDAO.associaAreaTematica(areeTematiche, corso.codCorso);
+                areaTematicaDAO.associaAreaTematica(areeTematiche, corso.getCodCorso());
             } catch (SQLException e) {
                 e.printStackTrace();
             }

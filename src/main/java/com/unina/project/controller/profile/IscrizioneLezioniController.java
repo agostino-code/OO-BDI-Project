@@ -56,8 +56,8 @@ public class IscrizioneLezioniController implements Initializable {
                 if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
                     rowDataLezione = row.getItem();
                     try {
-                        if(rowDataLezione.codLezione!=null){
-                            if (lezioneDAO.checkStudenteIscrittoLezione(rowDataLezione.codLezione, studente.codStudente)) {
+                        if(rowDataLezione.getCodLezione()!=null){
+                            if (lezioneDAO.checkStudenteIscrittoLezione(rowDataLezione.getCodLezione(), studente.getCodStudente())) {
                                 row.setContextMenu(contextMenu);
                             }
                             else{
@@ -74,7 +74,7 @@ public class IscrizioneLezioniController implements Initializable {
         });
         menuItem1.setOnAction((event) -> {
             try {
-                lezioneDAO.prenotaLezione(rowDataLezione.codLezione, studente.codStudente);
+                lezioneDAO.prenotaLezione(rowDataLezione.getCodLezione(), studente.getCodStudente());
                 updateLezioniTableView();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -83,7 +83,7 @@ public class IscrizioneLezioniController implements Initializable {
 
         menuItem2.setOnAction((event) -> {
             try {
-                lezioneDAO.deletePrenotazioneLezione(rowDataLezione.codLezione, studente.codStudente);
+                lezioneDAO.deletePrenotazioneLezione(rowDataLezione.getCodLezione(), studente.getCodStudente());
                 updateLezioniTableView();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -92,26 +92,26 @@ public class IscrizioneLezioniController implements Initializable {
     }
 
     public void setLezioniTableView(){
-        codCorsoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().codCorso));
-        titoloTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().titolo));
-        descrizioneTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().descrizione));
+        codCorsoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getCodCorso()));
+        titoloTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getTitolo()));
+        descrizioneTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getDescrizione()));
         dataTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getDataInizio()));
         oraTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getOraInizio()));
-        durataTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().durata));
-        codLezioneTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().codLezione));
+        durataTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getDurata()));
+        codLezioneTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getCodLezione()));
     }
 
     public void updateLezioniTableView() throws SQLException {
         TreeItem<Lezione> fakeroot=new TreeItem<>();
         lezioniTableView.setRoot(fakeroot);
         fakeroot.getChildren().clear();
-        studente.setCorsi(corsoDAO.getCorsiStudente(studente.codStudente));
-        for(Corso i: studente.corsi){
+        studente.setCorsi(corsoDAO.getCorsiStudente(studente.getCodStudente()));
+        for(Corso i: studente.getCorsi()){
             Lezione onlycodcorso=new Lezione();
-            onlycodcorso.setCodCorso(i.codCorso);
+            onlycodcorso.setCodCorso(i.getCodCorso());
             TreeItem<Lezione> treeItem=new TreeItem<>(onlycodcorso);
-            for(Lezione lezione:lezioneDAO.getLezioni(i.codCorso)) {
-                if(lezione.dataoraInizio.isAfter(LocalDateTime.now())){
+            for(Lezione lezione:lezioneDAO.getLezioni(i.getCodCorso())) {
+                if(lezione.getDataoraInizio().isAfter(LocalDateTime.now())){
                     TreeItem<Lezione> tagItem = new TreeItem<>(lezione);
                     treeItem.getChildren().add(tagItem);
                 }
@@ -141,7 +141,7 @@ public class IscrizioneLezioniController implements Initializable {
                                     TreeTableRow<Lezione> row = getTableRow();
                                     try {
                                         if(item!=null)
-                                        if (lezioneDAO.checkStudenteIscrittoLezione(item,studente.codStudente)) {
+                                        if (lezioneDAO.checkStudenteIscrittoLezione(item,studente.getCodStudente())) {
                                             row.setStyle("-fx-background-color: #ffc1cc");
                                         }
                                         else{
@@ -161,7 +161,7 @@ public class IscrizioneLezioniController implements Initializable {
 
     public void setDatiUtente(Utente utente){
         try {
-            studente.codStudente=studenteDAO.getCodStudente(utente.codiceFiscale);
+            studente.setCodStudente(studenteDAO.getCodStudente(utente.getCodiceFiscale()));
             updateLezioniTableView();
         } catch (SQLException e) {
             e.printStackTrace();

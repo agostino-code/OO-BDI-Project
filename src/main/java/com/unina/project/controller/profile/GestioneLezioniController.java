@@ -77,11 +77,11 @@ public class GestioneLezioniController implements Initializable {
                 if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
                     rowDataLezione = row.getItem();
                     try {
-                        if(rowDataLezione.codCorso!=null){
+                        if(rowDataLezione.getCodCorso()!=null){
                             row.setContextMenu(contextMenuNuovaLezione);
                         }
                         else{
-                            updateStudentiTableView(rowDataLezione.codLezione);
+                            updateStudentiTableView(rowDataLezione.getCodLezione());
                         }
 
 
@@ -111,23 +111,23 @@ public class GestioneLezioniController implements Initializable {
         });
         menuItem1.setOnAction((event) -> {
             try {
-                lezioneDAO.confermapresenza(rowDataStudente.codStudente,rowDataLezione.codLezione);
-                updateStudentiTableView(rowDataLezione.codLezione);
+                lezioneDAO.confermapresenza(rowDataStudente.getCodStudente(),rowDataLezione.getCodLezione());
+                updateStudentiTableView(rowDataLezione.getCodLezione());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         });
         menuItem3.setOnAction((event) -> {
             try {
-                lezioneDAO.nonpresente(rowDataStudente.codStudente,rowDataLezione.codLezione);
-                updateStudentiTableView(rowDataLezione.codLezione);
+                lezioneDAO.nonpresente(rowDataStudente.getCodStudente(),rowDataLezione.getCodLezione());
+                updateStudentiTableView(rowDataLezione.getCodLezione());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         });
         menuItem2.setOnAction((event) -> {
             try {
-                nuovalezione(rowDataLezione.codCorso);
+                nuovalezione(rowDataLezione.getCodCorso());
                 updateLezioniTableView();
             } catch (IOException | SQLException e) {
                 e.printStackTrace();
@@ -137,20 +137,20 @@ public class GestioneLezioniController implements Initializable {
     }
 
     public void setLezioniTableView(){
-        codCorsoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().codCorso));
-        titoloTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().titolo));
-        descrizioneTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().descrizione));
+        codCorsoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getCodCorso()));
+        titoloTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getTitolo()));
+        descrizioneTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getDescrizione()));
         dataTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getDataInizio()));
         oraTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getOraInizio()));
-        durataTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().durata));
-        codLezioneTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().codLezione));
+        durataTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getDurata()));
+        codLezioneTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getCodLezione()));
     }
 
     public void setStudentiTableView(){
-        nomeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().nome));
-        cognomeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().cognome));
-        emailTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().email));
-        codStudenteTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().codStudente));
+        nomeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNome()));
+        cognomeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCognome()));
+        emailTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEmail()));
+        codStudenteTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCodStudente()));
         datadiNascitaTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().dataNascita));
         sessoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().sesso));
         presenteTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPresente()));
@@ -182,12 +182,12 @@ public class GestioneLezioniController implements Initializable {
         TreeItem<Lezione> fakeroot=new TreeItem<>();
         lezioniTableView.setRoot(fakeroot);
         fakeroot.getChildren().clear();
-        operatore.setCorsi(corsoDAO.getCorsiOperatoreAccettati(operatore.codOperatore));
-        for(Corso i: operatore.corsi){
+        operatore.setCorsi(corsoDAO.getCorsiOperatoreAccettati(operatore.getCodOperatore()));
+        for(Corso i: operatore.getCorsi()){
             Lezione onlycodcorso=new Lezione();
-            onlycodcorso.setCodCorso(i.codCorso);
+            onlycodcorso.setCodCorso(i.getCodCorso());
             TreeItem<Lezione> treeItem=new TreeItem<>(onlycodcorso);
-            for(Lezione lezione:lezioneDAO.getLezioni(i.codCorso)) {
+            for(Lezione lezione:lezioneDAO.getLezioni(i.getCodCorso())) {
                 TreeItem<Lezione> tagItem = new TreeItem<>(lezione);
                 treeItem.getChildren().add(tagItem);
             }
@@ -237,7 +237,7 @@ public class GestioneLezioniController implements Initializable {
 
     public void setDatiUtente(Utente utente){
         try {
-            operatore.codOperatore=operatoreDAO.getCodOperatore(utente.codiceFiscale);
+            operatore.setCodOperatore(operatoreDAO.getCodOperatore(utente.getCodiceFiscale()));
             updateLezioniTableView();
         } catch (SQLException e) {
             e.printStackTrace();

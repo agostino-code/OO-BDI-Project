@@ -32,7 +32,7 @@ public class StatisticheController {
     public void setStatistiche(Corso corso){
         this.corso=corso;
         try {
-            this.statistiche=statisticheDAO.getStatistiche(corso.codCorso);
+            this.statistiche=statisticheDAO.getStatistiche(corso.getCodCorso());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -50,7 +50,7 @@ public class StatisticheController {
         PresenzeLezioni presenzeMinime=new PresenzeLezioni();
         PresenzeLezioni presenzeMassime=new PresenzeLezioni();
         try {
-            for (PresenzeLezioni i : statisticheDAO.getPresenzeLezioni(corso.codCorso)) {
+            for (PresenzeLezioni i : statisticheDAO.getPresenzeLezioni(corso.getCodCorso())) {
                 if(i.getNumero_presenze().equals(statistiche.getPresenzeMinime())){
                     presenzeMinime.setCodLezione(i.getCodLezione());
                 }
@@ -67,7 +67,7 @@ public class StatisticheController {
         series1.setName("Presenze Massime");
         XYChart.Series<String,Number> series2 = new XYChart.Series<>();
         series2.setName("Presenze Medie");
-        series.getData().add(new XYChart.Data<>(presenzeMinime.codLezione, statistiche.getPresenzeMinime()));
+        series.getData().add(new XYChart.Data<>(presenzeMinime.getCodLezione(), statistiche.getPresenzeMinime()));
         series1.getData().add(new XYChart.Data<>(presenzeMassime.getCodLezione(), statistiche.getPresenzeMassime()));
         series2.getData().add(new XYChart.Data<>("", statistiche.getPresenzeMedie()));
         statisticheBarChart.getData().add(series);
@@ -83,8 +83,8 @@ public class StatisticheController {
         XYChart.Series<String,Number> series = new XYChart.Series<>();
         series.setName("Lezioni");
         try {
-            for (PresenzeLezioni i : statisticheDAO.getPresenzeLezioni(corso.codCorso)) {
-                series.getData().add(new XYChart.Data<>(i.codLezione, i.numero_presenze));
+            for (PresenzeLezioni i : statisticheDAO.getPresenzeLezioni(corso.getCodCorso())) {
+                series.getData().add(new XYChart.Data<>(i.getCodLezione(), i.getNumero_presenze()));
 
             }
         } catch (SQLException e) {
@@ -98,7 +98,7 @@ public class StatisticheController {
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
                         new PieChart.Data("Posti rimanenti", 100-statistiche.getPercentualeRiempimento()),
-                        new PieChart.Data("Posti occupati", statistiche.percentualeRiempimento));
+                        new PieChart.Data("Posti occupati", statistiche.getPercentualeRiempimento()));
         statistichePieChart.getData().addAll(pieChartData);
         statistichePieChart.setAnimated(true);
         statistichePieChart.setTitle("Percentuale di Riempimento");

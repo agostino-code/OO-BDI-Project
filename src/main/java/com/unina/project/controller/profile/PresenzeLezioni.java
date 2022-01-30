@@ -17,6 +17,6 @@ public class PresenzeLezioni {
         this.numero_presenze = numero_presenze;
     }
 
-    public String codLezione;
-    public Integer numero_presenze;
+    private String codLezione;
+    private Integer numero_presenze;
 }

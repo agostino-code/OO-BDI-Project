@@ -51,9 +51,13 @@ public class Utente {
         this.email = email.toLowerCase();
     }
 
-    public String email;
-    public String nome;
-    public String cognome;
+    public String getEmail() {
+        return email;
+    }
+
+    private String email;
+    private String nome;
+    private String cognome;
 
     public LocalDate getDataNascita() {
         return dataNascita;

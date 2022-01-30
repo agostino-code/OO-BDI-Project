@@ -86,7 +86,7 @@ public class RegistrazioneGestoreController extends RegistrazioneController{
         registratigestoreButton.getParent().setDisable(false);
         IndirizzoController indirizzocontroller = indirizzoPageLoader.getController();
             sede=indirizzocontroller.getSede();
-            if(sede.via!=null){
+            if(sede.getVia()!=null){
                 indirizzoTextField.setText(sede.getIndirizzo());
             }
 

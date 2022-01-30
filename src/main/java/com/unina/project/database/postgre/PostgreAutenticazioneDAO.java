@@ -14,7 +14,7 @@ public class PostgreAutenticazioneDAO implements AutenticazioneDAO {
         Connection conn = postgreJDBC.Connessione();
         PreparedStatement pstmt = conn.prepareStatement(SQL);
         pstmt.setString(1, autenticazione.getEmail());
-        pstmt.setString(2, autenticazione.password);
+        pstmt.setString(2, autenticazione.getPassword());
         pstmt.executeUpdate();
         pstmt.close();
         conn.close();
@@ -79,7 +79,7 @@ public class PostgreAutenticazioneDAO implements AutenticazioneDAO {
         Connection conn = postgreJDBC.Connessione();
         PreparedStatement pstmt = conn.prepareStatement(SQL);
         pstmt.setString(1, autenticazione.getEmail());
-        pstmt.setString(2, autenticazione.password);
+        pstmt.setString(2, autenticazione.getPassword());
         pstmt.executeQuery();
         pstmt.close();
         conn.close();

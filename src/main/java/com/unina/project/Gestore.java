@@ -19,10 +19,34 @@ public class Gestore {
         this.email = email;
     }
 
-    public String nome;
-    public String descrizione;
-    public String telefono;
-    public String email;
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getCodGestore() {
+        return codGestore;
+    }
+
+    public List<Corso> getCorsi() {
+        return corsi;
+    }
+
+    private String nome;
+    private String descrizione;
+    private String telefono;
+    private String email;
 
     public void setCodGestore(String codGestore) {
         this.codGestore = codGestore;

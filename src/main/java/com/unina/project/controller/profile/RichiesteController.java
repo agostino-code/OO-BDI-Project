@@ -62,7 +62,7 @@ public class RichiesteController implements Initializable {
                 if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
                     rowDataCorso = row.getItem();
                     try {
-                        updateRichiesteTableView(rowDataCorso.codCorso);
+                        updateRichiesteTableView(rowDataCorso.getCodCorso());
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -97,29 +97,29 @@ public class RichiesteController implements Initializable {
     }
 
     public void accettaRichiesta(Studente studente,Corso corso) throws SQLException {
-        studenteDAO.richiestaAccettata(studente.codStudente, corso.codCorso);
-        updateRichiesteTableView(corso.codCorso);
+        studenteDAO.richiestaAccettata(studente.getCodStudente(), corso.getCodCorso());
+        updateRichiesteTableView(corso.getCodCorso());
     }
     public void eliminaRichiesta(Studente studente,Corso corso) throws SQLException {
-        studenteDAO.richiestaRifiutata(studente.codStudente, corso.codCorso);
-        updateRichiesteTableView(corso.codCorso);
+        studenteDAO.richiestaRifiutata(studente.getCodStudente(), corso.getCodCorso());
+        updateRichiesteTableView(corso.getCodCorso());
     }
 
     public void setCorsiTableView(){
-        codCorsoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().codCorso));
-        titoloTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().titolo));
-        descrizioneTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().descrizione));
-        iscrizionimassimeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().iscrizioniMassime));
-        numerolezioniTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().numeroLezioni));
+        codCorsoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getCodCorso()));
+        titoloTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getTitolo()));
+        descrizioneTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getDescrizione()));
+        iscrizionimassimeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getIscrizioniMassime()));
+        numerolezioniTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getNumeroLezioni()));
         tassopresenzeminimeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getTassoPresenzeMinime()));
         areeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().tag));
     }
 
     public void setRichiesteTableView(){
-        nomeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().nome));
-        cognomeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().cognome));
-        emailTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().email));
-        codStudenteTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().codStudente));
+        nomeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNome()));
+        cognomeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCognome()));
+        emailTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getEmail()));
+        codStudenteTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCodStudente()));
         datadiNascitaTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().dataNascita));
         sessoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().sesso));
     }
@@ -128,13 +128,13 @@ public class RichiesteController implements Initializable {
         TreeItem<Corso> fakeroot=new TreeItem<>();
         corsiTableView.setRoot(fakeroot);
         fakeroot.getChildren().clear();
-        operatore.setCorsi(corsoDAO.getCorsiOperatoreAccettati(operatore.codOperatore));
-        for(Corso i: operatore.corsi){
+        operatore.setCorsi(corsoDAO.getCorsiOperatoreAccettati(operatore.getCodOperatore()));
+        for(Corso i: operatore.getCorsi()){
             if(i.Privato){
                 TreeItem<Corso> treeItem=new TreeItem<>(i);
-                for(AreaTematica areaTematica:i.areetematiche){
+                for(AreaTematica areaTematica:i.getAreetematiche()){
                     Corso corso=new Corso();
-                    corso.setTag(areaTematica.tag);
+                    corso.setTag(areaTematica.getTag());
                     TreeItem<Corso> tagItem=new TreeItem<>(corso);
                     treeItem.getChildren().add(tagItem);
                 }
@@ -152,7 +152,7 @@ public class RichiesteController implements Initializable {
 
     public void setDatiUtente(Utente utente){
         try {
-            operatore.codOperatore=operatoreDAO.getCodOperatore(utente.codiceFiscale);
+            operatore.setCodOperatore(operatoreDAO.getCodOperatore(utente.getCodiceFiscale()));
             updateCorsiTableView();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -163,7 +163,7 @@ public class LezioneController implements Initializable {
             lezione.setDataoraInizio(localDateTime);
             lezione.setDurata(LocalTime.parse(durataTextField.getText()));
             try {
-                if(lezioneDAO.countNumeroLezioni(lezione.codCorso) < corsoDAO.getNumeroLezioni(lezione.codCorso)){
+                if(lezioneDAO.countNumeroLezioni(lezione.getCodCorso()) < corsoDAO.getNumeroLezioni(lezione.getCodCorso())){
                     lezioneDAO.insertLezione(lezione);
                 }
                 else {

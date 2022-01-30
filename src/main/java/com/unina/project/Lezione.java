@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Lezione {
-    public String titolo;
-    public String descrizione;
+    private String titolo;
+    private String descrizione;
 
     public void setTitolo(String titolo) {
         this.titolo = titolo;
@@ -47,14 +47,38 @@ public class Lezione {
     }
 
 
-    public LocalDateTime dataoraInizio;
-    public LocalTime durata;
-    public String codLezione;
+    public String getTitolo() {
+        return titolo;
+    }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public LocalDateTime getDataoraInizio() {
+        return dataoraInizio;
+    }
+
+    public LocalTime getDurata() {
+        return durata;
+    }
+
+    public String getCodLezione() {
+        return codLezione;
+    }
+
+    public String getCodCorso() {
+        return codCorso;
+    }
+
+    private LocalDateTime dataoraInizio;
+    private LocalTime durata;
+    private String codLezione;
 
     public void setCodCorso(String codCorso) {
         this.codCorso = codCorso;
     }
 
-    public String codCorso;
+    private String codCorso;
 
 }

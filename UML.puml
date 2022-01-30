@@ -3,75 +3,83 @@
 'https://plantuml.com/class-diagram
 !theme vibrant
 class Autenticazione {
-  +email: String
-  +password: String
+  +email: varchar
+  +password: varchar
 }
 Autenticazione "1" -- "1" Utente :AccessoUtente
 Autenticazione "1" -- "1" Gestore :AccessoGestore
 class Utente{
-  +nome: String
-  +cognome: String
+  +nome: varchar
+  +cognome: varchar
   +dataNascita: Date
-  +comunediNascita: String
+  +comunediNascita: varchar
   +sesso: sesso
-  +codiceFiscale: String
+  +codiceFiscale: varchar
 }
 class Gestore {
-  +nome: String
-  +descrizione: String
-  +sede: struct [Città: String, Via: String, Civico: String, Provincia: String, Cap: Integer]
-  +telefono: String
-  +cod.Gestore: String
+  +nome: varchar
+  +descrizione: varchar
+  +sede: struct [Città: varchar, Via: varchar, Civico: varchar, Provincia: varchar, Cap: integer]
+  +telefono: varchar
+  +cod.Gestore: varchar
 }
 class Operatore{
-  +cod.Operatore
+  +cod.Operatore: varchar
 }
 class Studente{
-  +cod.Studente
+  +cod.Studente: varchar
 }
 enum sesso{
 M
 F
 }
-Utente <|-- Operatore
-Utente <|-- Studente
+Utente <|--- Operatore
+Utente <|--- Studente
 note "{ Partial , Overlapping }" as N1
 Studente . N1
 Operatore . N1
 
 Gestore "1" -- "0..*" Corso:Possiede
 Corso "*" -- "*" Studente
-Corso "*" -- "1..*" Operatore:Gestiti
+Corso "*" -- "1..*" Operatore
+(Corso,Operatore)..Coordina
+class Coordina{
+Richiesta: boolean
+}
 class Corso{
-  +titolo: String
-  +descrizione: String
-  +iscrizioniMassime: double
-  +tassoPresenzeMinime: float
-  +cod.Corso: String
+  +titolo: varchar
+  +descrizione: varchar
+  +iscrizioniMassime: integer
+  +tassoPresenzeMinime: real
+  +cod.Corso: varchar
 }
 class Lezione{
-  +titolo: String
-  +descrizione: String
+  +titolo: varchar
+  +descrizione: varchar
   +dataoraInizio: Timestamp
   +durata: Time
-  +cod.Lezione: String
+  +cod.Lezione: varchar
 }
 Corso "1" -- "1..*" Lezione:Svolto
 (Corso, Studente) .. Iscritti
-Lezione "*" -- "*" Studente:Prenotazioni
+Lezione "*" -- "*" Studente
+(Lezione,Studente) .. Prenotazioni
+class Prenotazioni{
++Presente: boolean
+}
 class Iscritti{
 +idonei: boolean
++Richiesta: boolean
 }
 class Statistiche{
-  +presenzeMinime
-  +presenzeMassime
-  +presenzeMedie
-  +percentualeRiempimentoMedia
+  +presenzeMinime: integer
+  +presenzeMassime: integer
+  +presenzeMedie: real
+  +percentualeRiempimentoMedia: integer
 }
 Corso "1" -- "1" Statistiche:Associo
 class AreaTematica{
-  +Tipo
-  +cod.AreaTematica
+  +Tag: varchar
 }
 Corso "*" -- "1..*" AreaTematica:Appartengono
 

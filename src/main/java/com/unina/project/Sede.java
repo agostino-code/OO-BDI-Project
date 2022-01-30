@@ -19,10 +19,26 @@ public class Sede {
         this.provincia = provincia.toUpperCase();
     }
 
-    public String via;
-    public String civico;
-    public String citta;
-    public String provincia;
+    public String getVia() {
+        return via;
+    }
+
+    public String getCivico() {
+        return civico;
+    }
+
+    public String getCitta() {
+        return citta;
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    private String via;
+    private String civico;
+    private String citta;
+    private String provincia;
 
     public String getIndirizzo(){
 

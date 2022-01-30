@@ -2,42 +2,42 @@
 'https://plantuml.com/class-diagram
 !theme vibrant
 class Autenticazione {
-  +email: String
-  +password: String
+  +email: varchar
+  +password: varchar
 }
-Autenticazione "1" -- "1" Utente:AccessoUtente
+Autenticazione "1" --- "1" Utente:AccessoUtente
 Autenticazione "1" --- "1" Gestore:AccessoGestore
 class Utente{
-  +nome: String
-  +cognome: String
+  +nome: varchar
+  +cognome: varchar
   +dataNascita: Date
-  +comunediNascita: String
+  +comunediNascita: varchar
   +sesso: sesso
-  +codiceFiscale: String
+  +codiceFiscale: varchar
 }
 note "{ Partial , Overlapping }" as N1
 Utente ... N1
 Operatore .. N1
 Studente .. N1
 class Sede {
-  +città: String
-  +via: String
-  +civico: String
-  +provincia: String
+  +città: varchar
+  +via: varchar
+  +civico: varchar
+  +provincia: varchar
   +cap: Integer
 }
 class Gestore {
-  +nome: String
-  +descrizione: String
-  +telefono: String
-  +cod.Gestore: String
+  +nome: varchar
+  +descrizione: varchar
+  +telefono: varchar
+  +cod.Gestore: varchar
 }
 Gestore "*" - "1" Sede:Collocato
 class Operatore{
-  +cod.Operatore
+  +cod.Operatore :varchar
 }
 class Studente{
-  +cod.Studente
+  +cod.Studente: varchar
 }
 enum sesso{
 M
@@ -46,14 +46,19 @@ F
 Utente "1" -- "0..1" Operatore:EssereOperatore
 Utente "1" -- "0..1" Studente:EssereStudente
 Gestore "1" -- "0..*" Corso:Possiede
-Corso "*" -- "*" Studente
-Corso "*" - "1..*" Operatore:Coordinato
+Corso "*" --- "*" Studente
+Corso "*" - "1..*" Operatore
+(Corso,Operatore)..Coordina
+class Coordina{
+  +Richiesta: boolean
+}
+
 class Corso{
-  +titolo: String
-  +descrizione: String
+  +titolo: varchar
+  +descrizione: varchar
   +iscrizioniMassime: double
   +tassoPresenzeMinime: float
-  +cod.Corso: String
+  +cod.Corso: varchar
 }
 class AreaTematica{
   +Tipo
@@ -61,15 +66,19 @@ class AreaTematica{
 }
 Corso "*" --- "1..*" AreaTematica:Appartengono
 class Lezione{
-  +titolo: String
-  +descrizione: String
+  +titolo: varchar
+  +descrizione: varchar
   +dataoraInizio: Timestamp
   +durata: Time
-  +cod.Lezione: String
+  +cod.Lezione: varchar
 }
 Corso "1" -- "1..*" Lezione:Svolto
 (Corso, Studente) .. Iscritti
-Lezione "*" -- "*" Studente:Prenotazione
+Lezione "*" -- "*" Studente
+(Lezione,Studente)..Prenotazioni
+class Prenotazioni{
+Presente: boolean
+}
 class Iscritti{
 +idonei: boolean
 }

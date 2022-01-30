@@ -64,7 +64,7 @@ public class PostgreAreaTematicaDAO implements AreaTematicaDAO {
         String SQL = ("DELETE FROM \"Appartiene\" WHERE \"codCorso\"= ?;");
         Connection conn = postgreJDBC.Connessione();
         PreparedStatement pstmt = conn.prepareStatement(SQL);
-        pstmt.setString(1,corso.codCorso );
+        pstmt.setString(1,corso.getCodCorso());
         pstmt.executeUpdate();
         pstmt.close();
         conn.close();

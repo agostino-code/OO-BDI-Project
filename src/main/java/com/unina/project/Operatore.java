@@ -7,13 +7,21 @@ public class Operatore extends Utente{
         this.codOperatore = codOperatore;
     }
 
-    public String codOperatore;
+    public String getCodOperatore() {
+        return codOperatore;
+    }
+
+    public List<Corso> getCorsi() {
+        return corsi;
+    }
+
+    private String codOperatore;
 
     public void setCorsi(List<Corso> corsi) {
         this.corsi = corsi;
     }
 
-    public List<Corso> corsi;
+    private List<Corso> corsi;
 
     public void setRichiesta(Boolean richiesta) {
         Richiesta = richiesta;
@@ -31,5 +39,5 @@ public class Operatore extends Utente{
         }
     }
 
-    public Boolean Richiesta;
+    private Boolean Richiesta;
 }

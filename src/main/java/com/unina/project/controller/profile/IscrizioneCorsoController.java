@@ -42,14 +42,12 @@ public class IscrizioneCorsoController implements Initializable {
     public TreeTableColumn<CorsoRicerca,String> provinciaGestoreTableColumn;
     public TreeTableColumn<CorsoRicerca, String> areeTableColumn;
     public TreeTableColumn<CorsoRicerca,String> tipoTableColumn;
-    @FXML
-    private Button cercaButton;
+
     private Utente utente = new Utente();
     private CorsoRicerca rowData;
     private final CorsoDAO corsoDAO=new PostgreCorsoDAO();
     private final Studente studente=new Studente();
     private final StudenteDAO studenteDAO=new PostgreStudenteDAO();
-    private final Operatore operatore=new Operatore();
     private final OperatoreDAO operatoreDAO=new PostgreOperatoreDAO();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -96,24 +94,24 @@ public class IscrizioneCorsoController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent())
         if (result.get() == ButtonType.OK){
-            if(studenteDAO.checkStudenteExist(utente.codiceFiscale)){
-                studente.setCodStudente(studenteDAO.setStudente(utente.codiceFiscale));
+            if(studenteDAO.checkStudenteExist(utente.getCodiceFiscale())){
+                studente.setCodStudente(studenteDAO.setStudente(utente.getCodiceFiscale()));
             }
             else{
-                studente.setCodStudente(studenteDAO.getCodStudente(utente.codiceFiscale));
+                studente.setCodStudente(studenteDAO.getCodStudente(utente.getCodiceFiscale()));
             }
-            studenteDAO.iscriviStudente(studente.codStudente, corsoRicerca.codCorso);
+            studenteDAO.iscriviStudente(studente.getCodStudente(), corsoRicerca.codCorso);
             setCorsoRicercaTableView();
             if(corsoRicerca.Privato){
             Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
             alert2.setTitle("Attenzione!");
-            alert2.setHeaderText(utente.nome+" "+utente.cognome+" ha inoltrato correttamente la richiesta per il corso "+corsoRicerca.titolo);
+            alert2.setHeaderText(utente.getNome()+" "+utente.getCognome()+" ha inoltrato correttamente la richiesta per il corso "+corsoRicerca.titolo);
             alert2.showAndWait();
             }
             else{
             Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
             alert2.setTitle("Attenzione!");
-            alert2.setHeaderText(utente.nome+" "+utente.cognome+" ora è iscritto del corso "+corsoRicerca.titolo);
+            alert2.setHeaderText(utente.getNome()+" "+utente.getCognome()+" ora è iscritto del corso "+corsoRicerca.titolo);
             alert2.showAndWait();
             }
 
@@ -149,8 +147,8 @@ public class IscrizioneCorsoController implements Initializable {
         TreeItem<CorsoRicerca> fakeroot=new TreeItem<>();
         ricercacorsiTableView.setRoot(fakeroot);
         fakeroot.getChildren().clear();
-        String codOperatore=operatoreDAO.getCodOperatore(utente.codiceFiscale);
-        String codStudente=studenteDAO.getCodStudente(utente.codiceFiscale);
+        String codOperatore=operatoreDAO.getCodOperatore(utente.getCodiceFiscale());
+        String codStudente=studenteDAO.getCodStudente(utente.getCodiceFiscale());
         String SQL= "SELECT * FROM \"parametriricerca\" WHERE \"codCorso\" NOT IN" +
                 "(SELECT \"codCorso\" FROM \"Coordina\" WHERE \"codOperatore\"='"+codOperatore+"') \n" +
                 " AND \"codCorso\" NOT IN(SELECT \"codCorso\" FROM \"Iscritti\" WHERE \"codStudente\"='"+codStudente+"');";
@@ -160,7 +158,7 @@ public class IscrizioneCorsoController implements Initializable {
                 TreeItem<CorsoRicerca> treeItem = new TreeItem<>(i);
                 for (AreaTematica areaTematica : i.areetematiche) {
                     CorsoRicerca corsoRicerca = new CorsoRicerca();
-                    corsoRicerca.setTag(areaTematica.tag);
+                    corsoRicerca.setTag(areaTematica.getTag());
                     TreeItem<CorsoRicerca> tagItem = new TreeItem<>(corsoRicerca);
                     treeItem.getChildren().add(tagItem);
                 }
@@ -180,8 +178,8 @@ public class IscrizioneCorsoController implements Initializable {
                 List<String> tagscorso = new ArrayList<>();
                 for (AreaTematica areaTematica : i.areetematiche) {
                     CorsoRicerca corsoRicerca = new CorsoRicerca();
-                    corsoRicerca.setTag(areaTematica.tag);
-                    tagscorso.add(areaTematica.tag);
+                    corsoRicerca.setTag(areaTematica.getTag());
+                    tagscorso.add(areaTematica.getTag());
                     TreeItem<CorsoRicerca> tagItem = new TreeItem<>(corsoRicerca);
                     treeItem.getChildren().add(tagItem);
                 }
@@ -212,8 +210,8 @@ public class IscrizioneCorsoController implements Initializable {
         String SQL=ricercaCorsoController.getParametriRicercaSQL();
         if(!SQL.equals("Select * from \"parametriricerca\" WHERE ")) {
             try {
-                String codOperatore=operatoreDAO.getCodOperatore(utente.codiceFiscale);
-                String codStudente=studenteDAO.getCodStudente(utente.codiceFiscale);
+                String codOperatore=operatoreDAO.getCodOperatore(utente.getCodiceFiscale());
+                String codStudente=studenteDAO.getCodStudente(utente.getCodiceFiscale());
                 SQL=SQL.concat("\"codCorso\" NOT IN" +
                         "(SELECT \"codCorso\" FROM \"Coordina\" WHERE \"codOperatore\"='"+codOperatore+"') \n" +
                         " AND \"codCorso\" NOT IN(SELECT \"codCorso\" FROM \"Iscritti\" WHERE \"codStudente\"='"+codStudente+"');");

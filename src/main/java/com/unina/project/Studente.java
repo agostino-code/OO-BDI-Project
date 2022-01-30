@@ -11,7 +11,7 @@ public class Studente extends Utente{
         Idoneo = idoneo;
     }
 
-    public String codStudente;
+    private String codStudente;
 
     public String getIdoneo() {
         if (Idoneo == null) {
@@ -25,7 +25,16 @@ public class Studente extends Utente{
         }
     }
 
-    public Boolean Idoneo;
+    public String getCodStudente() {
+        return codStudente;
+    }
+
+    public List<Corso> getCorsi() {
+        return corsi;
+    }
+
+    private Boolean Idoneo;
+
     public String getPresente() {
         if(Presente){
             return "Si";
@@ -38,11 +47,11 @@ public class Studente extends Utente{
         Presente = presente;
     }
 
-    public Boolean Presente;
+    private Boolean Presente;
 
     public void setCorsi(List<Corso> corsi) {
         this.corsi = corsi;
     }
 
-    public List<Corso> corsi;
+    private List<Corso> corsi;
 }

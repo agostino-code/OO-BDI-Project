@@ -53,7 +53,7 @@ public class TagBar extends VBox {
             e.printStackTrace();
         }
         for(AreaTematica i:loadtags){
-            TextFields.bindAutoCompletion(inputTextField,i.tag);
+            TextFields.bindAutoCompletion(inputTextField,i.getTag());
         }
         inputTextField.prefHeightProperty().bind(this.heightProperty());
         HBox.setHgrow(inputTextField, Priority.ALWAYS);
