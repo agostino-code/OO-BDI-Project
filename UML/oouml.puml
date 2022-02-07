@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+interface InterfacciaGrafica{
+}
+abstract Resources{
+}
+annotation Database{
+}
+class com.unina.project.controller.Controller {
+}
+class com.unina.project.controller.profile.Controller {
+}
+class com.unina.project.Classi {
+}
+class com.unina.project.database.InterfaceDAO {
+}
+class com.unina.project.database.postgre.ClassiDAO {
+}
+InterfacciaGrafica - com.unina.project.controller.Controller
+InterfacciaGrafica - Resources
+com.unina.project.controller.profile.Controller --- com.unina.project.Classi
+com.unina.project.controller.Controller --- com.unina.project.Classi
+InterfacciaGrafica --- com.unina.project.controller.profile.Controller
+com.unina.project.controller.profile.Controller - com.unina.project.controller.Controller
+com.unina.project.Classi --- com.unina.project.database.InterfaceDAO
+com.unina.project.database.InterfaceDAO <|--- com.unina.project.database.postgre.ClassiDAO
+com.unina.project.database.postgre.ClassiDAO - Database
+
+@enduml

@@ -4,13 +4,14 @@ import com.unina.project.AreaTematica;
 import com.unina.project.Corso;
 import com.unina.project.controller.profile.CorsoRicerca;
 import com.unina.project.database.CorsoDAO;
+import com.unina.project.database.JDBC;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PostgreCorsoDAO implements CorsoDAO {
-    private final PostgreJDBC postgreJDBC=new PostgreJDBC();
+    private final JDBC postgreJDBC=new PostgreJDBC();
 
     @Override
     public String insertCorso(Corso corso, String codGestore) throws SQLException {
@@ -89,6 +90,7 @@ public class PostgreCorsoDAO implements CorsoDAO {
             corso.setNome(rs.getString("nome"));
             corso.setCitta(rs.getString("città"));
             corso.setCodCorso(rs.getString("codCorso"));
+            corso.setTelefono(rs.getString("telefono"));
             corso.setProvincia(rs.getString("provincia"));
             corso.setPrivato(rs.getBoolean("Privato"));
             corso.setNumeroLezioni(rs.getInt("numeroLezioni"));

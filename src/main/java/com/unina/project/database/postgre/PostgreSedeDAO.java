@@ -1,6 +1,7 @@
 package com.unina.project.database.postgre;
 
 import com.unina.project.Sede;
+import com.unina.project.database.JDBC;
 import com.unina.project.database.SedeDAO;
 
 import java.sql.Connection;
@@ -8,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class PostgreSedeDAO implements SedeDAO {
-    private final PostgreJDBC postgreJDBC=new PostgreJDBC();
+    private final JDBC postgreJDBC=new PostgreJDBC();
 
     @Override
     public void insertSede(Sede sede,String codGestore) throws SQLException {

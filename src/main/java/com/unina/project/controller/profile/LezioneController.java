@@ -29,25 +29,25 @@ public class LezioneController implements Initializable {
     public TextField oraTextField;
 
     @FXML
-    private TextField codCorsoTextField;
+    public TextField codCorsoTextField;
 
     @FXML
-    private DatePicker dataPicker=new DatePicker(LocalDate.now().plusDays(1));
+    public DatePicker dataPicker=new DatePicker(LocalDate.now().plusDays(1));
 
     @FXML
-    private TextArea descrizioneTextArea;
+    public TextArea descrizioneTextArea;
 
     @FXML
-    private TextField durataTextField;
+    public TextField durataTextField;
 
     @FXML
-    private Button nuovaLezioneButton;
+    public Button nuovaLezioneButton;
 
     @FXML
-    private TextField titoloTextField;
+    public TextField titoloTextField;
 
-    private final Lezione lezione=new Lezione();
-    private final LezioneDAO lezioneDAO=new PostgreLezioneDAO();
+    public Lezione lezione=new Lezione();
+    public final LezioneDAO lezioneDAO=new PostgreLezioneDAO();
     private final CorsoDAO corsoDAO=new PostgreCorsoDAO();
 
     @Override
@@ -151,9 +151,9 @@ public class LezioneController implements Initializable {
     };
 
     @FXML
-    void onnuovaLezioneButtonClick(ActionEvent event) {
-        if(!titoloTextField.getText().isBlank()&&!dataPicker.getValue().toString().isBlank()&&
-        !durataTextField.getText().isBlank()&&!codCorsoTextField.getText().isBlank()){
+    public void onnuovaLezioneButtonClick(ActionEvent event) {
+        if(!titoloTextField.getText().isBlank()&&dataPicker.getValue()!=null&&
+        !durataTextField.getText().isBlank()&&!codCorsoTextField.getText().isBlank()&&!oraTextField.getText().isBlank()){
             lezione.setTitolo(titoloTextField.getText());
             lezione.setDescrizione(descrizioneTextArea.getText());
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

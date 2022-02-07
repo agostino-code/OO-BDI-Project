@@ -14,14 +14,12 @@ import jfxtras.styles.jmetro.Style;
 import java.util.Optional;
 
 public class Main extends Application {
-    private static Scene loginScene;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loginPaneLoader = new FXMLLoader(getClass().getResource("login.fxml"));
         Parent loginPane = loginPaneLoader.load();
-        loginScene = new Scene(loginPane, 400, 400);
-
+        Scene loginScene = new Scene(loginPane, 400, 400);
         JMetro jMetro = new JMetro(Style.LIGHT);
         jMetro.setScene(loginScene);
             primaryStage.setTitle("FormazioneFacile");
@@ -39,9 +37,6 @@ public class Main extends Application {
         });
             primaryStage.show();
         }
-    public static Scene getLoginScene() {
-        return loginScene;
-    }
 
     public static void main(String[] args) {
         launch();

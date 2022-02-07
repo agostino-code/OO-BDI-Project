@@ -27,6 +27,8 @@
                            prefWidth="100.0" text="Codice Gestore"/>
           <TreeTableColumn fx:id="nomeGestoreTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0"
                            prefWidth="100.0" text="Nome Gestore"/>
+          <TreeTableColumn fx:id="telefonoGestoreTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0"
+                           prefWidth="100.0" text="Telefono Gestore"/>
           <TreeTableColumn fx:id="cittaGestoreTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0"
                            prefWidth="100.0" text="Città Gestore"/>
           <TreeTableColumn fx:id="provinciaGestoreTableColumn" maxWidth="1.7976931348623157E308" prefWidth="100.0"

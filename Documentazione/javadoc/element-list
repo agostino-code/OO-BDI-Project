@@ -1,0 +1,11 @@
+module:com.unina.project
+com.unina.project
+com.unina.project.codicefiscale.document
+com.unina.project.codicefiscale.document.citiesprovinces
+com.unina.project.codicefiscale.engine
+com.unina.project.controller
+com.unina.project.controller.profile
+com.unina.project.database
+com.unina.project.database.postgre
+com.unina.project.graphics
+com.unina.project.verificationcode

@@ -1,0 +1,166 @@
+@startuml
+class com.unina.project.Corso {
+- String titolo
+- String descrizione
+- Integer iscrizioniMassime
+- Integer numeroLezioni
++ Integer tassoPresenzeMinime
+- String codCorso
++ Boolean Privato
++ void setTitolo(String)
++ void setDescrizione(String)
++ void setIscrizioniMassime(Integer)
++ void setTassoPresenzeMinime(Integer)
++ void setNumeroLezioni(Integer)
++ String getTitolo()
++ String getDescrizione()
++ Integer getIscrizioniMassime()
++ Integer getNumeroLezioni()
++ String getCodCorso()
++ String getTassoPresenzeMinime()
++ void setCodCorso(String)
++ void setPrivato(Boolean)
++ String getPrivato()
+}
+class com.unina.project.Studente {
+- String codStudente
+- Boolean Idoneo
+- Boolean Presente
++ void setCodStudente(String)
++ void setIdoneo(Boolean)
++ String getIdoneo()
++ String getCodStudente()
++ String getPresente()
++ void setPresente(Boolean)
+}
+class com.unina.project.Gestore {
+- String nome
+- String descrizione
+- String telefono
++ String codGestore
++ void setNome(String)
++ void setDescrizione(String)
++ void setTelefono(String)
++ void setEmail(String)
++ String getNome()
++ String getDescrizione()
++ String getTelefono()
++ String getEmail()
++ String getCodGestore()
++ void setCodGestore(String)
+}
+class com.unina.project.Utente {
+- String nome
+- String cognome
++ LocalDate dataNascita
++ String sesso
++ String comuneDiNascita
++ String codiceFiscale
++ String getNome()
++ void setNome(String)
++ String getCognome()
++ void setCognome(String)
++ void setDataNascita(LocalDate)
++ String getSesso()
++ void setSesso(String)
++ String getCodiceFiscale()
++ void setCodiceFiscale(String)
++ String getComuneDiNascita()
++ void setComuneDiNascita(String)
++ void setEmail(String)
++ String getEmail()
++ LocalDate getDataNascita()
++ int getDataNascitaGiorno()
++ int getDataNascitaMese()
++ int getDataNascitaAnno()
+}
+class com.unina.project.Operatore {
+- String codOperatore
+- Boolean Richiesta
++ void setCodOperatore(String)
++ String getCodOperatore()
++ void setRichiesta(Boolean)
++ String getRichiesta()
+}
+class com.unina.project.Main {
++ void start(Stage)
++ {static} void main(String[])
+}
+class com.unina.project.AreaTematica {
+- String tag
++ void setTag(String)
++ String getTag()
+}
+class com.unina.project.Statistiche {
+- Integer percentualeRiempimento
+- Integer presenzeMinime
+- Integer presenzeMassime
+- Float presenzeMedie
++ Integer getPercentualeRiempimento()
++ void setPercentualeRiempimento(Integer)
++ Integer getPresenzeMinime()
++ void setPresenzeMinime(Integer)
++ Integer getPresenzeMassime()
++ void setPresenzeMassime(Integer)
++ Float getPresenzeMedie()
++ void setPresenzeMedie(Float)
+}
+class com.unina.project.Autenticazione {
+- String email
+- String password
++ void setEmail(String)
++ void setPassword(String)
++ String getEmail()
++ String getPassword()
+}
+class com.unina.project.Lezione {
+- String titolo
+- String descrizione
+- LocalDateTime dataoraInizio
+- LocalTime durata
+- String codLezione
++ void setTitolo(String)
++ void setDescrizione(String)
++ void setDataoraInizio(LocalDateTime)
++ void setDurata(LocalTime)
++ void setCodLezione(String)
++ LocalDate getDataInizio()
++ LocalTime getOraInizio()
++ String getTitolo()
++ String getDescrizione()
++ LocalDateTime getDataoraInizio()
++ LocalTime getDurata()
++ String getCodLezione()
++ String getCodCorso()
++ void setCodCorso(String)
+}
+class com.unina.project.Sede {
+- String via
+- String civico
+- String citta
+- String provincia
++ void setVia(String)
++ void setCivico(String)
++ void setCitta(String)
++ void setProvincia(String)
++ String getVia()
++ String getCivico()
++ String getCitta()
++ String getProvincia()
++ String getIndirizzo()
+}
+
+com.unina.project.Corso "1"-"1" com.unina.project.Statistiche
+com.unina.project.Utente <|-- com.unina.project.Studente
+com.unina.project.Utente <|-- com.unina.project.Operatore
+javafx.application.Application <|-- com.unina.project.Main
+com.unina.project.Operatore "*"--"*" com.unina.project.Corso
+com.unina.project.Studente "1"--"*" com.unina.project.Corso
+com.unina.project.Gestore "1"--"*" com.unina.project.Corso
+com.unina.project.AreaTematica "*"--"1" com.unina.project.Corso
+com.unina.project.Lezione "*"--"1" com.unina.project.Corso
+com.unina.project.Sede "1"--"1" com.unina.project.Corso
+com.unina.project.Autenticazione "1"--"1" com.unina.project.Utente
+com.unina.project.Autenticazione "1"--"1" com.unina.project.Gestore
+
+@enduml

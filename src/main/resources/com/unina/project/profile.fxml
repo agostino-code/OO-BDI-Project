@@ -12,139 +12,103 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-            prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.unina.project.controller.profile.ProfileController">
-    <HBox prefHeight="288.0" prefWidth="670.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-          AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unina.project.controller.profile.ProfileController">
+    <HBox prefHeight="288.0" prefWidth="670.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <SplitPane dividerPositions="0.4" HBox.hgrow="ALWAYS">
             <AnchorPane maxWidth="400.0">
-                <VBox prefHeight="286.4" prefWidth="662.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <VBox prefHeight="286.4" prefWidth="662.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <AnchorPane layoutX="10.0" layoutY="296.0">
-                        <Label alignment="CENTER" style="&#10;" styleClass="label24px" stylesheets="@style.css"
-                               text="Studente" textAlignment="CENTER" wrapText="false"
-                               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                               AnchorPane.topAnchor="20.0">
+                        <Label alignment="CENTER" style="&#10;" styleClass="label24px" stylesheets="@style.css" text="Studente" textAlignment="CENTER" wrapText="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
                             <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                             </font>
                             <textFill>
-                                <Color red="0.624" green="0.624" blue="0.624"/>
+                                <Color red="0.624" green="0.624" blue="0.624" />
                             </textFill>
                         </Label>
                     </AnchorPane>
-                    <Button alignment="CENTER" layoutX="20.0" layoutY="20.0" maxHeight="-Infinity"
-                            maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#setHomepage"
-                            prefHeight="30.0" stylesheets="@style.css" text="Homepage">
+                    <Button alignment="CENTER" layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#setHomepage" prefHeight="30.0" stylesheets="@style.css" text="Homepage">
                         <VBox.margin>
-                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                         </VBox.margin>
                         <graphic>
-                            <FontIcon iconColor="WHITE" iconLiteral="win10-home" iconSize="15"/>
+                            <FontIcon iconColor="WHITE" iconLiteral="win10-home" iconSize="15" />
                         </graphic>
                     </Button>
-                    <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308"
-                            mnemonicParsing="false" onAction="#onDatiAnagraficiButtonClick" prefHeight="30.0"
-                            stylesheets="@style.css" text="Dati anagrafici">
+                    <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onDatiAnagraficiButtonClick" prefHeight="30.0" stylesheets="@style.css" text="Dati anagrafici">
                         <VBox.margin>
-                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                         </VBox.margin>
                         <graphic>
-                            <FontIcon iconColor="WHITE" iconLiteral="win10-student" iconSize="15" layoutX="10.0"/>
+                            <FontIcon iconColor="WHITE" iconLiteral="win10-student" iconSize="15" layoutX="10.0" />
                         </graphic>
                     </Button>
-                    <Button alignment="CENTER" layoutX="20.0" layoutY="20.0" maxWidth="1.7976931348623157E308"
-                            mnemonicParsing="false" onAction="#onDatiAutenticazioneButtonClick" prefHeight="30.0"
-                            stylesheets="@style.css" text="Dati autenticazione">
+                    <Button alignment="CENTER" layoutX="20.0" layoutY="20.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onDatiAutenticazioneButtonClick" prefHeight="30.0" stylesheets="@style.css" text="Dati autenticazione">
                         <VBox.margin>
-                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                         </VBox.margin>
                         <graphic>
-                            <FontIcon iconColor="WHITE" iconLiteral="win10-key" iconSize="15"/>
+                            <FontIcon iconColor="WHITE" iconLiteral="win10-key" iconSize="15" />
                         </graphic>
                     </Button>
-                    <Button alignment="CENTER" layoutX="20.0" layoutY="20.0" maxWidth="1.7976931348623157E308"
-                            mnemonicParsing="false" onAction="#onIscrizioneCorsiButtonClick" prefHeight="30.0"
-                            stylesheets="@style.css" text="Iscrizione Corsi">
+                    <Button alignment="CENTER" layoutX="20.0" layoutY="20.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onIscrizioneCorsiButtonClick" prefHeight="30.0" stylesheets="@style.css" text="Iscrizione Corsi">
                         <VBox.margin>
-                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                         </VBox.margin>
                         <graphic>
-                            <FontIcon iconColor="WHITE" iconLiteral="win10-pencil" iconSize="15"/>
+                            <FontIcon iconColor="WHITE" iconLiteral="win10-pencil" iconSize="15" />
                         </graphic>
                     </Button>
-                    <Button alignment="CENTER" layoutX="20.0" layoutY="123.0" maxWidth="1.7976931348623157E308"
-                            mnemonicParsing="false" onAction="#oniscrizioniLezioniButtonClick" prefHeight="30.0"
-                            stylesheets="@style.css" text="Iscrizioni Lezioni">
+                    <Button alignment="CENTER" layoutX="20.0" layoutY="123.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#oniscrizioniLezioniButtonClick" prefHeight="30.0" stylesheets="@style.css" text="Iscrizioni Lezioni">
                         <VBox.margin>
-                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                         </VBox.margin>
                         <graphic>
-                            <FontIcon iconColor="WHITE" iconLiteral="win10-todo-list" iconSize="15"/>
+                            <FontIcon iconColor="WHITE" iconLiteral="win10-todo-list" iconSize="15" />
                         </graphic>
                     </Button>
                     <AnchorPane fx:id="operatoreAnchorPane" visible="false">
-                        <Label alignment="CENTER" style="&#10;" styleClass="label24px" stylesheets="@style.css"
-                               text="Operatore" textAlignment="CENTER" wrapText="false"
-                               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                        <Label alignment="CENTER" style="&#10;" styleClass="label24px" stylesheets="@style.css" text="Operatore" textAlignment="CENTER" wrapText="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                             <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                             </font>
                             <textFill>
-                                <Color red="0.624" green="0.624" blue="0.624"/>
+                                <Color red="0.624" green="0.624" blue="0.624" />
                             </textFill>
                         </Label>
                     </AnchorPane>
-                    <Button fx:id="gestioneCorsiButton" alignment="CENTER" maxWidth="1.7976931348623157E308"
-                            mnemonicParsing="false" onAction="#onGestioneCorsiButtonClick" prefHeight="30.0"
-                            stylesheets="@style.css" text="Gestione Corsi" visible="false">
+                    <Button fx:id="gestioneCorsiButton" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onGestioneCorsiButtonClick" prefHeight="30.0" stylesheets="@style.css" text="Gestione Corsi" visible="false">
                         <VBox.margin>
-                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                         </VBox.margin>
                         <graphic>
-                            <FontIcon iconColor="WHITE" iconLiteral="win10-parallel-tasks" iconSize="15"/>
+                            <FontIcon iconColor="WHITE" iconLiteral="win10-parallel-tasks" iconSize="15" />
                         </graphic>
                     </Button>
-                    <Button fx:id="gestorelezioneButton" alignment="CENTER" layoutX="20.0" layoutY="306.0"
-                            maxWidth="1.7976931348623157E308" mnemonicParsing="false"
-                            onAction="#onGestioneLezioniButtonClick" prefHeight="30.0" stylesheets="@style.css"
-                            text="Gestione Lezione" visible="false">
+                    <Button fx:id="gestorelezioneButton" alignment="CENTER" layoutX="20.0" layoutY="306.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onGestioneLezioniButtonClick" prefHeight="30.0" stylesheets="@style.css" text="Gestione Lezione" visible="false">
                         <graphic>
-                            <FontIcon iconColor="WHITE" iconLiteral="win10-notebook" iconSize="15"/>
+                            <FontIcon iconColor="WHITE" iconLiteral="win10-notebook" iconSize="15" />
                         </graphic>
                         <VBox.margin>
-                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                         </VBox.margin>
                     </Button>
-                    <Button fx:id="richiesteButton" alignment="CENTER" layoutX="20.0" layoutY="357.0"
-                            maxWidth="1.7976931348623157E308" mnemonicParsing="false"
-                            onAction="#onRichiesteButtonClick" prefHeight="30.0" stylesheets="@style.css"
-                            text="Richieste" visible="false">
+                    <Button fx:id="richiesteButton" alignment="CENTER" layoutX="20.0" layoutY="357.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onRichiesteButtonClick" prefHeight="30.0" stylesheets="@style.css" text="Richieste" visible="false">
                         <graphic>
-                            <FontIcon iconColor="WHITE" iconLiteral="win10-news" iconSize="15"/>
+                            <FontIcon iconColor="WHITE" iconLiteral="win10-news" iconSize="15" />
                         </graphic>
                         <VBox.margin>
-                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                         </VBox.margin>
                     </Button>
                     <VBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
                         <VBox.margin>
-                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                         </VBox.margin>
                         <HBox alignment="BOTTOM_LEFT" VBox.vgrow="ALWAYS">
-                            <Button alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
-                                    onAction="#onLogoutButtonClick" prefHeight="30.0" prefWidth="300.0"
-                                    stylesheets="@style.css" text="Logout" HBox.hgrow="ALWAYS">
+                            <Button alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLogoutButtonClick" prefHeight="30.0" prefWidth="300.0" stylesheets="@style.css" text="Logout" HBox.hgrow="ALWAYS">
                                 <HBox.margin>
-                                    <Insets bottom="20.0" left="10.0" right="10.0" top="10.0"/>
-                                </HBox.margin>
-                            </Button>
-                            <Button alignment="CENTER" layoutX="10.0" layoutY="353.0"
-                                    maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="30.0"
-                                    prefWidth="300.0" text="Elimina Utente" HBox.hgrow="ALWAYS">
-                                <HBox.margin>
-                                    <Insets bottom="20.0" left="10.0" right="10.0" top="10.0"/>
+                                    <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
                                 </HBox.margin>
                             </Button>
                         </HBox>
@@ -152,8 +116,7 @@
                 </VBox>
             </AnchorPane>
             <AnchorPane>
-                <StackPane fx:id="stackPanelProfilo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                <StackPane fx:id="stackPanelProfilo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             </AnchorPane>
         </SplitPane>
     </HBox>

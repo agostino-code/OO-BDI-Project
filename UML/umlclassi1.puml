@@ -1,0 +1,75 @@
+@startuml
+class Corso {
+- String titolo
+- String descrizione
+- Integer iscrizioniMassime
+- Integer numeroLezioni
+- Integer tassoPresenzeMinime
+- Boolean Privato
+}
+class Studente {
+- String codStudente
+- Boolean Idoneo
+- Boolean Presente
+}
+
+class Gestore {
+- String nome
+- String descrizione
+- String telefono
+}
+class Utente {
+- String nome
+- String cognome
+- LocalDate dataNascita
+- String sesso
+- String comuneDiNascita
+- String codiceFiscale
+}
+class Operatore {
+- String codOperatore
+- Boolean Richiesta
+}
+
+class AreaTematica {
+- String tag
+}
+
+class Statistiche {
+- Integer percentualeRiempimento
+- Integer presenzeMinime
+- Integer presenzeMassime
+- Float presenzeMedie
+}
+
+class Autenticazione {
+- String email
+- String password
+}
+
+class Lezione {
+- String titolo
+- String descrizione
+- LocalDateTime dataoraInizio
+- LocalTime durata
+}
+class Sede {
+- String via
+- String civico
+- String citta
+- String provincia
+}
+
+Corso "1"-"1" Statistiche
+Utente <|-- Studente
+Utente <|-- Operatore
+Operatore "*"--"*" Corso
+Studente "1"--"*" Corso
+Gestore "1"--"*" Corso
+AreaTematica "*"--"1" Corso
+Lezione "*"--"1" Corso
+Sede "1"---"1" Gestore
+Autenticazione "1"--"1" Utente
+Autenticazione "1"--"1" Gestore
+
+@enduml

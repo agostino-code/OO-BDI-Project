@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="250.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unina.project.controller.ModificaDatiAutenticazioneController">
+    <Label layoutX="94.0" layoutY="87.0" stylesheets="@style.css" text="Email" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="80.0" />
+   <Label alignment="CENTER" layoutY="25.0" styleClass="label24px" stylesheets="@style.css" text="Modifica dati autenticazione" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+    <Label layoutX="67.0" layoutY="137.0" text="Password" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="120.0">
+        <stylesheets>
+            <URL value="@style.css" />
+        </stylesheets></Label>
+    <Label layoutX="28.0" layoutY="161.0" stylesheets="@style.css" text="Ripeti password" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="160.0" />
+    <Button fx:id="confermaModificaButton" layoutX="262.0" layoutY="199.0" mnemonicParsing="false" onAction="#confermaModifica" stylesheets="@style.css" text="Conferma modifica" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="200.0" />
+    <PasswordField fx:id="passwordField" layoutX="150.0" layoutY="117.0" prefHeight="25.0" prefWidth="284.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="115.0" />
+    <PasswordField fx:id="confermaPasswordField" layoutX="149.0" layoutY="155.0" prefHeight="25.0" prefWidth="284.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="155.0" />
+    <TextField fx:id="emailTextField" layoutX="150.0" layoutY="76.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="75.0" />
+</AnchorPane>

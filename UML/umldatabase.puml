@@ -1,0 +1,204 @@
+@startuml
+skinparam dpi 300
+class com.unina.project.database.postgre.PostgreCorsoDAO {
+- JDBC postgreJDBC
++ String insertCorso(Corso,String)
++ List<Corso> getCorsi(String)
++ List<Corso> getCorsoList(String,String)
++ void deleteCorso(Corso)
++ List<CorsoRicerca> ricercaCorsi(String)
++ void updateCorso(Corso)
++ List<AreaTematica> getAreeTematiche(String)
++ Integer numeroIscrittiCorso(String)
++ List<Corso> getCorsiOperatore(String)
++ List<Corso> getCorsiOperatoreAccettati(String)
++ List<Corso> getCorsiStudente(String)
++ void disiscrivitiCorso(String,String)
++ Integer getNumeroLezioni(String)
+}
+class com.unina.project.database.postgre.PostgreUtenteDAO {
+- JDBC postgreJDBC
++ void insertUtente(Utente)
++ Utente getUtente(String)
+}
+class com.unina.project.database.postgre.PostgreOperatoreDAO {
+- JDBC postgreJDBC
++ String setOperatore(String)
++ void associaOperatore(String,String)
++ List<Operatore> getOperatori(String)
++ boolean checkOperatoreExist(String)
++ String getCodOperatore(String)
++ boolean checkOperatoreDaAccettare(String,String)
++ void annullaGestioneCorso(String,String)
++ void accettaGestioneCorso(String,String)
++ boolean checkOperatoreCorso(String,String)
+}
+class com.unina.project.database.postgre.PostgreSedeDAO {
+- JDBC postgreJDBC
++ void insertSede(Sede,String)
+}
+interface com.unina.project.database.StudenteDAO {
+~ String setStudente(String)
+~ boolean checkStudenteExist(String)
+~ void iscriviStudente(String,String)
+~ List<Studente> getStudentiDaAccettare(String)
+~ List<Studente> getStudentiAccettati(String)
+~ String getCodStudente(String)
+~ void richiestaAccettata(String,String)
+~ void richiestaRifiutata(String,String)
+~ boolean checkStudenteIscritto(String,String)
+~ Boolean getStudenteIdoneo(String)
+}
+interface com.unina.project.database.AutenticazioneDAO {
+~ void insertAutenticazione(Autenticazione)
+~ boolean checkEmailExist(String)
+~ boolean checkEmailUtenteExist(String)
+~ boolean checkEmailGestoriExist(String)
+~ boolean loginUtente(String,String)
+~ boolean loginGestore(String,String)
+~ void resetPassword(String,String)
+~ void deleteAutenticazione(Autenticazione)
+~ void updateAutenticazione(String,String,String)
+}
+interface com.unina.project.database.AreaTematicaDAO {
+~ void insertAreaTematica(List<String>)
+~ void associaAreaTematica(List<String>,String)
+~ List<AreaTematica> getAreeTematiche()
+~ void deleteAreaTematica(Corso)
+}
+class com.unina.project.database.postgre.PostgreGestoreDAO {
+- JDBC postgreJDBC
++ String insertGestore(Gestore)
++ boolean checkNomeExist(String)
++ Gestore getGestore(String)
+}
+interface com.unina.project.database.StatisticheDAO {
+~ Statistiche getStatistiche(String)
+~ List<PresenzeLezioni> getPresenzeLezioni(String)
+}
+class com.unina.project.database.postgre.PostgreStudenteDAO {
+- JDBC postgreJDBC
++ String setStudente(String)
++ boolean checkStudenteExist(String)
++ void iscriviStudente(String,String)
++ List<Studente> getStudentiDaAccettare(String)
++ List<Studente> getStudente(String,String)
++ List<Studente> getStudentiAccettati(String)
++ String getCodStudente(String)
++ void richiestaAccettata(String,String)
++ void richiestaRifiutata(String,String)
++ boolean checkStudenteIscritto(String,String)
++ Boolean getStudenteIdoneo(String)
+}
+class com.unina.project.database.postgre.PostgreStatisticheDAO {
+- JDBC postgreJDBC
++ Statistiche getStatistiche(String)
++ List<PresenzeLezioni> getPresenzeLezioni(String)
+}
+class com.unina.project.database.postgre.PostgreAutenticazioneDAO {
+- JDBC postgreJDBC
++ void insertAutenticazione(Autenticazione)
++ boolean checkEmailExist(String)
++ boolean checkEmailUtenteExist(String)
++ boolean checkEmailGestoriExist(String)
++ boolean loginUtente(String,String)
++ boolean loginGestore(String,String)
++ void deleteAutenticazione(Autenticazione)
++ void resetPassword(String,String)
++ void updateAutenticazione(String,String,String)
+}
+interface com.unina.project.database.GestoreDAO {
+~ String insertGestore(Gestore)
+~ boolean checkNomeExist(String)
+~ Gestore getGestore(String)
+}
+interface com.unina.project.database.SedeDAO {
+~ void insertSede(Sede,String)
+}
+interface com.unina.project.database.CorsoDAO {
+~ String insertCorso(Corso,String)
+~ List<Corso> getCorsi(String)
+~ void deleteCorso(Corso)
+~ List<CorsoRicerca> ricercaCorsi(String)
+~ void updateCorso(Corso)
+~ List<AreaTematica> getAreeTematiche(String)
+~ Integer numeroIscrittiCorso(String)
+~ List<Corso> getCorsiOperatore(String)
+~ List<Corso> getCorsiOperatoreAccettati(String)
+~ List<Corso> getCorsiStudente(String)
+~ void disiscrivitiCorso(String,String)
+~ Integer getNumeroLezioni(String)
+}
+interface com.unina.project.database.UtenteDAO {
+~ void insertUtente(Utente)
+~ Utente getUtente(String)
+}
+class com.unina.project.database.postgre.PostgreJDBC {
++ Connection Connessione()
+}
+class com.unina.project.database.postgre.PostgreLezioneDAO {
+- JDBC postgreJDBC
++ List<Lezione> getLezioni(String)
++ String getCorsoLezione(String)
++ List<Studente> getStudentiPrenotati(String)
++ void insertLezione(Lezione)
++ void updateLezione(Lezione)
++ void deleteLezione(String)
++ void prenotaLezione(String,String)
++ void deletePrenotazioneLezione(String,String)
++ void confermapresenza(String,String)
++ void nonpresente(String,String)
++ List<Lezione> getLezioniPrenotate(String)
++ boolean checkStudenteIscrittoLezione(String,String)
++ Integer countNumeroLezioni(String)
+}
+class com.unina.project.database.postgre.PostgreAreaTematicaDAO {
+- JDBC postgreJDBC
++ void insertAreaTematica(List<String>)
++ void associaAreaTematica(List<String>,String)
++ List<AreaTematica> getAreeTematiche()
++ void deleteAreaTematica(Corso)
+}
+interface com.unina.project.database.LezioneDAO {
+~ List<Lezione> getLezioni(String)
+~ String getCorsoLezione(String)
+~ List<Studente> getStudentiPrenotati(String)
+~ void insertLezione(Lezione)
+~ void updateLezione(Lezione)
+~ void deleteLezione(String)
+~ void prenotaLezione(String,String)
+~ void deletePrenotazioneLezione(String,String)
+~ void confermapresenza(String,String)
+~ void nonpresente(String,String)
+~ List<Lezione> getLezioniPrenotate(String)
+~ boolean checkStudenteIscrittoLezione(String,String)
+~ Integer countNumeroLezioni(String)
+}
+interface com.unina.project.database.OperatoreDAO {
+~ String setOperatore(String)
+~ void associaOperatore(String,String)
+~ List<Operatore> getOperatori(String)
+~ boolean checkOperatoreExist(String)
+~ String getCodOperatore(String)
+~ boolean checkOperatoreDaAccettare(String,String)
+~ void annullaGestioneCorso(String,String)
+~ void accettaGestioneCorso(String,String)
+~ boolean checkOperatoreCorso(String,String)
+}
+interface com.unina.project.database.JDBC {
+~ Connection Connessione()
+}
+
+
+com.unina.project.database.CorsoDAO <|.. com.unina.project.database.postgre.PostgreCorsoDAO
+com.unina.project.database.UtenteDAO <|.. com.unina.project.database.postgre.PostgreUtenteDAO
+com.unina.project.database.OperatoreDAO <|.. com.unina.project.database.postgre.PostgreOperatoreDAO
+com.unina.project.database.SedeDAO <|.. com.unina.project.database.postgre.PostgreSedeDAO
+com.unina.project.database.GestoreDAO <|.. com.unina.project.database.postgre.PostgreGestoreDAO
+com.unina.project.database.StudenteDAO <|.. com.unina.project.database.postgre.PostgreStudenteDAO
+com.unina.project.database.StatisticheDAO <|.. com.unina.project.database.postgre.PostgreStatisticheDAO
+com.unina.project.database.AutenticazioneDAO <|.. com.unina.project.database.postgre.PostgreAutenticazioneDAO
+com.unina.project.database.JDBC <|.. com.unina.project.database.postgre.PostgreJDBC
+com.unina.project.database.LezioneDAO <|.. com.unina.project.database.postgre.PostgreLezioneDAO
+com.unina.project.database.AreaTematicaDAO <|.. com.unina.project.database.postgre.PostgreAreaTematicaDAO
+@enduml

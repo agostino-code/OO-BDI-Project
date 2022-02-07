@@ -21,16 +21,36 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class HomepageController implements Initializable {
+    public static class CorsoIdoneo extends Corso{
+        public String getIdoneo() {
+            if (Idoneo == null) {
+                return null;
+            }
+            if(Idoneo){
+                return "Si";
+            }
+            else{
+                return "No";
+            }
+        }
+
+        public void setIdoneo(Boolean idoneo) {
+            Idoneo = idoneo;
+        }
+
+        Boolean Idoneo;
+    }
+
     @FXML
-    public TreeTableView<Corso> corsiTableView;
-    public TreeTableColumn<Corso,String> codCorsoTableColumn;
-    public TreeTableColumn<Corso,String> titoloTableColumn;
-    public TreeTableColumn<Corso,String> descrizioneTableColumn;
-    public TreeTableColumn<Corso,Integer> iscrizionimassimeTableColumn;
-    public TreeTableColumn<Corso,Integer> numerolezioniTableColumn;
-    public TreeTableColumn<Corso,String> tassopresenzeminimeTableColumn;
-    public TreeTableColumn<Corso,String> privatoTableColumn;
-    public TreeTableColumn<Corso,String> areeTableColumn;
+    public TreeTableView<CorsoIdoneo> corsiTableView;
+    public TreeTableColumn<CorsoIdoneo,String> codCorsoTableColumn;
+    public TreeTableColumn<CorsoIdoneo,String> titoloTableColumn;
+    public TreeTableColumn<CorsoIdoneo,String> descrizioneTableColumn;
+    public TreeTableColumn<CorsoIdoneo,String> idoneoTableColumn;
+    public TreeTableColumn<CorsoIdoneo,Integer> numerolezioniTableColumn;
+    public TreeTableColumn<CorsoIdoneo,String> tassopresenzeminimeTableColumn;
+    public TreeTableColumn<CorsoIdoneo,String> privatoTableColumn;
+    public TreeTableColumn<CorsoIdoneo,String> areeTableColumn;
 
     @FXML
     public TableView<Lezione> lezioniTableView;
@@ -56,7 +76,7 @@ public class HomepageController implements Initializable {
         MenuItem menuItem1 = new MenuItem("Esci dal corso");
         contextMenu.getItems().addAll(menuItem1);
         corsiTableView.setRowFactory( tv -> {
-            TreeTableRow<Corso> row = new TreeTableRow<>();
+            TreeTableRow<CorsoIdoneo> row = new TreeTableRow<>();
             row.setContextMenu(contextMenu);
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
@@ -73,7 +93,7 @@ public class HomepageController implements Initializable {
         codCorsoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getCodCorso()));
         titoloTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getTitolo()));
         descrizioneTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getDescrizione()));
-        iscrizionimassimeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getIscrizioniMassime()));
+        idoneoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getIdoneo()));
         numerolezioniTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getNumeroLezioni()));
         tassopresenzeminimeTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getTassoPresenzeMinime()));
         privatoTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getPrivato()));
@@ -90,16 +110,24 @@ public class HomepageController implements Initializable {
         codLezioneTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCodLezione()));
     }
     private void updateCorsiTableView() {
-        TreeItem<Corso> fakeroot=new TreeItem<>();
+        TreeItem<CorsoIdoneo> fakeroot=new TreeItem<>();
         corsiTableView.setRoot(fakeroot);
         fakeroot.getChildren().clear();
         try {
             for(Corso i:corsoDAO.getCorsiStudente(studente.getCodStudente())){
-                TreeItem<Corso> treeItem=new TreeItem<>(i);
+                CorsoIdoneo corsoIdoneo = new CorsoIdoneo();
+                corsoIdoneo.setTitolo(i.getTitolo());
+                corsoIdoneo.setDescrizione(i.getDescrizione());
+                corsoIdoneo.setCodCorso(i.getCodCorso());
+                corsoIdoneo.setNumeroLezioni(i.getNumeroLezioni());
+                corsoIdoneo.setTassoPresenzeMinime(i.tassoPresenzeMinime);
+                corsoIdoneo.setPrivato(i.Privato);
+                corsoIdoneo.setIdoneo(studenteDAO.getStudenteIdoneo(i.getCodCorso()));
+                TreeItem<CorsoIdoneo> treeItem=new TreeItem<>(corsoIdoneo);
                 for(AreaTematica areaTematica:i.getAreetematiche()){
-                    Corso corso=new Corso();
+                    CorsoIdoneo corso= new CorsoIdoneo();
                     corso.setTag(areaTematica.getTag());
-                    TreeItem<Corso> tagItem=new TreeItem<>(corso);
+                    TreeItem<CorsoIdoneo> tagItem=new TreeItem<>(corso);
                     treeItem.getChildren().add(tagItem);
                 }
                 fakeroot.getChildren().add(treeItem);

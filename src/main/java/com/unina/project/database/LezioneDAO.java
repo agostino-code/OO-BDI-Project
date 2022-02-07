@@ -14,6 +14,9 @@ public interface LezioneDAO {
 
     List<Studente> getStudentiPrenotati(String codLezione) throws SQLException;
     void insertLezione(Lezione lezione) throws SQLException;
+
+    void updateLezione(Lezione lezione) throws SQLException;
+
     void deleteLezione(String codLezione) throws SQLException;
     void prenotaLezione(String codLezione, String codStudente) throws SQLException;
     void deletePrenotazioneLezione(String codLezione,String codStudente) throws SQLException;

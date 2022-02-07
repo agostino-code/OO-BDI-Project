@@ -301,17 +301,24 @@ public class RegistrazioneController implements Initializable {
     public void accountCreatedSuccessful(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Attenzione!");
-        alert.setHeaderText("Account Creato Correttamente");
+        alert.setHeaderText("Account creato correttamente");
         alert.setContentText("Benvenuto!");
         alert.showAndWait();
-        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        primaryStage.setScene(Main.getLoginScene());
+        try {
+            onindietroButtonClick(actionEvent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void onindietroButtonClick(ActionEvent actionEvent) {
+    public void onindietroButtonClick(ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        primaryStage.setTitle("Formazione Facile");
-        primaryStage.setScene(Main.getLoginScene());
+        Main main=new Main();
+        try {
+            main.start(primaryStage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

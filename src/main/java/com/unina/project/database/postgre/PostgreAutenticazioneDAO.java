@@ -2,11 +2,12 @@ package com.unina.project.database.postgre;
 
 import com.unina.project.Autenticazione;
 import com.unina.project.database.AutenticazioneDAO;
+import com.unina.project.database.JDBC;
 
 import java.sql.*;
 
 public class PostgreAutenticazioneDAO implements AutenticazioneDAO {
-    private final PostgreJDBC postgreJDBC=new PostgreJDBC();
+    private final JDBC postgreJDBC=new PostgreJDBC();
 
     @Override
     public void insertAutenticazione(Autenticazione autenticazione) throws SQLException {
@@ -80,8 +81,30 @@ public class PostgreAutenticazioneDAO implements AutenticazioneDAO {
         PreparedStatement pstmt = conn.prepareStatement(SQL);
         pstmt.setString(1, autenticazione.getEmail());
         pstmt.setString(2, autenticazione.getPassword());
-        pstmt.executeQuery();
+        pstmt.executeUpdate();
         pstmt.close();
+        conn.close();
+    }
+    @Override
+    public void resetPassword(String email, String password) throws SQLException {
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement stmt=conn.prepareStatement("update \"Autenticazione\" set password=? where email=?");
+        stmt.setString(1, password);
+        stmt.setString(2, email);
+        stmt.executeUpdate();
+        stmt.close();
+        conn.close();
+    }
+
+    @Override
+    public void updateAutenticazione(String password, String email, String emaildacontrollare) throws SQLException {
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement stmt = conn.prepareStatement("Update \"Autenticazione\" Set email=?,password=? Where email=?");
+        stmt.setString(1,email);
+        stmt.setString(2,password);
+        stmt.setString(3,emaildacontrollare);
+        stmt.executeUpdate();
+        stmt.close();
         conn.close();
     }
 }

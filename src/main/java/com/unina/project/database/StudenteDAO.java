@@ -22,4 +22,6 @@ public interface StudenteDAO {
     void richiestaRifiutata(String CodStudente, String CodCorso) throws SQLException;
 
     boolean checkStudenteIscritto(String codCorso,String codStudente) throws SQLException;
+
+    Boolean getStudenteIdoneo(String codCorso) throws SQLException;
 }

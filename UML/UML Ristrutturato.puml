@@ -1,13 +1,13 @@
 @startuml
-
+skinparam dpi 300
 'https://plantuml.com/class-diagram
 !theme vibrant
 class Autenticazione {
   +email: varchar
   +password: varchar
 }
-Autenticazione "1" -- "1" Utente :AccessoUtente
-Autenticazione "1" -- "1" Gestore :AccessoGestore
+Autenticazione "1" --- "1" Utente:AccessoUtente
+Autenticazione "1" --- "1" Gestore:AccessoGestore
 class Utente{
   +nome: varchar
   +cognome: varchar
@@ -16,15 +16,26 @@ class Utente{
   +sesso: sesso
   +codiceFiscale: varchar
 }
+note "{ Partial , Overlapping }" as N1
+Utente ... N1
+Operatore .. N1
+Studente .. N1
+class Sede {
+  +città: varchar
+  +via: varchar
+  +civico: varchar
+  +provincia: varchar
+  +cap: Integer
+}
 class Gestore {
   +nome: varchar
   +descrizione: varchar
-  +sede: struct [Città: varchar, Via: varchar, Civico: varchar, Provincia: varchar, Cap: integer]
   +telefono: varchar
   +cod.Gestore: varchar
 }
+Gestore "*" - "1" Sede:Collocato
 class Operatore{
-  +cod.Operatore: varchar
+  +cod.Operatore :varchar
 }
 class Studente{
   +cod.Studente: varchar
@@ -33,26 +44,28 @@ enum sesso{
 M
 F
 }
-Utente <|--- Operatore
-Utente <|--- Studente
-note "{ Partial , Overlapping }" as N1
-Studente . N1
-Operatore . N1
-
+Utente "1" -- "0..1" Operatore:EssereOperatore
+Utente "1" -- "0..1" Studente:EssereStudente
 Gestore "1" -- "0..*" Corso:Possiede
-Corso "*" -- "*" Studente
-Corso "*" -- "1..*" Operatore
+Corso "*" --- "*" Studente
+Corso "*" - "1..*" Operatore
 (Corso,Operatore)..Coordina
 class Coordina{
-Richiesta: boolean
+  +Richiesta: boolean
 }
+
 class Corso{
   +titolo: varchar
   +descrizione: varchar
-  +iscrizioniMassime: integer
-  +tassoPresenzeMinime: real
+  +iscrizioniMassime: double
+  +tassoPresenzeMinime: float
   +cod.Corso: varchar
 }
+class AreaTematica{
+  +Tipo
+  +cod.AreaTematica
+}
+Corso "*" --- "1..*" AreaTematica:Appartengono
 class Lezione{
   +titolo: varchar
   +descrizione: varchar
@@ -63,24 +76,18 @@ class Lezione{
 Corso "1" -- "1..*" Lezione:Svolto
 (Corso, Studente) .. Iscritti
 Lezione "*" -- "*" Studente
-(Lezione,Studente) .. Prenotazioni
+(Lezione,Studente)..Prenotazioni
 class Prenotazioni{
-+Presente: boolean
+Presente: boolean
 }
 class Iscritti{
 +idonei: boolean
-+Richiesta: boolean
 }
 class Statistiche{
-  +presenzeMinime: integer
-  +presenzeMassime: integer
-  +presenzeMedie: real
-  +percentualeRiempimentoMedia: integer
+  presenzeMinime
+  presenzeMassime
+  presenzeMedie
+  percentualeRiempimentoMedia
 }
-Corso "1" -- "1" Statistiche:Associo
-class AreaTematica{
-  +Tag: varchar
-}
-Corso "*" -- "1..*" AreaTematica:Appartengono
-
+Corso "1" - "1" Statistiche:Associate
 @enduml

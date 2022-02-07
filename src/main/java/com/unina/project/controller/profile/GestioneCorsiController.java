@@ -69,7 +69,8 @@ public class GestioneCorsiController implements Initializable {
         contextMenuAccetta.getItems().addAll(menuItem1,menuItem2);
         ContextMenu contextMenu = new ContextMenu();
         MenuItem menuItem3 = new MenuItem("Visualizza statistiche Corso");
-        contextMenu.getItems().addAll(menuItem3);
+        MenuItem menuItem4 = new MenuItem("Rimuovi Gestione");
+        contextMenu.getItems().addAll(menuItem3,menuItem4);
         corsiTableView.setRowFactory( tv -> {
             TreeTableRow<Corso> row = new TreeTableRow<>();
             row.setOnMouseClicked(event -> {
@@ -91,8 +92,8 @@ public class GestioneCorsiController implements Initializable {
             return row ;
         });
         ContextMenu contextMenuStudente = new ContextMenu();
-        MenuItem menuItem4 = new MenuItem("Rimuovi Studente");
-        contextMenuStudente.getItems().addAll(menuItem4);
+        MenuItem menuItem5 = new MenuItem("Rimuovi Studente");
+        contextMenuStudente.getItems().addAll(menuItem5);
         studentiTableView.setRowFactory( tv -> {
             TableRow<Studente> row = new TableRow<>();
             row.setContextMenu(contextMenuStudente);
@@ -124,17 +125,19 @@ public class GestioneCorsiController implements Initializable {
                 e.printStackTrace();
             }
         });
-
         menuItem4.setOnAction((event) -> {
+            eliminaOperatore(operatore.getCodOperatore(),rowDataCorso);
+        });
+        menuItem5.setOnAction((event) -> {
             try {
-                eliminaStudente();
+                eliminaStudente(rowDataCorso);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         });
     }
 
-    public void eliminaStudente() throws SQLException {
+    public void eliminaStudente(Corso corso) throws SQLException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Conferma");
         alert.setHeaderText("Vuoi davvero rimuovere lo studente "+rowDataStudente.getNome()+" "+rowDataStudente.getCognome()+" dal Corso "+ rowDataCorso.getTitolo()+"?");
@@ -142,6 +145,7 @@ public class GestioneCorsiController implements Initializable {
         if(result.isPresent())
         if (result.get() == ButtonType.OK){
             studenteDAO.richiestaRifiutata(rowDataStudente.getCodStudente(), rowDataCorso.getCodCorso());
+            updateStudentiTableView(corso.getCodCorso());
         }
 
     }
@@ -155,21 +159,58 @@ public class GestioneCorsiController implements Initializable {
         updateCorsiTableView();
     }
 
+    private void eliminaOperatore(String codOperatore,Corso corso) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Conferma");
+        dialog.setHeaderText("Per rimuovere la gestione del Corso "+corso.getTitolo());
+        dialog.setContentText("Inserisci 'si' :");
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            if (result.get().equals("si")) {
+                try {
+                    operatoreDAO.annullaGestioneCorso(codOperatore, corso.getCodCorso());
+                    updateCorsiTableView();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Attenzione!");
+                alert.setHeaderText("Devi inserire 'si' per rimuovere la gestione del Corso "+corso.getCodCorso()+"!");
+                alert.setContentText("Riprova!");
+                alert.showAndWait();
+            }
+        }
+    }
+
     private void visualizzaStatistiche(Corso corso) throws IOException {
-        Stage statisticheStage=new Stage();
-        FXMLLoader statistichePageLoader = new FXMLLoader(Main.class.getResource("profile/statistiche.fxml"));
-        Parent statistichePane = statistichePageLoader.load();
-        Scene statisticheScene = new Scene(statistichePane);
-        JMetro jMetro = new JMetro(Style.LIGHT);
-        jMetro.setScene(statisticheScene);
-        statisticheStage.setTitle("Statistiche Corso: "+corso.getCodCorso());
-        statisticheStage.setScene(statisticheScene);
-        StatisticheController statistichecontroller = statistichePageLoader.getController();
-        statistichecontroller.setStatistiche(corso);
-        Stage primaryStage = (Stage) corsiTableView.getParent().getScene().getWindow();
-        primaryStage.getScene().getRoot().setDisable(true);
-        statisticheStage.showAndWait();
-        primaryStage.getScene().getRoot().setDisable(false);
+        try {
+            if (corsoDAO.numeroIscrittiCorso(corso.getCodCorso()) != 0) {
+            Stage statisticheStage = new Stage();
+            FXMLLoader statistichePageLoader = new FXMLLoader(Main.class.getResource("profile/statistiche.fxml"));
+            Parent statistichePane = statistichePageLoader.load();
+            Scene statisticheScene = new Scene(statistichePane);
+            JMetro jMetro = new JMetro(Style.LIGHT);
+            jMetro.setScene(statisticheScene);
+            statisticheStage.setTitle("Statistiche Corso: " + corso.getCodCorso());
+            statisticheStage.setScene(statisticheScene);
+            StatisticheController statistichecontroller = statistichePageLoader.getController();
+            statistichecontroller.setStatistiche(corso);
+            Stage primaryStage = (Stage) corsiTableView.getParent().getScene().getWindow();
+            primaryStage.getScene().getRoot().setDisable(true);
+            statisticheStage.showAndWait();
+            primaryStage.getScene().getRoot().setDisable(false);
+            }
+            else
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Errore");
+                alert.setHeaderText("Non posso generare Statistiche per un corso che non ha Iscritti");
+                alert.show();
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 
     public void setCorsiTableView(){

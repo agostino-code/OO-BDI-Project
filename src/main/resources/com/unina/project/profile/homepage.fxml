@@ -44,13 +44,14 @@
                                       minWidth="100.0" prefWidth="-1.0" text="Titolo"/>
                      <TreeTableColumn fx:id="descrizioneTableColumn" maxWidth="1.7976931348623157E308"
                                       minWidth="100.0" prefWidth="-1.0" text="Descrizione"/>
-                     <TreeTableColumn fx:id="iscrizionimassimeTableColumn" maxWidth="1.7976931348623157E308"
-                                      minWidth="100.0" prefWidth="-1.0" text="Iscrizioni Massime"/>
+
                      <TreeTableColumn fx:id="numerolezioniTableColumn" maxWidth="1.7976931348623157E308"
                                       minWidth="100.0" prefWidth="-1.0" text="Numero Lezioni"/>
                      <TreeTableColumn fx:id="tassopresenzeminimeTableColumn"
                                       maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0"
                                       text="Tasso Presenze Minime"/>
+                     <TreeTableColumn fx:id="idoneoTableColumn" maxWidth="1.7976931348623157E308"
+                                      minWidth="100.0" prefWidth="-1.0" text="Idoneo"/>
                      <TreeTableColumn fx:id="privatoTableColumn" maxWidth="1.7976931348623157E308"
                                       minWidth="100.0" prefWidth="-1.0" text="Tipo"/>
                      <TreeTableColumn fx:id="areeTableColumn" maxWidth="1.7976931348623157E308"

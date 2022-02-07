@@ -44,6 +44,12 @@ public class CorsoRicerca {
     public String citta;
     public String provincia;
 
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String telefono;
+
     public void setIscrizioniMassime(Integer iscrizioniMassime) {
         this.iscrizioniMassime = iscrizioniMassime;
     }

@@ -1,6 +1,7 @@
 package com.unina.project.database.postgre;
 
 import com.unina.project.Operatore;
+import com.unina.project.database.JDBC;
 import com.unina.project.database.OperatoreDAO;
 
 import java.sql.Connection;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostgreOperatoreDAO implements OperatoreDAO {
-    private final PostgreJDBC postgreJDBC=new PostgreJDBC();
+    private final JDBC postgreJDBC=new PostgreJDBC();
 
     @Override
     public String setOperatore(String codiceFiscale) throws SQLException {

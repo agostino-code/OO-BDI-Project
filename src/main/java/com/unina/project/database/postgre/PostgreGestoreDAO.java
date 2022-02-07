@@ -2,6 +2,7 @@ package com.unina.project.database.postgre;
 
 import com.unina.project.Gestore;
 import com.unina.project.database.GestoreDAO;
+import com.unina.project.database.JDBC;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class PostgreGestoreDAO implements GestoreDAO {
-    private final PostgreJDBC postgreJDBC=new PostgreJDBC();
+    private final JDBC postgreJDBC=new PostgreJDBC();
 
     public String insertGestore(Gestore gestore) throws SQLException {
         String SQL = ("INSERT INTO \"Gestore\" (nome, descrizione, telefono, email) VALUES (?,?,?,?) returning \"codGestore\";");

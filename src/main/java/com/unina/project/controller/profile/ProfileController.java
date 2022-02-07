@@ -2,18 +2,14 @@ package com.unina.project.controller.profile;
 
 import com.unina.project.Autenticazione;
 import com.unina.project.Main;
-import com.unina.project.Operatore;
 import com.unina.project.Utente;
-import com.unina.project.database.AutenticazioneDAO;
 import com.unina.project.database.OperatoreDAO;
 import com.unina.project.database.UtenteDAO;
-import com.unina.project.database.postgre.PostgreAutenticazioneDAO;
 import com.unina.project.database.postgre.PostgreOperatoreDAO;
 import com.unina.project.database.postgre.PostgreUtenteDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -22,12 +18,10 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
-public class ProfileController implements Initializable {
+public class ProfileController {
 
     public AnchorPane operatoreAnchorPane;
     @FXML
@@ -44,19 +38,13 @@ public class ProfileController implements Initializable {
 
     private Stage loginStage;
     public final Autenticazione autenticazione = new Autenticazione();
-    private final AutenticazioneDAO autenticazioneDAO = new PostgreAutenticazioneDAO();
     public Utente utente=new Utente();
     private final UtenteDAO utenteDAO=new PostgreUtenteDAO();
-    private final Operatore operatore=new Operatore();
     private final OperatoreDAO operatoreDAO=new PostgreOperatoreDAO();
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        setHomepage();
-    }
 
     @FXML
-    void onDatiAnagraficiButtonClick(ActionEvent event) {
+    void onDatiAnagraficiButtonClick() {
         Parent root = null;
         try {
             FXMLLoader datiAnagraficiPageLoader = new FXMLLoader(Objects.requireNonNull(Main.class.getResource("profile/datiAnagrafici.fxml")));
@@ -71,7 +59,7 @@ public class ProfileController implements Initializable {
     }
 
     @FXML
-    void onDatiAutenticazioneButtonClick(ActionEvent event) {
+    void onDatiAutenticazioneButtonClick() {
         Parent root = null;
         try {
             FXMLLoader datiAutenticazionePageLoader = new FXMLLoader(Objects.requireNonNull(Main.class.getResource("profile/datiAutenticazione.fxml")));
@@ -86,7 +74,7 @@ public class ProfileController implements Initializable {
     }
 
     @FXML
-    void onIscrizioneCorsiButtonClick(ActionEvent event) {
+    void onIscrizioneCorsiButtonClick() {
         Parent root = null;
         try {
             FXMLLoader iscrizioneCorsiPageLoader = new FXMLLoader(Objects.requireNonNull(Main.class.getResource("profile/iscrizioneCorsi.fxml")));
@@ -110,7 +98,7 @@ public class ProfileController implements Initializable {
     }
 
     @FXML
-    void oniscrizioniLezioniButtonClick(ActionEvent event) {
+    void oniscrizioniLezioniButtonClick() {
         Parent root = null;
         try {
             FXMLLoader iscrizioneLezioniPageLoader = new FXMLLoader(Objects.requireNonNull(Main.class.getResource("profile/iscrizioneLezioni.fxml")));
@@ -150,13 +138,13 @@ public class ProfileController implements Initializable {
                 gestorelezioneButton.setVisible(true);
                 richiesteButton.setVisible(true);
             }
-
+            setHomepage();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void onGestioneCorsiButtonClick(ActionEvent actionEvent) {
+    public void onGestioneCorsiButtonClick() {
         Parent root = null;
         try {
             FXMLLoader gestioneCorsiPageLoader = new FXMLLoader(Objects.requireNonNull(Main.class.getResource("profile/gestioneCorsi.fxml")));
@@ -170,7 +158,7 @@ public class ProfileController implements Initializable {
         stackPanelProfilo.getChildren().addAll(root);
     }
 
-    public void onGestioneLezioniButtonClick(ActionEvent actionEvent) {
+    public void onGestioneLezioniButtonClick() {
         Parent root = null;
         try {
             FXMLLoader gestioneLezioniPageLoader = new FXMLLoader(Objects.requireNonNull(Main.class.getResource("profile/gestioneLezioni.fxml")));
@@ -184,7 +172,7 @@ public class ProfileController implements Initializable {
         stackPanelProfilo.getChildren().addAll(root);
     }
 
-    public void onRichiesteButtonClick(ActionEvent actionEvent) {
+    public void onRichiesteButtonClick() {
         Parent root = null;
         try {
             FXMLLoader richiestePageLoader = new FXMLLoader(Objects.requireNonNull(Main.class.getResource("profile/richieste.fxml")));

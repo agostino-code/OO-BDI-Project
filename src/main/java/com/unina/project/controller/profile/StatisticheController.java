@@ -5,6 +5,7 @@ import com.unina.project.Main;
 import com.unina.project.Statistiche;
 import com.unina.project.database.StatisticheDAO;
 import com.unina.project.database.postgre.PostgreStatisticheDAO;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import javafx.scene.chart.*;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.sql.SQLException;
 import java.util.Objects;
@@ -99,19 +101,16 @@ public class StatisticheController {
                 FXCollections.observableArrayList(
                         new PieChart.Data("Posti rimanenti", 100-statistiche.getPercentualeRiempimento()),
                         new PieChart.Data("Posti occupati", statistiche.getPercentualeRiempimento()));
-        statistichePieChart.getData().addAll(pieChartData);
+
         statistichePieChart.setAnimated(true);
         statistichePieChart.setTitle("Percentuale di Riempimento");
-        Label caption = new Label("");
-        caption.setTextFill(Color.BLACK);
-        caption.setStyle("-fx-font: 24 arial;");
-        statistichePieChart.getData().forEach((data) -> data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED,
-                (MouseEvent e) -> {
-                    caption.setTranslateX(e.getSceneX());
-                    caption.setTranslateY(e.getSceneY());
-                    caption.setText(data.getPieValue()
-                            + "%");
-                }));
-
+            pieChartData.forEach(data ->
+                    data.nameProperty().bind(
+                            Bindings.concat(
+                                    data.getName(), " ", data.pieValueProperty(), "%"
+                            )
+                    )
+            );
+            statistichePieChart.getData().addAll(pieChartData);
     }
 }

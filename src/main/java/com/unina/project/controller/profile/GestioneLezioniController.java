@@ -26,6 +26,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class GestioneLezioniController implements Initializable {
@@ -71,6 +72,10 @@ public class GestioneLezioniController implements Initializable {
         ContextMenu contextMenuNonPresente = new ContextMenu();
         MenuItem menuItem3 = new MenuItem("Non Presente");
         contextMenuNonPresente.getItems().addAll(menuItem3);
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem menuItem4 = new MenuItem("Modifica Lezione");
+        MenuItem menuItem5 = new MenuItem("Cancella Lezione");
+        contextMenu.getItems().addAll(menuItem4,menuItem5);
         lezioniTableView.setRowFactory( tv -> {
             TreeTableRow<Lezione> row = new TreeTableRow<>();
             row.setOnMouseClicked(event -> {
@@ -81,6 +86,7 @@ public class GestioneLezioniController implements Initializable {
                             row.setContextMenu(contextMenuNuovaLezione);
                         }
                         else{
+                            row.setContextMenu(contextMenu);
                             updateStudentiTableView(rowDataLezione.getCodLezione());
                         }
 
@@ -117,6 +123,14 @@ public class GestioneLezioniController implements Initializable {
                 e.printStackTrace();
             }
         });
+        menuItem2.setOnAction((event) -> {
+            try {
+                nuovalezione(rowDataLezione.getCodCorso());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        });
         menuItem3.setOnAction((event) -> {
             try {
                 lezioneDAO.nonpresente(rowDataStudente.getCodStudente(),rowDataLezione.getCodLezione());
@@ -125,13 +139,16 @@ public class GestioneLezioniController implements Initializable {
                 e.printStackTrace();
             }
         });
-        menuItem2.setOnAction((event) -> {
+        menuItem4.setOnAction((event) -> {
             try {
-                nuovalezione(rowDataLezione.getCodCorso());
-                updateLezioniTableView();
-            } catch (IOException | SQLException e) {
+                modificaLezione(rowDataLezione);
+            } catch (IOException e) {
                 e.printStackTrace();
             }
+
+        });
+        menuItem5.setOnAction((event) -> {
+            eliminaLezione(rowDataLezione);
 
         });
     }
@@ -177,6 +194,60 @@ public class GestioneLezioniController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void modificaLezione(Lezione lezione) throws IOException {
+        Stage lezioneStage=new Stage();
+        FXMLLoader lezionePageLoader = new FXMLLoader(Main.class.getResource("profile/lezione.fxml"));
+        lezionePageLoader.setControllerFactory((Class<?> controllerType) ->{
+            if(controllerType == LezioneController.class){
+                return new LezioneModificaController();
+            }
+            return new LezioneModificaController();
+        });
+        Parent lezionePane = lezionePageLoader.load();
+        Scene lezioneScene = new Scene(lezionePane, 400, 400);
+        JMetro jMetro = new JMetro(Style.LIGHT);
+        jMetro.setScene(lezioneScene);
+        LezioneModificaController lezioneModificaController=lezionePageLoader.getController();
+        lezioneModificaController.setLezione(lezione);
+        lezioneStage.setResizable(false);
+        lezioneStage.setTitle("Modifica Lezione");
+        lezioneStage.setScene(lezioneScene);
+        Stage primaryStage = (Stage) studentiTableView.getParent().getScene().getWindow();
+        primaryStage.getScene().getRoot().setDisable(true);
+        lezioneStage.showAndWait();
+        primaryStage.getScene().getRoot().setDisable(false);
+        try {
+            updateLezioniTableView();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void eliminaLezione(Lezione lezione){
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Conferma");
+        dialog.setHeaderText("Per eliminare la lezione");
+        dialog.setContentText("Inserisci 'si' :");
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            if (result.get().equals("si")) {
+                try {
+                    lezioneDAO.deleteLezione(lezione.getCodLezione());
+                    updateLezioniTableView();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Attenzione!");
+                alert.setHeaderText("Devi inserire 'si' per eliminare la lezione!");
+                alert.setContentText("Riprova!");
+                alert.showAndWait();
+            }
+        }
+
     }
     public void updateLezioniTableView() throws SQLException {
         TreeItem<Lezione> fakeroot=new TreeItem<>();

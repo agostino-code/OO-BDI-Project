@@ -3,6 +3,7 @@ package com.unina.project.database.postgre;
 import com.unina.project.AreaTematica;
 import com.unina.project.Corso;
 import com.unina.project.database.AreaTematicaDAO;
+import com.unina.project.database.JDBC;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostgreAreaTematicaDAO implements AreaTematicaDAO {
-    private final PostgreJDBC postgreJDBC=new PostgreJDBC();
+    private final JDBC postgreJDBC=new PostgreJDBC();
 
     @Override
     public void insertAreaTematica(List<String> areetematiche) throws SQLException {

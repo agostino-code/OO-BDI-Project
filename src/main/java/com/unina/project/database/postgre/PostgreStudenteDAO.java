@@ -1,6 +1,7 @@
 package com.unina.project.database.postgre;
 
 import com.unina.project.Studente;
+import com.unina.project.database.JDBC;
 import com.unina.project.database.StudenteDAO;
 
 import java.sql.Connection;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostgreStudenteDAO implements StudenteDAO {
-    private final PostgreJDBC postgreJDBC=new PostgreJDBC();
+    private final JDBC postgreJDBC=new PostgreJDBC();
 
     @Override
     public String setStudente(String codiceFiscale) throws SQLException {
@@ -134,6 +135,17 @@ public class PostgreStudenteDAO implements StudenteDAO {
         return !rs.next();
     }
 
+    @Override
+    public Boolean getStudenteIdoneo(String codCorso) throws SQLException {
+        String SQL = ("SELECT \"Idoneo\" FROM \"Iscritti\" WHERE \"codCorso\" =?;");
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement pstmt = conn.prepareStatement(SQL);
+        pstmt.setString(1, codCorso);
+        pstmt.execute();
+        ResultSet rs =pstmt.getResultSet();
+        rs.next();
+        return rs.getBoolean("Idoneo");
+    }
 
 
 }

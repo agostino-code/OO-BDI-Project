@@ -2,6 +2,7 @@ package com.unina.project.database.postgre;
 
 import com.unina.project.Statistiche;
 import com.unina.project.controller.profile.PresenzeLezioni;
+import com.unina.project.database.JDBC;
 import com.unina.project.database.StatisticheDAO;
 
 import java.sql.Connection;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostgreStatisticheDAO implements StatisticheDAO {
-    private final PostgreJDBC postgreJDBC=new PostgreJDBC();
+    private final JDBC postgreJDBC=new PostgreJDBC();
     @Override
     public Statistiche getStatistiche(String codCorso) throws SQLException {
         String SQL = ("SELECT * FROM \"Statistiche\" WHERE \"codCorso\" = ?;");

@@ -8,7 +8,6 @@ import com.unina.project.verificationcode.SendVerificationEmail;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -205,20 +204,33 @@ public class ProfileGestoreController implements Initializable {
     }
 
     private void visualizzaStatistiche(Corso corso) throws IOException {
-        Stage statisticheStage=new Stage();
-        FXMLLoader statistichePageLoader = new FXMLLoader(Main.class.getResource("profile/statistiche.fxml"));
-        Parent statistichePane = statistichePageLoader.load();
-        Scene statisticheScene = new Scene(statistichePane);
-        JMetro jMetro = new JMetro(Style.LIGHT);
-        jMetro.setScene(statisticheScene);
-        statisticheStage.setTitle("Statistiche Corso: "+corso.getCodCorso());
-        statisticheStage.setScene(statisticheScene);
-        StatisticheController statistichecontroller = statistichePageLoader.getController();
-        statistichecontroller.setStatistiche(corso);
-        Stage primaryStage = (Stage) corsiTableView.getParent().getScene().getWindow();
-        primaryStage.getScene().getRoot().setDisable(true);
-        statisticheStage.showAndWait();
-        primaryStage.getScene().getRoot().setDisable(false);
+        try {
+            if (corsoDAO.numeroIscrittiCorso(corso.getCodCorso()) != 0) {
+                Stage statisticheStage = new Stage();
+                FXMLLoader statistichePageLoader = new FXMLLoader(Main.class.getResource("profile/statistiche.fxml"));
+                Parent statistichePane = statistichePageLoader.load();
+                Scene statisticheScene = new Scene(statistichePane);
+                JMetro jMetro = new JMetro(Style.LIGHT);
+                jMetro.setScene(statisticheScene);
+                statisticheStage.setTitle("Statistiche Corso: " + corso.getCodCorso());
+                statisticheStage.setScene(statisticheScene);
+                StatisticheController statistichecontroller = statistichePageLoader.getController();
+                statistichecontroller.setStatistiche(corso);
+                Stage primaryStage = (Stage) corsiTableView.getParent().getScene().getWindow();
+                primaryStage.getScene().getRoot().setDisable(true);
+                statisticheStage.showAndWait();
+                primaryStage.getScene().getRoot().setDisable(false);
+            }
+            else
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Errore");
+                alert.setHeaderText("Non posso generare Statistiche per un corso che non ha Iscritti");
+                alert.show();
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 
     private void styleRowColor() {
@@ -281,7 +293,6 @@ public class ProfileGestoreController implements Initializable {
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
             try {
-                Utente utente = utenteDAO.getUtente(result.get());
                 if (autenticazioneDAO.checkEmailUtenteExist(result.get())) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Errore email");
@@ -289,6 +300,7 @@ public class ProfileGestoreController implements Initializable {
                     alert.showAndWait();
                 }
                 else{
+                    Utente utente = utenteDAO.getUtente(result.get());
                     if(!studenteDAO.checkStudenteIscritto(corso.getCodCorso(), studenteDAO.getCodStudente(utente.getCodiceFiscale()))){
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Attenzione!");
@@ -354,6 +366,7 @@ public class ProfileGestoreController implements Initializable {
         }
         nuovoCorsoButton.getParent().setDisable(false);
     }
+
     public void updateCorsiTableView() throws SQLException {
         TreeItem<Corso> fakeroot=new TreeItem<>();
         corsiTableView.setRoot(fakeroot);

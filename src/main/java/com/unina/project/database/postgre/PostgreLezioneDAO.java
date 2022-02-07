@@ -2,6 +2,7 @@ package com.unina.project.database.postgre;
 
 import com.unina.project.Lezione;
 import com.unina.project.Studente;
+import com.unina.project.database.JDBC;
 import com.unina.project.database.LezioneDAO;
 
 import java.sql.*;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostgreLezioneDAO implements LezioneDAO {
-    private final PostgreJDBC postgreJDBC=new PostgreJDBC();
+    private final JDBC postgreJDBC=new PostgreJDBC();
 
     @Override
     public List<Lezione> getLezioni(String codCorso) throws SQLException {
@@ -88,6 +89,20 @@ public class PostgreLezioneDAO implements LezioneDAO {
         pstmt.setString(5,lezione.getCodCorso());
         pstmt.execute();
         pstmt.close();
+        conn.close();
+    }
+
+    @Override
+    public void updateLezione(Lezione lezione) throws SQLException {
+        String SQL = ("UPDATE \"Lezione\" SET titolo='"+lezione.getTitolo()+
+                "', descrizione = '"+lezione.getDescrizione()+
+                "', \"dataoraInizio\" = '"+Timestamp.valueOf(lezione.getDataoraInizio())+
+                "',durata = '"+Time.valueOf(lezione.getDurata())+
+                "' where \"codLezione\"='"+lezione.getCodLezione()+"';");
+        Connection conn = postgreJDBC.Connessione();
+        Statement stmt = conn.createStatement();
+        stmt.executeUpdate(SQL);
+        stmt.close();
         conn.close();
     }
 
@@ -192,4 +207,6 @@ public class PostgreLezioneDAO implements LezioneDAO {
         numerolezioni =rs.getInt(1);
         return numerolezioni;
     }
+
+
 }

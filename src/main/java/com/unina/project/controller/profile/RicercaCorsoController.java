@@ -98,7 +98,6 @@ public class RicercaCorsoController implements Initializable {
             String sqlprovinciagestore = " provincia ='"+provinciaTextField.getText().toUpperCase()+"' AND ";
             SQL=SQL.concat(sqlprovinciagestore);
         }
-        System.out.println(SQL);
         Stage stage = (Stage) cercaCorsoButton.getScene().getWindow();
         stage.close();
     }
