@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 
+import java.io.File;
 import java.util.Optional;
 
 public class Main extends Application {
@@ -37,6 +38,12 @@ public class Main extends Application {
         });
             primaryStage.show();
         }
+
+    public void openRelazione() {
+        File file = new File("javadoc/index.html");
+        getHostServices().showDocument(String.valueOf(file));
+
+    }
 
     public static void main(String[] args) {
         launch();

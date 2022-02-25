@@ -35,32 +35,21 @@
                </Label>
                    <AnchorPane VBox.vgrow="ALWAYS">
                        <VBox.margin>
-                           <Insets/>
+                           <Insets />
                        </VBox.margin>
                        <padding>
-                           <Insets right="10.0"/>
+                           <Insets right="10.0" />
                        </padding>
-                       <TreeTableView fx:id="corsiTableView" editable="true" maxHeight="1.7976931348623157E308"
-                                      maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0"
-                                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                                      AnchorPane.topAnchor="0.0">
+                       <TreeTableView fx:id="corsiTableView" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <columns>
-                               <TreeTableColumn fx:id="codCorsoTableColumn" maxWidth="1.7976931348623157E308"
-                                                minWidth="100.0" prefWidth="-1.0" text="cod.Corso"/>
-                               <TreeTableColumn fx:id="titoloTableColumn" maxWidth="1.7976931348623157E308"
-                                                minWidth="100.0" prefWidth="-1.0" text="Titolo"/>
-                               <TreeTableColumn fx:id="descrizioneTableColumn" maxWidth="1.7976931348623157E308"
-                                                minWidth="100.0" prefWidth="-1.0" text="Descrizione"/>
-                               <TreeTableColumn fx:id="iscrizionimassimeTableColumn" maxWidth="1.7976931348623157E308"
-                                                minWidth="100.0" prefWidth="-1.0" text="Iscrizioni Massime"/>
-                               <TreeTableColumn fx:id="numerolezioniTableColumn" maxWidth="1.7976931348623157E308"
-                                                minWidth="100.0" prefWidth="-1.0" text="Numero Lezioni"/>
-                               <TreeTableColumn fx:id="tassopresenzeminimeTableColumn" maxWidth="1.7976931348623157E308"
-                                                minWidth="100.0" prefWidth="-1.0" text="Tasso Presenze Minime"/>
-                               <TreeTableColumn fx:id="privatoTableColumn" maxWidth="1.7976931348623157E308"
-                                                minWidth="100.0" prefWidth="-1.0" text="Tipo"/>
-                               <TreeTableColumn fx:id="areeTableColumn" maxWidth="1.7976931348623157E308"
-                                                minWidth="100.0" prefWidth="-1.0" text="Aree Tematiche"/>
+                               <TreeTableColumn fx:id="codCorsoTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="cod.Corso" />
+                               <TreeTableColumn fx:id="titoloTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Titolo" />
+                               <TreeTableColumn fx:id="descrizioneTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Descrizione" />
+                               <TreeTableColumn fx:id="iscrizionimassimeTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Iscrizioni Massime" />
+                               <TreeTableColumn fx:id="numerolezioniTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Numero Lezioni" />
+                               <TreeTableColumn fx:id="tassopresenzeminimeTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Tasso Presenze Minime" />
+                               <TreeTableColumn fx:id="privatoTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Tipo" />
+                               <TreeTableColumn fx:id="areeTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Aree Tematiche" />
                            </columns>
                        </TreeTableView>
                    </AnchorPane>
@@ -79,21 +68,13 @@
                            </font>
                        </Label>
                        <AnchorPane VBox.vgrow="ALWAYS">
-                           <TableView fx:id="operatoriTableView" maxHeight="1.7976931348623157E308"
-                                      maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0"
-                                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                                      AnchorPane.topAnchor="0.0">
+                           <TableView fx:id="operatoriTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                <columns>
-                                   <TableColumn fx:id="emailoperatoreTableColumn" maxWidth="1.7976931348623157E308"
-                                                minWidth="100.0" prefWidth="-1.0" text="Email"/>
-                                   <TableColumn fx:id="nomeoperatoreTableColumn" maxWidth="1.7976931348623157E308"
-                                                minWidth="100.0" prefWidth="-1.0" text="Nome"/>
-                                   <TableColumn fx:id="cognomeoperatoreTableColumn" maxWidth="1.7976931348623157E308"
-                                                minWidth="100.0" prefWidth="-1.0" text="Cognome"/>
-                                   <TableColumn fx:id="codoperatoreTableColumn" maxWidth="1.7976931348623157E308"
-                                                minWidth="100.0" prefWidth="-1.0" text="cod.Operatore"/>
-                                   <TableColumn fx:id="richiestaTableColumn" maxWidth="1.7976931348623157E308"
-                                                minWidth="100.0" prefWidth="-1.0" text="Richiesta"/>
+                                   <TableColumn fx:id="emailoperatoreTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Email" />
+                                   <TableColumn fx:id="nomeoperatoreTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Nome" />
+                                   <TableColumn fx:id="cognomeoperatoreTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Cognome" />
+                                   <TableColumn fx:id="codoperatoreTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="cod.Operatore" />
+                                   <TableColumn fx:id="richiestaTableColumn" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Richiesta" />
                                </columns>
                            </TableView>
                        </AnchorPane>
@@ -110,25 +91,15 @@
                            </font>
                        </Label>
                        <AnchorPane VBox.vgrow="ALWAYS">
-                           <TableView fx:id="studentiTableView" fixedCellSize="0.0" maxHeight="1.7976931348623157E308"
-                                      maxWidth="1.7976931348623157E308" prefHeight="475.2" prefWidth="255.2"
-                                      snapToPixel="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <TableView fx:id="studentiTableView" fixedCellSize="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="475.2" prefWidth="255.2" snapToPixel="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                <columns>
-                                   <TableColumn fx:id="emailTableColumn" maxWidth="1.7976931348623157E308"
-                                                minWidth="-1.0" prefWidth="100.0" text="Email"/>
-                                   <TableColumn fx:id="nomeTableColumn" maxWidth="1.7976931348623157E308"
-                                                minWidth="-1.0" prefWidth="100.0" text="Nome"/>
-                                   <TableColumn fx:id="cognomeTableColumn" maxWidth="1.7976931348623157E308"
-                                                minWidth="-1.0" prefWidth="100.0" text="Cognome"/>
-                                   <TableColumn fx:id="datadiNascitaTableColumn" maxWidth="1.7976931348623157E308"
-                                                minWidth="-1.0" prefWidth="100.0" text="Data di Nascita"/>
-                                   <TableColumn fx:id="sessoTableColumn" maxWidth="1.7976931348623157E308"
-                                                minWidth="-1.0" prefWidth="100.0" text="Sesso"/>
-                                   <TableColumn fx:id="idoneoTableColumn" maxWidth="1.7976931348623157E308"
-                                                minWidth="-1.0" prefWidth="100.0" text="Idoneo"/>
-                                   <TableColumn fx:id="codStudenteTableColumn" maxWidth="1.7976931348623157E308"
-                                                minWidth="-1.0" prefWidth="100.0" text="cod.Studente"/>
+                                   <TableColumn fx:id="emailTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Email" />
+                                   <TableColumn fx:id="nomeTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Nome" />
+                                   <TableColumn fx:id="cognomeTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Cognome" />
+                                   <TableColumn fx:id="datadiNascitaTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Data di Nascita" />
+                                   <TableColumn fx:id="sessoTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Sesso" />
+                                   <TableColumn fx:id="idoneoTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Idoneo" />
+                                   <TableColumn fx:id="codStudenteTableColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="cod.Studente" />
                                </columns>
                            </TableView>
                        </AnchorPane>
@@ -149,7 +120,7 @@
                <MenuItem mnemonicParsing="false" onAction="#oneliminaGestoreButtonMenuClick" text="Elimina Gestore" />
            </Menu>
            <Menu mnemonicParsing="false" text="Help">
-               <MenuItem mnemonicParsing="false" text="Documentazione" />
+               <MenuItem mnemonicParsing="false" onAction="#onhelpButtonClick" text="Documentazione" />
            </Menu>
        </MenuBar>
    </top>

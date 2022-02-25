@@ -125,9 +125,7 @@ public class GestioneCorsiController implements Initializable {
                 e.printStackTrace();
             }
         });
-        menuItem4.setOnAction((event) -> {
-            eliminaOperatore(operatore.getCodOperatore(),rowDataCorso);
-        });
+        menuItem4.setOnAction((event) -> eliminaOperatore(operatore.getCodOperatore(),rowDataCorso));
         menuItem5.setOnAction((event) -> {
             try {
                 eliminaStudente(rowDataCorso);
@@ -185,7 +183,7 @@ public class GestioneCorsiController implements Initializable {
 
     private void visualizzaStatistiche(Corso corso) throws IOException {
         try {
-            if (corsoDAO.numeroIscrittiCorso(corso.getCodCorso()) != 0) {
+            if (corsoDAO.numeroIscrittiCorso(corso.getCodCorso()) != 0 && corsoDAO.numeroLezioniCorso(corso.getCodCorso())!= 0 && corsoDAO.numeroPrenotati(corso.getCodCorso()) !=0) {
             Stage statisticheStage = new Stage();
             FXMLLoader statistichePageLoader = new FXMLLoader(Main.class.getResource("profile/statistiche.fxml"));
             Parent statistichePane = statistichePageLoader.load();
@@ -205,7 +203,7 @@ public class GestioneCorsiController implements Initializable {
             {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Errore");
-                alert.setHeaderText("Non posso generare Statistiche per un corso che non ha Iscritti");
+                alert.setHeaderText("Non posso generare Statistiche per un corso che non ha Iscritti o Lezioni");
                 alert.show();
             }
         } catch(SQLException e){

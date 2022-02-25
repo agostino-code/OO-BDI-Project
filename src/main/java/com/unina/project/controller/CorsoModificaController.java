@@ -50,6 +50,7 @@ public class CorsoModificaController extends CorsoController{
         else{
             tipocorsoChoiseBox.getSelectionModel().selectFirst();
         }
+        tipocorsoChoiseBox.setDisable(true);
         iscrizioniMassimeTextField.setText(String.valueOf(corso.getIscrizioniMassime()));
         lezioniTextField.setText(String.valueOf(corso.getNumeroLezioni()));
         lezioniMinimeTextField.setText(String.valueOf((corso.getNumeroLezioni()*corso.tassoPresenzeMinime)/100));

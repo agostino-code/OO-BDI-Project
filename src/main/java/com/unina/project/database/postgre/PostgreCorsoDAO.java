@@ -152,6 +152,18 @@ public class PostgreCorsoDAO implements CorsoDAO {
     }
 
     @Override
+    public Integer numeroLezioniCorso(String CodCorso) throws SQLException{
+        int NumeroIscritti;
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement stmt = conn.prepareStatement("Select count(*) from \"Lezione\" where \"codCorso\"=?");
+        stmt.setString(1,CodCorso);
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+        NumeroIscritti =rs.getInt(1);
+        return NumeroIscritti;
+    }
+
+    @Override
     public List<Corso> getCorsiOperatore(String codOperatore) throws SQLException {
         String SQL = ("SELECT titolo, descrizione, \"iscrizioniMassime\", \"tassoPresenzeMinime\", \"numeroLezioni\",\"codCorso\",\"Privato\" FROM \"Corso\" NATURAL JOIN \"Coordina\" WHERE \"codOperatore\" = ?;");
         return getCorsoList(codOperatore, SQL);
@@ -165,7 +177,7 @@ public class PostgreCorsoDAO implements CorsoDAO {
 
     @Override
     public List<Corso> getCorsiStudente(String codStudente) throws SQLException {
-        String SQL = ("SELECT titolo, descrizione, \"iscrizioniMassime\", \"tassoPresenzeMinime\", \"numeroLezioni\",\"codCorso\",\"Privato\" FROM \"Corso\" NATURAL JOIN \"Iscritti\" WHERE \"codStudente\" = ?;");
+        String SQL = ("SELECT titolo, descrizione, \"iscrizioniMassime\", \"tassoPresenzeMinime\", \"numeroLezioni\",\"codCorso\",\"Privato\" FROM \"Corso\" NATURAL JOIN \"Iscritti\" WHERE \"codStudente\" = ? AND \"Richiesta\"=true;");
         return getCorsoList(codStudente, SQL);
     }
 
@@ -193,5 +205,17 @@ public class PostgreCorsoDAO implements CorsoDAO {
         pstmt.close();
         conn.close();
         return numeroLezioni;
+    }
+
+    @Override
+    public Integer numeroPrenotati(String CodCorso) throws SQLException{
+        int NumeroIscritti;
+        Connection conn = postgreJDBC.Connessione();
+        PreparedStatement stmt = conn.prepareStatement("Select count(*) from \"Lezione\" NATURAL JOIN \"Prenotazioni\" WHERE \"codCorso\"=?");
+        stmt.setString(1,CodCorso);
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+        NumeroIscritti =rs.getInt(1);
+        return NumeroIscritti;
     }
 }

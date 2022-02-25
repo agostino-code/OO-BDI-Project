@@ -3,31 +3,28 @@ skinparam dpi 300
 'https://plantuml.com/class-diagram
 !theme vibrant
 class Autenticazione {
-  +email: varchar
-  +password: varchar
+  +email: String
+  +password: String
 }
 Autenticazione "1" -- "1" Utente :AccessoUtente
 Autenticazione "1" -- "1" Gestore :AccessoGestore
 class Utente{
-  +nome: varchar
-  +cognome: varchar
+  +nome: String
+  +cognome: String
   +dataNascita: Date
-  +comunediNascita: varchar
+  +comunediNascita: String
   +sesso: sesso
-  +codiceFiscale: varchar
+  +codiceFiscale: String
 }
 class Gestore {
-  +nome: varchar
-  +descrizione: varchar
-  +sede: struct [Città: varchar, Via: varchar, Civico: varchar, Provincia: varchar, Cap: integer]
-  +telefono: varchar
-  +cod.Gestore: varchar
+  +nome: String
+  +descrizione: String [0,1]
+  +sede: struct [Città: string, Via: string, Civico: string, Provincia: string, Cap: integer]
+  +telefono: String
 }
 class Operatore{
-  +cod.Operatore: varchar
 }
 class Studente{
-  +cod.Studente: varchar
 }
 enum sesso{
 M
@@ -47,18 +44,18 @@ class Coordina{
 Richiesta: boolean
 }
 class Corso{
-  +titolo: varchar
-  +descrizione: varchar
+  +titolo: String
+  +descrizione: String [0,1]
   +iscrizioniMassime: integer
-  +tassoPresenzeMinime: real
-  +cod.Corso: varchar
+  +tassoPresenzeMinime: integer
+  +numeroLezioni: integer
+  +Privato: boolean
 }
 class Lezione{
-  +titolo: varchar
-  +descrizione: varchar
+  +titolo: String
+  +descrizione: String [0,1]
   +dataoraInizio: Timestamp
   +durata: Time
-  +cod.Lezione: varchar
 }
 Corso "1" -- "1..*" Lezione:Svolto
 (Corso, Studente) .. Iscritti
@@ -74,12 +71,12 @@ class Iscritti{
 class Statistiche{
   +presenzeMinime: integer
   +presenzeMassime: integer
-  +presenzeMedie: real
+  +presenzeMedie: integer
   +percentualeRiempimentoMedia: integer
 }
 Corso "1" -- "1" Statistiche:Associo
 class AreaTematica{
-  +Tag: varchar
+  +Tag: String
 }
 Corso "*" -- "1..*" AreaTematica:Appartengono
 

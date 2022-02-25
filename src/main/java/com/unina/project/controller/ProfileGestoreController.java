@@ -5,20 +5,26 @@ import com.unina.project.controller.profile.StatisticheController;
 import com.unina.project.database.*;
 import com.unina.project.database.postgre.*;
 import com.unina.project.verificationcode.SendVerificationEmail;
+import javafx.application.HostServices;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -41,6 +47,7 @@ public class ProfileGestoreController implements Initializable {
     public TreeTableColumn<Corso,String> tassopresenzeminimeTableColumn;
     public TreeTableColumn<Corso,String> privatoTableColumn;
     public TreeTableColumn<Corso,String> areeTableColumn;
+    public MenuItem helpbutton;
     @FXML
     private MenuBar gestoreMenuBar;
     public Menu nomeGestoreMenu;
@@ -205,7 +212,7 @@ public class ProfileGestoreController implements Initializable {
 
     private void visualizzaStatistiche(Corso corso) throws IOException {
         try {
-            if (corsoDAO.numeroIscrittiCorso(corso.getCodCorso()) != 0) {
+            if (corsoDAO.numeroIscrittiCorso(corso.getCodCorso()) != 0 && corsoDAO.numeroLezioniCorso(corso.getCodCorso()) != 0 && corsoDAO.numeroPrenotati(corso.getCodCorso()) !=0) {
                 Stage statisticheStage = new Stage();
                 FXMLLoader statistichePageLoader = new FXMLLoader(Main.class.getResource("profile/statistiche.fxml"));
                 Parent statistichePane = statistichePageLoader.load();
@@ -225,7 +232,7 @@ public class ProfileGestoreController implements Initializable {
             {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Errore");
-                alert.setHeaderText("Non posso generare Statistiche per un corso che non ha Iscritti");
+                alert.setHeaderText("Non posso generare Statistiche per un corso che non ha Iscritti o Lezioni");
                 alert.show();
             }
         } catch(SQLException e){
@@ -474,4 +481,9 @@ public class ProfileGestoreController implements Initializable {
         }
         nuovoCorsoButton.getParent().setDisable(false);
         }
+
+    public void onhelpButtonClick(ActionEvent actionEvent) {
+        Main main=new Main();
+        main.openRelazione();
+    }
 }

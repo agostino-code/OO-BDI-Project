@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.10'
+    id 'org.openjfx.javafxplugin' version '0.0.11'
     id 'org.beryx.jlink' version '2.24.1'
 }
 
@@ -36,12 +36,12 @@ javafx {
 dependencies {
     implementation('org.controlsfx:controlsfx:11.1.1')
     implementation 'org.jfxtras:jmetro:11.6.15'
-    implementation 'org.openjfx:javafx-controls:17.0.0.1'
-    implementation 'org.openjfx:javafx:17.0.0.1'
-    implementation 'org.openjfx:javafx-base:17.0.0.1'
-    implementation 'org.openjfx:javafx-graphics:17.0.0.1'
-    implementation 'org.openjfx:javafx-fxml:17.0.0.1'
-    implementation 'org.openjfx:javafx-media:17.0.0.1'
+    implementation 'org.openjfx:javafx-controls:17.0.2'
+    implementation 'org.openjfx:javafx:17.0.2'
+    implementation 'org.openjfx:javafx-base:17.0.2'
+    implementation 'org.openjfx:javafx-graphics:17.0.2'
+    implementation 'org.openjfx:javafx-fxml:17.0.2'
+    implementation 'org.openjfx:javafx-media:17.0.2'
     implementation 'org.postgresql:postgresql:42.3.1'
     implementation 'com.sun.mail:javax.mail:1.6.2'
     implementation 'org.kordamp.ikonli:ikonli-javafx:12.2.0'
